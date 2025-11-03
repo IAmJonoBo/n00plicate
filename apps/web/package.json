@@ -29,7 +29,7 @@
     "@builder.io/qwik": "^1.17.1",
     "@builder.io/qwik-city": "^1.17.1",
     "@eslint/js": "^9.39.0",
-    "@mimic/design-tokens": "workspace:*",
+    "@n00plicate/design-tokens": "workspace:*",
     "@types/node": "24.10.0",
     "eslint": "9.39.0",
     "eslint-plugin-qwik": "^1.17.1",

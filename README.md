@@ -1,6 +1,6 @@
-# Mimic 2.0 (Preview)
+# n00plicate 2.0 (Preview)
 
-[![CI](https://github.com/IAmJonoBo/mimic/workflows/CI/badge.svg)](https://github.com/IAmJonoBo/mimic/actions)
+[![CI](https://github.com/IAmJonoBo/n00plicate/workflows/CI/badge.svg)](https://github.com/IAmJonoBo/n00plicate/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Nx](https://img.shields.io/badge/built%20with-Nx-21.6-blue)](https://nx.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue)](https://www.typescriptlang.org/)
@@ -8,7 +8,7 @@
 [![pnpm](https://img.shields.io/badge/pnpm-10.18.2-orange)](https://pnpm.io/)
 [![Storybook](https://img.shields.io/badge/Storybook-9.1.9-ff4785)](https://storybook.js.org/)
 
-> Penpot-first, multi-runtime design systems powered by open tooling. Mimic 2.0 is an in-progress
+> Penpot-first, multi-runtime design systems powered by open tooling. n00plicate 2.0 is an in-progress
 > rewrite that introduces a token orchestrator, framework-agnostic UI kernel, and automated quality
 > gates spanning web, native, and desktop surfaces.
 
@@ -16,7 +16,7 @@
 [`docs/IMPLEMENTATION_PLAN_2.0.md`](docs/IMPLEMENTATION_PLAN_2.0.md) and use the documentation hub at
 [`docs/README.md`](docs/README.md) for the most current references.
 
-## Why Mimic
+## Why n00plicate
 
 - **Penpot as the source of truth** — DTCG-compliant exports flow through a Rust-based orchestrator to
   generate SDKs for every surface.
@@ -65,8 +65,8 @@ Refer to [`docs/IMPLEMENTATION_PLAN_2.0.md`](docs/IMPLEMENTATION_PLAN_2.0.md) fo
 ### Bootstrap the Workspace
 
 ```bash
-git clone https://github.com/IAmJonoBo/mimic.git
-cd mimic
+git clone https://github.com/IAmJonoBo/n00plicate.git
+cd n00plicate
 
 # One-time setup
 ./setup.sh
@@ -88,8 +88,8 @@ pnpm nx run-many -t lint,test,visual-test
 | Sync tokens from Penpot | `make tokens-sync`                                                 |
 | Build everything        | `pnpm build`                                                       |
 | Launch Storybook        | `pnpm nx run design-system:storybook`                              |
-| Mobile dev server       | `pnpm --filter @mimic/mobile-rn start`                             |
-| Desktop dev server      | `pnpm --filter @mimic/desktop tauri dev`                           |
+| Mobile dev server       | `pnpm --filter @n00plicate/mobile-rn start`                             |
+| Desktop dev server      | `pnpm --filter @n00plicate/desktop tauri dev`                           |
 | Format & lint           | `pnpm lint:workspace` (Biome + typed ESLint) / `pnpm format:check` |
 | Visual regression       | `pnpm nx run design-system:visual-test`                            |
 
@@ -133,7 +133,7 @@ toolchains/            # Centralised config (tsconfig, eslint, biome, etc.)
 - **CI / DevOps** — [`docs/devops/ci-overview.md`](docs/devops/ci-overview.md)
 - **Troubleshooting** — [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md)
 
-Legacy Mimic 1.x documentation is being archived; check the “Legacy / Pending Review” section of
+Legacy n00plicate 1.x documentation is being archived; check the "Legacy / Pending Review" section of
 [`docs/README.md`](docs/README.md) if you need something that has not yet been migrated.
 
 ## Engineering Metrics & Observability
@@ -149,13 +149,13 @@ Legacy Mimic 1.x documentation is being archived; check the “Legacy / Pending 
 
 ## AI & Developer Intelligence
 
-- `mimic assist` CLI offers local Ollama workflows with optional OpenAI and GitHub Copilot integration for
+- `n00plicate assist` CLI offers local Ollama workflows with optional OpenAI and GitHub Copilot integration for
   accessibility in connected environments.
 - CI posts AI-generated summaries for token diffs, visual regressions, and failing pipelines to speed up
   triage.
 - Storybook gains an intelligence addon (token inspector, contrast checks, design checklist) with
   AI-suggested remediation.
-- `just` commands and CLI wizards (`mimic init feature`, `mimic token create`) provide guided flows with
+- `just` commands and CLI wizards (`n00plicate init feature`, `n00plicate token create`) provide guided flows with
   inline AI help.
 
 ## Contributing
@@ -163,7 +163,7 @@ Legacy Mimic 1.x documentation is being archived; check the “Legacy / Pending 
 We welcome feedback and contributions while 2.0 takes shape:
 
 1. Review [`CONTRIBUTING.md`](CONTRIBUTING.md) and adopt the coding standards.
-2. Look for `mimic-2.0` issues in GitHub Projects → “Mimic 2.0 Delivery”.
+2. Look for `n00plicate-2.0` issues in GitHub Projects → "n00plicate 2.0 Delivery".
 3. Keep pull requests focused, with docs and tests covering new behaviour.
 4. Mention which phase (from the implementation plan) your work targets.
 
@@ -173,14 +173,14 @@ requesting review.
 
 ## Community & Support
 
-- **Issues** — [github.com/IAmJonoBo/mimic/issues](https://github.com/IAmJonoBo/mimic/issues)
-- **Discussions** — [github.com/IAmJonoBo/mimic/discussions](https://github.com/IAmJonoBo/mimic/discussions)
-- **Storybook (public)** — <https://iamjonobo.github.io/mimic/storybook/>
+- **Issues** — [github.com/IAmJonoBo/n00plicate/issues](https://github.com/IAmJonoBo/n00plicate/issues)
+- **Discussions** — [github.com/IAmJonoBo/n00plicate/discussions](https://github.com/IAmJonoBo/n00plicate/discussions)
+- **Storybook (public)** — <https://iamjonobo.github.io/n00plicate/storybook/>
 - **Dependency automation plan** — [`docs/DEPENDENCY_AUTOMATION_PLAN.md`](docs/DEPENDENCY_AUTOMATION_PLAN.md)
 
 ## License
 
-Mimic is released under the [MIT License](LICENSE). Penpot assets, Compose bindings, and other
+n00plicate is released under the [MIT License](LICENSE). Penpot assets, Compose bindings, and other
 downstream artefacts retain their upstream licences as noted in the respective directories.
 
 ---

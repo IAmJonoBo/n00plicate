@@ -107,15 +107,15 @@ typecheck --nx-bail` stalled after kicking off five projects (manual SIGTERM at 
   known vulnerabilities. Scoped `pnpm exec vitest run --config vitest.config.ts` inside
   `packages/shared-utils` to execute the new token-utils coverage without triggering Nx.
 - 2025-10-27: React Native formatter multi-axis fix: added Vitest snapshot for `react-native/theme-ts`,
-  reran `pnpm --filter @mimic/design-tokens exec vitest run`, `pnpm lint:workspace`, and
+  reran `pnpm --filter @n00plicate/design-tokens exec vitest run`, `pnpm lint:workspace`, and
   `pnpm typecheck`; regenerated Style Dictionary outputs via
-  `pnpm --filter @mimic/design-tokens build:tokens` (acknowledged existing collision warnings) to
+  `pnpm --filter @n00plicate/design-tokens build:tokens` (acknowledged existing collision warnings) to
   verify padding tokens now emit axis-specific objects.
 - 2025-10-12: Revalidated baseline ahead of platform token precedence update — `pnpm format:check`
   still fails with 50 formatter errors and 4 warnings from existing drift; `pnpm lint:workspace` and
   `pnpm typecheck` complete with engine mismatch warnings; `pnpm nx run-many -t test` and `pnpm build`
   continue to crash the terminal while constructing the project graph; targeted `pnpm --filter
-  @mimic/design-tokens test -- --run` added to cover new platform lookup behaviour.
+  @n00plicate/design-tokens test -- --run` added to cover new platform lookup behaviour.
 - 2025-10-28: Re-ran baseline commands before sprint planning refresh — `pnpm format:check` fails with
   47 errors/4 warnings (Biome broken symlink notices persist); `pnpm lint:workspace` and
   `pnpm typecheck` pass despite Node engine warnings; `pnpm nx run-many -t test` and `pnpm build`

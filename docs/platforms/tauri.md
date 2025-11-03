@@ -5,7 +5,7 @@ Advanced Tauri v2 integration for design tokens, security, auto-updates, and CSP
 ## Overview
 
 This guide covers Tauri desktop app integration with design tokens, security best practices, auto-updater configuration,
-and Content Security Policy (CSP) implementation for the Mimic design system.
+and Content Security Policy (CSP) implementation for the n00plicate design system.
 
 ## Table of Contents
 
@@ -33,7 +33,7 @@ Tauri automatically injects strict CSP with script hashes. Keep HTML meta tag bl
     <!-- ✅ Let Tauri inject CSP automatically -->
     <meta http-equiv="Content-Security-Policy" content="" />
 
-    <title>Mimic Design System</title>
+    <title>n00plicate Design System</title>
   </head>
   <body>
     <div id="root"></div>
@@ -53,7 +53,7 @@ Configure CSP in Tauri configuration:
         "script-src": "'self' 'wasm-unsafe-eval'",
         "img-src": "'self' data: blob:",
         "font-src": "'self' data:",
-        "connect-src": "'self' https://api.mimic.design wss://api.mimic.design",
+        "connect-src": "'self' https://api.n00plicate.design wss://api.n00plicate.design",
         "media-src": "'self'",
         "object-src": "'none'",
         "base-uri": "'self'",
@@ -87,18 +87,18 @@ Configure CSP in Tauri configuration:
           "readFile": true,
           "writeFile": true,
           "scope": [
-            "$APPDATA/mimic/**",
-            "$DOCUMENT/mimic/**",
-            "$APPCONFIG/mimic/**"
+            "$APPDATA/n00plicate/**",
+            "$DOCUMENT/n00plicate/**",
+            "$APPCONFIG/n00plicate/**"
           ]
         },
         "http": {
           "all": false,
           "request": true,
           "scope": [
-            "https://api.mimic.design/**",
-            "https://cdn.mimic.design/**",
-            "https://github.com/IAmJonoBo/mimic/**"
+            "https://api.n00plicate.design/**",
+            "https://cdn.n00plicate.design/**",
+            "https://github.com/IAmJonoBo/n00plicate/**"
           ]
         },
         "notification": {
@@ -237,8 +237,8 @@ Configure updater endpoints in tauri.conf.json:
     "updater": {
       "active": true,
       "endpoints": [
-        "https://github.com/IAmJonoBo/mimic/releases/latest/download/mimic-updater.json",
-        "https://cdn.mimic.design/releases/latest/mimic-updater.json"
+        "https://github.com/IAmJonoBo/n00plicate/releases/latest/download/n00plicate-updater.json",
+        "https://cdn.n00plicate.design/releases/latest/n00plicate-updater.json"
       ],
       "dialog": true,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmljIGFwcCBwdWJsaWMga2V5CkZDUUZBUEh2MzJMdWJ5Z..."
@@ -257,19 +257,19 @@ Create update manifest for GitHub Releases:
   "platforms": {
     "darwin-x86_64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkK...",
-      "url": "https://github.com/IAmJonoBo/mimic/releases/download/v1.0.1/mimic_1.0.1_x64.dmg"
+      "url": "https://github.com/IAmJonoBo/n00plicate/releases/download/v1.0.1/n00plicate_1.0.1_x64.dmg"
     },
     "darwin-aarch64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkK...",
-      "url": "https://github.com/IAmJonoBo/mimic/releases/download/v1.0.1/mimic_1.0.1_aarch64.dmg"
+      "url": "https://github.com/IAmJonoBo/n00plicate/releases/download/v1.0.1/n00plicate_1.0.1_aarch64.dmg"
     },
     "linux-x86_64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkK...",
-      "url": "https://github.com/IAmJonoBo/mimic/releases/download/v1.0.1/mimic_1.0.1_amd64.AppImage"
+      "url": "https://github.com/IAmJonoBo/n00plicate/releases/download/v1.0.1/n00plicate_1.0.1_amd64.AppImage"
     },
     "windows-x86_64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkK...",
-      "url": "https://github.com/IAmJonoBo/mimic/releases/download/v1.0.1/mimic_1.0.1_x64-setup.exe"
+      "url": "https://github.com/IAmJonoBo/n00plicate/releases/download/v1.0.1/n00plicate_1.0.1_x64-setup.exe"
     }
   }
 }
@@ -366,8 +366,8 @@ Import and use design tokens in your Tauri frontend:
 
 ```typescript
 // src/lib/tokens.ts
-import '@mimic/design-tokens/css';
-import { dsColors, dsSpacing, dsTypography } from '@mimic/design-tokens/js';
+import '@n00plicate/design-tokens/css';
+import { dsColors, dsSpacing, dsTypography } from '@n00plicate/design-tokens/js';
 
 export class TokenManager {
   static loadTokens() {
@@ -420,7 +420,7 @@ Use tokens dynamically in TypeScript:
 
 ```typescript
 // src/components/TauriComponent.tsx
-import { dsColors, dsSpacing } from '@mimic/design-tokens/js';
+import { dsColors, dsSpacing } from '@n00plicate/design-tokens/js';
 
 export function TauriComponent() {
   const dynamicStyles = {
@@ -506,7 +506,7 @@ Audit your allowlist configuration:
         "all": false,
         "readFile": true,
         "writeFile": true,
-        "scope": ["$APPDATA/mimic/**"]
+        "scope": ["$APPDATA/n00plicate/**"]
       }
     }
   }
@@ -565,7 +565,7 @@ Configure multiple windows for advanced desktop features:
     "windows": [
       {
         "label": "main",
-        "title": "Mimic Design System",
+        "title": "n00plicate Design System",
         "width": 1200,
         "height": 800,
         "minWidth": 800,
@@ -787,7 +787,7 @@ Essential configuration files for frontend integration:
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "design.mimic.app",
+      "identifier": "design.n00plicate.app",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -819,7 +819,7 @@ Configure development and build scripts for Tauri:
   "dependencies": {
     "@tauri-apps/api": "^2.0.0",
     "@tauri-apps/plugin-updater": "^2.0.0",
-    "@mimic/design-tokens": "workspace:*"
+    "@n00plicate/design-tokens": "workspace:*"
   }
 }
 ```
@@ -870,7 +870,7 @@ export default defineConfig(async () => ({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
-      '@mimic/tokens': resolve(
+      '@n00plicate/tokens': resolve(
         __dirname,
         '../../../packages/design-tokens/dist'
       ),
@@ -894,7 +894,7 @@ Configure your main HTML file for Tauri:
     <!-- CSP will be injected by Tauri -->
     <meta http-equiv="Content-Security-Policy" content="" />
 
-    <title>Mimic Design System</title>
+    <title>n00plicate Design System</title>
 
     <!-- Design token CSS imports -->
     <link rel="stylesheet" href="/src/styles/tokens.css" />

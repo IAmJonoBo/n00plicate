@@ -1,7 +1,7 @@
 /**
- * Mimic Mobile App - React Native with New Architecture
+ * n00plicate Mobile App - React Native with New Architecture
  *
- * Main App component demonstrating the Mimic design token system
+ * Main App component demonstrating the n00plicate design token system
  * with collision-prevention architecture and React Native integration.
  */
 
@@ -19,7 +19,7 @@ const App: FC = () => {
         <StatusBar barStyle="dark-content" backgroundColor="#fafafa" />
         <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
           <View style={styles.content}>
-            <Text style={styles.title}>Mimic Design Tokens</Text>
+            <Text style={styles.title}>n00plicate Design Tokens</Text>
             <Text style={styles.subtitle}>React Native with Collision-Prevention Architecture</Text>
 
             <TokenDemo />

@@ -1,10 +1,10 @@
 # 🎨 Complete Design Guide Index
 
-> **Your comprehensive guide to professional UI/UX design with Mimic**
+> **Your comprehensive guide to professional UI/UX design with n00plicate**
 
 ## Welcome
 
-This design guide transforms Mimic into the most powerful, intelligent, and user-friendly OSS design tool.
+This design guide transforms n00plicate into the most powerful, intelligent, and user-friendly OSS design tool.
 Whether you're wireframing, prototyping, or building production interfaces, these guides provide everything
 you need to create professional, accessible designs.
 
@@ -229,14 +229,14 @@ Master component architecture patterns:
 
 ## 🛠️ Tools & Resources
 
-### Mimic Tools
+### n00plicate Tools
 
 - **Design Token Browser**: Explore all 115+ tokens
 - **Contrast Checker**: Test color combinations
 - **Type Scale Calculator**: Generate type scales
 - **Spacing Visualizer**: See spacing system
 - **Grid Inspector**: Visualize grid layouts
-- **AI Assistant CLI**: `mimic ai suggest-tokens`
+- **AI Assistant CLI**: `n00plicate ai suggest-tokens`
 
 ### External Resources
 
@@ -328,8 +328,8 @@ Our comprehensive design system includes:
 
 Help us make this the best design guide in OSS:
 
-1. **Report issues**: Found a mistake? [Open an issue](https://github.com/IAmJonoBo/mimic/issues/new)
-2. **Suggest improvements**: Have ideas? [Start a discussion](https://github.com/IAmJonoBo/mimic/discussions)
+1. **Report issues**: Found a mistake? [Open an issue](https://github.com/IAmJonoBo/n00plicate/issues/new)
+2. **Suggest improvements**: Have ideas? [Start a discussion](https://github.com/IAmJonoBo/n00plicate/discussions)
 3. **Add examples**: Submit PRs with more examples
 4. **Share patterns**: Document patterns you've discovered
 
@@ -380,8 +380,8 @@ Help us make this the best design guide in OSS:
 
 ## 📞 Get Help
 
-- **Issues**: [GitHub Issues](https://github.com/IAmJonoBo/mimic/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/IAmJonoBo/mimic/discussions)
+- **Issues**: [GitHub Issues](https://github.com/IAmJonoBo/n00plicate/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/IAmJonoBo/n00plicate/discussions)
 - **Documentation**: [docs/TROUBLESHOOTING.md](../TROUBLESHOOTING.md)
 
 ---
@@ -392,6 +392,6 @@ All documentation is licensed under MIT License.
 
 ---
 
-### Built with ❤️ by the Mimic community
+### Built with ❤️ by the n00plicate community
 
 #### Last updated: 2025-10-11

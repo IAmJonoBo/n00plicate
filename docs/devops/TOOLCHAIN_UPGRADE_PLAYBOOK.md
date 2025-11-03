@@ -1,6 +1,6 @@
 # Toolchain Upgrade Playbook
 
-> Updated for the flattened Mimic workspace (September 2025).
+> Updated for the flattened n00plicate workspace (September 2025).
 
 This playbook captures the recommended sequence for keeping Node.js, pnpm, Nx, Qwik, React Native, Storybook, Style
 Dictionary, and Penpot automation on their latest supported versions.
@@ -88,5 +88,5 @@ Dictionary, and Penpot automation on their latest supported versions.
 - Push migrations and regenerated lockfile in the same pull request.
 - Tag the release with semantic version notes covering Penpot, Qwik, React Native, and Tauri deltas.
 
-Following this routine ensures Mimic stays aligned with the latest open-source tooling while preserving the
+Following this routine ensures n00plicate stays aligned with the latest open-source tooling while preserving the
 collision-free guarantees of the design-token pipeline.

@@ -4,7 +4,7 @@
 
 ## Overview
 
-Mimic integrates AI capabilities to assist with design decisions, accessibility checks, and workflow automation.
+n00plicate integrates AI capabilities to assist with design decisions, accessibility checks, and workflow automation.
 This guide covers how to use AI features for faster, smarter design work.
 
 ## Table of Contents
@@ -20,7 +20,7 @@ This guide covers how to use AI features for faster, smarter design work.
 
 ## AI Features Overview
 
-Mimic provides AI assistance across multiple design workflows:
+n00plicate provides AI assistance across multiple design workflows:
 
 ```typescript
 // AI capabilities
@@ -44,7 +44,7 @@ const aiProviders = {
     name: 'Ollama',
     models: ['llama2', 'codellama', 'mistral'],
     privacy: 'Fully local, no data sent externally',
-    setup: 'Run `mimic ai setup --provider=ollama`',
+    setup: 'Run `n00plicate ai setup --provider=ollama`',
   },
 
   cloud: {
@@ -69,7 +69,7 @@ AI helps you select the right design tokens for your components.
 
 ```typescript
 // CLI usage
-$ mimic ai suggest-tokens --component="primary button"
+$ n00plicate ai suggest-tokens --component="primary button"
 
 AI Response:
 Recommended tokens for primary button:
@@ -90,7 +90,7 @@ Reasoning:
 ### Programmatic API
 
 ```typescript
-import { aiAssistant } from '@mimic/ai-assistant';
+import { aiAssistant } from '@n00plicate/ai-assistant';
 
 // Get token suggestions
 const suggestions = await aiAssistant.suggestTokens({
@@ -141,7 +141,7 @@ Automated accessibility checking with actionable fixes.
 ### Real-Time A11y Auditing
 
 ```typescript
-import { a11yAI } from '@mimic/ai-assistant';
+import { a11yAI } from '@n00plicate/ai-assistant';
 
 // Analyze component for accessibility issues
 const audit = await a11yAI.analyze({
@@ -185,7 +185,7 @@ console.log(audit);
 
 ```bash
 # CLI auto-fix
-$ mimic ai fix-a11y src/components/Button.tsx
+$ n00plicate ai fix-a11y src/components/Button.tsx
 
 Analyzing Button.tsx...
 Found 3 accessibility issues:
@@ -209,7 +209,7 @@ Apply all fixes? (y/n): y
 
 ```typescript
 // Watch mode: Monitor components for a11y issues
-import { a11yMonitor } from '@mimic/ai-assistant';
+import { a11yMonitor } from '@n00plicate/ai-assistant';
 
 a11yMonitor.watch({
   paths: ['src/components/**/*.tsx'],
@@ -237,7 +237,7 @@ AI generates harmonious color palettes from your brand colors.
 ### Generate from Brand Color
 
 ```typescript
-import { colorAI } from '@mimic/ai-assistant';
+import { colorAI } from '@n00plicate/ai-assistant';
 
 // Generate full palette from brand color
 const palette = await colorAI.generatePalette({
@@ -281,7 +281,7 @@ console.log(palette);
 
 ```bash
 # CLI palette generation
-$ mimic ai palette --brand="#3b82f6" --harmony=analogous
+$ n00plicate ai palette --brand="#3b82f6" --harmony=analogous
 
 Generating color palette...
 
@@ -293,7 +293,7 @@ Accent (Indigo): #6366f1
 ✓ Generated 30 token definitions
 ✓ Exported to: tokens/colors-generated.json
 
-Preview palette: mimic ai palette --preview
+Preview palette: n00plicate ai palette --preview
 ```
 
 ### Smart Color Adjustments
@@ -322,7 +322,7 @@ AI suggests optimal layouts based on content and context.
 ### Content-Based Layout
 
 ```typescript
-import { layoutAI } from '@mimic/ai-assistant';
+import { layoutAI } from '@n00plicate/ai-assistant';
 
 // AI analyzes content and suggests layout
 const layout = await layoutAI.suggest({
@@ -394,7 +394,7 @@ AI generates component variants and boilerplate.
 ### Generate Component Variants
 
 ```typescript
-import { componentAI } from '@mimic/ai-assistant';
+import { componentAI } from '@n00plicate/ai-assistant';
 
 // Generate button variants
 const variants = await componentAI.generateVariants({
@@ -416,7 +416,7 @@ console.log(variants.code);
 
 ```bash
 # CLI component generation
-$ mimic ai generate component --name="DataTable" --features="sorting,filtering,pagination"
+$ n00plicate ai generate component --name="DataTable" --features="sorting,filtering,pagination"
 
 Generating DataTable component...
 
@@ -449,7 +449,7 @@ AI provides actionable feedback on your designs.
 ### Component Critique
 
 ```typescript
-import { designCritic } from '@mimic/ai-assistant';
+import { designCritic } from '@n00plicate/ai-assistant';
 
 // Get design feedback
 const feedback = await designCritic.analyze({
@@ -493,7 +493,7 @@ console.log(feedback);
 
 ```bash
 # Audit entire design system
-$ mimic ai audit --scope=design-system
+$ n00plicate ai audit --scope=design-system
 
 Auditing design system...
 
@@ -525,7 +525,7 @@ Recommendations:
 3. Complete API documentation
 4. Add more usage examples
 
-Generate report: mimic ai audit --format=html > report.html
+Generate report: n00plicate ai audit --format=html > report.html
 ```
 
 ## Setup & Configuration
@@ -534,19 +534,19 @@ Generate report: mimic ai audit --format=html > report.html
 
 ```bash
 # Install AI assistant package
-pnpm add @mimic/ai-assistant
+pnpm add @n00plicate/ai-assistant
 
 # Setup local AI (Ollama)
-mimic ai setup --provider=ollama
+n00plicate ai setup --provider=ollama
 
 # Or configure cloud provider
-mimic ai setup --provider=openai --api-key=your-key
+n00plicate ai setup --provider=openai --api-key=your-key
 ```
 
 ### Configuration
 
 ```typescript
-// mimic.config.ts
+// n00plicate.config.ts
 export default {
   ai: {
     // Default provider
@@ -589,16 +589,16 @@ export default {
 
 ```bash
 # AI assistant commands
-mimic ai suggest-tokens --component="button"
-mimic ai fix-a11y --path=src/components
-mimic ai palette --brand="#3b82f6"
-mimic ai layout --content="feature cards" --count=6
-mimic ai generate component --name="Modal"
-mimic ai critique --component=src/components/Button.tsx
-mimic ai audit --scope=design-system
+n00plicate ai suggest-tokens --component="button"
+n00plicate ai fix-a11y --path=src/components
+n00plicate ai palette --brand="#3b82f6"
+n00plicate ai layout --content="feature cards" --count=6
+n00plicate ai generate component --name="Modal"
+n00plicate ai critique --component=src/components/Button.tsx
+n00plicate ai audit --scope=design-system
 
 # Interactive mode
-mimic ai chat
+n00plicate ai chat
 > How can I improve the contrast in my primary button?
 > Generate a color palette from #3b82f6
 > What layout should I use for 6 feature cards?
@@ -607,10 +607,10 @@ mimic ai chat
 ### API Usage
 
 ```typescript
-import { mimic AI } from '@mimic/ai-assistant';
+import { n00plicate AI } from '@n00plicate/ai-assistant';
 
 // Initialize
-const ai = new MimicAI({
+const ai = new n00plicateAI({
   provider: 'ollama',
   model: 'llama2',
 });
@@ -661,7 +661,7 @@ const config = {
     cache: {
       enabled: true,
       ttl: 86400, // 24 hours
-      location: '.mimic/ai-cache',
+      location: '.n00plicate/ai-cache',
     },
 
     // Anonymize data
@@ -701,22 +701,22 @@ Planned AI features:
 
 ```bash
 # 1. Generate color palette
-$ mimic ai palette --brand="#3b82f6" --output=tokens/colors.json
+$ n00plicate ai palette --brand="#3b82f6" --output=tokens/colors.json
 
 # 2. Create component with AI
-$ mimic ai generate component --name="FeatureCard"
+$ n00plicate ai generate component --name="FeatureCard"
 
 # 3. Get token suggestions
-$ mimic ai suggest-tokens --component="FeatureCard"
+$ n00plicate ai suggest-tokens --component="FeatureCard"
 
 # 4. Check accessibility
-$ mimic ai fix-a11y src/components/FeatureCard.tsx
+$ n00plicate ai fix-a11y src/components/FeatureCard.tsx
 
 # 5. Get design feedback
-$ mimic ai critique --component=src/components/FeatureCard.tsx
+$ n00plicate ai critique --component=src/components/FeatureCard.tsx
 
 # 6. Generate layout
-$ mimic ai layout --content="6 feature cards" --output=src/pages/features.tsx
+$ n00plicate ai layout --content="6 feature cards" --output=src/pages/features.tsx
 ```
 
 ## Further Reading
@@ -728,4 +728,4 @@ $ mimic ai layout --content="6 feature cards" --output=src/pages/features.tsx
 
 ---
 
-**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/mimic/issues/new).
+**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/n00plicate/issues/new).

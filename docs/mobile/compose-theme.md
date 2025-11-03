@@ -20,14 +20,14 @@ The generated `Theme.kt` file from Style Dictionary provides the foundation for 
 
 ```kotlin
 // Generated from Style Dictionary: dist/compose/Theme.kt
-package com.mimic.tokens
+package com.n00plicate.tokens
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-object MimicTheme {
+object n00plicateTheme {
     // Colors - Primary Scale
     val ColorPrimary50 = Color(0xFFEFF6FF)
     val ColorPrimary100 = Color(0xFFDBEAFE)
@@ -65,8 +65,8 @@ object MimicTheme {
 ### Material 3 Theme Integration
 
 ```kotlin
-// compose/theme/MimicTheme.kt - Complete theme setup
-package com.mimic.compose.theme
+// compose/theme/n00plicateTheme.kt - Complete theme setup
+package com.n00plicate.compose.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
@@ -76,7 +76,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.mimic.tokens.MimicTheme as Tokens
+import com.n00plicate.tokens.n00plicateTheme as Tokens
 
 // Light color scheme
 private val LightColorScheme = lightColorScheme(
@@ -127,7 +127,7 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 // Typography based on design tokens
-private val MimicTypography = Typography(
+private val n00plicateTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = Tokens.FontWeightBold,
@@ -173,7 +173,7 @@ private val MimicTypography = Typography(
 )
 
 @Composable
-fun MimicTheme(
+fun n00plicateTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
@@ -181,7 +181,7 @@ fun MimicTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = MimicTypography,
+        typography = n00plicateTypography,
         content = content
     )
 }
@@ -193,7 +193,7 @@ fun MimicTheme(
 
 ```kotlin
 // compose/theme/ThemeManager.kt - Centralized theme management
-package com.mimic.compose.theme
+package com.n00plicate.compose.theme
 
 import androidx.compose.runtime.*
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -255,8 +255,8 @@ fun ProvideThemeManager(
 ### Dynamic Theme Composable
 
 ```kotlin
-// compose/theme/DynamicMimicTheme.kt - Theme with runtime switching
-package com.mimic.compose.theme
+// compose/theme/Dynamicn00plicateTheme.kt - Theme with runtime switching
+package com.n00plicate.compose.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
@@ -265,7 +265,7 @@ import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.flow.collectAsState
 
 @Composable
-fun DynamicMimicTheme(
+fun Dynamicn00plicateTheme(
     themeManager: ThemeManager = LocalThemeManager.current,
     content: @Composable () -> Unit
 ) {
@@ -292,7 +292,7 @@ fun DynamicMimicTheme(
 
     MaterialTheme(
         colorScheme = animatedColorScheme,
-        typography = MimicTypography,
+        typography = n00plicateTypography,
         content = content
     )
 }
@@ -337,7 +337,7 @@ private fun applyCustomColors(
 
 ```kotlin
 // compose/components/ThemeSwitcher.kt - UI component for theme switching
-package com.mimic.compose.components
+package com.n00plicate.compose.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -347,7 +347,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mimic.compose.theme.*
+import com.n00plicate.compose.theme.*
 import kotlinx.coroutines.flow.collectAsState
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -430,7 +430,7 @@ fun ThemeSwitcher(
 
 ```kotlin
 // compose/platform/IOSThemeAdaptations.kt - iOS-specific theme handling
-package com.mimic.compose.platform
+package com.n00plicate.compose.platform
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.systemBars
@@ -495,7 +495,7 @@ fun IOSSafeAreaTheme(
 
 ```kotlin
 // compose/platform/WASMThemeOptimizations.kt - WASM-specific optimizations
-package com.mimic.compose.platform
+package com.n00plicate.compose.platform
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -565,7 +565,7 @@ fun rememberWASMOptimizedColors(
 
 ```kotlin
 // compose/interop/ReactNativeBridge.kt - RN interoperability
-package com.mimic.compose.interop
+package com.n00plicate.compose.interop
 
 import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.*
@@ -657,7 +657,7 @@ private fun Color.toHexString(): String {
 
 ```kotlin
 // compose/performance/ThemeCache.kt - Theme performance optimizations
-package com.mimic.compose.performance
+package com.n00plicate.compose.performance
 
 import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.*
@@ -720,7 +720,7 @@ fun rememberOptimizedColor(argb: Int): Color {
 
 ```kotlin
 // compose/performance/MemoryOptimizedTheme.kt - Memory optimizations
-package com.mimic.compose.performance
+package com.n00plicate.compose.performance
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -729,7 +729,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
-fun MemoryOptimizedMimicTheme(
+fun MemoryOptimizedn00plicateTheme(
     darkTheme: Boolean = false,
     content: @Composable () -> Unit
 ) {
@@ -758,7 +758,7 @@ fun MemoryOptimizedMimicTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = MimicTypography,
+        typography = n00plicateTypography,
         content = content
     )
 }
@@ -799,7 +799,7 @@ fun DebuggableTheme(content: @Composable () -> Unit) {
         println("Theme mode changed to: $themeMode")
     }
 
-    DynamicMimicTheme(content = content)
+    Dynamicn00plicateTheme(content = content)
 }
 ```
 
@@ -820,7 +820,7 @@ fun PerformantTheme(
     }
 
     // Avoid recreating typography on every recomposition
-    val typography = remember { MimicTypography }
+    val typography = remember { n00plicateTypography }
 
     MaterialTheme(
         colorScheme = colorScheme,

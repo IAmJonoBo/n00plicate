@@ -163,7 +163,7 @@ impl ContentSecurityPolicy {
         "style-src": ["'self'", "'unsafe-inline'", "data:"],
         "img-src": ["'self'", "data:", "blob:"],
         "font-src": ["'self'", "data:"],
-        "connect-src": ["'self'", "tauri://localhost", "https://api.mimic.design"],
+        "connect-src": ["'self'", "tauri://localhost", "https://api.n00plicate.design"],
         "media-src": ["'none'"],
         "object-src": ["'none'"],
         "child-src": ["'none'"],
@@ -174,7 +174,7 @@ impl ContentSecurityPolicy {
       "dangerousDisableAssetCspModification": false,
       "assetProtocol": {
         "enable": true,
-        "scope": ["$APPDATA/mimic/tokens/**", "$RESOURCE/tokens/**"]
+        "scope": ["$APPDATA/n00plicate/tokens/**", "$RESOURCE/tokens/**"]
       }
     }
   }
@@ -396,7 +396,7 @@ impl SecureUpdater {
 
         let client = Client::builder()
             .timeout(std::time::Duration::from_secs(30))
-            .user_agent("Mimic-Desktop-Updater/1.0")
+            .user_agent("n00plicate-Desktop-Updater/1.0")
             .build()
             .map_err(|e| tauri::Error::Updater(format!("HTTP client error: {}", e)))?;
 
@@ -488,7 +488,7 @@ pub async fn check_for_updates<R: Runtime>(
     app: tauri::AppHandle<R>,
 ) -> Result<Option<UpdateManifest>, String> {
     let public_key = include_bytes!("../../../keys/public.key");
-    let manifest_url = "https://releases.mimic.design/manifest.json".to_string();
+    let manifest_url = "https://releases.n00plicate.design/manifest.json".to_string();
 
     let updater = SecureUpdater::new(public_key, manifest_url)
         .map_err(|e| format!("Updater initialization failed: {}", e))?;
@@ -512,8 +512,8 @@ pub struct SecureInstaller {
 
 impl SecureInstaller {
     pub fn new() -> tauri::Result<Self> {
-        let temp_dir = std::env::temp_dir().join("mimic-updates");
-        let backup_dir = std::env::temp_dir().join("mimic-backup");
+        let temp_dir = std::env::temp_dir().join("n00plicate-updates");
+        let backup_dir = std::env::temp_dir().join("n00plicate-backup");
 
         std::fs::create_dir_all(&temp_dir)
             .map_err(|e| tauri::Error::Io(e))?;
@@ -709,7 +709,7 @@ fn copy_dir_all(src: impl AsRef<std::path::Path>, dst: impl AsRef<std::path::Pat
     "bundle": {
       "active": true,
       "category": "DeveloperTool",
-      "copyright": "© 2024 Mimic Design Systems",
+      "copyright": "© 2024 n00plicate Design Systems",
       "description": "Advanced design token management and synchronization",
       "externalBin": [],
       "icon": [
@@ -719,13 +719,13 @@ fn copy_dir_all(src: impl AsRef<std::path::Path>, dst: impl AsRef<std::path::Pat
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "design.mimic.desktop",
-      "longDescription": "Mimic provides comprehensive design token management with real-time synchronization across Penpot, Style Dictionary, and multiple platform outputs.",
+      "identifier": "design.n00plicate.desktop",
+      "longDescription": "n00plicate provides comprehensive design token management with real-time synchronization across Penpot, Style Dictionary, and multiple platform outputs.",
       "macOS": {
         "frameworks": [],
         "minimumSystemVersion": "10.13",
         "exceptionDomain": "",
-        "signingIdentity": "Developer ID Application: Mimic Design Systems",
+        "signingIdentity": "Developer ID Application: n00plicate Design Systems",
         "providerShortName": "MIMIC",
         "entitlements": "entitlements.plist"
       },
@@ -796,10 +796,10 @@ fn copy_dir_all(src: impl AsRef<std::path::Path>, dst: impl AsRef<std::path::Pat
 set -e
 
 # Configuration
-APP_NAME="Mimic"
-DEVELOPER_ID="Developer ID Application: Mimic Design Systems"
+APP_NAME="n00plicate"
+DEVELOPER_ID="Developer ID Application: n00plicate Design Systems"
 TEAM_ID="YOUR_TEAM_ID"
-BUNDLE_ID="design.mimic.desktop"
+BUNDLE_ID="design.n00plicate.desktop"
 APP_PATH="src-tauri/target/release/bundle/macos/${APP_NAME}.app"
 DMG_PATH="src-tauri/target/release/bundle/dmg/${APP_NAME}_*.dmg"
 

@@ -1,6 +1,6 @@
-# Documentation Summary (Mimic 2.0)
+# Documentation Summary (n00plicate 2.0)
 
-Use this file to understand the current documentation landscape during the Mimic 2.0 rewrite. Each
+Use this file to understand the current documentation landscape during the n00plicate 2.0 rewrite. Each
 entry links to a living document; consult [`docs/README.md`](./README.md) for the canonical index.
 
 ## Start Here
@@ -11,7 +11,7 @@ entry links to a living document; consult [`docs/README.md`](./README.md) for th
 | [`docs/README.md`](./README.md)                                   | Documentation hub with curated sections and legacy tracking    |
 | [`docs/IMPLEMENTATION_PLAN_2.0.md`](./IMPLEMENTATION_PLAN_2.0.md) | Phase-by-phase implementation roadmap                          |
 | [`docs/SPRINT_PLAN.md`](./SPRINT_PLAN.md)                         | Sequenced two-week sprint objectives and outcomes              |
-| [`docs/REPO_STRUCTURE.md`](./REPO_STRUCTURE.md)                   | Canonical Mimic 2.0 directory tree and migration reference     |
+| [`docs/REPO_STRUCTURE.md`](./REPO_STRUCTURE.md)                   | Canonical n00plicate 2.0 directory tree and migration reference     |
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md)                           | Contribution workflow, quality expectations, PR checklist      |
 | [`DEVELOPMENT.md`](../DEVELOPMENT.md)                             | Environment setup, daily workflow, troubleshooting quick links |
 
@@ -63,7 +63,7 @@ entry links to a living document; consult [`docs/README.md`](./README.md) for th
 
 ## Legacy / Pending Migration
 
-The following documents stem from Mimic 1.x. Keep them for reference while their contents are folded
+The following documents stem from n00plicate 1.x. Keep them for reference while their contents are folded
 into the 2.0 set. Do not treat them as authoritative.
 
 - [`docs/CONTROL_DOCUMENT.md`](./CONTROL_DOCUMENT.md)

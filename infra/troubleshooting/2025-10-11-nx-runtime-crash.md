@@ -30,7 +30,7 @@ NX_DAEMON=false pnpm format:check
 ## Observed output
 
 ```
-> mimic@0.1.1 format:check /workspace/mimic
+> n00plicate@0.1.1 format:check /workspace/n00plicate
 > nx run workspace-format:format --configuration=check
 fatal runtime error: failed to initiate panic, error 5
 Aborted

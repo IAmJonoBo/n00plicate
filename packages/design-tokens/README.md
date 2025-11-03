@@ -1,7 +1,7 @@
-# 🎨 @mimic/design-tokens
+# 🎨 @n00plicate/design-tokens
 
 Design tokens generated from Penpot using Style Dictionary, providing the single source of truth for all visual
-properties across the Mimic design system. This package implements a complete design-to-code pipeline that transforms
+properties across the n00plicate design system. This package implements a complete design-to-code pipeline that transforms
 Penpot design files into production-ready tokens for web, mobile, and desktop applications.
 
 ## 📋 Overview
@@ -76,7 +76,7 @@ corepack enable && corepack prepare pnpm@latest --activate
 
 ```bash
 # Install in existing Nx workspace
-pnpm add @mimic/design-tokens
+pnpm add @n00plicate/design-tokens
 
 # Or for local development
 pnpm install
@@ -101,7 +101,7 @@ pnpm nx run design-tokens:watch
 
 ```typescript
 // Basic token access with type safety
-import { tokens, getToken, getTokensByPattern } from '@mimic/design-tokens';
+import { tokens, getToken, getTokensByPattern } from '@n00plicate/design-tokens';
 
 // Direct token access
 const primaryColor = tokens.color.primary.value; // '#007bff'
@@ -128,7 +128,7 @@ const allColors = getTokensByPattern('color.**');
 
 ```typescript
 // apps/mobile-rn/src/theme.ts
-import { tokens } from '@mimic/design-tokens';
+import { tokens } from '@n00plicate/design-tokens';
 import { StyleSheet } from 'react-native';
 
 export const theme = StyleSheet.create({
@@ -189,7 +189,7 @@ even when the base token tree defines the same path.
 
 ```typescript
 // apps/desktop/src/theme.ts
-import { tokens } from '@mimic/design-tokens';
+import { tokens } from '@n00plicate/design-tokens';
 
 // Tauri uses web technologies, so CSS variables and TypeScript work directly
 export const desktopTheme = {
@@ -208,8 +208,8 @@ export const desktopTheme = {
 
 ```typescript
 // .storybook/preview.ts
-import { tokens } from '@mimic/design-tokens';
-import '@mimic/design-tokens/css';
+import { tokens } from '@n00plicate/design-tokens';
+import '@n00plicate/design-tokens/css';
 
 export const parameters = {
   backgrounds: {
@@ -226,7 +226,7 @@ export const parameters = {
 };
 ```
 
-import { getToken, getTokensByPattern } from '@mimic/design-tokens';
+import { getToken, getTokensByPattern } from '@n00plicate/design-tokens';
 
 // Access individual tokens with fallback support
 const primaryColor = getToken('color.primary.500', '#007bff');
@@ -245,7 +245,7 @@ const cardShadow = getToken('component.card.shadow');
 
 ```css
 /* Import generated CSS variables */
-@import '@mimic/design-tokens/css';
+@import '@n00plicate/design-tokens/css';
 
 .component {
   background-color: var(--color-primary-500);
@@ -260,7 +260,7 @@ const cardShadow = getToken('component.card.shadow');
 ```typescript
 // apps/web/src/theme.css.ts
 import { style } from '@vanilla-extract/css';
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 export const button = style({
   backgroundColor: getToken('color.primary.500'),
@@ -275,7 +275,7 @@ export const button = style({
 
 ```typescript
 // apps/mobile/src/theme.ts
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -433,7 +433,7 @@ module.exports = {
 
 ## 📁 Output Structure
 
-Style Dictionary generates platform-specific outputs for the entire Mimic ecosystem:
+Style Dictionary generates platform-specific outputs for the entire n00plicate ecosystem:
 
 ```text
 dist/
@@ -458,11 +458,11 @@ dist/
 
 | Platform            | Import Path                 | Usage Example                   |
 | ------------------- | --------------------------- | ------------------------------- |
-| **Web (CSS)**       | `@mimic/design-tokens/css`  | `var(--color-primary-500)`      |
-| **Web (JS/TS)**     | `@mimic/design-tokens`      | `getToken('color.primary.500')` |
-| **React Native**    | `@mimic/design-tokens`      | `getToken('spacing.md')`        |
-| **Storybook**       | `@mimic/design-tokens/json` | Token documentation             |
-| **Mobile (Future)** | `@mimic/design-tokens/dart` | Flutter theming                 |
+| **Web (CSS)**       | `@n00plicate/design-tokens/css`  | `var(--color-primary-500)`      |
+| **Web (JS/TS)**     | `@n00plicate/design-tokens`      | `getToken('color.primary.500')` |
+| **React Native**    | `@n00plicate/design-tokens`      | `getToken('spacing.md')`        |
+| **Storybook**       | `@n00plicate/design-tokens/json` | Token documentation             |
+| **Mobile (Future)** | `@n00plicate/design-tokens/dart` | Flutter theming                 |
 | **Desktop**         | Inherits from web           | Tauri web view styling          |
 
 ## 🎨 Token Design Philosophy
@@ -553,7 +553,7 @@ nx affected -t build:tokens
 ```typescript
 // apps/web/src/components/Button.tsx
 import { style } from '@vanilla-extract/css';
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 export const buttonStyle = style({
   backgroundColor: getToken('color.primary.500'),
@@ -566,7 +566,7 @@ export const buttonStyle = style({
 
 ```typescript
 // apps/mobile/src/theme/colors.ts
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 export const colors = {
   primary: getToken('color.primary.500'),
@@ -579,7 +579,7 @@ export const colors = {
 
 ```css
 /* Inherits web styling via CSS variables */
-@import '@mimic/design-tokens/css';
+@import '@n00plicate/design-tokens/css';
 
 .desktop-frame {
   background: var(--color-neutral-50);
@@ -593,7 +593,7 @@ export const colors = {
 
 ```typescript
 // packages/design-system/.storybook/preview.ts
-import '@mimic/design-tokens/css';
+import '@n00plicate/design-tokens/css';
 
 export const parameters = {
   docs: {

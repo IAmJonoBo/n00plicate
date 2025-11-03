@@ -1,4 +1,4 @@
-// Shared utilities for the Mimic design system
+// Shared utilities for the n00plicate design system
 
 // Runtime collision detection and guard-rails
 import RuntimeGuards, { runtimeGuards } from './runtime-guards.js';

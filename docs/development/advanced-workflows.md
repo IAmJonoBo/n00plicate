@@ -1,6 +1,6 @@
 # Advanced Development Workflows
 
-Comprehensive development workflows for the Mimic monorepo, covering local development setup, hot reload optimization,\
+Comprehensive development workflows for the n00plicate monorepo, covering local development setup, hot reload optimization,\
 debugging strategies, and contributor onboarding automation.
 
 ## Local Development Setup
@@ -13,7 +13,7 @@ debugging strategies, and contributor onboarding automation.
 
 set -e
 
-echo "🚀 Setting up Mimic development environment..."
+echo "🚀 Setting up n00plicate development environment..."
 
 # Check system requirements
 check_requirements() {
@@ -222,8 +222,8 @@ export class HotReloadServer {
   }
 }
 
-// Configuration for Mimic workspace
-export const mimicHotReloadConfig: HotReloadConfig = {
+// Configuration for n00plicate workspace
+export const n00plicateHotReloadConfig: HotReloadConfig = {
   port: 3001,
   watchPaths: [
     'packages/design-tokens/tokens/**/*.json',
@@ -524,7 +524,7 @@ interface ContributorInfo {
 
 export class ContributorOnboarding {
   async start() {
-    console.log(chalk.blue('🎉 Welcome to the Mimic Design System!'));
+    console.log(chalk.blue('🎉 Welcome to the n00plicate Design System!'));
     console.log(chalk.gray("Let's get you set up for contributing...\\n"));
 
     const info = await this.gatherContributorInfo();
@@ -774,7 +774,7 @@ if (require.main === module) {
         "production",
         "^production",
         {
-          "externalDependencies": ["@mimic/design-tokens"]
+          "externalDependencies": ["@n00plicate/design-tokens"]
         }
       ],
       "outputs": ["{options.outputPath}"],

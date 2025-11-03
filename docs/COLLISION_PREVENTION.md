@@ -1,11 +1,11 @@
 # Collision Prevention Implementation Guide
 
-This document outlines the comprehensive collision-prevention strategies implemented in the Mimic design token
+This document outlines the comprehensive collision-prevention strategies implemented in the n00plicate design token
 pipeline to address the three critical issues documented in our design system documentation:
 
 ## Overview
 
-The Mimic design token pipeline implements three key collision-prevention strategies:
+The n00plicate design token pipeline implements three key collision-prevention strategies:
 
 1. **Token-name clashes with Tailwind** (Specify Warning Prevention)
 2. **Storybook port conflicts** (Supernova Docs Compliance)
@@ -151,11 +151,11 @@ Implement package scoping and Metro deduplication configuration:
 
 ### Package Scoping
 
-All packages use the `@mimic/` scope:
+All packages use the `@n00plicate/` scope:
 
 ```json
 {
-  "name": "@mimic/design-tokens",
+  "name": "@n00plicate/design-tokens",
   "version": "0.1.0"
 }
 ```
@@ -170,16 +170,16 @@ const config = {
     dedupe: [
       'react',
       'react-native',
-      '@mimic/design-tokens',
-      '@mimic/shared-utils',
-      '@mimic/design-system',
+      '@n00plicate/design-tokens',
+      '@n00plicate/shared-utils',
+      '@n00plicate/design-system',
     ],
 
     // Explicit alias to prevent duplication
     alias: {
-      '@mimic/design-tokens': path.resolve(__dirname, 'packages/design-tokens'),
-      '@mimic/shared-utils': path.resolve(__dirname, 'packages/shared-utils'),
-      '@mimic/design-system': path.resolve(__dirname, 'packages/design-system'),
+      '@n00plicate/design-tokens': path.resolve(__dirname, 'packages/design-tokens'),
+      '@n00plicate/shared-utils': path.resolve(__dirname, 'packages/shared-utils'),
+      '@n00plicate/design-system': path.resolve(__dirname, 'packages/design-system'),
     },
 
     // Enable package deduplication features
@@ -190,7 +190,7 @@ const config = {
 
 ### Implementation Files
 
-- **Package Configuration**: `packages/*/package.json` (all packages use `@mimic/` scope)
+- **Package Configuration**: `packages/*/package.json` (all packages use `@n00plicate/` scope)
 - **Example Config**: `metro.config.example.js`
 
 ### Validation
@@ -201,7 +201,7 @@ The CI/CD pipeline validates package scoping:
 # Check package scoping
 for package_file in packages/*/package.json; do
   package_name=$(jq -r '.name' "$package_file")
-  if [[ ! "$package_name" =~ ^@mimic/ ]]; then
+  if [[ ! "$package_name" =~ ^@n00plicate/ ]]; then
     echo "❌ Unscoped package: $package_name"
   fi
 done
@@ -212,7 +212,7 @@ done
 The `packages/shared-utils/src/collision-prevention.ts` module provides runtime validation for all three strategies:
 
 ```typescript
-import { validateCollisionPrevention } from '@mimic/shared-utils/collision-prevention';
+import { validateCollisionPrevention } from '@n00plicate/shared-utils/collision-prevention';
 
 const report = validateCollisionPrevention({
   cssTokenPath: 'packages/design-tokens/libs/tokens/css/tokens.css',
@@ -250,7 +250,7 @@ The `.github/workflows/collision-prevention.yml` workflow validates all strategi
 ### Key Validations
 
 - ✅ All CSS tokens use `--ds-*` prefix
-- ✅ All packages use `@mimic/` scope
+- ✅ All packages use `@n00plicate/` scope
 - ✅ Storybook ports are correctly assigned (6006, 7007, 6008)
 - ✅ Metro config includes deduplication features
 - ✅ No deprecated import paths
@@ -287,10 +287,10 @@ const { getDefaultConfig } = require('expo/metro-config');
 const config = getDefaultConfig(__dirname);
 
 config.resolver.alias = {
-  '@mimic/design-tokens': './node_modules/@mimic/design-tokens',
+  '@n00plicate/design-tokens': './node_modules/@n00plicate/design-tokens',
 };
 
-config.resolver.dedupe = ['@mimic/design-tokens'];
+config.resolver.dedupe = ['@n00plicate/design-tokens'];
 ```
 
 ### For Storybook Development
@@ -324,7 +324,7 @@ pnpm validate:collision-prevention
 
 ### For Component Authors
 
-1. Import tokens from scoped packages (`@mimic/design-tokens`)
+1. Import tokens from scoped packages (`@n00plicate/design-tokens`)
 2. Use collision-safe class names (`.ds-component-name`)
 3. Test components in all Storybook instances
 
@@ -373,4 +373,4 @@ When adding new tokens, components, or configurations:
 4. Test in all supported platforms (web, mobile, desktop)
 
 The collision-prevention strategies ensure a stable, predictable development experience across all platforms and
-tools in the Mimic design system.
+tools in the n00plicate design system.

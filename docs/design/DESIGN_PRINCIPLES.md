@@ -26,7 +26,7 @@ Visual hierarchy guides users through your interface by organizing information i
 
 ```typescript
 // Example: Creating clear hierarchy with design tokens
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 const styles = {
   heading: {
@@ -525,4 +525,4 @@ const buttonStates = {
 
 ---
 
-**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/mimic/issues/new).
+**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/n00plicate/issues/new).

@@ -4,7 +4,7 @@
 
 ## Overview
 
-Wireframing and prototyping are essential steps in the design process. This guide covers how to use Mimic's
+Wireframing and prototyping are essential steps in the design process. This guide covers how to use n00plicate's
 tools to create low-fidelity wireframes, build interactive prototypes, and validate designs before development.
 
 ## Table of Contents
@@ -59,7 +59,7 @@ const prototype = {
 
 ## Wireframe Component Library
 
-Mimic provides low-fidelity components optimized for rapid wireframing.
+n00plicate provides low-fidelity components optimized for rapid wireframing.
 
 ### Basic Wireframe Components
 
@@ -72,7 +72,7 @@ import {
   WireInput,
   WireCard,
   WireNav,
-} from '@mimic/wireframe-kit';
+} from '@n00plicate/wireframe-kit';
 
 // Simple wireframe page
 export const WireframePage = component$(() => {
@@ -399,7 +399,7 @@ import {
   PrototypeDrawer,
   PrototypeToast,
   usePrototypeState,
-} from '@mimic/prototype-kit';
+} from '@n00plicate/prototype-kit';
 
 export const InteractivePrototype = component$(() => {
   const state = usePrototypeState({
@@ -455,7 +455,7 @@ export const InteractivePrototype = component$(() => {
 ### Animation & Transitions
 
 ```typescript
-import { animate, stagger } from '@mimic/prototype-animations';
+import { animate, stagger } from '@n00plicate/prototype-animations';
 
 // Animate on mount
 export const AnimatedList = component$(() => {
@@ -501,7 +501,7 @@ export const AnimatedButton = component$(() => {
 ### State Management
 
 ```typescript
-import { usePrototypeStore } from '@mimic/prototype-kit';
+import { usePrototypeStore } from '@n00plicate/prototype-kit';
 
 // Global prototype state
 export const prototypeStore = usePrototypeStore({
@@ -584,7 +584,7 @@ Common interaction patterns for prototypes.
 ### Drag & Drop
 
 ```typescript
-import { useDraggable, useDropZone } from '@mimic/prototype-kit';
+import { useDraggable, useDropZone } from '@n00plicate/prototype-kit';
 
 export const DragDropExample = component$(() => {
   const { dragProps, isDragging } = useDraggable({
@@ -614,7 +614,7 @@ export const DragDropExample = component$(() => {
 ### Form Validation
 
 ```typescript
-import { usePrototypeForm } from '@mimic/prototype-kit';
+import { usePrototypeForm } from '@n00plicate/prototype-kit';
 
 export const PrototypeForm = component$(() => {
   const form = usePrototypeForm({
@@ -655,7 +655,7 @@ export const PrototypeForm = component$(() => {
 ### Navigation Transitions
 
 ```typescript
-import { usePrototypeRouter } from '@mimic/prototype-kit';
+import { usePrototypeRouter } from '@n00plicate/prototype-kit';
 
 export const PrototypeApp = component$(() => {
   const router = usePrototypeRouter({
@@ -687,7 +687,7 @@ export const PrototypeApp = component$(() => {
 ### Adding Annotations
 
 ```typescript
-import { PrototypeAnnotation } from '@mimic/prototype-kit';
+import { PrototypeAnnotation } from '@n00plicate/prototype-kit';
 
 <PrototypeAnnotation
   position="top-right"
@@ -701,7 +701,7 @@ import { PrototypeAnnotation } from '@mimic/prototype-kit';
 ### Recording User Sessions
 
 ```typescript
-import { enableSessionRecording } from '@mimic/prototype-kit';
+import { enableSessionRecording } from '@n00plicate/prototype-kit';
 
 // Enable session recording
 enableSessionRecording({
@@ -726,7 +726,7 @@ console.log(sessionData);
 ### A/B Testing
 
 ```typescript
-import { usePrototypeVariant } from '@mimic/prototype-kit';
+import { usePrototypeVariant } from '@n00plicate/prototype-kit';
 
 export const ButtonTest = component$(() => {
   const variant = usePrototypeVariant('button-test', {
@@ -760,7 +760,7 @@ export const ButtonTest = component$(() => {
 
 ```bash
 # Export prototype specifications
-$ mimic prototype export --format=specs
+$ n00plicate prototype export --format=specs
 
 Exporting specifications...
 
@@ -781,7 +781,7 @@ Generated files:
 
 ```bash
 # Convert prototype to production code
-$ mimic prototype codegen --input=prototype.tsx --output=src/components
+$ n00plicate prototype codegen --input=prototype.tsx --output=src/components
 
 Analyzing prototype...
 
@@ -801,7 +801,7 @@ Next steps:
 
 ```typescript
 // Auto-generate documentation
-import { exportPrototypeSpecs } from '@mimic/prototype-kit';
+import { exportPrototypeSpecs } from '@n00plicate/prototype-kit';
 
 const specs = exportPrototypeSpecs({
   includeInteractions: true,
@@ -853,4 +853,4 @@ const specs = exportPrototypeSpecs({
 
 ---
 
-**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/mimic/issues/new).
+**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/n00plicate/issues/new).

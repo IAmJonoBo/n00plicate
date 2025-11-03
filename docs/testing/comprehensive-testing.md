@@ -1,6 +1,6 @@
 # Comprehensive Testing Strategy
 
-Advanced testing approaches for the Mimic design system monorepo, covering visual regression, interaction testing,\
+Advanced testing approaches for the n00plicate design system monorepo, covering visual regression, interaction testing,\
 accessibility validation, and cross-platform compatibility.
 
 ## Visual Regression Testing

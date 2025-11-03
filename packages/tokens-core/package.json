@@ -1,5 +1,5 @@
 {
-  "name": "@mimic/tokens-core",
+  "name": "@n00plicate/tokens-core",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -11,8 +11,8 @@
     }
   },
   "dependencies": {
-    "@mimic/design-tokens": "workspace:*",
-    "@mimic/shared-utils": "workspace:*"
+    "@n00plicate/design-tokens": "workspace:*",
+    "@n00plicate/shared-utils": "workspace:*"
   },
   "scripts": {
     "typecheck": "tsc --noEmit --project tsconfig.json"

@@ -1,7 +1,7 @@
 # Qwik City Platform Integration Guide
 
 This document covers advanced Qwik City integration techniques including prefetch strategies, image optimization,
-optimizer configuration, and static asset management for the Mimic design system.
+optimizer configuration, and static asset management for the n00plicate design system.
 
 ## Table of Contents
 
@@ -362,7 +362,7 @@ export default defineConfig(({ mode }) => {
               'src/components/input/',
               'src/components/modal/',
             ],
-            'design-tokens': ['src/tokens/', '@mimic/design-tokens'],
+            'design-tokens': ['src/tokens/', '@n00plicate/design-tokens'],
           },
         },
 
@@ -410,8 +410,8 @@ export default defineConfig(({ mode }) => {
         output: {
           manualChunks: {
             vendor: ['@builder.io/qwik', '@builder.io/qwik-city'],
-            'design-tokens': ['@mimic/design-tokens'],
-            'design-system': ['@mimic/design-system'],
+            'design-tokens': ['@n00plicate/design-tokens'],
+            'design-system': ['@n00plicate/design-system'],
           },
         },
       },
@@ -522,10 +522,10 @@ Configure OG image generation:
 import { component$ } from '@builder.io/qwik';
 import { routeLoader$ } from '@builder.io/qwik-city';
 import { ImageResponse } from '@qwikdev/og-img';
-import { tokens } from '@mimic/design-tokens';
+import { tokens } from '@n00plicate/design-tokens';
 
 export const useOGImageData = routeLoader$(async ({ params, url }) => {
-  const title = params.title || 'Mimic Design System';
+  const title = params.title || 'n00plicate Design System';
   const description = params.description || 'Open-source design system built with design tokens';
 
   return { title, description, url: url.toString() };
@@ -609,7 +609,7 @@ import { component$, Slot } from '@builder.io/qwik';
 import { routeLoader$ } from '@builder.io/qwik-city';
 
 export const usePageMeta = routeLoader$(async ({ url, params }) => {
-  const title = params.title || 'Mimic Design System';
+  const title = params.title || 'n00plicate Design System';
   const description = params.description || 'Open-source design system built with design tokens';
 
   return {

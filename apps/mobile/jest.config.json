@@ -5,9 +5,9 @@
   "collectCoverageFrom": ["src/**/*.{ts,tsx}", "!src/**/*.d.ts"],
   "setupFilesAfterEnv": ["<rootDir>/jest-setup.ts"],
   "moduleNameMapper": {
-    "^@mimic/(.*)$": "<rootDir>/../../packages/$1/src"
+    "^@n00plicate/(.*)$": "<rootDir>/../../packages/$1/src"
   },
   "transformIgnorePatterns": [
-    "node_modules/(?!(react-native|@react-native|react-native-.*|@mimic|@react-native-async-storage)/)"
+    "node_modules/(?!(react-native|@react-native|react-native-.*|@n00plicate|@react-native-async-storage)/)"
   ]
 }

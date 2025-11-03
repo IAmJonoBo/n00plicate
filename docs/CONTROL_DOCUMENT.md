@@ -1,20 +1,20 @@
-# Mimic Design Token Pipeline: Master Control Document
+# n00plicate Design Token Pipeline: Master Control Document
 
 **Version**: 2.2.0\
 **Last Updated**: June 2025\
 **Status**: Production Ready with Collision-Prevention Architecture
 
-> **📋 Document Overview**: This Control Document serves as the master technical reference for the Mimic platform.
+> **📋 Document Overview**: This Control Document serves as the master technical reference for the n00plicate platform.
 > For step-by-step user instructions, see the [User Guide](./USER_GUIDE.md).
 > For quick overview and setup, see the [README](../README.md).
 
-This document serves as the canonical reference and control handbook for the complete Mimic design
+This document serves as the canonical reference and control handbook for the complete n00plicate design
 token pipeline. It orchestrates all components, workflows, and integrations across the entire ecosystem
 with comprehensive collision-prevention strategies for multi-platform deployment.
 
 ## Executive Summary
 
-Mimic is a comprehensive, open-source design token management platform that provides real-time
+n00plicate is a comprehensive, open-source design token management platform that provides real-time
 synchronization between design tools (Penpot), transformation systems (Style Dictionary), and
 platform-specific outputs (Qwik, React Native, Tauri). This control document defines the complete
 architecture, workflows, and operational procedures for the entire pipeline, including the industry-leading
@@ -312,7 +312,7 @@ interface TokenLifecycle {
 
 ## Collision Prevention Architecture
 
-The Mimic design token pipeline implements a comprehensive collision-prevention strategy that eliminates\
+The n00plicate design token pipeline implements a comprehensive collision-prevention strategy that eliminates\
 all four types of conflicts: naming collisions, file-path collisions, module boundary violations, and\
 runtime global conflicts. This architecture ensures safe deployment across all supported platforms while\
 maintaining design consistency.
@@ -424,7 +424,7 @@ Nx ESLint rules prevent illegal cross-platform token imports:
 | Runtime Environment | Collision Risk                       | Prevention Strategy               | Implementation                                             | Documentation Reference |
 | ------------------- | ------------------------------------ | --------------------------------- | ---------------------------------------------------------- | ----------------------- |
 | **Qwik City**       | CSS variables vs Tailwind/frameworks | Prefixed `--ds-*` variables       | Tailwind safelist: `^ds-` pattern                          | Specify warning docs    |
-| **React Native**    | Metro cache conflicts & duplicates   | Package naming + Import isolation | Package name: `@mimic/design-tokens` + Metro deduplication | Locofy FAQ              |
+| **React Native**    | Metro cache conflicts & duplicates   | Package naming + Import isolation | Package name: `@n00plicate/design-tokens` + Metro deduplication | Locofy FAQ              |
 | **Compose MP**      | Package name clashes                 | Namespace isolation               | Use `ds.theme` package namespace                           | Industry standard       |
 | **Tauri Desktop**   | Asset path conflicts                 | Path isolation                    | Configure `distDir` to isolated build path                 | Tauri best practice     |
 | **Storybook**       | Port conflicts + Builder composition | Fixed ports + Isolated builders   | Web: 6006, Mobile: 7007, Desktop: 6008                     | Supernova docs          |
@@ -471,7 +471,7 @@ const validateCollisions = (tokens: DesignToken[]) => {
   run: |
     # Ensure Metro won't duplicate packages due to name collisions per Locofy FAQ
     # Check that design-tokens package uses proper scoped naming
-    grep -q '"name": "@mimic/design-tokens"' packages/design-tokens/package.json || exit 1
+    grep -q '"name": "@n00plicate/design-tokens"' packages/design-tokens/package.json || exit 1
 
     # Verify no workspace lib names collide with package.json names
     find packages/ -name "package.json" -exec grep -l '"name":.*[^@]' {} \; | \
@@ -479,7 +479,7 @@ const validateCollisions = (tokens: DesignToken[]) => {
       name=$(grep '"name"' "$pkg" | cut -d'"' -f4)
       if [[ ! "$name" =~ ^@.+/.+ ]]; then
         echo "Error: Package $pkg uses unscoped name '$name' - Metro duplication risk per Locofy FAQ"
-        echo "Solution: Use @mimic/package-name format to prevent Metro bundle conflicts"
+        echo "Solution: Use @n00plicate/package-name format to prevent Metro bundle conflicts"
         exit 1
       fi
     done
@@ -538,12 +538,12 @@ module.exports = {
 #### 2. Metro Bundle Deduplication (Locofy FAQ Compliance)
 
 Locofy FAQ documents that React Native Metro bundler will create duplicate packages if package.json\
-name fields collide with workspace library names. Mimic prevents this with scoped package naming:
+name fields collide with workspace library names. n00plicate prevents this with scoped package naming:
 
 ```json
 // packages/design-tokens/package.json - Locofy FAQ compliant
 {
-  "name": "@mimic/design-tokens", // ✅ Scoped name prevents Locofy FAQ collisions
+  "name": "@n00plicate/design-tokens", // ✅ Scoped name prevents Locofy FAQ collisions
   "version": "1.0.0",
   "main": "libs/tokens/js/tokens.js",
   "types": "libs/tokens/ts/tokens.d.ts",
@@ -558,7 +558,7 @@ name fields collide with workspace library names. Mimic prevents this with scope
 
 **Why This Works (Locofy FAQ Analysis):**
 
-- Metro recognizes `@mimic/design-tokens` as external scoped package
+- Metro recognizes `@n00plicate/design-tokens` as external scoped package
 - No collision with workspace lib `design-tokens` (different namespace)
 - Metro cache deduplicates correctly across multiple app bundles
 - Package resolution follows npm scoped package conventions
@@ -566,7 +566,7 @@ name fields collide with workspace library names. Mimic prevents this with scope
 #### 3. Storybook Port Management (Supernova Issue Prevention)
 
 Supernova documentation notes that Storybook's React Native builder defaults to port 7007 while Vite\
-builder defaults to port 6006, causing development machine port conflicts. Mimic uses explicit fixed\
+builder defaults to port 6006, causing development machine port conflicts. n00plicate uses explicit fixed\
 port assignment to prevent Supernova-documented issues:
 
 ```javascript
@@ -797,7 +797,7 @@ composition for cross-platform component documentation and preventing port confl
 
 #### Post-Build Apple Cleanup Chain
 
-The Mimic platform implements a universal post-build cleanup chain to automatically remove Apple-specific
+The n00plicate platform implements a universal post-build cleanup chain to automatically remove Apple-specific
 metadata files (`.DS_Store`, `._*` AppleDouble files) from all build outputs and export directories.
 This ensures clean, portable builds across all platforms and prevents deployment artifacts from containing
 platform-specific metadata.
@@ -1275,7 +1275,7 @@ du -h packages/design-tokens/libs/tokens/*/*.css
 ## Conclusion
 
 This control document establishes the foundation for a world-class design token management platform.
-By following these guidelines, procedures, and standards, the Mimic platform delivers consistent,
+By following these guidelines, procedures, and standards, the n00plicate platform delivers consistent,
 reliable, and performant design token management across all supported platforms.
 
 The platform's success depends on maintaining these standards while continuously improving the
@@ -1286,7 +1286,7 @@ the platform evolves with the needs of its users and the broader design and deve
 
 ## Document Control
 
-- **Owner**: Mimic Core Team
+- **Owner**: n00plicate Core Team
 - **Review Cycle**: Quarterly
 - **Next Review**: September 2025
 - **Distribution**: Public (Open Source)

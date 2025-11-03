@@ -19,8 +19,8 @@ and React Native new architecture considerations.
 Create a comprehensive theme system for Compose Multiplatform:
 
 ```kotlin
-// design-system/src/commonMain/kotlin/com/mimic/design/theme/MimicTheme.kt
-package com.mimic.design.theme
+// design-system/src/commonMain/kotlin/com/n00plicate/design/theme/n00plicateTheme.kt
+package com.n00plicate.design.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -30,9 +30,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 
 // Import generated tokens
-import com.mimic.design.tokens.MimicTokens
+import com.n00plicate.design.tokens.n00plicateTokens
 
-data class MimicColors(
+data class n00plicateColors(
     val primary: Color,
     val primaryVariant: Color,
     val secondary: Color,
@@ -46,7 +46,7 @@ data class MimicColors(
     val onError: Color
 )
 
-data class MimicTypography(
+data class n00plicateTypography(
     val h1: TextStyle,
     val h2: TextStyle,
     val h3: TextStyle,
@@ -60,7 +60,7 @@ data class MimicTypography(
     val overline: TextStyle
 )
 
-data class MimicSpacing(
+data class n00plicateSpacing(
     val xxs: Dp,
     val xs: Dp,
     val sm: Dp,
@@ -70,48 +70,48 @@ data class MimicSpacing(
     val xxl: Dp
 )
 
-object MimicTheme {
-    val colors: MimicColors
+object n00plicateTheme {
+    val colors: n00plicateColors
         @Composable
         @ReadOnlyComposable
-        get() = LocalMimicColors.current
+        get() = Localn00plicateColors.current
 
-    val typography: MimicTypography
+    val typography: n00plicateTypography
         @Composable
         @ReadOnlyComposable
-        get() = LocalMimicTypography.current
+        get() = Localn00plicateTypography.current
 
-    val spacing: MimicSpacing
+    val spacing: n00plicateSpacing
         @Composable
         @ReadOnlyComposable
-        get() = LocalMimicSpacing.current
+        get() = Localn00plicateSpacing.current
 }
 
 // Local composition providers
-internal val LocalMimicColors = staticCompositionLocalOf<MimicColors> {
-    error("No MimicColors provided")
+internal val Localn00plicateColors = staticCompositionLocalOf<n00plicateColors> {
+    error("No n00plicateColors provided")
 }
 
-internal val LocalMimicTypography = staticCompositionLocalOf<MimicTypography> {
-    error("No MimicTypography provided")
+internal val Localn00plicateTypography = staticCompositionLocalOf<n00plicateTypography> {
+    error("No n00plicateTypography provided")
 }
 
-internal val LocalMimicSpacing = staticCompositionLocalOf<MimicSpacing> {
-    error("No MimicSpacing provided")
+internal val Localn00plicateSpacing = staticCompositionLocalOf<n00plicateSpacing> {
+    error("No n00plicateSpacing provided")
 }
 
 @Composable
-fun MimicTheme(
+fun n00plicateTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    colors: MimicColors = if (darkTheme) darkMimicColors() else lightMimicColors(),
-    typography: MimicTypography = mimicTypography(),
-    spacing: MimicSpacing = mimicSpacing(),
+    colors: n00plicateColors = if (darkTheme) darkn00plicateColors() else lightn00plicateColors(),
+    typography: n00plicateTypography = n00plicateTypography(),
+    spacing: n00plicateSpacing = n00plicateSpacing(),
     content: @Composable () -> Unit
 ) {
     CompositionLocalProvider(
-        LocalMimicColors provides colors,
-        LocalMimicTypography provides typography,
-        LocalMimicSpacing provides spacing
+        Localn00plicateColors provides colors,
+        Localn00plicateTypography provides typography,
+        Localn00plicateSpacing provides spacing
     ) {
         MaterialTheme(
             colorScheme = colors.toMaterial3ColorScheme(),
@@ -122,56 +122,56 @@ fun MimicTheme(
 }
 
 // Token-based theme factories
-fun lightMimicColors(): MimicColors = MimicColors(
-    primary = Color(MimicTokens.ColorPrimary500),
-    primaryVariant = Color(MimicTokens.ColorPrimary700),
-    secondary = Color(MimicTokens.ColorSecondary500),
-    background = Color(MimicTokens.ColorSurface),
-    surface = Color(MimicTokens.ColorSurfaceElevated),
-    error = Color(MimicTokens.ColorError500),
-    onPrimary = Color(MimicTokens.ColorOnPrimary),
-    onSecondary = Color(MimicTokens.ColorOnSecondary),
-    onBackground = Color(MimicTokens.ColorOnSurface),
-    onSurface = Color(MimicTokens.ColorOnSurface),
-    onError = Color(MimicTokens.ColorOnError)
+fun lightn00plicateColors(): n00plicateColors = n00plicateColors(
+    primary = Color(n00plicateTokens.ColorPrimary500),
+    primaryVariant = Color(n00plicateTokens.ColorPrimary700),
+    secondary = Color(n00plicateTokens.ColorSecondary500),
+    background = Color(n00plicateTokens.ColorSurface),
+    surface = Color(n00plicateTokens.ColorSurfaceElevated),
+    error = Color(n00plicateTokens.ColorError500),
+    onPrimary = Color(n00plicateTokens.ColorOnPrimary),
+    onSecondary = Color(n00plicateTokens.ColorOnSecondary),
+    onBackground = Color(n00plicateTokens.ColorOnSurface),
+    onSurface = Color(n00plicateTokens.ColorOnSurface),
+    onError = Color(n00plicateTokens.ColorOnError)
 )
 
-fun darkMimicColors(): MimicColors = MimicColors(
-    primary = Color(MimicTokens.ColorPrimary400),
-    primaryVariant = Color(MimicTokens.ColorPrimary600),
-    secondary = Color(MimicTokens.ColorSecondary400),
-    background = Color(MimicTokens.ColorSurfaceDark),
-    surface = Color(MimicTokens.ColorSurfaceElevatedDark),
-    error = Color(MimicTokens.ColorError400),
-    onPrimary = Color(MimicTokens.ColorOnPrimaryDark),
-    onSecondary = Color(MimicTokens.ColorOnSecondaryDark),
-    onBackground = Color(MimicTokens.ColorOnSurfaceDark),
-    onSurface = Color(MimicTokens.ColorOnSurfaceDark),
-    onError = Color(MimicTokens.ColorOnErrorDark)
+fun darkn00plicateColors(): n00plicateColors = n00plicateColors(
+    primary = Color(n00plicateTokens.ColorPrimary400),
+    primaryVariant = Color(n00plicateTokens.ColorPrimary600),
+    secondary = Color(n00plicateTokens.ColorSecondary400),
+    background = Color(n00plicateTokens.ColorSurfaceDark),
+    surface = Color(n00plicateTokens.ColorSurfaceElevatedDark),
+    error = Color(n00plicateTokens.ColorError400),
+    onPrimary = Color(n00plicateTokens.ColorOnPrimaryDark),
+    onSecondary = Color(n00plicateTokens.ColorOnSecondaryDark),
+    onBackground = Color(n00plicateTokens.ColorOnSurfaceDark),
+    onSurface = Color(n00plicateTokens.ColorOnSurfaceDark),
+    onError = Color(n00plicateTokens.ColorOnErrorDark)
 )
 
-fun mimicTypography(): MimicTypography = MimicTypography(
-    h1 = MimicTokens.TypographyH1,
-    h2 = MimicTokens.TypographyH2,
-    h3 = MimicTokens.TypographyH3,
-    h4 = MimicTokens.TypographyH4,
-    h5 = MimicTokens.TypographyH5,
-    h6 = MimicTokens.TypographyH6,
-    body1 = MimicTokens.TypographyBody1,
-    body2 = MimicTokens.TypographyBody2,
-    button = MimicTokens.TypographyButton,
-    caption = MimicTokens.TypographyCaption,
-    overline = MimicTokens.TypographyOverline
+fun n00plicateTypography(): n00plicateTypography = n00plicateTypography(
+    h1 = n00plicateTokens.TypographyH1,
+    h2 = n00plicateTokens.TypographyH2,
+    h3 = n00plicateTokens.TypographyH3,
+    h4 = n00plicateTokens.TypographyH4,
+    h5 = n00plicateTokens.TypographyH5,
+    h6 = n00plicateTokens.TypographyH6,
+    body1 = n00plicateTokens.TypographyBody1,
+    body2 = n00plicateTokens.TypographyBody2,
+    button = n00plicateTokens.TypographyButton,
+    caption = n00plicateTokens.TypographyCaption,
+    overline = n00plicateTokens.TypographyOverline
 )
 
-fun mimicSpacing(): MimicSpacing = MimicSpacing(
-    xxs = MimicTokens.SpacingXxs,
-    xs = MimicTokens.SpacingXs,
-    sm = MimicTokens.SpacingSm,
-    md = MimicTokens.SpacingMd,
-    lg = MimicTokens.SpacingLg,
-    xl = MimicTokens.SpacingXl,
-    xxl = MimicTokens.SpacingXxl
+fun n00plicateSpacing(): n00plicateSpacing = n00plicateSpacing(
+    xxs = n00plicateTokens.SpacingXxs,
+    xs = n00plicateTokens.SpacingXs,
+    sm = n00plicateTokens.SpacingSm,
+    md = n00plicateTokens.SpacingMd,
+    lg = n00plicateTokens.SpacingLg,
+    xl = n00plicateTokens.SpacingXl,
+    xxl = n00plicateTokens.SpacingXxl
 )
 ```
 
@@ -180,8 +180,8 @@ fun mimicSpacing(): MimicSpacing = MimicSpacing(
 Handle dynamic theme changes across platforms:
 
 ```kotlin
-// design-system/src/commonMain/kotlin/com/mimic/design/theme/ThemeController.kt
-package com.mimic.design.theme
+// design-system/src/commonMain/kotlin/com/n00plicate/design/theme/ThemeController.kt
+package com.n00plicate.design.theme
 
 import androidx.compose.runtime.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -197,8 +197,8 @@ class ThemeController {
     private val _themeMode = MutableStateFlow(ThemeMode.SYSTEM)
     val themeMode: StateFlow<ThemeMode> = _themeMode
 
-    private val _customColors = MutableStateFlow<MimicColors?>(null)
-    val customColors: StateFlow<MimicColors?> = _customColors
+    private val _customColors = MutableStateFlow<n00plicateColors?>(null)
+    val customColors: StateFlow<n00plicateColors?> = _customColors
 
     fun setThemeMode(mode: ThemeMode) {
         _themeMode.value = mode
@@ -206,7 +206,7 @@ class ThemeController {
         saveThemePreference(mode)
     }
 
-    fun setCustomColors(colors: MimicColors) {
+    fun setCustomColors(colors: n00plicateColors) {
         _customColors.value = colors
     }
 
@@ -231,7 +231,7 @@ fun rememberThemeController(): ThemeController {
 }
 
 @Composable
-fun DynamicMimicTheme(
+fun Dynamicn00plicateTheme(
     themeController: ThemeController = rememberThemeController(),
     content: @Composable () -> Unit
 ) {
@@ -244,9 +244,9 @@ fun DynamicMimicTheme(
         ThemeMode.SYSTEM -> isSystemInDarkTheme()
     }
 
-    val colors = customColors ?: if (isDarkTheme) darkMimicColors() else lightMimicColors()
+    val colors = customColors ?: if (isDarkTheme) darkn00plicateColors() else lightn00plicateColors()
 
-    MimicTheme(
+    n00plicateTheme(
         darkTheme = isDarkTheme,
         colors = colors,
         content = content
@@ -259,8 +259,8 @@ fun DynamicMimicTheme(
 ### Platform Detection and Adaptation
 
 ```kotlin
-// shared/src/commonMain/kotlin/com/mimic/shared/Platform.kt
-package com.mimic.shared
+// shared/src/commonMain/kotlin/com/n00plicate/shared/Platform.kt
+package com.n00plicate.shared
 
 expect object Platform {
     val name: String
@@ -276,14 +276,14 @@ sealed class PlatformType {
 }
 
 // Platform-specific implementations
-// shared/src/androidMain/kotlin/com/mimic/shared/Platform.android.kt
+// shared/src/androidMain/kotlin/com/n00plicate/shared/Platform.android.kt
 actual object Platform {
     actual val name = "Android"
     actual val version = android.os.Build.VERSION.RELEASE
     actual val current = PlatformType.Android
 }
 
-// shared/src/iosMain/kotlin/com/mimic/shared/Platform.ios.kt
+// shared/src/iosMain/kotlin/com/n00plicate/shared/Platform.ios.kt
 import platform.UIKit.UIDevice
 
 actual object Platform {
@@ -292,7 +292,7 @@ actual object Platform {
     actual val current = PlatformType.IOS
 }
 
-// shared/src/wasmJsMain/kotlin/com/mimic/shared/Platform.wasm.kt
+// shared/src/wasmJsMain/kotlin/com/n00plicate/shared/Platform.wasm.kt
 actual object Platform {
     actual val name = "Wasm"
     actual val version = js("navigator.userAgent") as String
@@ -303,8 +303,8 @@ actual object Platform {
 ### Responsive Design System
 
 ```kotlin
-// design-system/src/commonMain/kotlin/com/mimic/design/responsive/Breakpoints.kt
-package com.mimic.design.responsive
+// design-system/src/commonMain/kotlin/com/n00plicate/design/responsive/Breakpoints.kt
+package com.n00plicate.design.responsive
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalDensity
@@ -373,8 +373,8 @@ fun Modifier.responsive(
 ### Safe Area Handling
 
 ```kotlin
-// design-system/src/iosMain/kotlin/com/mimic/design/platform/SafeArea.ios.kt
-package com.mimic.design.platform
+// design-system/src/iosMain/kotlin/com/n00plicate/design/platform/SafeArea.ios.kt
+package com.n00plicate.design.platform
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
@@ -405,14 +405,14 @@ fun SafeAreaLayout(
 ### iOS-Specific Theme Adaptations
 
 ```kotlin
-// design-system/src/iosMain/kotlin/com/mimic/design/theme/IOSTheme.ios.kt
-package com.mimic.design.theme
+// design-system/src/iosMain/kotlin/com/n00plicate/design/theme/IOSTheme.ios.kt
+package com.n00plicate.design.theme
 
 import androidx.compose.runtime.Composable
 import platform.UIKit.*
 
 @Composable
-fun IOSAdaptiveMimicTheme(
+fun IOSAdaptiven00plicateTheme(
     content: @Composable () -> Unit
 ) {
     // Detect iOS dynamic type settings
@@ -420,7 +420,7 @@ fun IOSAdaptiveMimicTheme(
         .preferredContentSizeCategory
 
     // Adapt typography based on iOS accessibility settings
-    val adaptedTypography = mimicTypography().adaptForAccessibility(
+    val adaptedTypography = n00plicateTypography().adaptForAccessibility(
         contentSizeCategory = preferredContentSizeCategory
     )
 
@@ -428,16 +428,16 @@ fun IOSAdaptiveMimicTheme(
     val isDarkMode = UITraitCollection.currentTraitCollection
         .userInterfaceStyle == UIUserInterfaceStyleDark
 
-    MimicTheme(
+    n00plicateTheme(
         darkTheme = isDarkMode,
         typography = adaptedTypography,
         content = content
     )
 }
 
-fun MimicTypography.adaptForAccessibility(
+fun n00plicateTypography.adaptForAccessibility(
     contentSizeCategory: UIContentSizeCategory
-): MimicTypography {
+): n00plicateTypography {
     val scaleFactor = when (contentSizeCategory) {
         UIContentSizeCategoryExtraSmall -> 0.8f
         UIContentSizeCategorySmall -> 0.9f
@@ -473,8 +473,8 @@ fun MimicTypography.adaptForAccessibility(
 ### iOS Navigation Integration
 
 ```kotlin
-// design-system/src/iosMain/kotlin/com/mimic/design/navigation/IOSNavigation.ios.kt
-package com.mimic.design.navigation
+// design-system/src/iosMain/kotlin/com/n00plicate/design/navigation/IOSNavigation.ios.kt
+package com.n00plicate.design.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
@@ -517,8 +517,8 @@ fun IOSNavigationTheme(
 ### Browser API Integration
 
 ```kotlin
-// shared/src/wasmJsMain/kotlin/com/mimic/shared/Browser.wasm.kt
-package com.mimic.shared
+// shared/src/wasmJsMain/kotlin/com/n00plicate/shared/Browser.wasm.kt
+package com.n00plicate.shared
 
 import kotlinx.browser.document
 import kotlinx.browser.window
@@ -560,14 +560,14 @@ object BrowserAPI {
 ### Wasm-Specific Theme Implementation
 
 ```kotlin
-// design-system/src/wasmJsMain/kotlin/com/mimic/design/theme/WasmTheme.wasm.kt
-package com.mimic.design.theme
+// design-system/src/wasmJsMain/kotlin/com/n00plicate/design/theme/WasmTheme.wasm.kt
+package com.n00plicate.design.theme
 
 import androidx.compose.runtime.*
-import com.mimic.shared.BrowserAPI
+import com.n00plicate.shared.BrowserAPI
 
 @Composable
-fun WasmAdaptiveMimicTheme(
+fun WasmAdaptiven00plicateTheme(
     content: @Composable () -> Unit
 ) {
     var isDarkTheme by remember { mutableStateOf(BrowserAPI.getSystemThemePreference()) }
@@ -584,7 +584,7 @@ fun WasmAdaptiveMimicTheme(
         BrowserAPI.setThemePreference(isDarkTheme)
     }
 
-    MimicTheme(
+    n00plicateTheme(
         darkTheme = isDarkTheme,
         content = content
     )
@@ -612,7 +612,7 @@ actual fun getScreenWidth(): Dp {
 // react-native/src/design-system/ThemeProvider.tsx
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Appearance, useColorScheme } from 'react-native';
-import { tokens } from '@mimic/design-tokens/dist/mobile/tokens.json';
+import { tokens } from '@n00plicate/design-tokens/dist/mobile/tokens.json';
 
 interface ThemeContextType {
   theme: 'light' | 'dark';
@@ -789,8 +789,8 @@ export default TurboModuleRegistry.getEnforcing<Spec>('DesignTokensModule');
 ### Theme Caching
 
 ```kotlin
-// design-system/src/commonMain/kotlin/com/mimic/design/cache/ThemeCache.kt
-package com.mimic.design.cache
+// design-system/src/commonMain/kotlin/com/n00plicate/design/cache/ThemeCache.kt
+package com.n00plicate.design.cache
 
 import androidx.compose.runtime.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -798,18 +798,18 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlin.collections.mutableMapOf
 
 object ThemeCache {
-    private val colorCache = mutableMapOf<String, MimicColors>()
-    private val typographyCache = mutableMapOf<String, MimicTypography>()
+    private val colorCache = mutableMapOf<String, n00plicateColors>()
+    private val typographyCache = mutableMapOf<String, n00plicateTypography>()
 
-    fun getCachedColors(key: String): MimicColors? = colorCache[key]
+    fun getCachedColors(key: String): n00plicateColors? = colorCache[key]
 
-    fun setCachedColors(key: String, colors: MimicColors) {
+    fun setCachedColors(key: String, colors: n00plicateColors) {
         colorCache[key] = colors
     }
 
-    fun getCachedTypography(key: String): MimicTypography? = typographyCache[key]
+    fun getCachedTypography(key: String): n00plicateTypography? = typographyCache[key]
 
-    fun setCachedTypography(key: String, typography: MimicTypography) {
+    fun setCachedTypography(key: String, typography: n00plicateTypography) {
         typographyCache[key] = typography
     }
 
@@ -820,15 +820,15 @@ object ThemeCache {
 }
 
 @Composable
-fun cachedMimicColors(
+fun cachedn00plicateColors(
     isDark: Boolean,
     customizations: Map<String, Any> = emptyMap()
-): MimicColors {
+): n00plicateColors {
     val cacheKey = "colors_${isDark}_${customizations.hashCode()}"
 
     return remember(cacheKey) {
         ThemeCache.getCachedColors(cacheKey) ?: run {
-            val colors = if (isDark) darkMimicColors() else lightMimicColors()
+            val colors = if (isDark) darkn00plicateColors() else lightn00plicateColors()
             val customizedColors = applyCustomizations(colors, customizations)
             ThemeCache.setCachedColors(cacheKey, customizedColors)
             customizedColors
@@ -840,8 +840,8 @@ fun cachedMimicColors(
 ### Memory Management
 
 ```kotlin
-// design-system/src/commonMain/kotlin/com/mimic/design/memory/MemoryManager.kt
-package com.mimic.design.memory
+// design-system/src/commonMain/kotlin/com/n00plicate/design/memory/MemoryManager.kt
+package com.n00plicate.design.memory
 
 import androidx.compose.runtime.*
 
@@ -888,8 +888,8 @@ class MemoryTracker {
 ### Platform-Specific Testing
 
 ```kotlin
-// design-system/src/commonTest/kotlin/com/mimic/design/theme/ThemeTest.kt
-package com.mimic.design.theme
+// design-system/src/commonTest/kotlin/com/n00plicate/design/theme/ThemeTest.kt
+package com.n00plicate.design.theme
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -898,7 +898,7 @@ import kotlin.test.assertNotNull
 class ThemeTest {
     @Test
     fun testLightThemeColors() {
-        val lightColors = lightMimicColors()
+        val lightColors = lightn00plicateColors()
 
         assertNotNull(lightColors.primary)
         assertNotNull(lightColors.background)
@@ -907,7 +907,7 @@ class ThemeTest {
 
     @Test
     fun testDarkThemeColors() {
-        val darkColors = darkMimicColors()
+        val darkColors = darkn00plicateColors()
 
         assertNotNull(darkColors.primary)
         assertNotNull(darkColors.background)
@@ -916,8 +916,8 @@ class ThemeTest {
 
     @Test
     fun testThemeTokenConsistency() {
-        val lightColors = lightMimicColors()
-        val darkColors = darkMimicColors()
+        val lightColors = lightn00plicateColors()
+        val darkColors = darkn00plicateColors()
 
         // Ensure both themes have same structure
         assertEquals(lightColors::class, darkColors::class)
@@ -925,7 +925,7 @@ class ThemeTest {
 }
 
 // Platform-specific tests
-// design-system/src/iosTest/kotlin/com/mimic/design/theme/IOSThemeTest.kt
+// design-system/src/iosTest/kotlin/com/n00plicate/design/theme/IOSThemeTest.kt
 class IOSThemeTest {
     @Test
     fun testSafeAreaInsets() {

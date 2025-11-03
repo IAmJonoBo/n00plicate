@@ -1,9 +1,9 @@
 {
-  "name": "@mimic/ui-kernel",
+  "name": "@n00plicate/ui-kernel",
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Lit + vanilla-extract primitives for Mimic 2.0 (placeholder)",
+  "description": "Lit + vanilla-extract primitives for n00plicate 2.0 (placeholder)",
   "exports": {
     ".": {
       "types": "./src/index.ts",

@@ -1,15 +1,15 @@
 {
-  "name": "mimic",
+  "name": "n00plicate",
   "version": "0.1.1",
   "type": "module",
   "private": true,
   "description": "Design-token-driven pipeline using 100% libre tooling",
   "repository": {
     "type": "git",
-    "url": "https://github.com/IAmJonoBo/mimic.git"
+    "url": "https://github.com/IAmJonoBo/n00plicate.git"
   },
   "license": "MIT",
-  "author": "Mimic Team",
+  "author": "n00plicate Team",
   "workspaces": [
     "packages/*",
     "apps/*",
@@ -57,7 +57,7 @@
     "build-storybook": "pnpm --filter design-system build-storybook",
     "tokens:build": "pnpm --filter design-tokens build",
     "tokens:build-all": "pnpm --filter design-tokens build && pnpm -r --workspace-root=false --workspace-concurrency=1 --if-present build",
-    "tokens:orchestrate": "cargo run --manifest-path packages/token-orchestrator/Cargo.toml --bin mimic-token-orchestrator",
+    "tokens:orchestrate": "cargo run --manifest-path packages/token-orchestrator/Cargo.toml --bin n00plicate-token-orchestrator",
     "tokens:sync": "pnpm run tokens:orchestrate && pnpm --filter design-tokens tokens:sync",
     "tokens:sync-all": "pnpm --filter design-tokens tokens:sync && pnpm -r --workspace-root=false --workspace-concurrency=1 --if-present build",
     "tokens:watch": "pnpm --filter design-tokens watch",
@@ -65,8 +65,8 @@
     "tokens:check-drift": "echo '🔍 Checking for token drift...' && echo 'Drift check placeholder - would compare with Penpot'",
     "tokens:diff": "echo '📊 Token diff placeholder - would show changes between versions'",
     "tokens:monitor": "echo '👀 Token monitoring placeholder - would start continuous monitoring'",
-    "tokens:cli:help": "echo '📋 Install mimic-token-cli globally: npm install -g mimic-token-cli'",
-    "tokens:cli:status": "echo '📋 Use: mimic-tokens status (install globally: npm install -g mimic-token-cli)'",
+    "tokens:cli:help": "echo '📋 Install n00plicate-token-cli globally: npm install -g n00plicate-token-cli'",
+    "tokens:cli:status": "echo '📋 Use: n00plicate-tokens status (install globally: npm install -g n00plicate-token-cli)'",
     "validate:token-contract": "pnpm tokens:validate",
     "validate:penpot-export": "node -e \"console.log('🔍 Validating Penpot export...'); if (!require('fs').existsSync('tokens.json')) { console.log('❌ tokens.json not found'); process.exit(1); } console.log('✅ Penpot export validated');\"",
     "dev:full-stack": "concurrently 'pnpm --filter design-tokens watch' 'pnpm --filter design-system storybook'",

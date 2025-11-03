@@ -8,7 +8,7 @@ export default component$(() => {
     <>
       <h1>Hi 👋</h1>
       <div>
-        Welcome to Mimic Design Token Pipeline Demo!
+        Welcome to n00plicate Design Token Pipeline Demo!
         <br />
         Below you can see our design tokens in action with Qwik City.
       </div>
@@ -19,11 +19,11 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: 'Mimic Design Token Pipeline - Qwik Demo',
+  title: 'n00plicate Design Token Pipeline - Qwik Demo',
   meta: [
     {
       name: 'description',
-      content: 'Demo of Mimic design tokens integration with Qwik City and Vanilla Extract',
+      content: 'Demo of n00plicate design tokens integration with Qwik City and Vanilla Extract',
     },
   ],
 };

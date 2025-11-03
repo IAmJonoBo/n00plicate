@@ -98,7 +98,7 @@ for (const task of tasks) {
 }
 
 function showMenu() {
-  console.log('\n🎨 Mimic Development Task Runner\n');
+  console.log('\n🎨 n00plicate Development Task Runner\n');
   for (const task of tasks) {
     const aliasList = task.aliases?.filter((alias) => alias !== task.id && alias !== task.label);
     const aliasDisplay = aliasList?.length ? ` (aliases: ${aliasList.join(', ')})` : '';

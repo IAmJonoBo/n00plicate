@@ -1,10 +1,10 @@
-# Mimic Mobile App (React Native)
+# n00plicate Mobile App (React Native)
 
-React Native mobile application demonstrating the Mimic design token system with collision-prevention architecture.
+React Native mobile application demonstrating the n00plicate design token system with collision-prevention architecture.
 
 ## Features
 
-- **Design Token Integration**: Uses `@mimic/design-tokens` with collision-safe `ds-` prefixed tokens
+- **Design Token Integration**: Uses `@n00plicate/design-tokens` with collision-safe `ds-` prefixed tokens
 - **New Architecture**: React Native 0.76+ with Fabric renderer and TurboModules
 - **Theme Provider**: Centralized theme management with system theme detection
 - **Component Demos**: Token usage examples with buttons and UI components
@@ -45,9 +45,9 @@ pnpm android
 The mobile app implements collision-prevention strategies:
 
 1. **Token Namespace**: All tokens use `ds-` prefix (`color.primary_500`, `spacing.md`)
-2. **Import Paths**: Uses collision-safe import paths (`@mimic/design-tokens/react-native`)
+2. **Import Paths**: Uses collision-safe import paths (`@n00plicate/design-tokens/react-native`)
 3. **Metro Aliases**: Resolves workspace packages correctly
-4. **Package Scoping**: Uses `@mimic/` scoped package names
+4. **Package Scoping**: Uses `@n00plicate/` scoped package names
 
 ### Theme System
 
@@ -104,7 +104,7 @@ fontWeight: getToken('typography.fontWeight_medium', '500');
 
 ## Integration with Design System
 
-This mobile app is part of the larger Mimic design system:
+This mobile app is part of the larger n00plicate design system:
 
 - Shares tokens with web (`apps/web`) and desktop (`apps/desktop`)
 - Uses the same collision-prevention architecture

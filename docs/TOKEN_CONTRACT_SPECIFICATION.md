@@ -2,11 +2,11 @@
 
 ## Overview
 
-Before exporting anything from Penpot into the Mimic pipeline, you must treat the JSON token file as a formal
+Before exporting anything from Penpot into the n00plicate pipeline, you must treat the JSON token file as a formal
 "contract artefact". If that contract is precise, every downstream tool—Style Dictionary, Qwik City, React Native,
 Compose MP, Tauri 2 and Storybook—will ingest the data without clashes or manual patch-ups.
 
-This document defines the formal contract rules that guarantee fidelity across all targets in the Mimic design token
+This document defines the formal contract rules that guarantee fidelity across all targets in the n00plicate design token
 pipeline.
 
 ## 1. Penpot-Side Rules (Source of Truth)
@@ -243,4 +243,4 @@ By respecting these contract rules—prefixed tokens, platform-scoped outputs, b
 boundary checks—Penpot becomes a safe single point of entry, Style Dictionary a deterministic transformer, and every
 runtime (web, native, desktop, docs) remains collision-free, reproducible, and perfectly in sync.
 
-**The token contract is the foundation of the Mimic design system's reliability and scalability.**
+**The token contract is the foundation of the n00plicate design system's reliability and scalability.**

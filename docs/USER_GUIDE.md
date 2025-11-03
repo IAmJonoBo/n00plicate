@@ -1,10 +1,10 @@
-# Mimic Design Token Pipeline: User Guide
+# n00plicate Design Token Pipeline: User Guide
 
 **Version**: 2.3.0\
 **Last Updated**: June 2025\
 **Target Audience**: Designers, Developers, DevOps Engineers
 
-> **📖 Document Overview**: This User Guide provides step-by-step instructions for using the Mimic design token
+> **📖 Document Overview**: This User Guide provides step-by-step instructions for using the n00plicate design token
 > pipeline.
 > For comprehensive technical details, see the [Control Document](./CONTROL_DOCUMENT.md).
 > For quick setup, see the [README](../README.md).
@@ -56,10 +56,10 @@ Install Node via corepack, then initialize the repo:
 corepack enable
 
 # Create Nx workspace
-pnpm dlx create-nx-workspace@latest mimic-tokens --preset=empty
+pnpm dlx create-nx-workspace@latest n00plicate-tokens --preset=empty
 
 # Navigate to workspace
-cd mimic-tokens
+cd n00plicate-tokens
 
 # Install dependencies
 pnpm install
@@ -312,7 +312,7 @@ For complex styling systems, use Vanilla Extract:
 ```typescript
 // apps/web/src/styles/theme.css.ts
 import { style } from '@vanilla-extract/css';
-import '@mimic/design-tokens/css';
+import '@n00plicate/design-tokens/css';
 
 export const buttonPrimary = style({
   backgroundColor: 'var(--ds-color-primary-500)',
@@ -569,7 +569,7 @@ Visual testing catches unintended design changes.
 
 ```kotlin
 // Import generated theme
-import com.mimic.tokens.Theme
+import com.n00plicate.tokens.Theme
 
 @Composable
 fun App() {
@@ -621,7 +621,7 @@ hermesEnabled = true;
 
 ```typescript
 // Import generated tokens
-import { tokens } from '@mimic/design-tokens';
+import { tokens } from '@n00plicate/design-tokens';
 
 const theme = {
   colors: tokens.colors,
@@ -908,7 +908,7 @@ testing and CI gates prevent regressions while maintaining development velocity.
 
 ## 11. Collision Prevention Architecture
 
-The Mimic design token pipeline implements a comprehensive collision-prevention strategy
+The n00plicate design token pipeline implements a comprehensive collision-prevention strategy
 following industry best practices. This ensures that tokens, build artifacts, and runtime
 globals never conflict across the multi-platform monorepo.
 
@@ -985,7 +985,7 @@ Enable strict module boundaries to prevent cross-platform token imports:
 | Runtime           | Collision Risk            | Prevention Strategy                                                 | Tooling Reference    |
 | ----------------- | ------------------------- | ------------------------------------------------------------------- | -------------------- |
 | **Qwik City**     | CSS variables vs Tailwind | Prefixed `--ds-*` vars; Tailwind safelist `^ds-`                    | Specify warning docs |
-| **React Native**  | Metro cache conflicts     | Scoped package names (`@mimic/design-tokens`) + Metro deduplication | Locofy FAQ           |
+| **React Native**  | Metro cache conflicts     | Scoped package names (`@n00plicate/design-tokens`) + Metro deduplication | Locofy FAQ           |
 | **Compose MP**    | Package name clashes      | Use `ds.theme` package namespace                                    | Industry standard    |
 | **Tauri Desktop** | Asset path conflicts      | Configure `distDir` to `apps/web/dist`                              | Tauri best practice  |
 | **Storybook**     | Port conflicts            | Fixed ports: Web(6006), Mobile(7007), Desktop(6008)                 | Supernova docs       |
@@ -995,7 +995,7 @@ Enable strict module boundaries to prevent cross-platform token imports:
 ### Specify-Documented Tailwind CSS Collision Prevention
 
 Specify documentation warns that un-namespaced design token CSS variables will collide with Tailwind\
-utility classes. Mimic's `ds-` prefix completely eliminates this risk:
+utility classes. n00plicate's `ds-` prefix completely eliminates this risk:
 
 ```javascript
 // tailwind.config.js - Collision-safe configuration
@@ -1028,12 +1028,12 @@ module.exports = {
 ### Locofy FAQ Metro Bundle Deduplication
 
 Locofy FAQ documents that Metro will bundle duplicate packages if package.json name fields collide with\
-workspace library names. Mimic prevents this with proper scoped naming:
+workspace library names. n00plicate prevents this with proper scoped naming:
 
 ```json
 // packages/design-tokens/package.json - Metro-safe configuration
 {
-  "name": "@mimic/design-tokens", // ✅ Scoped name prevents Locofy FAQ duplication issue
+  "name": "@n00plicate/design-tokens", // ✅ Scoped name prevents Locofy FAQ duplication issue
   "version": "1.0.0",
   "main": "libs/tokens/js/tokens.js",
   "exports": {
@@ -1047,14 +1047,14 @@ workspace library names. Mimic prevents this with proper scoped naming:
 
 **Why This Works:**
 
-- Metro recognizes `@mimic/design-tokens` as external scoped package
+- Metro recognizes `@n00plicate/design-tokens` as external scoped package
 - No collision with workspace lib `design-tokens` (different namespace)
 - Metro cache deduplicates correctly across multiple app bundles
 
 ### Supernova-Documented Storybook Port Management
 
 Supernova documentation notes that Storybook's React Native builder defaults to port 7007 while Vite\
-builder defaults to port 6006, causing dev-machine port conflicts. Mimic uses fixed port assignment:
+builder defaults to port 6006, causing dev-machine port conflicts. n00plicate uses fixed port assignment:
 
 ```bash
 # Collision-safe Storybook commands per Supernova best practices
@@ -1214,8 +1214,8 @@ fully documented, reproducible, and ready for team onboarding or open-source con
 
 ## Document Information
 
-- **Maintainer**: Mimic Core Team
+- **Maintainer**: n00plicate Core Team
 - **Last Updated**: June 2025
 - **Target Audience**: All pipeline users (Designers, Developers, DevOps)
 - **Related Documents**: [Control Document](./CONTROL_DOCUMENT.md) • [README](../README.md)
-- **Feedback**: [Create an issue](https://github.com/mimic/issues/new) for improvements
+- **Feedback**: [Create an issue](https://github.com/n00plicate/issues/new) for improvements

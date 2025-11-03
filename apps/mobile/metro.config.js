@@ -20,8 +20,8 @@ const config = {
   resolver: {
     alias: {
       // Collision-safe design token imports
-      '@mimic/design-tokens': '../../../packages/design-tokens/libs/tokens/react-native/theme.ts',
-      '@mimic/shared-utils': '../../../packages/shared-utils/src/index.ts',
+      '@n00plicate/design-tokens': '../../../packages/design-tokens/libs/tokens/react-native/theme.ts',
+      '@n00plicate/shared-utils': '../../../packages/shared-utils/src/index.ts',
     },
     // Enable workspace package resolution
     nodeModulesPath: '../../../node_modules',

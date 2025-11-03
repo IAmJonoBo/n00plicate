@@ -16,7 +16,7 @@ jest.mock('react-native-reanimated', () => {
 });
 
 // Mock design tokens
-jest.mock('@mimic/design-tokens', () => ({
+jest.mock('@n00plicate/design-tokens', () => ({
   color: {
     primary: {
       50: '#eff6ff',

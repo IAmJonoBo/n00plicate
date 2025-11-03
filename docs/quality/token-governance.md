@@ -1,6 +1,6 @@
 # Token Governance & Design System Standards
 
-This document establishes governance standards, validation rules, and quality assurance processes for the Mimic
+This document establishes governance standards, validation rules, and quality assurance processes for the n00plicate
 design token system.
 
 ## Table of Contents
@@ -475,8 +475,8 @@ test.describe('Design Token Visual Tests', () => {
 ```typescript
 // tests/cross-platform/token-consistency.test.ts
 import { describe, it, expect } from 'vitest';
-import { tokens as webTokens } from '@mimic/design-tokens/dist/web/tokens.json';
-import { tokens as mobileTokens } from '@mimic/design-tokens/dist/mobile/tokens.json';
+import { tokens as webTokens } from '@n00plicate/design-tokens/dist/web/tokens.json';
+import { tokens as mobileTokens } from '@n00plicate/design-tokens/dist/mobile/tokens.json';
 
 describe('Cross-Platform Token Consistency', () => {
   it('should have consistent color values across platforms', () => {
@@ -517,7 +517,7 @@ describe('Token Performance', () => {
     const startTime = performance.now();
 
     // Load tokens
-    const tokens = await import('@mimic/design-tokens');
+    const tokens = await import('@n00plicate/design-tokens');
 
     const loadTime = performance.now() - startTime;
 

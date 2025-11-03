@@ -119,11 +119,11 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: 'Design Token Documentation - Mimic Pipeline',
+  title: 'Design Token Documentation - n00plicate Pipeline',
   meta: [
     {
       name: 'description',
-      content: 'Documentation for the Mimic design token pipeline implementation with Qwik City',
+      content: 'Documentation for the n00plicate design token pipeline implementation with Qwik City',
     },
   ],
 };

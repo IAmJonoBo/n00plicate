@@ -1,6 +1,6 @@
-# Mimic 2.0 Development Guide
+# n00plicate 2.0 Development Guide
 
-Use this guide when working on Mimic 2.0. For big-picture context check
+Use this guide when working on n00plicate 2.0. For big-picture context check
 [`docs/IMPLEMENTATION_PLAN_2.0.md`](docs/IMPLEMENTATION_PLAN_2.0.md) and the documentation hub at
 [`docs/README.md`](docs/README.md).
 
@@ -66,10 +66,10 @@ Legacy folders from 1.x remain until their replacements land; prefer the 2.0 tar
 pnpm --filter apps/web dev
 
 # Mobile (React Native)
-pnpm --filter @mimic/mobile-rn start
+pnpm --filter @n00plicate/mobile-rn start
 
 # Desktop (Tauri)
-pnpm --filter @mimic/desktop tauri dev
+pnpm --filter @n00plicate/desktop tauri dev
 ```
 
 ## 4. Tokens During the Transition
@@ -111,7 +111,7 @@ CI repeats these checks plus Playwright journeys, package builds, and deployment
 | Node version mismatch          | `nvm use` then re-run `./setup.sh`                                                       |
 | Token drift or collisions      | `pnpm nx run design-tokens:build` and inspect `libs/tokens/*`                            |
 | Storybook cache oddities       | `rm -rf packages/design-system/storybook-static* && pnpm nx run design-system:storybook` |
-| React Native Metro duplication | Clear Metro cache: `pnpm --filter @mimic/mobile-rn start -- --reset-cache`               |
+| React Native Metro duplication | Clear Metro cache: `pnpm --filter @n00plicate/mobile-rn start -- --reset-cache`               |
 | Dev container not starting     | `docker compose -f infra/containers/devcontainer/docker-compose.yml logs`                |
 
 See [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md) for the full catalogue.
@@ -129,7 +129,7 @@ See [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md) for the full catalogue.
 - Documentation hub — [`docs/README.md`](docs/README.md)
 - Contribution guide — [`CONTRIBUTING.md`](CONTRIBUTING.md)
 - CI overview — [`docs/devops/ci-overview.md`](docs/devops/ci-overview.md)
-- Storybook — <https://iamjonobo.github.io/mimic/storybook/>
+- Storybook — <https://iamjonobo.github.io/n00plicate/storybook/>
 
 Keep this guide up to date as the 2.0 milestones land. If something changed, edit this file in the
 same pull request.

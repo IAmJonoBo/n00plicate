@@ -1,6 +1,6 @@
 # CI/CD Pipeline Overview
 
-This document provides a comprehensive overview of the complete CI/CD pipeline for the Mimic design
+This document provides a comprehensive overview of the complete CI/CD pipeline for the n00plicate design
 token ecosystem, including pipeline diagrams, performance budgets, and integration workflows.
 
 ## Table of Contents
@@ -17,11 +17,11 @@ token ecosystem, including pipeline diagrams, performance budgets, and integrati
 
 ### Multi-Platform Pipeline Overview
 
-The Mimic CI/CD pipeline orchestrates build, test, and deployment across multiple platforms and targets:
+The n00plicate CI/CD pipeline orchestrates build, test, and deployment across multiple platforms and targets:
 
 ```yaml
 # .github/workflows/main.yml - Master Pipeline Orchestrator
-name: Mimic CI/CD Pipeline
+name: n00plicate CI/CD Pipeline
 
 on:
   push:
@@ -530,7 +530,7 @@ jobs:
             -keystore ${{ secrets.ANDROID_KEYSTORE }} \
             -storepass ${{ secrets.ANDROID_KEYSTORE_PASSWORD }} \
             apps/mobile/android/app/build/outputs/apk/release/app-release-unsigned.apk \
-            mimic
+            n00plicate
 
   build-ios:
     name: '🍎 iOS Build'
@@ -553,11 +553,11 @@ jobs:
       - name: Build iOS app
         run: |
           cd apps/mobile/ios
-          xcodebuild -workspace Mimic.xcworkspace \
-            -scheme Mimic \
+          xcodebuild -workspace n00plicate.xcworkspace \
+            -scheme n00plicate \
             -configuration Release \
             -destination generic/platform=iOS \
-            -archivePath Mimic.xcarchive \
+            -archivePath n00plicate.xcarchive \
             archive
 ```
 
@@ -616,10 +616,10 @@ jobs:
           # Sign and notarize
           codesign --force --deep --sign "${{ secrets.MACOS_DEVELOPER_ID }}" \
             --options runtime \
-            src-tauri/target/release/bundle/macos/Mimic.app
+            src-tauri/target/release/bundle/macos/n00plicate.app
 
           xcrun notarytool submit \
-            src-tauri/target/release/bundle/dmg/Mimic_*.dmg \
+            src-tauri/target/release/bundle/dmg/n00plicate_*.dmg \
             --team-id "${{ secrets.MACOS_TEAM_ID }}" \
             --wait
 
@@ -1013,7 +1013,7 @@ name: Pipeline Monitoring
 
 on:
   workflow_run:
-    workflows: ['Mimic CI/CD Pipeline']
+    workflows: ['n00plicate CI/CD Pipeline']
     types: [completed]
 
 jobs:
@@ -1027,7 +1027,7 @@ jobs:
           PIPELINE_STATUS="${{ github.event.workflow_run.conclusion }}"
 
           # Send to monitoring system
-          curl -X POST https://metrics.mimic.design/pipeline \
+          curl -X POST https://metrics.n00plicate.design/pipeline \
             -H "Content-Type: application/json" \
             -d "{
               \"pipeline\": \"main\",

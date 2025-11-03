@@ -1,11 +1,11 @@
 # 🔄 Design Tokens Migration Guide
 
-Step-by-step guide for migrating existing projects to use the Mimic design token system.
+Step-by-step guide for migrating existing projects to use the n00plicate design token system.
 
 ## 📋 Overview
 
 This guide helps teams migrate from hardcoded styles, CSS variables, or other design token systems to the
-Mimic design token architecture. The migration process ensures design consistency while minimizing development
+n00plicate design token architecture. The migration process ensures design consistency while minimizing development
 disruption.
 
 ## 🎯 Migration Strategy
@@ -40,7 +40,7 @@ disruption.
    };
    ```
 
-3. **Map to Mimic tokens:**
+3. **Map to n00plicate tokens:**
 
    ```typescript
    const tokenMapping = {
@@ -58,11 +58,11 @@ disruption.
 
 ```bash
 # Add to your project
-npm install @mimic/design-tokens
+npm install @n00plicate/design-tokens
 # or
-pnpm add @mimic/design-tokens
+pnpm add @n00plicate/design-tokens
 # or
-yarn add @mimic/design-tokens
+yarn add @n00plicate/design-tokens
 ```
 
 #### Configure Build System
@@ -77,7 +77,7 @@ yarn add @mimic/design-tokens
      css: {
        preprocessorOptions: {
          css: {
-           additionalData: `@import '@mimic/design-tokens/css';`,
+           additionalData: `@import '@n00plicate/design-tokens/css';`,
          },
        },
      },
@@ -111,7 +111,7 @@ const styles = {
 };
 
 // After: Design tokens
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 const styles = {
   primary: getToken('color.primary.500'),
@@ -171,7 +171,7 @@ const Button = styled.button`
 `;
 
 // After: Styled-components with tokens
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 const Button = styled.button`
   background: ${getToken('color.primary.500')};
@@ -204,7 +204,7 @@ const Button = styled.button`
 </template>
 
 <style scoped>
-@import '@mimic/design-tokens/css';
+@import '@n00plicate/design-tokens/css';
 
 .btn-primary {
   background: var(--color-primary-500);
@@ -227,7 +227,7 @@ const theme = {
 };
 
 // After: Token-based theme
-import { getToken, getTokensByPattern } from '@mimic/design-tokens';
+import { getToken, getTokensByPattern } from '@n00plicate/design-tokens';
 
 const theme = {
   primary: getToken('color.primary.500'),
@@ -303,13 +303,13 @@ const theme = {
 ### Pre-Migration
 
 - [ ] Audit existing styles and identify token categories
-- [ ] Create mapping between current values and Mimic tokens
+- [ ] Create mapping between current values and n00plicate tokens
 - [ ] Set up development environment with design tokens
 - [ ] Create backup branch of current implementation
 
 ### During Migration
 
-- [ ] Install and configure @mimic/design-tokens
+- [ ] Install and configure @n00plicate/design-tokens
 - [ ] Import CSS variables or TypeScript functions
 - [ ] Replace colors with token equivalents
 - [ ] Replace spacing with token equivalents
@@ -409,7 +409,7 @@ const useTokens = () => ({
 ## 📚 Resources
 
 - **[Design Tokens Guide](./DESIGN_TOKENS.md)** - Complete token usage guide
-- **[API Documentation](./API.md#mimicdesign-tokens-api)** - Token API reference
+- **[API Documentation](./API.md#n00plicatedesign-tokens-api)** - Token API reference
 - **[Troubleshooting](./TROUBLESHOOTING.md#design-token-problems)** - Common issues and solutions
 - **[Package Documentation](../packages/design-tokens/README.md)** - Technical implementation details
 

@@ -15,19 +15,19 @@ describe('RuntimeGuards.validateTokenImport', () => {
     expect(guards.validateTokenImport('libs/tokens/theme.css')).toBe(true);
   });
 
-  it('accepts bare @mimic/design-tokens scope', () => {
+  it('accepts bare @n00plicate/design-tokens scope', () => {
     const guards = createGuards();
-    expect(guards.validateTokenImport('@mimic/design-tokens')).toBe(true);
+    expect(guards.validateTokenImport('@n00plicate/design-tokens')).toBe(true);
   });
 
   it('accepts scoped subpath imports', () => {
     const guards = createGuards();
-    expect(guards.validateTokenImport('@mimic/design-tokens/css')).toBe(true);
+    expect(guards.validateTokenImport('@n00plicate/design-tokens/css')).toBe(true);
   });
 
   it('rejects dist-based scoped imports', () => {
     const guards = createGuards();
-    expect(guards.validateTokenImport('@mimic/design-tokens/dist/theme.css')).toBe(false);
+    expect(guards.validateTokenImport('@n00plicate/design-tokens/dist/theme.css')).toBe(false);
   });
 
   it('rejects legacy dist paths', () => {

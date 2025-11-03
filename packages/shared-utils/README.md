@@ -1,12 +1,12 @@
-# 🔧 @mimic/shared-utils
+# 🔧 @n00plicate/shared-utils
 
-Shared utilities and helper functions for the Mimic monorepo, providing common functionality across web, mobile, and
+Shared utilities and helper functions for the n00plicate monorepo, providing common functionality across web, mobile, and
 desktop applications.
 
 ## 📋 Overview
 
 This package contains reusable TypeScript utilities, type definitions, and helper functions that are shared across all
-Mimic packages. It provides a foundation of common functionality to reduce code duplication and ensure consistency.
+n00plicate packages. It provides a foundation of common functionality to reduce code duplication and ensure consistency.
 
 ## 🎯 Key Features
 
@@ -20,7 +20,7 @@ Mimic packages. It provides a foundation of common functionality to reduce code 
 
 ```bash
 # Install via pnpm (workspace dependency)
-pnpm add @mimic/shared-utils
+pnpm add @n00plicate/shared-utils
 
 # Or if developing locally
 pnpm install
@@ -37,7 +37,7 @@ import {
   debounce,
   isEmptyObject,
   createId,
-} from '@mimic/shared-utils';
+} from '@n00plicate/shared-utils';
 
 // Use utilities in your components
 const className = cn('base-class', condition && 'conditional-class');
@@ -53,7 +53,7 @@ const formattedDate = formatDate(new Date(), 'YYYY-MM-DD');
 Utility for conditionally joining class names together.
 
 ```typescript
-import { cn } from '@mimic/shared-utils';
+import { cn } from '@n00plicate/shared-utils';
 
 // Basic usage
 cn('btn', 'btn-primary'); // 'btn btn-primary'
@@ -77,7 +77,7 @@ cn(['btn', 'btn-primary'], condition && 'active');
 Convert strings to URL-safe slugs.
 
 ```typescript
-import { slugify } from '@mimic/shared-utils';
+import { slugify } from '@n00plicate/shared-utils';
 
 slugify('Hello World!'); // 'hello-world'
 slugify('My Article Title'); // 'my-article-title'
@@ -89,7 +89,7 @@ slugify('Special@Characters#Here'); // 'special-characters-here'
 Safely truncate strings with optional ellipsis.
 
 ```typescript
-import { truncate } from '@mimic/shared-utils';
+import { truncate } from '@n00plicate/shared-utils';
 
 truncate('This is a long string', 10); // 'This is a...'
 truncate('Short', 10); // 'Short'
@@ -103,7 +103,7 @@ truncate('Custom ellipsis', 10, '---'); // 'Custom el---'
 Format dates with various patterns.
 
 ```typescript
-import { formatDate } from '@mimic/shared-utils';
+import { formatDate } from '@n00plicate/shared-utils';
 
 const date = new Date('2023-12-25');
 
@@ -118,7 +118,7 @@ formatDate(date, 'DD MMM YYYY HH:mm'); // '25 Dec 2023 00:00'
 Get human-readable relative time strings.
 
 ```typescript
-import { getRelativeTime } from '@mimic/shared-utils';
+import { getRelativeTime } from '@n00plicate/shared-utils';
 
 const now = new Date();
 const pastDate = new Date(now.getTime() - 3600000); // 1 hour ago
@@ -132,7 +132,7 @@ getRelativeTime(new Date(now.getTime() + 3600000)); // 'in 1 hour'
 Check if a value is a valid date.
 
 ```typescript
-import { isValidDate } from '@mimic/shared-utils';
+import { isValidDate } from '@n00plicate/shared-utils';
 
 isValidDate(new Date()); // true
 isValidDate('2023-12-25'); // false
@@ -146,7 +146,7 @@ isValidDate(new Date('invalid')); // false
 Check if an object is empty.
 
 ```typescript
-import { isEmptyObject } from '@mimic/shared-utils';
+import { isEmptyObject } from '@n00plicate/shared-utils';
 
 isEmptyObject({}); // true
 isEmptyObject({ key: 'value' }); // false
@@ -158,7 +158,7 @@ isEmptyObject([]); // true (arrays are objects)
 Create a new object with only specified properties.
 
 ```typescript
-import { pick } from '@mimic/shared-utils';
+import { pick } from '@n00plicate/shared-utils';
 
 const user = {
   id: 1,
@@ -175,7 +175,7 @@ const publicUser = pick(user, ['id', 'name', 'email']);
 Create a new object excluding specified properties.
 
 ```typescript
-import { omit } from '@mimic/shared-utils';
+import { omit } from '@n00plicate/shared-utils';
 
 const user = {
   id: 1,
@@ -192,7 +192,7 @@ const publicUser = omit(user, ['password']);
 Recursively merge multiple objects.
 
 ```typescript
-import { deepMerge } from '@mimic/shared-utils';
+import { deepMerge } from '@n00plicate/shared-utils';
 
 const obj1 = { a: 1, b: { c: 2 } };
 const obj2 = { b: { d: 3 }, e: 4 };
@@ -207,7 +207,7 @@ const merged = deepMerge(obj1, obj2);
 Remove duplicate values from an array.
 
 ```typescript
-import { unique } from '@mimic/shared-utils';
+import { unique } from '@n00plicate/shared-utils';
 
 unique([1, 2, 2, 3, 1]); // [1, 2, 3]
 unique(['a', 'b', 'a', 'c']); // ['a', 'b', 'c']
@@ -226,7 +226,7 @@ unique(users, user => user.id); // [{ id: 1, name: 'John' }, { id: 2, name: 'Jan
 Group array elements by a key function.
 
 ```typescript
-import { groupBy } from '@mimic/shared-utils';
+import { groupBy } from '@n00plicate/shared-utils';
 
 const users = [
   { name: 'John', role: 'admin' },
@@ -246,7 +246,7 @@ const grouped = groupBy(users, user => user.role);
 Split an array into chunks of specified size.
 
 ```typescript
-import { chunk } from '@mimic/shared-utils';
+import { chunk } from '@n00plicate/shared-utils';
 
 chunk([1, 2, 3, 4, 5, 6], 2); // [[1, 2], [3, 4], [5, 6]]
 chunk([1, 2, 3, 4, 5], 3); // [[1, 2, 3], [4, 5]]
@@ -259,7 +259,7 @@ chunk([1, 2, 3, 4, 5], 3); // [[1, 2, 3], [4, 5]]
 Delay function execution until after a specified time has passed.
 
 ```typescript
-import { debounce } from '@mimic/shared-utils';
+import { debounce } from '@n00plicate/shared-utils';
 
 const searchHandler = debounce((query: string) => {
   console.log('Searching for:', query);
@@ -276,7 +276,7 @@ searchHandler('app'); // Only this will execute
 Limit function execution to once per specified time period.
 
 ```typescript
-import { throttle } from '@mimic/shared-utils';
+import { throttle } from '@n00plicate/shared-utils';
 
 const scrollHandler = throttle(() => {
   console.log('Scroll event handled');
@@ -291,7 +291,7 @@ window.addEventListener('scroll', scrollHandler);
 Cache function results for improved performance.
 
 ```typescript
-import { memoize } from '@mimic/shared-utils';
+import { memoize } from '@n00plicate/shared-utils';
 
 const expensiveFunction = memoize((n: number) => {
   console.log('Computing for', n);
@@ -309,7 +309,7 @@ expensiveFunction(5); // Returns 25 (cached, no log)
 Validate email addresses.
 
 ```typescript
-import { isEmail } from '@mimic/shared-utils';
+import { isEmail } from '@n00plicate/shared-utils';
 
 isEmail('user@example.com'); // true
 isEmail('invalid-email'); // false
@@ -321,7 +321,7 @@ isEmail('user@domain'); // false
 Validate URLs.
 
 ```typescript
-import { isURL } from '@mimic/shared-utils';
+import { isURL } from '@n00plicate/shared-utils';
 
 isURL('https://example.com'); // true
 isURL('http://localhost:3000'); // true
@@ -333,7 +333,7 @@ isURL('not-a-url'); // false
 Validate UUID strings.
 
 ```typescript
-import { isUUID } from '@mimic/shared-utils';
+import { isUUID } from '@n00plicate/shared-utils';
 
 isUUID('123e4567-e89b-12d3-a456-426614174000'); // true
 isUUID('invalid-uuid'); // false
@@ -346,7 +346,7 @@ isUUID('invalid-uuid'); // false
 Generate unique identifiers.
 
 ```typescript
-import { createId } from '@mimic/shared-utils';
+import { createId } from '@n00plicate/shared-utils';
 
 createId(); // 'cm0x1y2z3'
 createId(10); // '1a2b3c4d5e' (10 characters)
@@ -358,7 +358,7 @@ createId(8, 'numeric'); // '12345678' (numeric only)
 Generate URL-safe slugs with optional uniqueness.
 
 ```typescript
-import { createSlug } from '@mimic/shared-utils';
+import { createSlug } from '@n00plicate/shared-utils';
 
 createSlug('My Article Title'); // 'my-article-title'
 createSlug('My Article Title', true); // 'my-article-title-x1y2z3'
@@ -395,7 +395,7 @@ import {
   detectPlatform,
   isBrowser,
   isServer,
-} from '@mimic/shared-utils';
+} from '@n00plicate/shared-utils';
 
 // Platform detection
 const platform: Platform = detectPlatform();

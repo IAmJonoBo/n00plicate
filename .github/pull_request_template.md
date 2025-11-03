@@ -1,6 +1,6 @@
 ---
 name: Pull Request
-about: Create a pull request to contribute to Mimic 2.0
+about: Create a pull request to contribute to n00plicate 2.0
 title: '[type(scope): description]'
 labels: ''
 assignees: ''
@@ -12,7 +12,7 @@ assignees: ''
 
 ## Implementation Plan Phase
 
-<!-- Which phase of the Mimic 2.0 implementation plan does this target? -->
+<!-- Which phase of the n00plicate 2.0 implementation plan does this target? -->
 
 - [ ] Phase 1: Core Infrastructure
 - [ ] Phase 2: Token Orchestrator
@@ -131,7 +131,7 @@ assignees: ''
 
 ### Architecture Compliance
 
-- [ ] Aligns with Mimic 2.0 implementation plan
+- [ ] Aligns with n00plicate 2.0 implementation plan
 - [ ] Respects module boundaries
 - [ ] Follows token-first design principles
 - [ ] Maintains API consistency

@@ -1,11 +1,11 @@
-# Mimic 2.0 Repository Structure
+# n00plicate 2.0 Repository Structure
 
-This document captures the target directory layout for Mimic 2.0. Use it as the source of truth when
+This document captures the target directory layout for n00plicate 2.0. Use it as the source of truth when
 migrating 1.x assets, scaffolding new packages, or evaluating placement for future workstreams. Paths
 marked _(planned)_ will be created as their corresponding sprint delivers.
 
 ``text
-mimic/
+n00plicate/
 ├── .github/
 │ ├── workflows/ # CI/CD pipelines, lint/test gates, release automation
 │ └── reusable/ # (planned) shared workflow snippets for token sync, Storybook QA
@@ -102,7 +102,7 @@ mimic/
 │ └── provisioning/ # (planned) Terraform/Ansible scripts for remote runners
 ├── scripts/
 │ ├── justfile/ # (planned) convenience commands
-│ ├── mimic-assist.js # (planned) AI orchestration entrypoint
+│ ├── n00plicate-assist.js # (planned) AI orchestration entrypoint
 │ ├── release-tools/
 │ │ └── generate-notes.ts
 │ └── token-helpers/

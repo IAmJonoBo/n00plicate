@@ -1,16 +1,16 @@
-# 📚 Mimic API Documentation
+# 📚 n00plicate API Documentation
 
-Complete API reference for all Mimic packages and their exported functions, components, and types.
+Complete API reference for all n00plicate packages and their exported functions, components, and types.
 
 ## 📋 Table of Contents
 
-- [@mimic/design-tokens API](#mimicdesign-tokens-api)
-- [@mimic/design-system API](#mimicdesign-system-api)
-- [@mimic/shared-utils API](#mimicshared-utils-api)
+- [@n00plicate/design-tokens API](#n00plicatedesign-tokens-api)
+- [@n00plicate/design-system API](#n00plicatedesign-system-api)
+- [@n00plicate/shared-utils API](#n00plicateshared-utils-api)
 - [Type Definitions](#type-definitions)
 - [Integration Examples](#integration-examples)
 
-## @mimic/design-tokens API
+## @n00plicate/design-tokens API
 
 ### Core Functions
 
@@ -32,7 +32,7 @@ function getToken(path: string, fallback?: string): string;
 **Examples:**
 
 ```typescript
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 // Get a color token
 const primaryColor = getToken('color.primary.500'); // '#007bff'
@@ -65,7 +65,7 @@ function getTokensByPattern(pattern: string): Array<{
 **Examples:**
 
 ```typescript
-import { getTokensByPattern } from '@mimic/design-tokens';
+import { getTokensByPattern } from '@n00plicate/design-tokens';
 
 // Get all primary colors
 const primaryColors = getTokensByPattern('color.primary.*');
@@ -103,7 +103,7 @@ function validateTokens(
 **Examples:**
 
 ```typescript
-import { validateTokens } from '@mimic/design-tokens';
+import { validateTokens } from '@n00plicate/design-tokens';
 
 // Validate built-in tokens
 const result = validateTokens();
@@ -137,7 +137,7 @@ function matchesPattern(path: string, pattern: string): boolean;
 **Examples:**
 
 ```typescript
-import { matchesPattern } from '@mimic/design-tokens';
+import { matchesPattern } from '@n00plicate/design-tokens';
 
 matchesPattern('color.primary.500', 'color.primary.*'); // true
 matchesPattern('spacing.md', 'color.*'); // false
@@ -339,7 +339,7 @@ interface Token<T> {
 }
 ```
 
-## @mimic/design-system API
+## @n00plicate/design-system API
 
 ### Component Exports
 
@@ -496,7 +496,7 @@ export { cardStyles } from './styles/card.css';
 export { inputStyles } from './styles/input.css';
 ```
 
-## @mimic/shared-utils API
+## @n00plicate/shared-utils API
 
 ### String Utilities
 
@@ -887,14 +887,14 @@ import {
   Input,
   Text,
   Alert
-} from '@mimic/design-system';
+} from '@n00plicate/design-system';
 import {
   cn,
   debounce,
   formatDate,
   isEmail
-} from '@mimic/shared-utils';
-import { tokens } from '@mimic/design-tokens';
+} from '@n00plicate/shared-utils';
+import { tokens } from '@n00plicate/design-tokens';
 
 export default component$(() => {
   const handleSearch = debounce((query: string) => {
@@ -907,7 +907,7 @@ export default component$(() => {
 
       <Card variant="elevated" padding="lg">
         <Text variant="heading" size="xl">
-          Welcome to Mimic
+          Welcome to n00plicate
         </Text>
 
         <Text color="muted">
@@ -931,7 +931,7 @@ export default component$(() => {
         </Button>
 
         <Alert variant="info" dismissible>
-          Welcome to the Mimic design system!
+          Welcome to the n00plicate design system!
         </Alert>
       </Card>
     </div>
@@ -945,8 +945,8 @@ export default component$(() => {
 // custom-component.tsx
 import { component$ } from '@builder.io/qwik';
 import { style } from '@vanilla-extract/css';
-import { tokens } from '@mimic/design-tokens';
-import { cn } from '@mimic/shared-utils';
+import { tokens } from '@n00plicate/design-tokens';
+import { cn } from '@n00plicate/shared-utils';
 
 interface CustomComponentProps {
   variant?: 'primary' | 'secondary';
@@ -1000,8 +1000,8 @@ export const CustomComponent = component$<CustomComponentProps>(({
 ```typescript
 // form-example.tsx
 import { component$, useSignal } from '@builder.io/qwik';
-import { Button, Input, Alert } from '@mimic/design-system';
-import { isEmail, isStrongPassword } from '@mimic/shared-utils';
+import { Button, Input, Alert } from '@n00plicate/design-system';
+import { isEmail, isStrongPassword } from '@n00plicate/shared-utils';
 
 export const FormExample = component$(() => {
   const email = useSignal('');
@@ -1071,5 +1071,5 @@ export const FormExample = component$(() => {
 });
 ```
 
-This comprehensive API documentation provides complete reference material for all Mimic packages, making it easy for
+This comprehensive API documentation provides complete reference material for all n00plicate packages, making it easy for
 developers to understand and use the design system effectively.

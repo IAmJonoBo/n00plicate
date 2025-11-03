@@ -1,6 +1,6 @@
 # Ignore Patterns Guide
 
-This document outlines the comprehensive ignore patterns implemented across all tools in the Mimic repository.
+This document outlines the comprehensive ignore patterns implemented across all tools in the n00plicate repository.
 
 ## Overview
 

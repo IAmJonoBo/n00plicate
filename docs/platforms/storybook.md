@@ -60,14 +60,14 @@ const config: StorybookConfig = {
     return mergeConfig(config, {
       resolve: {
         alias: {
-          '@mimic/design-tokens': '../packages/design-tokens/src',
-          '@mimic/design-system': '../packages/design-system/src',
+          '@n00plicate/design-tokens': '../packages/design-tokens/src',
+          '@n00plicate/design-system': '../packages/design-system/src',
         },
       },
       css: {
         preprocessorOptions: {
           scss: {
-            additionalData: `@import "@mimic/design-tokens/dist/web/tokens.scss";`,
+            additionalData: `@import "@n00plicate/design-tokens/dist/web/tokens.scss";`,
           },
         },
       },
@@ -86,7 +86,7 @@ Create a theme decorator for consistent testing:
 // .storybook/decorators/theme-decorator.tsx
 import React, { useEffect } from 'react';
 import type { Decorator } from '@storybook/react';
-import { tokens } from '@mimic/design-tokens';
+import { tokens } from '@n00plicate/design-tokens';
 
 export const ThemeDecorator: Decorator = (Story, context) => {
   const { globals } = context;
@@ -722,7 +722,7 @@ const config: StorybookConfig = {
           external: ['react', 'react-dom'],
           output: {
             manualChunks: {
-              'design-tokens': ['@mimic/design-tokens'],
+              'design-tokens': ['@n00plicate/design-tokens'],
               vendor: ['react', 'react-dom'],
             },
           },
@@ -946,7 +946,7 @@ export const WithMultipleDesignEmbeds: Story = {
       {
         type: 'link',
         name: 'Design Guidelines',
-        url: 'https://mimic-design.com/guidelines/button',
+        url: 'https://n00plicate-design.com/guidelines/button',
       },
     ],
     docs: {
@@ -1154,7 +1154,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./storybook-static
-          cname: storybook.mimic-design.com
+          cname: storybook.n00plicate-design.com
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
@@ -1173,8 +1173,8 @@ jobs:
           channel: '#design-system'
           text: |
             🚀 Storybook 9.1 deployed successfully!
-            📚 GitHub Pages: https://storybook.mimic-design.com
-            🌐 Netlify: https://mimic-storybook.netlify.app
+            📚 GitHub Pages: https://storybook.n00plicate-design.com
+            🌐 Netlify: https://n00plicate-storybook.netlify.app
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```

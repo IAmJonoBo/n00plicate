@@ -136,7 +136,7 @@ export default [
           pathGroupsExcludedImportTypes: ['builtin'],
           pathGroups: [
             {
-              pattern: '@mimic/**',
+              pattern: '@n00plicate/**',
               group: 'internal',
               position: 'after',
             },

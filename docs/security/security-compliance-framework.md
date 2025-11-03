@@ -1,6 +1,6 @@
 # Security and Compliance Framework
 
-Enterprise-grade security and compliance strategies for the Mimic design system, covering token security,\
+Enterprise-grade security and compliance strategies for the n00plicate design system, covering token security,\
 supply chain protection, vulnerability management, and regulatory compliance.
 
 ## Table of Contents
@@ -103,11 +103,11 @@ jobs:
           echo "🐳 Scanning container images..."
 
           # Build test image
-          docker build -t mimic-security-test .
+          docker build -t n00plicate-security-test .
 
           # Scan with Trivy
           docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
-            aquasec/trivy image --format json --output container-scan.json mimic-security-test
+            aquasec/trivy image --format json --output container-scan.json n00plicate-security-test
 
       - name: Upload security artifacts
         if: always()
@@ -414,8 +414,8 @@ const securityManager = new TokenSecurityManager({
   hashSalt: process.env.TOKEN_HASH_SALT || 'default-salt',
   tokenExpiryHours: 24,
   allowedOrigins: [
-    'https://mimic-design.com',
-    'https://storybook.mimic-design.com',
+    'https://n00plicate-design.com',
+    'https://storybook.n00plicate-design.com',
     'https://localhost:3000', // Development only
   ],
 });
@@ -974,5 +974,5 @@ export class VulnerabilityManager {
 
 This comprehensive security and compliance documentation provides enterprise-grade protection strategies,\
 including automated security scanning, vulnerability management, supply chain monitoring, and compliance\
-frameworks. The documentation ensures that the Mimic design system maintains the highest security standards\
+frameworks. The documentation ensures that the n00plicate design system maintains the highest security standards\
 while remaining compliant with industry regulations and best practices.

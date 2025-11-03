@@ -1,12 +1,12 @@
 /**
- * Theme Provider for Mimic Mobile App
+ * Theme Provider for n00plicate Mobile App
  *
  * Provides design tokens and theme context for React Native components
  * with collision-prevention architecture and proper namespace prefixing.
  */
 
 // Import design tokens with collision-safe paths
-import * as tokens from '@mimic/design-tokens/react-native';
+import * as tokens from '@n00plicate/design-tokens/react-native';
 import type { FC, PropsWithChildren } from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Appearance, type ColorSchemeName, useColorScheme } from 'react-native';

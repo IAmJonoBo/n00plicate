@@ -1,6 +1,6 @@
-# Mimic 2.0 – Implementation Plan
+# n00plicate 2.0 – Implementation Plan
 
-> Living roadmap for reimagining Mimic into a Penpot-first, multi-runtime design system
+> Living roadmap for reimagining n00plicate into a Penpot-first, multi-runtime design system
 > platform.
 > Update status checkboxes (`[ ]` → `[x]`) and owners as milestones complete.
 
@@ -15,7 +15,7 @@
 
 ## Vision Statement
 
-Deliver Mimic 2.0 as an opinionated FOSS design-to-code platform where:
+Deliver n00plicate 2.0 as an opinionated FOSS design-to-code platform where:
 
 - Penpot is the canonical source for tokens and UI intent.
 - An automated token pipeline produces SDKs for every runtime.
@@ -58,7 +58,7 @@ Deliver Mimic 2.0 as an opinionated FOSS design-to-code platform where:
 ### Repository Organisation
 
 ```text
-mimic/
+n00plicate/
 ├── apps/
 │   ├── web/                     # Qwik City app
 │   ├── mobile/                  # React Native + Expo
@@ -89,7 +89,7 @@ mimic/
   adapters, and `rsbuild` for Rust CLI bundling.
 - DevContainer provisioning Node 22 LTS, Rust, Android/iOS SDKs, Playwright, Penpot 2.8, and both
   OpenAI + GitHub Copilot CLI tooling for AI accessibility.
-- Local + remote AI assistant stack: `mimic assist` (Ollama) with fallbacks to OpenAI/Copilot for
+- Local + remote AI assistant stack: `n00plicate assist` (Ollama) with fallbacks to OpenAI/Copilot for
   orchestration, scaffolding, and documentation queries.
 - Storybook 10 readiness plan with 8.6 compatibility branch until addon parity, including custom
   addons for token inspection and accessibility.
@@ -106,15 +106,15 @@ mimic/
 | Phases 1–6   | Nx 21.6 plugin stack (`@nx/{js,react,storybook,vite,plugin}`)                                          | Provides project graph, lint/test orchestration, Storybook build integration, and custom generators. | OSS licenses (MIT). Requires Node environment; offline usage supported via pnpm store.                                                          | Installed through workspace `pnpm install`. Ensure cache seeds via existing CI install steps.                                                                     |
 | Phases 2–6   | Rust toolchain (stable 1.80+, `wasm32-unknown-unknown`, `cargo-generate`)                              | Builds the token orchestrator CLI, wasm bindings, and future Tauri shell automation.                 | Apache-2.0 / MIT dual license. Offline builds require pre-fetching `rustup` components.                                                         | **Follow-up:** add rustup provisioning to token orchestrator GitHub Actions (`token-sync.yml`/`token-export.yml`). Track in `Next_Steps.md`.                      |
 | Phases 2–6   | Storybook 9.1 + Loki + Playwright runners                                                              | Document kernel/adapters and power visual/a11y regression gates.                                     | OSS license. Requires Node; offline builds rely on cached npm packages and Chromatic alternatives.                                              | `visual-tests.yml` builds Storybook and runs Loki; ensure Chromatic optional path documented in Sprint 6.                                                         |
-| Phases 0–6   | AI CLIs: Ollama >=0.5 (`ollama run`), OpenAI CLI (`openai`), GitHub Copilot CLI (`github-copilot-cli`) | Powers `mimic assist` and AI-augmented `just` flows for scaffolding, Q&A, and review triage.         | Ollama: AGPLv3, runs fully offline with local models. OpenAI/Copilot: proprietary APIs—requires network + billing; provide opt-in legal review. | Devcontainers install Ollama by default; remote runners skip AI setup. **Follow-up:** evaluate self-hosted runners for AI optionality (track in `Next_Steps.md`). |
+| Phases 0–6   | AI CLIs: Ollama >=0.5 (`ollama run`), OpenAI CLI (`openai`), GitHub Copilot CLI (`github-copilot-cli`) | Powers `n00plicate assist` and AI-augmented `just` flows for scaffolding, Q&A, and review triage.         | Ollama: AGPLv3, runs fully offline with local models. OpenAI/Copilot: proprietary APIs—requires network + billing; provide opt-in legal review. | Devcontainers install Ollama by default; remote runners skip AI setup. **Follow-up:** evaluate self-hosted runners for AI optionality (track in `Next_Steps.md`). |
 
 ### CLI Deliverables & AI Runtime Expectations
 
 | CLI deliverable                                                        | Runtime dependency                                                                    | AI / network requirements                                                                                | Licensing & offline posture                                                                                      |
 | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `mimic assist`                                                         | Node 22 CLI wrapper invoking Ollama (default) with optional OpenAI/Copilot fallbacks. | Offline with local Ollama models; optional remote API keys enable GPT/Copilot flows.                     | Wrapper MIT-licensed. Ollama AGPLv3—ensure redistribution compliance. Document opt-in for proprietary APIs.      |
-| `mimic init feature`, `mimic token create` wizards                     | Node 22 + Nx generators + Rust orchestrator bindings (Phase 2+).                      | AI prompts piggyback on `mimic assist`; runs offline when Ollama available.                              | Scripts MIT; respects same Ollama/OpenAI licensing constraints.                                                  |
-| `just` catalogue (`just lint-all`, `just ai-review`, `just penpot-up`) | Requires system `just` binary, pnpm workspace, Docker (for Penpot)                    | AI-enhanced recipes call `mimic assist`; offline usage supported when Ollama + Docker images pre-pulled. | `just` is MIT; Docker images for Penpot are AGPL-compatible. Provide legal review for enterprise redistribution. |
+| `n00plicate assist`                                                         | Node 22 CLI wrapper invoking Ollama (default) with optional OpenAI/Copilot fallbacks. | Offline with local Ollama models; optional remote API keys enable GPT/Copilot flows.                     | Wrapper MIT-licensed. Ollama AGPLv3—ensure redistribution compliance. Document opt-in for proprietary APIs.      |
+| `n00plicate init feature`, `n00plicate token create` wizards                     | Node 22 + Nx generators + Rust orchestrator bindings (Phase 2+).                      | AI prompts piggyback on `n00plicate assist`; runs offline when Ollama available.                              | Scripts MIT; respects same Ollama/OpenAI licensing constraints.                                                  |
+| `just` catalogue (`just lint-all`, `just ai-review`, `just penpot-up`) | Requires system `just` binary, pnpm workspace, Docker (for Penpot)                    | AI-enhanced recipes call `n00plicate assist`; offline usage supported when Ollama + Docker images pre-pulled. | `just` is MIT; Docker images for Penpot are AGPL-compatible. Provide legal review for enterprise redistribution. |
 
 ## Engineering Metrics & Observability Pillars
 
@@ -167,10 +167,10 @@ mimic/
 
 ## AI & Developer Intelligence
 
-- `mimic assist` CLI powered by Ollama locally with opt-in OpenAI and GitHub Copilot integrations for
+- `n00plicate assist` CLI powered by Ollama locally with opt-in OpenAI and GitHub Copilot integrations for
   wider accessibility.
 - AI summaries posted automatically on CI (token diffs, visual regressions, flaky test hints).
-- Interactive CLI wizards (`mimic init feature`, `mimic token create`) with AI guidance and guardrails.
+- Interactive CLI wizards (`n00plicate init feature`, `n00plicate token create`) with AI guidance and guardrails.
 - Storybook intelligence addon (token inspector, contrast calculator, design checklist) backed by AI
   prompts for remediation steps.
 
@@ -188,8 +188,8 @@ mimic/
 - Token analytics dashboard (timelines, usage heatmaps).
 - Real-time QA bot (Slack/Matrix) surfacing a11y/visual regression alerts.
 - `just penpot-up` for optional local Penpot provisioning.
-- CLI enhancements: `mimic design diff`, `mimic story publish`, `mimic repo doctor`, AI-powered incident explainers.
-- Migration utilities for Mimic 1.x consumers (codemods, token rename mapping).
+- CLI enhancements: `n00plicate design diff`, `n00plicate story publish`, `n00plicate repo doctor`, AI-powered incident explainers.
+- Migration utilities for n00plicate 1.x consumers (codemods, token rename mapping).
 
 ## Immediate Next Steps
 
@@ -274,7 +274,7 @@ Rust orchestrator usage guide, feature flags, and build targets.
 | [ ]    | Document token governance, release process, migration guides (with SLO dashboards) | Docs Guild |              |
 | [ ]    | Ship AI assistant docs covering Ollama, OpenAI, and Copilot flows                  | AI Guild   |              |
 | [ ]    | Publish upgrade playbooks (Penpot updates, toolchain bumps)                        | DevOps     |              |
-| [ ]    | Add CLI wizards + AI usage guide (`mimic init`, `mimic token create`)              | Platform   |              |
+| [ ]    | Add CLI wizards + AI usage guide (`n00plicate init`, `n00plicate token create`)              | Platform   |              |
 
 **Deliverables**: docs site, governance guidelines, CLI handbooks, migration cookbook.
 
@@ -286,7 +286,7 @@ Rust orchestrator usage guide, feature flags, and build targets.
 | [ ]    | Run beta program with selected adopters                                            | DevRel          | Phase 4      |
 | [ ]    | Finalise semantic releases (Changesets, GitHub Releases) + automated release notes | DevOps          |              |
 | [ ]    | Launch token analytics dashboard + QA notification bot                             | Platform/DevOps |              |
-| [ ]    | Ship Mimic 2.0 GA announcement + migration toolkit                                 | Core WG         |              |
+| [ ]    | Ship n00plicate 2.0 GA announcement + migration toolkit                                 | Core WG         |              |
 
 **Exit Criteria**: All tests green, documentation complete, migration path validated, release artifacts published.
 
@@ -304,5 +304,5 @@ Rust orchestrator usage guide, feature flags, and build targets.
 ## Tracking & Reporting
 
 - Update status weekly in this document; mirror highlights to `docs/IMPLEMENTATION_GUIDE.md`.
-- Use GitHub project board **“Mimic 2.0 Delivery”** with columns: Backlog, In Progress, In Review, Done.
-- Each checklist item should map to an issue/PR with `mimic-2.0` label for traceability.
+- Use GitHub project board **“n00plicate 2.0 Delivery”** with columns: Backlog, In Progress, In Review, Done.
+- Each checklist item should map to an issue/PR with `n00plicate-2.0` label for traceability.

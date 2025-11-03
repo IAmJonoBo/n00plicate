@@ -199,9 +199,9 @@ describe('Collision Prevention Guards', () => {
       const metroConfig = `
         const config = {
           resolver: {
-            dedupe: ['react', 'react-native', '@mimic/design-tokens'],
+            dedupe: ['react', 'react-native', '@n00plicate/design-tokens'],
             alias: {
-              '@mimic/design-tokens': './packages/design-tokens',
+              '@n00plicate/design-tokens': './packages/design-tokens',
             },
             enableGlobalPackages: true,
           }
@@ -209,12 +209,12 @@ describe('Collision Prevention Guards', () => {
       `;
 
       const packageJson1 = JSON.stringify({
-        name: '@mimic/design-tokens',
+        name: '@n00plicate/design-tokens',
         version: '1.0.0',
       });
 
       const packageJson2 = JSON.stringify({
-        name: '@mimic/shared-utils',
+        name: '@n00plicate/shared-utils',
         version: '1.0.0',
       });
 
@@ -261,7 +261,7 @@ describe('Collision Prevention Guards', () => {
       `;
 
       const unscopedPackage = JSON.stringify({
-        name: 'design-tokens', // Should be @mimic/design-tokens
+        name: 'design-tokens', // Should be @n00plicate/design-tokens
         version: '1.0.0',
       });
 
@@ -272,7 +272,7 @@ describe('Collision Prevention Guards', () => {
       writeFileSync(pkgPath, unscopedPackage);
 
       const violations = validateMetroDuplicationRisks(metroPath, [pkgPath]);
-      expect(violations.some((v: string) => v.includes('@mimic/'))).toBe(true);
+      expect(violations.some((v: string) => v.includes('@n00plicate/'))).toBe(true);
     });
   });
 
@@ -299,7 +299,7 @@ describe('Collision Prevention Guards', () => {
         };
       `;
       const validPackageJson = JSON.stringify({
-        name: '@mimic/design-tokens',
+        name: '@n00plicate/design-tokens',
         version: '1.0.0',
       });
 

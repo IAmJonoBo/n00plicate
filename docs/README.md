@@ -1,6 +1,6 @@
-# Mimic 2.0 Documentation Hub
+# n00plicate 2.0 Documentation Hub
 
-This hub curates the documentation that matters for the Mimic 2.0 rewrite. Start with the links in
+This hub curates the documentation that matters for the n00plicate 2.0 rewrite. Start with the links in
 “Begin Here”, then use the thematic sections to dive deeper into architecture, development, and
 operations. Anything marked **Legacy** is retained temporarily for reference and will be migrated or
 retired during the roll-out.
@@ -81,7 +81,7 @@ retired during the roll-out.
 
 ## Legacy / Pending Review
 
-The following documents are from Mimic 1.x. Keep them handy while rewriting, but prefer the 2.0
+The following documents are from n00plicate 1.x. Keep them handy while rewriting, but prefer the 2.0
 sources above. Anything not referenced here is slated for archival.
 
 - [`docs/ADVANCED_DOCUMENTATION_SUMMARY.md`](./ADVANCED_DOCUMENTATION_SUMMARY.md)
@@ -134,8 +134,8 @@ Please open an issue for any missing or outdated documentation so we can prune t
 
 ### Getting Help
 
-- **[GitHub Issues](https://github.com/IAmJonoBo/mimic/issues)** - Bug reports and feature requests
-- **[GitHub Discussions](https://github.com/IAmJonoBo/mimic/discussions)** - Community discussions
+- **[GitHub Issues](https://github.com/IAmJonoBo/n00plicate/issues)** - Bug reports and feature requests
+- **[GitHub Discussions](https://github.com/IAmJonoBo/n00plicate/discussions)** - Community discussions
 - **[Troubleshooting](./TROUBLESHOOTING.md)** - Common problems and solutions
 
 ### Contributing
@@ -193,4 +193,4 @@ Please open an issue for any missing or outdated documentation so we can prune t
 
 **Last Updated**: June 2025
 
-**Need help?** Check the [troubleshooting guide](./TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/mimic/issues/new).
+**Need help?** Check the [troubleshooting guide](./TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/n00plicate/issues/new).

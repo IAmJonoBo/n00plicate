@@ -44,9 +44,9 @@ const config: StorybookConfig = {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@mimic/design-tokens/web': require.resolve('../../design-tokens/libs/tokens/css/tokens.css'),
-      '@mimic/design-tokens/js': require.resolve('../../design-tokens/libs/tokens/js/tokens.js'),
-      '@mimic/design-tokens/types': require.resolve('../../design-tokens/libs/tokens/ts/tokens.ts'),
+      '@n00plicate/design-tokens/web': require.resolve('../../design-tokens/libs/tokens/css/tokens.css'),
+      '@n00plicate/design-tokens/js': require.resolve('../../design-tokens/libs/tokens/js/tokens.js'),
+      '@n00plicate/design-tokens/types': require.resolve('../../design-tokens/libs/tokens/ts/tokens.ts'),
     };
 
     // Add CSS preprocessing for design tokens
@@ -54,7 +54,7 @@ const config: StorybookConfig = {
     config.css.preprocessorOptions = {
       ...config.css.preprocessorOptions,
       scss: {
-        additionalData: `@import "@mimic/design-tokens/scss/tokens.scss";`,
+        additionalData: `@import "@n00plicate/design-tokens/scss/tokens.scss";`,
       },
     };
 

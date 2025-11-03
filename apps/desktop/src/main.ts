@@ -1,13 +1,13 @@
 /**
- * Mimic Desktop App - Tauri Main Entry
+ * n00plicate Desktop App - Tauri Main Entry
  *
- * Desktop application for the Mimic design token system demonstrating
+ * Desktop application for the n00plicate design token system demonstrating
  * collision-prevention architecture with web technologies and native performance.
  */
 
 // Import design tokens with collision-safe paths
 // Import design tokens with collision-safe paths
-import '@mimic/design-tokens/css';
+import '@n00plicate/design-tokens/css';
 
 // TypeScript compatibility: Allow importing CSS files as modules to prevent TypeScript errors.
 // Move the CSS module declaration to a separate .d.ts file for proper type support.
@@ -27,7 +27,7 @@ function getAppHtml(): string {
   return `
     <div class="container">
       <header class="header">
-        <h1 class="title">Mimic Design Tokens</h1>
+        <h1 class="title">n00plicate Design Tokens</h1>
         <p class="subtitle">Desktop App with Collision-Prevention Architecture</p>
       </header>
       <main class="main">

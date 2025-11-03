@@ -29,9 +29,9 @@ const config: StorybookConfig = {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@mimic/design-tokens/mobile': require.resolve('../../design-tokens/libs/tokens/react-native/theme.ts'),
-      '@mimic/design-tokens/json': require.resolve('../../design-tokens/libs/tokens/json/tokens.json'),
-      '@mimic/design-tokens': require.resolve('../../design-tokens/libs/tokens/react-native/theme.ts'),
+      '@n00plicate/design-tokens/mobile': require.resolve('../../design-tokens/libs/tokens/react-native/theme.ts'),
+      '@n00plicate/design-tokens/json': require.resolve('../../design-tokens/libs/tokens/json/tokens.json'),
+      '@n00plicate/design-tokens': require.resolve('../../design-tokens/libs/tokens/react-native/theme.ts'),
     };
 
     return config;

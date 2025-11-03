@@ -1,11 +1,11 @@
 # Biome & dprint Configuration
 
-Advanced code formatting and linting setup with Biome and dprint for the Mimic design system.
+Advanced code formatting and linting setup with Biome and dprint for the n00plicate design system.
 
 ## Overview
 
 This guide covers the setup and configuration of Biome for TypeScript/JavaScript linting and formatting,
-and dprint for additional file formatting across the Mimic workspace.
+and dprint for additional file formatting across the n00plicate workspace.
 
 ## Biome Configuration
 

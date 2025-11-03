@@ -1,10 +1,10 @@
 # 🎨 Design Tokens Guide
 
-Complete guide to the Mimic design system's collision-free token architecture, usage patterns, and best practices.
+Complete guide to the n00plicate design system's collision-free token architecture, usage patterns, and best practices.
 
 ## 📋 Overview
 
-The `@mimic/design-tokens` package provides the foundation for consistent visual design across all Mimic
+The `@n00plicate/design-tokens` package provides the foundation for consistent visual design across all n00plicate
 applications with comprehensive collision prevention. Built with W3C Design Token Community Group (DTCG)
 standards and powered by Style Dictionary, it transforms design tokens exported from Penpot into
 platform-specific, namespaced formats for web, mobile, and desktop applications.
@@ -99,17 +99,17 @@ Platform Tokens (overrides)
 
 ```bash
 # Install the package
-pnpm add @mimic/design-tokens
+pnpm add @n00plicate/design-tokens
 
 # Import in your app
-import { getToken, getTokensByPattern } from '@mimic/design-tokens';
+import { getToken, getTokensByPattern } from '@n00plicate/design-tokens';
 ```
 
 ### In CSS/SCSS
 
 ```css
 /* Import CSS variables */
-@import '@mimic/design-tokens/css';
+@import '@n00plicate/design-tokens/css';
 
 .component {
   color: var(--ds-color-primary-500);
@@ -121,7 +121,7 @@ import { getToken, getTokensByPattern } from '@mimic/design-tokens';
 
 ```javascript
 // Vite/Webpack - import as modules
-import tokens from '@mimic/design-tokens/json';
+import tokens from '@n00plicate/design-tokens/json';
 
 // Use in styled-components
 const Button = styled.button`
@@ -306,7 +306,7 @@ const successAlert = getColorVariant('success', 100);
 Validate token structure during development:
 
 ```typescript
-import { validateTokens } from '@mimic/design-tokens';
+import { validateTokens } from '@n00plicate/design-tokens';
 
 const result = validateTokens(customTokens);
 if (!result.isValid) {
@@ -453,7 +453,7 @@ pnpm run test:tokens
 
 ```typescript
 // ES modules
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 // Use in styled-components
 const theme = {
@@ -472,7 +472,7 @@ const theme = {
 
 ```typescript
 // Platform-specific mobile tokens
-import { tokens } from '@mimic/design-tokens/mobile';
+import { tokens } from '@n00plicate/design-tokens/mobile';
 
 const styles = StyleSheet.create({
   button: {
@@ -501,7 +501,7 @@ if (token === 'fallback-value') {
 
 ```css
 /* Ensure CSS is imported */
-@import '@mimic/design-tokens/css';
+@import '@n00plicate/design-tokens/css';
 
 /* Check browser support */
 .fallback {
@@ -535,7 +535,7 @@ console.log(
 );
 
 // Validate custom tokens
-import { validateTokens } from '@mimic/design-tokens';
+import { validateTokens } from '@n00plicate/design-tokens';
 const result = validateTokens(myTokens);
 console.log('Validation:', result);
 ```
@@ -579,7 +579,7 @@ export const Button = component$<ButtonProps>((props) => {
 
 ```javascript
 // tailwind.config.js
-const { getToken } = require('@mimic/design-tokens');
+const { getToken } = require('@n00plicate/design-tokens');
 
 module.exports = {
   theme: {

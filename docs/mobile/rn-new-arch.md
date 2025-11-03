@@ -1,6 +1,6 @@
 # React Native New Architecture Integration
 
-Comprehensive guide for integrating Mimic design tokens with React Native's New Architecture (Fabric + TurboModules),\
+Comprehensive guide for integrating n00plicate design tokens with React Native's New Architecture (Fabric + TurboModules),\
 covering token transformation, native module integration, and platform-specific optimizations.
 
 ## New Architecture Overview
@@ -178,7 +178,7 @@ module.exports = {
         {
           destination: 'ios/Tokens.swift',
           format: 'ios-swift/class.swift',
-          className: 'MimicTokens',
+          className: 'n00plicateTokens',
           options: {
             newArchitecture: true,
             fabricSupport: true,
@@ -187,10 +187,10 @@ module.exports = {
         {
           destination: 'android/Tokens.kt',
           format: 'android/kotlin',
-          className: 'MimicTokens',
+          className: 'n00plicateTokens',
           options: {
             newArchitecture: true,
-            packageName: 'com.mimic.tokens',
+            packageName: 'com.n00plicate.tokens',
           },
         },
       ],
@@ -263,8 +263,8 @@ struct TokenViewProps: ViewProps {
 ### Android Fabric Integration
 
 ```kotlin
-// packages/mobile/react-native/android/src/main/java/com/mimic/tokens/TokenViewManager.kt
-package com.mimic.tokens
+// packages/mobile/react-native/android/src/main/java/com/n00plicate/tokens/TokenViewManager.kt
+package com.n00plicate.tokens
 
 import android.graphics.Color
 import android.view.View
@@ -585,7 +585,7 @@ export class TokenCache {
   private static instance: TokenCache;
   private cache = new Map<string, any>();
   private lastSync = 0;
-  private readonly CACHE_KEY = '@mimic_tokens';
+  private readonly CACHE_KEY = '@n00plicate_tokens';
   private readonly SYNC_INTERVAL = 5 * 60 * 1000; // 5 minutes
 
   static getInstance(): TokenCache {
@@ -664,8 +664,8 @@ config.transformer = {
 config.resolver = {
   ...config.resolver,
   alias: {
-    '@mimic/tokens':
-      './node_modules/@mimic/design-tokens/dist/react-native-new-arch/tokens.js',
+    '@n00plicate/tokens':
+      './node_modules/@n00plicate/design-tokens/dist/react-native-new-arch/tokens.js',
   },
   assetExts: [...config.resolver.assetExts, 'svg'],
   sourceExts: [...config.resolver.sourceExts, 'svg'],
@@ -681,6 +681,6 @@ config.optimization = {
 module.exports = config;
 ```
 
-This comprehensive guide ensures seamless integration of Mimic design tokens with React Native's New Architecture,\
+This comprehensive guide ensures seamless integration of n00plicate design tokens with React Native's New Architecture,\
 providing optimal performance and platform-specific optimizations while maintaining token consistency across all
 platforms.

@@ -134,7 +134,7 @@ Colors evoke emotional responses and communicate meaning. Understanding this hel
 - Important warnings
 
 ```typescript
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 const redUsage = {
   error: getToken('color.danger.500'),
@@ -247,7 +247,7 @@ Color harmony creates pleasing combinations based on color wheel relationships.
 **Cons**: Can lack contrast, may feel monotonous
 
 ```typescript
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 const monochromaticPalette = {
   lightest: getToken('color.primary.50'), // Tint (add white)
@@ -517,7 +517,7 @@ const colorSystem = {
 Map colors to meaning and purpose:
 
 ```typescript
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 const semanticColors = {
   // Brand
@@ -632,7 +632,7 @@ const componentColors = {
 
 ```typescript
 // React/Qwik component
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 import { component$ } from '@builder.io/qwik';
 
 export const Button = component$((props) => {
@@ -726,7 +726,7 @@ export const Button = component$((props) => {
 - [Colour Contrast Analyzer](https://www.tpgi.com/color-contrast-checker/)
 - [Color Blindness Simulator](https://www.color-blindness.com/coblis-color-blindness-simulator/)
 
-### Mimic Tools
+### n00plicate Tools
 
 - [Contrast Checker](/tools/contrast-checker) - Built-in contrast testing
 - [Color Palette Generator](/tools/palette-generator) - Create harmonious palettes
@@ -741,4 +741,4 @@ export const Button = component$((props) => {
 
 ---
 
-**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/mimic/issues/new).
+**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/n00plicate/issues/new).

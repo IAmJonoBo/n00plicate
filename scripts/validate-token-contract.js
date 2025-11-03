@@ -3,7 +3,7 @@
 /**
  * Token Contract Validation CLI
  *
- * Validates that the entire Mimic design token pipeline follows the formal contract rules.
+ * Validates that the entire n00plicate design token pipeline follows the formal contract rules.
  * This script should be run before any token export or deployment.
  *
  * Usage:
@@ -18,7 +18,7 @@ const { existsSync } = require('node:fs');
 const { validateTokenContract } = require('../packages/shared-utils/dist/token-contract-validation.js');
 
 function main() {
-  console.log('🔍 Mimic Token Contract Validation\n');
+  console.log('🔍 n00plicate Token Contract Validation\n');
   console.log('Validating formal contract compliance for collision-free tokens...\n');
 
   const workspaceRoot = process.cwd();

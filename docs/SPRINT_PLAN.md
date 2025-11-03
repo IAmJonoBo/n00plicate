@@ -1,6 +1,6 @@
-# Mimic 2.0 Sprint Roadmap
+# n00plicate 2.0 Sprint Roadmap
 
-Two-week sprints tailored for the Mimic 2.0 rewrite. Each sprint now calls out mission, workstreams,
+Two-week sprints tailored for the n00plicate 2.0 rewrite. Each sprint now calls out mission, workstreams,
 architecture/tooling upgrades, quality gates, and exit checklists so squads can execute against
 consistent expectations. Partner this roadmap with
 [`docs/IMPLEMENTATION_PLAN_2.0.md`](./IMPLEMENTATION_PLAN_2.0.md) for deeper architectural context.
@@ -34,14 +34,14 @@ confidently from Sprint 1 onwards.
 
 - Run architecture workshops to confirm token orchestrator scope, UI kernel split, and automation
   layers.
-- Map stakeholder goals and produce the Mimic 1.x migration impact assessment.
+- Map stakeholder goals and produce the n00plicate 1.x migration impact assessment.
 - Draft the metrics charter (SLOs, SLIs, error budgets, telemetry owners).
 
 ### Architecture & Tooling Upgrades
 
 - Promote the Node 22.20.0 + pnpm 10.18.2 toolchain and document fallbacks (nvm, devcontainer,
   wheelhouse sync).
-- Decide on AI platform mix (Ollama/OpenAI/Copilot) for `mimic assist` and Storybook guidance.
+- Decide on AI platform mix (Ollama/OpenAI/Copilot) for `n00plicate assist` and Storybook guidance.
 - Capture ADRs for Rust CLI footprint, Lit kernel, repo layout, Storybook 10 track, and AI
   accessibility workflow.
 
@@ -284,7 +284,7 @@ Launch the new documentation experience, refine developer tooling, and expand AI
 
 - Build Starlight-based docs app with MDX, Storybook embeds, and API tables.
 - Document token governance, release process, migration guides, and AI tooling playbooks.
-- Enhance `mimic assist` CLI with guided flows, offline hints, and telemetry.
+- Enhance `n00plicate assist` CLI with guided flows, offline hints, and telemetry.
 
 ### Architecture & Tooling Upgrades
 
@@ -302,7 +302,7 @@ Launch the new documentation experience, refine developer tooling, and expand AI
 
 - Docs site preview with Storybook embeds, AI search, and governance content.
 - Updated CONTRIBUTING/DEVELOPMENT guides and release playbooks.
-- `mimic assist` CLI enhancements and documentation.
+- `n00plicate assist` CLI enhancements and documentation.
 
 ### Exit Checklist
 
@@ -359,6 +359,6 @@ Harden CI/CD, complete beta programme follow-ups, and prepare the GA release pac
 - Penpot plugin enhancements (semantic naming, validation hints).
 - CLI advanced commands (`design diff`, `story publish`, `repo doctor`) and AI assistant extensions.
 - Security hardening backlog (Scorecard, Trivy, Cargo Audit follow-ups).
-- Mimic 1.x migration codemods and API rename mapping.
+- n00plicate 1.x migration codemods and API rename mapping.
 
 Review and reprioritise these items at the end of each sprint.

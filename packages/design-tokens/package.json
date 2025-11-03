@@ -1,5 +1,5 @@
 {
-  "name": "@mimic/design-tokens",
+  "name": "@n00plicate/design-tokens",
   "version": "0.1.0",
   "type": "module",
   "description": "Design tokens generated from Penpot using Style Dictionary",
@@ -68,7 +68,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mimic-org/mimic.git",
+    "url": "https://github.com/n00plicate-org/n00plicate.git",
     "directory": "packages/design-tokens"
   },
   "publishConfig": {

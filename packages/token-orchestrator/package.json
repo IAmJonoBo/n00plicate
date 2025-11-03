@@ -1,8 +1,8 @@
 {
-  "name": "@mimic/token-orchestrator",
+  "name": "@n00plicate/token-orchestrator",
   "version": "0.0.0",
   "private": true,
-  "description": "Rust + Wasm CLI for Mimic token governance (placeholder)",
+  "description": "Rust + Wasm CLI for n00plicate token governance (placeholder)",
   "scripts": {
     "prepare": "echo 'Rust orchestrator not yet implemented'"
   }

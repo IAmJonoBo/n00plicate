@@ -23,7 +23,7 @@ in downstream tooling documentation:
 Specify documentation warns that un-namespaced design token CSS variables will collide with Tailwind utility
 classes, causing runtime CSS conflicts and unpredictable styling behavior.
 
-### Mimic Solution
+### n00plicate Solution
 
 All design tokens use the `ds-` prefix to guarantee collision-free integration:
 
@@ -113,16 +113,16 @@ module.exports = {
 Locofy FAQ documents that React Native Metro bundler will create duplicate packages if package.json name
 fields collide with workspace library names, leading to increased bundle size and potential runtime conflicts.
 
-### Mimic Solution
+### n00plicate Solution
 
 All packages use scoped naming to prevent Metro workspace library conflicts:
 
 ```json
 // packages/design-tokens/package.json - Locofy FAQ compliant
 {
-  "name": "@mimic/design-tokens", // ✅ Scoped name prevents duplication
+  "name": "@n00plicate/design-tokens", // ✅ Scoped name prevents duplication
   "version": "1.0.0",
-  "description": "Design tokens for Mimic design system",
+  "description": "Design tokens for n00plicate design system",
   "main": "libs/tokens/js/tokens.js",
   "types": "libs/tokens/ts/tokens.d.ts",
   "exports": {
@@ -138,7 +138,7 @@ All packages use scoped naming to prevent Metro workspace library conflicts:
   "files": ["libs/tokens/"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/IAmJonoBo/mimic.git",
+    "url": "https://github.com/IAmJonoBo/n00plicate.git",
     "directory": "packages/design-tokens"
   }
 }
@@ -158,18 +158,18 @@ config.resolver.platforms = ['native', 'ios', 'android', 'web'];
 
 // Explicit alias to prevent duplication
 config.resolver.alias = {
-  // Ensure @mimic/design-tokens resolves to single source
-  '@mimic/design-tokens': path.resolve(__dirname, 'packages/design-tokens'),
+  // Ensure @n00plicate/design-tokens resolves to single source
+  '@n00plicate/design-tokens': path.resolve(__dirname, 'packages/design-tokens'),
   // Add other scoped packages as needed
-  '@mimic/shared-utils': path.resolve(__dirname, 'packages/shared-utils'),
-  '@mimic/design-system': path.resolve(__dirname, 'packages/design-system'),
+  '@n00plicate/shared-utils': path.resolve(__dirname, 'packages/shared-utils'),
+  '@n00plicate/design-system': path.resolve(__dirname, 'packages/design-system'),
 };
 
 // Enable package deduplication features
 config.resolver.enableGlobalPackages = true;
 
 // Dedupe common packages that might be duplicated
-config.resolver.dedupe = ['react', 'react-native', '@mimic/design-tokens'];
+config.resolver.dedupe = ['react', 'react-native', '@n00plicate/design-tokens'];
 
 // Watch for changes in workspace packages
 config.watchFolders = [
@@ -185,8 +185,8 @@ module.exports = config;
 
 ```typescript
 // React Native app - Locofy FAQ compliant imports
-import { dsColors, dsSpacing } from '@mimic/design-tokens'; // ✅ Scoped import
-import { dsTheme } from '@mimic/design-tokens/react-native'; // ✅ Platform-specific
+import { dsColors, dsSpacing } from '@n00plicate/design-tokens'; // ✅ Scoped import
+import { dsTheme } from '@n00plicate/design-tokens/react-native'; // ✅ Platform-specific
 
 // Component usage
 const styles = StyleSheet.create({
@@ -213,7 +213,7 @@ for pkg in packages/*/package.json; do
   name=$(jq -r '.name' "$pkg")
   if [[ ! "$name" =~ ^@.+/.+ ]]; then
     echo "❌ Error: $pkg uses unscoped name '$name'"
-    echo "   Solution: Use @mimic/package-name format per Locofy FAQ"
+    echo "   Solution: Use @n00plicate/package-name format per Locofy FAQ"
     exit 1
   else
     echo "✅ $pkg uses scoped name: $name"
@@ -230,7 +230,7 @@ echo "✅ All packages use Locofy FAQ compliant scoped naming"
 Supernova documentation notes that Storybook's React Native builder defaults to port 7007 while Vite builder
 defaults to port 6006, causing development machine port conflicts when running multiple Storybook instances.
 
-### Mimic Solution
+### n00plicate Solution
 
 Fixed port assignment prevents all Supernova-documented port conflicts:
 
@@ -423,8 +423,8 @@ jobs:
         run: |
           echo "Checking for Locofy FAQ compliant package naming..."
           # Check design-tokens package uses scoped name
-          if ! grep -q '"name": "@mimic/design-tokens"' packages/design-tokens/package.json; then
-            echo "❌ design-tokens package should use @mimic/design-tokens (Metro duplication risk)"
+          if ! grep -q '"name": "@n00plicate/design-tokens"' packages/design-tokens/package.json; then
+            echo "❌ design-tokens package should use @n00plicate/design-tokens (Metro duplication risk)"
             exit 1
           fi
 
@@ -496,7 +496,7 @@ jobs:
           # Validate Metro config exists and is properly configured
           if [[ -f "metro.config.js" ]]; then
             # Check for dedupe configuration
-            if grep -q "dedupe.*@mimic/design-tokens" metro.config.js; then
+            if grep -q "dedupe.*@n00plicate/design-tokens" metro.config.js; then
               echo "✅ Metro config includes deduplication settings"
             else
               echo "❌ Metro config missing deduplication settings"

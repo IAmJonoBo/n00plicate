@@ -5,7 +5,7 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${REPO_ROOT}"
 
-echo "🧩 Bootstrapping Mimic dev environment..."
+echo "🧩 Bootstrapping n00plicate dev environment..."
 
 # Use nvm if available
 if command -v nvm >/dev/null 2>&1; then

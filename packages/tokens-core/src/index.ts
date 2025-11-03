@@ -1,5 +1,5 @@
-import { CommonTokens, getToken, getTokensByPattern } from '@mimic/design-tokens/sdk';
-import { tokenUtils, validationUtils } from '@mimic/shared-utils';
+import { CommonTokens, getToken, getTokensByPattern } from '@n00plicate/design-tokens/sdk';
+import { tokenUtils, validationUtils } from '@n00plicate/shared-utils';
 
 export type TokenExpectation = 'color' | 'spacing' | 'string';
 
@@ -24,8 +24,8 @@ export type TokenBundle<TBlueprint extends Record<string, TokenRequest>> = {
 
 /**
  * Resolve a single token path into a value plus CSS references. The implementation
- * runs the path through @mimic/design-tokens and validates the resulting value
- * using @mimic/shared-utils to ensure design-time regressions are caught in tests.
+ * runs the path through @n00plicate/design-tokens and validates the resulting value
+ * using @n00plicate/shared-utils to ensure design-time regressions are caught in tests.
  */
 export const resolveToken = ({ path, expectation, fallback = '' }: TokenRequest): ResolvedToken => {
   const rawValue = getToken(path, fallback);

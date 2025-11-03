@@ -46,7 +46,7 @@ Understanding type anatomy helps you make informed decisions:
 **Examples**: Georgia, Times New Roman, Merriweather, Lora
 
 ```typescript
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 const serifStyle = {
   fontFamily: getToken('font.family.serif'),
@@ -235,7 +235,7 @@ const majorThird = {
 ### Implementing Type Hierarchy
 
 ```typescript
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 // Complete type system
 const typeSystem = {
@@ -469,7 +469,7 @@ const responsiveType = {
 
 ```typescript
 // Import tokens
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 // Build type components
 const Heading1 = styled.h1`
@@ -647,4 +647,4 @@ const fontLoadStrategy = {
 
 ---
 
-**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/mimic/issues/new).
+**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/n00plicate/issues/new).

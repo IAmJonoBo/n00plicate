@@ -1,5 +1,5 @@
-import type { ButtonTokenBundle } from '@mimic/tokens-core';
-import { getButtonTokenBundle as coreGetButtonTokenBundle } from '@mimic/tokens-core';
+import type { ButtonTokenBundle } from '@n00plicate/tokens-core';
+import { getButtonTokenBundle as coreGetButtonTokenBundle } from '@n00plicate/tokens-core';
 
 // Placeholder for design system components
 export const version = '0.1.0';

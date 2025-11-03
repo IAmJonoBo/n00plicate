@@ -4,7 +4,7 @@
 **Last Updated**: June 2025
 
 This document defines the required naming conventions and structure for design tokens in the
-Mimic design system to prevent collisions across platforms.
+n00plicate design system to prevent collisions across platforms.
 
 ## Namespace Requirements
 
@@ -24,7 +24,7 @@ Tokens must follow the pattern: `{prefix}.{type}.{purpose}.{variant?}`
 
 ```json
 {
-  "$description": "Base design tokens for the Mimic design system",
+  "$description": "Base design tokens for the n00plicate design system",
   "color": {
     "$type": "color",
     "$description": "Color palette tokens",

@@ -1,11 +1,11 @@
-# Mimic Desktop App (Tauri)
+# n00plicate Desktop App (Tauri)
 
-Desktop application for the Mimic design token system built with Tauri 2.0, demonstrating
+Desktop application for the n00plicate design token system built with Tauri 2.0, demonstrating
 collision-prevention architecture with web technologies and native performance.
 
 ## Features
 
-- **Design Token Integration**: Uses `@mimic/design-tokens` with collision-safe `ds-` prefixed CSS variables
+- **Design Token Integration**: Uses `@n00plicate/design-tokens` with collision-safe `ds-` prefixed CSS variables
 - **Tauri 2.0**: Native desktop performance with web technologies
 - **Cross-Platform**: Runs on Windows, macOS, and Linux
 - **Collision Prevention**: Implements the complete collision-prevention architecture
@@ -42,9 +42,9 @@ pnpm build
 The desktop app implements collision-prevention strategies:
 
 1. **Token Namespace**: All CSS variables use `ds-` prefix (`--ds-color-primary-500`, `--ds-spacing-md`)
-2. **Import Paths**: Uses collision-safe import paths (`@mimic/design-tokens/css`)
+2. **Import Paths**: Uses collision-safe import paths (`@n00plicate/design-tokens/css`)
 3. **Asset Isolation**: Tauri `distDir` configuration prevents path conflicts
-4. **Package Scoping**: Uses `@mimic/` scoped package names
+4. **Package Scoping**: Uses `@n00plicate/` scoped package names
 
 ### Design Token Usage
 
@@ -110,7 +110,7 @@ The desktop app showcases:
 
 ## Integration with Design System
 
-This desktop app is part of the larger Mimic design system:
+This desktop app is part of the larger n00plicate design system:
 
 - Shares tokens with web (`apps/web`) and mobile (`apps/mobile`)
 - Uses the same collision-prevention architecture

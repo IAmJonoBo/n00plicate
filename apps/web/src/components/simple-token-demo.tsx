@@ -40,7 +40,7 @@ export const SimpleTokenDemo = component$(() => {
           marginBottom: 'var(--ds-spacing-lg, 1.5rem)',
         }}
       >
-        This component demonstrates the Mimic design token pipeline working with Qwik City. All colors, spacing,
+        This component demonstrates the n00plicate design token pipeline working with Qwik City. All colors, spacing,
         typography, and effects use CSS variables generated from Penpot design tokens with the collision-safe{' '}
         <code>ds-</code> prefix.
       </p>

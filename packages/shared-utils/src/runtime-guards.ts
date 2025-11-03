@@ -219,8 +219,8 @@ class RuntimeGuards {
     // Validate that import uses collision-safe paths
     const validMatchers = [
       (path: string) => path.includes('libs/tokens/'),
-      (path: string) => path === '@mimic/design-tokens',
-      (path: string) => path.startsWith('@mimic/design-tokens/'),
+      (path: string) => path === '@n00plicate/design-tokens',
+      (path: string) => path.startsWith('@n00plicate/design-tokens/'),
     ];
 
     const deprecatedPatterns = ['dist/', 'build/'];

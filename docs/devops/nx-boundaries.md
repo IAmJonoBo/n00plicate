@@ -4,7 +4,7 @@ Advanced Nx workspace management, module boundaries, and release workflows.
 
 ## Overview
 
-This guide covers Nx workspace optimization for the Mimic design system, including module boundaries,
+This guide covers Nx workspace optimization for the n00plicate design system, including module boundaries,
 remote caching, and automated release workflows.
 
 ## Module Boundaries Configuration

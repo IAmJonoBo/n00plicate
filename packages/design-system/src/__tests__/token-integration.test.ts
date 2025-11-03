@@ -2,7 +2,7 @@
  * Integration coverage to ensure design-system bridges shared utilities
  * through tokens-core into design tokens.
  */
-import { buttonTokenBlueprint, CommonTokens, snapshotTokens, tokenUtils } from '@mimic/tokens-core';
+import { buttonTokenBlueprint, CommonTokens, snapshotTokens, tokenUtils } from '@n00plicate/tokens-core';
 import { describe, expect, it } from 'vitest';
 
 import { getButtonStyles, getButtonTokenBundle } from '../index.js';

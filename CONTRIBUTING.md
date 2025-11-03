@@ -1,6 +1,6 @@
-# Contributing to Mimic 2.0
+# Contributing to n00plicate 2.0
 
-Thanks for helping shape the next generation of Mimic. The 2.0 rewrite is underway and every
+Thanks for helping shape the next generation of n00plicate. The 2.0 rewrite is underway and every
 contribution should move us closer to the architecture described in
 [`docs/IMPLEMENTATION_PLAN_2.0.md`](docs/IMPLEMENTATION_PLAN_2.0.md).
 
@@ -10,15 +10,15 @@ We follow the [Contributor Covenant](CODE_OF_CONDUCT.md). Be kind, inclusive, an
 
 ## Before You Start
 
-1. **Pick an issue** — Prioritise items labelled `mimic-2.0` on the “Mimic 2.0 Delivery” project board.
+1. **Pick an issue** — Prioritise items labelled `n00plicate-2.0` on the “n00plicate 2.0 Delivery” project board.
 2. **Declare the phase** — Mention the implementation plan phase your change targets (e.g. Phase 2 –
    Token Orchestrator).
 3. **Fork and clone** —
 
 ```bash
- git clone https://github.com/YOUR_USERNAME/mimic.git
- cd mimic
- git remote add upstream https://github.com/IAmJonoBo/mimic.git
+ git clone https://github.com/YOUR_USERNAME/n00plicate.git
+ cd n00plicate
+ git remote add upstream https://github.com/IAmJonoBo/n00plicate.git
 ```
 
 4. **Bootstrap once** — `./setup.sh` installs Node 22.20, pnpm 10.18.2, Husky hooks, and workspace deps.
@@ -97,7 +97,7 @@ UI kernel, adapters, CLI), run `pnpm changeset` and describe the impact succinct
 
 ## Need Help?
 
-- Create a discussion in [GitHub Discussions](https://github.com/IAmJonoBo/mimic/discussions).
+- Create a discussion in [GitHub Discussions](https://github.com/IAmJonoBo/n00plicate/discussions).
 - Tag maintainers in the issue if you’re blocked.
 - For docs gaps, file an issue with the `documentation` label—keeping references fresh is part of the
   2.0 push.

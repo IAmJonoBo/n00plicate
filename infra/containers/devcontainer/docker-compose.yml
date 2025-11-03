@@ -17,7 +17,7 @@ services:
       - penpot-frontend
       - ollama
     networks:
-      - mimic-dev
+      - n00plicate-dev
 
   # Penpot self-hosted setup
   penpot-db:
@@ -32,13 +32,13 @@ services:
     volumes:
       - penpot_postgres_v15:/var/lib/postgresql/data
     networks:
-      - mimic-dev
+      - n00plicate-dev
 
   penpot-redis:
     image: redis:8
     restart: always
     networks:
-      - mimic-dev
+      - n00plicate-dev
 
   penpot-backend:
     image: penpotapp/backend:2.10.0
@@ -69,7 +69,7 @@ services:
       PENPOT_SMTP_TLS: false
       PENPOT_SMTP_SSL: 'false'
     networks:
-      - mimic-dev
+      - n00plicate-dev
 
   penpot-frontend:
     image: penpotapp/frontend:2.10.0
@@ -81,7 +81,7 @@ services:
     environment:
       PENPOT_FLAGS: enable-registration enable-login-with-password disable-email-verification enable-smtp disable-demo-users
     networks:
-      - mimic-dev
+      - n00plicate-dev
 
   # Ollama for local AI
   ollama:
@@ -94,12 +94,12 @@ services:
     environment:
       - OLLAMA_KEEP_ALIVE=24h
     networks:
-      - mimic-dev
+      - n00plicate-dev
 
   # Penpot token export automation
   penpot-export:
     image: penpotapp/exporter:2.10.0
-    container_name: mimic-penpot-export
+    container_name: n00plicate-penpot-export
     volumes:
       - ../../../packages/design-tokens/tokens:/out
       - ../../../tools/penpot-export:/workspace
@@ -123,7 +123,7 @@ services:
     profiles:
       - penpot-sync
     networks:
-      - mimic-dev
+      - n00plicate-dev
 
 volumes:
   node_modules:
@@ -133,5 +133,5 @@ volumes:
   ollama_data:
 
 networks:
-  mimic-dev:
+  n00plicate-dev:
     driver: bridge

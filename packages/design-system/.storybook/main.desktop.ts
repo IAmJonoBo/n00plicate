@@ -32,9 +32,9 @@ const config: StorybookConfig = {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@mimic/design-tokens/desktop': require.resolve('../../design-tokens/libs/tokens/css/tokens.css'),
-      '@mimic/design-tokens/js': require.resolve('../../design-tokens/libs/tokens/js/tokens.js'),
-      '@mimic/design-tokens': require.resolve('../../design-tokens/libs/tokens/ts/tokens.ts'),
+      '@n00plicate/design-tokens/desktop': require.resolve('../../design-tokens/libs/tokens/css/tokens.css'),
+      '@n00plicate/design-tokens/js': require.resolve('../../design-tokens/libs/tokens/js/tokens.js'),
+      '@n00plicate/design-tokens': require.resolve('../../design-tokens/libs/tokens/ts/tokens.ts'),
     };
 
     return config;

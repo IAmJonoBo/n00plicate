@@ -10,7 +10,7 @@
     "apps/*/**/*.js",
     "apps/*/**/*.jsx",
     "tools/*/src/**/*",
-    "mimic-token-cli/src/**/*"
+    "n00plicate-token-cli/src/**/*"
   ],
   "exclude": ["node_modules", "**/node_modules", "**/dist", "**/build", "toolchains/**"]
 }

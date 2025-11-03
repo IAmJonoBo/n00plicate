@@ -1,5 +1,5 @@
 {
-  "name": "Mimic Development Environment",
+  "name": "n00plicate Development Environment",
   "dockerComposeFile": "docker-compose.yml",
   "service": "workspace",
   "workspaceFolder": "/workspace",

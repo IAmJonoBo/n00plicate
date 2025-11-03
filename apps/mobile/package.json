@@ -1,5 +1,5 @@
 {
-  "name": "@mimic/mobile-rn",
+  "name": "@n00plicate/mobile-rn",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,8 +12,8 @@
     "clean": "react-native clean"
   },
   "dependencies": {
-    "@mimic/design-tokens": "workspace:*",
-    "@mimic/shared-utils": "workspace:*",
+    "@n00plicate/design-tokens": "workspace:*",
+    "@n00plicate/shared-utils": "workspace:*",
     "@react-native-async-storage/async-storage": "^2.2.0",
     "react": "19.2.0",
     "react-native": "0.82.1"

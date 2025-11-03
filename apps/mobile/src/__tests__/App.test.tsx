@@ -4,7 +4,7 @@ import App from '../App';
 import { ThemeProvider } from '../theme/ThemeProvider';
 
 // Mock design tokens
-jest.mock('@mimic/design-tokens', () => ({
+jest.mock('@n00plicate/design-tokens', () => ({
   color: {
     primary: {
       500: '#3b82f6',
@@ -31,7 +31,7 @@ describe('App', () => {
         <App />
       </ThemeProvider>
     );
-    expect(getByText('Mimic Mobile App')).toBeTruthy();
+    expect(getByText('n00plicate Mobile App')).toBeTruthy();
   });
 
   it('renders design token demo components', () => {

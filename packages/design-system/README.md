@@ -1,4 +1,4 @@
-# 🧩 @mimic/design-system
+# 🧩 @n00plicate/design-system
 
 A modern Qwik-based design system component library built with design tokens, featuring Storybook documentation and
 comprehensive testing.
@@ -6,7 +6,7 @@ comprehensive testing.
 ## 📋 Overview
 
 This package provides a collection of reusable, accessible UI components built with Qwik and styled using design tokens
-from `@mimic/design-tokens`. It includes comprehensive documentation through Storybook, visual regression testing, and
+from `@n00plicate/design-tokens`. It includes comprehensive documentation through Storybook, visual regression testing, and
 accessibility testing.
 
 ## 🎯 Key Features
@@ -23,7 +23,7 @@ accessibility testing.
 
 ```bash
 # Install via pnpm (workspace dependency)
-pnpm add @mimic/design-system @mimic/design-tokens
+pnpm add @n00plicate/design-system @n00plicate/design-tokens
 
 # Or if developing locally
 pnpm install
@@ -34,7 +34,7 @@ pnpm install
 ### Basic Component Usage
 
 ```typescript
-import { Button, Card, Input } from '@mimic/design-system';
+import { Button, Card, Input } from '@n00plicate/design-system';
 
 export default component$(() => {
   return (
@@ -55,7 +55,7 @@ Components automatically use design tokens, but you can also access them directl
 
 ```typescript
 import { style } from '@vanilla-extract/css';
-import { tokens } from '@mimic/design-tokens';
+import { tokens } from '@n00plicate/design-tokens';
 
 export const customStyle = style({
   backgroundColor: tokens.color.primary.value,
@@ -73,7 +73,7 @@ export const customStyle = style({
 A flexible container component for grouping related content.
 
 ```typescript
-import { Card } from '@mimic/design-system';
+import { Card } from '@n00plicate/design-system';
 
 // Basic usage
 <Card>
@@ -97,7 +97,7 @@ import { Card } from '@mimic/design-system';
 A responsive layout container with consistent max-width and padding.
 
 ```typescript
-import { Container } from '@mimic/design-system';
+import { Container } from '@n00plicate/design-system';
 
 <Container size="large">
   <h1>Page Content</h1>
@@ -116,7 +116,7 @@ import { Container } from '@mimic/design-system';
 A versatile button component with multiple variants and states.
 
 ```typescript
-import { Button } from '@mimic/design-system';
+import { Button } from '@n00plicate/design-system';
 
 // Primary button
 <Button variant="primary" onClick$={() => handleClick()}>
@@ -148,7 +148,7 @@ import { Button } from '@mimic/design-system';
 A text input component with validation and error states.
 
 ```typescript
-import { Input } from '@mimic/design-system';
+import { Input } from '@n00plicate/design-system';
 
 <Input
   label="Email Address"
@@ -173,7 +173,7 @@ import { Input } from '@mimic/design-system';
 A dropdown select component with search and multi-select capabilities.
 
 ```typescript
-import { Select } from '@mimic/design-system';
+import { Select } from '@n00plicate/design-system';
 
 const options = [
   { value: 'option1', label: 'Option 1' },
@@ -204,7 +204,7 @@ const options = [
 Display important messages with different severity levels.
 
 ```typescript
-import { Alert } from '@mimic/design-system';
+import { Alert } from '@n00plicate/design-system';
 
 <Alert variant="success" dismissible>
   Your changes have been saved successfully!
@@ -226,7 +226,7 @@ import { Alert } from '@mimic/design-system';
 Display loading states with spinners or skeletons.
 
 ```typescript
-import { Loading, Skeleton } from '@mimic/design-system';
+import { Loading, Skeleton } from '@n00plicate/design-system';
 
 // Spinner
 <Loading size="large" text="Loading content..." />
@@ -242,7 +242,7 @@ import { Loading, Skeleton } from '@mimic/design-system';
 A flexible text component with semantic styling.
 
 ```typescript
-import { Text } from '@mimic/design-system';
+import { Text } from '@n00plicate/design-system';
 
 <Text variant="heading" size="large">
   Page Title
@@ -286,7 +286,7 @@ Override component styles using Vanilla Extract:
 
 ```typescript
 import { style } from '@vanilla-extract/css';
-import { Button } from '@mimic/design-system';
+import { Button } from '@n00plicate/design-system';
 
 const customButtonStyle = style({
   backgroundColor: 'purple',
@@ -388,7 +388,7 @@ pnpm test --watch
 pnpm test --coverage
 ```
 
-The Vitest suite now includes integration coverage that exercises the `@mimic/tokens-core`
+The Vitest suite now includes integration coverage that exercises the `@n00plicate/tokens-core`
 bridge. The `token-integration.test.ts` spec ensures our design-system utilities resolve
 tokens through the shared helpers and continue to produce the expected CSS variable
 contracts when design tokens or validation guards change.
@@ -440,7 +440,7 @@ pnpm dev
 // src/components/NewComponent/NewComponent.tsx
 import { component$, Slot } from '@builder.io/qwik';
 import { style } from '@vanilla-extract/css';
-import { tokens } from '@mimic/design-tokens';
+import { tokens } from '@n00plicate/design-tokens';
 
 interface NewComponentProps {
   variant?: 'default' | 'accent';

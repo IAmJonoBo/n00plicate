@@ -1,11 +1,11 @@
-# Mimic Design System - Development Makefile
+# n00plicate Design System - Development Makefile
 # Provides convenient commands for the complete design-to-code pipeline
 
 .PHONY: help install build dev clean test tokens
 
 # Default target
 help: ## Show this help message
-	@echo "Mimic Design System - Available Commands:"
+	@echo "n00plicate Design System - Available Commands:"
 	@echo ""
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
 	@echo ""

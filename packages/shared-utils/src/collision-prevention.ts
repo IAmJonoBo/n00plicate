@@ -2,7 +2,7 @@
  * Runtime Collision Prevention Guards
  *
  * This module provides runtime validation for the three critical collision-prevention
- * strategies documented in the Mimic design token pipeline:
+ * strategies documented in the n00plicate design token pipeline:
  *
  * 1. Token-name clashes with Tailwind (Specify warning prevention)
  * 2. Storybook port conflicts (Supernova docs compliance)
@@ -146,9 +146,9 @@ export function validateMetroDuplicationRisks(metroConfigPath: string, packageJs
         const packageContent = readFileSync(packagePath, 'utf-8');
         const packageJson = JSON.parse(packageContent);
 
-        if (packageJson.name && !packageJson.name.startsWith('@mimic/')) {
+        if (packageJson.name && !packageJson.name.startsWith('@n00plicate/')) {
           violations.push(
-            `${packagePath}: Package name "${packageJson.name}" should use @mimic/ scope (Locofy FAQ compliance)`
+            `${packagePath}: Package name "${packageJson.name}" should use @n00plicate/ scope (Locofy FAQ compliance)`
           );
         }
       } catch (error) {

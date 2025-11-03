@@ -18,14 +18,14 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "../",
     "paths": {
-      "@mimic/design-system": ["./packages/design-system/src"],
-      "@mimic/design-tokens": ["./packages/design-tokens/src"],
-      "@mimic/design-tokens/sdk": ["./packages/design-tokens/src"],
-      "@mimic/shared-utils": ["./packages/shared-utils/src"],
-      "@mimic/tokens-core": ["./packages/tokens-core/src"],
-      "@mimic/ui-kernel": ["./packages/ui-kernel/src"],
-      "@mimic/ui-adapters": ["./packages/ui-adapters/src"],
-      "@mimic/platform-bridges": ["./packages/platform-bridges/src"]
+      "@n00plicate/design-system": ["./packages/design-system/src"],
+      "@n00plicate/design-tokens": ["./packages/design-tokens/src"],
+      "@n00plicate/design-tokens/sdk": ["./packages/design-tokens/src"],
+      "@n00plicate/shared-utils": ["./packages/shared-utils/src"],
+      "@n00plicate/tokens-core": ["./packages/tokens-core/src"],
+      "@n00plicate/ui-kernel": ["./packages/ui-kernel/src"],
+      "@n00plicate/ui-adapters": ["./packages/ui-adapters/src"],
+      "@n00plicate/platform-bridges": ["./packages/platform-bridges/src"]
     }
   }
 }

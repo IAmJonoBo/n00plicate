@@ -1,4 +1,4 @@
 {
-  "name": "Mimic Infrastructure Dev Container",
+  "name": "n00plicate Infrastructure Dev Container",
   "extends": "../infra/containers/devcontainer/devcontainer.json"
 }

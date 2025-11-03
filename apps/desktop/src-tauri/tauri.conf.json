@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Mimic Design Tokens",
+  "productName": "n00plicate Design Tokens",
   "version": "0.1.0",
-  "identifier": "com.mimic.design-tokens",
+  "identifier": "com.n00plicate.design-tokens",
   "build": {
     "beforeBuildCommand": "npm run build:frontend",
     "beforeDevCommand": "npm run dev",
@@ -16,7 +16,7 @@
     },
     "windows": [
       {
-        "title": "Mimic Design Tokens",
+        "title": "n00plicate Design Tokens",
         "width": 800,
         "height": 600,
         "resizable": true,
@@ -28,9 +28,9 @@
     "active": true,
     "targets": "all",
     "category": "DeveloperTool",
-    "shortDescription": "Mimic Design Tokens Desktop App",
-    "longDescription": "Desktop application for the Mimic design token system with collision-prevention architecture.",
-    "copyright": "© 2025 Mimic Design Tokens",
+    "shortDescription": "n00plicate Design Tokens Desktop App",
+    "longDescription": "Desktop application for the n00plicate design token system with collision-prevention architecture.",
+    "copyright": "© 2025 n00plicate Design Tokens",
     "externalBin": [],
     "resources": [],
     "windows": {

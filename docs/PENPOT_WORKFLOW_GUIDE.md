@@ -1,6 +1,6 @@
-# Penpot to Mimic Design Token Workflow
+# Penpot to n00plicate Design Token Workflow
 
-Complete user-friendly guide for exporting, processing, and re-exporting design tokens from Penpot to the Mimic monorepo
+Complete user-friendly guide for exporting, processing, and re-exporting design tokens from Penpot to the n00plicate monorepo
 applications.
 
 ## 🎯 Overview
@@ -38,15 +38,15 @@ This workflow enables designers and developers to:
 
 ```bash
 # Install the CLI globally
-npm install -g mimic-token-cli
+npm install -g n00plicate-token-cli
 # or
-pnpm add -g mimic-token-cli
+pnpm add -g n00plicate-token-cli
 
 # Navigate to your project root
 cd /path/to/your-project
 
 # Initialize configuration
-mimic-tokens init
+n00plicate-tokens init
 ```
 
 The CLI will prompt you for:
@@ -60,7 +60,7 @@ The CLI will prompt you for:
 
 ```bash
 # Check pipeline status
-mimic-tokens status
+n00plicate-tokens status
 ```
 
 This will verify:
@@ -74,18 +74,18 @@ This will verify:
 
 ```bash
 # One-time sync: export from Penpot + build all platforms
-mimic-tokens sync
+n00plicate-tokens sync
 
 # Or run steps individually:
-mimic-tokens export  # Export from Penpot → base.json
-mimic-tokens build   # Transform → platform outputs
+n00plicate-tokens export  # Export from Penpot → base.json
+n00plicate-tokens build   # Transform → platform outputs
 ```
 
 ### 4. Development Workflow
 
 ```bash
 # Watch mode: auto-rebuild when tokens change
-mimic-tokens watch
+n00plicate-tokens watch
 
 # Keep this running during development
 # Changes in Penpot → export → auto-rebuild
@@ -148,13 +148,13 @@ button.color.primary → {color.primary.500}
 
 ```bash
 # Export latest tokens from Penpot
-mimic-tokens export
+n00plicate-tokens export
 
 # With custom output location
-mimic-tokens export --output packages/design-tokens/tokens/custom.json
+n00plicate-tokens export --output packages/design-tokens/tokens/custom.json
 
 # Force overwrite existing files
-mimic-tokens export --force
+n00plicate-tokens export --force
 ```
 
 #### Automated CI/CD Export
@@ -177,7 +177,7 @@ jobs:
     steps:
       - name: Export & Build Tokens
         run: |
-          mimic-tokens sync
+          n00plicate-tokens sync
 
       - name: Create PR if changes
         # Auto-creates PR with token updates
@@ -223,7 +223,7 @@ platforms: {
     files: [{
       destination: 'Tokens.swift',
       format: 'ios-swift/class.swift',
-      options: { className: 'MimicTokens' }
+      options: { className: 'n00plicateTokens' }
     }]
   }
 }
@@ -235,10 +235,10 @@ platforms: {
 
 ```typescript
 // Import CSS variables
-import '@mimic/design-tokens/css';
+import '@n00plicate/design-tokens/css';
 
 // Or import TypeScript tokens
-import { tokens } from '@mimic/design-tokens';
+import { tokens } from '@n00plicate/design-tokens';
 
 // Usage in components
 const Button = () => (
@@ -257,7 +257,7 @@ const Button = () => (
 #### React Native
 
 ```tsx
-import { theme } from '@mimic/design-tokens/react-native';
+import { theme } from '@n00plicate/design-tokens/react-native';
 
 const Button = () => (
   <TouchableOpacity
@@ -276,15 +276,15 @@ const Button = () => (
 #### Android Compose
 
 ```kotlin
-import com.mimic.tokens.MimicTheme
+import com.n00plicate.tokens.n00plicateTheme
 
 @Composable
-fun MimicButton() {
+fun n00plicateButton() {
     Button(
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = MimicTheme.ColorPrimary500
+            backgroundColor = n00plicateTheme.ColorPrimary500
         ),
-        modifier = Modifier.padding(MimicTheme.SpacingMd)
+        modifier = Modifier.padding(n00plicateTheme.SpacingMd)
     ) {
         Text("Click me")
     }
@@ -297,37 +297,37 @@ fun MimicButton() {
 
 ```bash
 # Validate tokens against W3C DTCG schema
-mimic-tokens validate
+n00plicate-tokens validate
 
 # Validate specific files
-mimic-tokens validate --tokens packages/design-tokens/tokens/base.json
+n00plicate-tokens validate --tokens packages/design-tokens/tokens/base.json
 
 # Custom schema
-mimic-tokens validate --schema schemas/custom-dtcg.json
+n00plicate-tokens validate --schema schemas/custom-dtcg.json
 ```
 
 ### Token Diffing
 
 ```bash
 # Compare tokens between branches
-mimic-tokens diff --base main --head feature/new-colors
+n00plicate-tokens diff --base main --head feature/new-colors
 
 # Generate diff report
-mimic-tokens diff --output token-changes.md
+n00plicate-tokens diff --output token-changes.md
 
 # Compare specific commits
-mimic-tokens diff --base abc123 --head def456
+n00plicate-tokens diff --base abc123 --head def456
 ```
 
 ### Platform-Specific Builds
 
 ```bash
 # Build only specific platforms
-mimic-tokens build --platform css
-mimic-tokens build --platform react-native
+n00plicate-tokens build --platform css
+n00plicate-tokens build --platform react-native
 
 # Watch specific platform
-mimic-tokens build --platform ts --watch
+n00plicate-tokens build --platform ts --watch
 ```
 
 ## 🚦 Development Workflow Examples
@@ -338,13 +338,13 @@ mimic-tokens build --platform ts --watch
 2. **System** auto-exports every 6 hours OR manual trigger:
 
    ```bash
-   mimic-tokens export
+   n00plicate-tokens export
    ```
 
 3. **Build** updated platform outputs:
 
    ```bash
-   mimic-tokens build
+   n00plicate-tokens build
    ```
 
 4. **Developers** see changes in their apps automatically
@@ -357,7 +357,7 @@ mimic-tokens build --platform ts --watch
 3. **Export** new tokens:
 
    ```bash
-   mimic-tokens sync
+   n00plicate-tokens sync
    ```
 
 4. **Integration** in code:
@@ -372,13 +372,13 @@ mimic-tokens build --platform ts --watch
 1. **Validation** before every build:
 
    ```bash
-   mimic-tokens validate
+   n00plicate-tokens validate
    ```
 
 2. **Diff checking** in PR workflow:
 
    ```bash
-   mimic-tokens diff --base main --output pr-changes.md
+   n00plicate-tokens diff --base main --output pr-changes.md
    ```
 
 3. **Visual regression** tests run automatically
@@ -399,7 +399,7 @@ fi
 
 # Validate any token changes
 if git diff --cached --name-only | grep -q "tokens/"; then
-  mimic-tokens validate
+  n00plicate-tokens validate
 fi
 ```
 
@@ -427,10 +427,10 @@ jobs:
         run: pnpm install
 
       - name: Validate tokens
-        run: mimic-tokens validate
+        run: n00plicate-tokens validate
 
       - name: Build all platforms
-        run: mimic-tokens build
+        run: n00plicate-tokens build
 
       - name: Run visual regression tests
         run: pnpm test:visual
@@ -500,10 +500,10 @@ cat /tmp/penpot.out
 
 ```bash
 # Check credentials
-mimic-tokens status
+n00plicate-tokens status
 
 # Test specific file ID
-mimic-tokens export --file-id your-file-id --force
+n00plicate-tokens export --file-id your-file-id --force
 ```
 
 #### Build Errors
@@ -511,17 +511,17 @@ mimic-tokens export --file-id your-file-id --force
 ```bash
 # Clean and rebuild
 rm -rf packages/design-tokens/libs
-mimic-tokens build
+n00plicate-tokens build
 
 # Check Style Dictionary config
-mimic-tokens validate --tokens packages/design-tokens/style-dictionary.config.js
+n00plicate-tokens validate --tokens packages/design-tokens/style-dictionary.config.js
 ```
 
 #### Watch Mode Not Working
 
 ```bash
 # Use polling mode for network drives
-CHOKIDAR_USEPOLLING=true mimic-tokens watch
+CHOKIDAR_USEPOLLING=true n00plicate-tokens watch
 
 # Check file permissions
 ls -la packages/design-tokens/tokens/
@@ -529,9 +529,9 @@ ls -la packages/design-tokens/tokens/
 
 ### Getting Help
 
-1. **Check status**: `mimic-tokens status`
+1. **Check status**: `n00plicate-tokens status`
 2. **View logs**: Check terminal output for detailed errors
-3. **Validate tokens**: `mimic-tokens validate`
+3. **Validate tokens**: `n00plicate-tokens validate`
 4. **Review docs**: `/docs/design/penpot-token-schema.md`
 5. **GitHub Issues**: Report bugs with reproduction steps
 

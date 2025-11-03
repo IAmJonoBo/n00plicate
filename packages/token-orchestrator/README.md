@@ -1,6 +1,6 @@
 # Token Orchestrator
 
-Rust CLI and WebAssembly bindings that normalise Penpot DTCG exports, enforce the Mimic token governance
+Rust CLI and WebAssembly bindings that normalise Penpot DTCG exports, enforce the n00plicate token governance
 contract, and generate multi-platform artefacts in `packages/tokens-outputs/`.
 
 ## Capabilities
@@ -27,15 +27,15 @@ rustup target add wasm32-unknown-unknown
 ```bash
 # Run with defaults (reads ./tokens.json, writes to packages/tokens-outputs)
 cargo run --manifest-path packages/token-orchestrator/Cargo.toml \
-  --bin mimic-token-orchestrator
+  --bin n00plicate-token-orchestrator
 
 # Validate without emitting files
 cargo run --manifest-path packages/token-orchestrator/Cargo.toml \
-  --bin mimic-token-orchestrator -- --validate-only
+  --bin n00plicate-token-orchestrator -- --validate-only
 
 # Force air-gapped mode (skips remote exporters, still records spans locally)
 cargo run --manifest-path packages/token-orchestrator/Cargo.toml \
-  --no-default-features --features airgap --bin mimic-token-orchestrator
+  --no-default-features --features airgap --bin n00plicate-token-orchestrator
 
 # Build native + wasm artefacts
 cargo build --manifest-path packages/token-orchestrator/Cargo.toml --release

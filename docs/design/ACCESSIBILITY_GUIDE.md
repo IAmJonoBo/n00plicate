@@ -157,7 +157,7 @@ Sufficient contrast ensures text is readable for users with low vision or color 
 | UI components                     | 3:1      | -         |
 
 ```typescript
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 // ✅ Good: High contrast combinations
 const accessibleColors = {
@@ -789,7 +789,7 @@ const a11yTools = {
 
 ```typescript
 import { component$, useSignal, useId } from '@builder.io/qwik';
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 export const AccessibleInput = component$<{
   label: string;
@@ -897,4 +897,4 @@ export const AccessibleInput = component$<{
 
 ---
 
-**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/mimic/issues/new).
+**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/n00plicate/issues/new).

@@ -6,7 +6,7 @@ vi.mock('@tauri-apps/api', () => ({
 }));
 
 // Mock design tokens for testing
-vi.mock('@mimic/design-tokens', () => ({
+vi.mock('@n00plicate/design-tokens', () => ({
   default: {
     color: {
       primary: {

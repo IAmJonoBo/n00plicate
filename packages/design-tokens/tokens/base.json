@@ -1,5 +1,5 @@
 {
-  "$description": "Base design tokens for the Mimic design system",
+  "$description": "Base design tokens for the n00plicate design system",
   "color": {
     "$type": "color",
     "$description": "Color palette tokens",

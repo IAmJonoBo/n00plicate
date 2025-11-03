@@ -1,8 +1,8 @@
 # 🛠️ Troubleshooting Guide
 
-Common issues and solutions for the Mimic design system monorepo.
+Common issues and solutions for the n00plicate design system monorepo.
 
-> Applies to the Mimic 2.0 toolchain (Node 22.20 / pnpm 10.18.2). If you are working from older
+> Applies to the n00plicate 2.0 toolchain (Node 22.20 / pnpm 10.18.2). If you are working from older
 > instructions, cross-check the latest references in [`docs/README.md`](./README.md).
 
 ## 📋 Table of Contents
@@ -67,7 +67,7 @@ Common issues and solutions for the Mimic design system monorepo.
 
 **Symptoms:**
 
-- `Cannot resolve module '@mimic/design-tokens'`
+- `Cannot resolve module '@n00plicate/design-tokens'`
 - Import errors between packages
 
 **Solutions:**
@@ -279,7 +279,7 @@ pnpm build:tokens
 
    ```typescript
    // Verify token access is working
-   import { getToken } from '@mimic/design-tokens';
+   import { getToken } from '@n00plicate/design-tokens';
    console.log('Primary color:', getToken('color.primary.500'));
    ```
 
@@ -314,7 +314,7 @@ pnpm build:tokens
 
    ```typescript
    // Debug token availability
-   import { getTokensByPattern } from '@mimic/design-tokens';
+   import { getTokensByPattern } from '@n00plicate/design-tokens';
 
    // List all available tokens
    const allTokens = getTokensByPattern('*');
@@ -363,7 +363,7 @@ pnpm build:tokens
 
    ```css
    /* ✅ Import tokens before using them */
-   @import '@mimic/design-tokens/css';
+   @import '@n00plicate/design-tokens/css';
 
    .component {
      color: var(--color-primary-500);
@@ -409,7 +409,7 @@ pnpm build:tokens
 1. **Run validation manually:**
 
    ```typescript
-   import { validateTokens } from '@mimic/design-tokens';
+   import { validateTokens } from '@n00plicate/design-tokens';
 
    const result = validateTokens();
    if (!result.isValid) {
@@ -465,7 +465,7 @@ pnpm build:tokens
 1. **Test pattern matching:**
 
    ```typescript
-   import { matchesPattern } from '@mimic/design-tokens';
+   import { matchesPattern } from '@n00plicate/design-tokens';
 
    // Test specific patterns
    console.log(matchesPattern('color.primary.500', 'color.primary.*')); // true
@@ -568,9 +568,9 @@ pnpm build:tokens
 
    ```typescript
    // Test different import methods
-   import { getToken } from '@mimic/design-tokens';
-   import '@mimic/design-tokens/css';
-   import tokens from '@mimic/design-tokens/json';
+   import { getToken } from '@n00plicate/design-tokens';
+   import '@n00plicate/design-tokens/css';
+   import tokens from '@n00plicate/design-tokens/json';
    ```
 
 ## Storybook Issues
@@ -813,10 +813,10 @@ pnpm build:tokens
 
    ```typescript
    // Use specific imports
-   import { Button } from '@mimic/design-system/button';
+   import { Button } from '@n00plicate/design-system/button';
 
    // Instead of
-   import { Button } from '@mimic/design-system';
+   import { Button } from '@n00plicate/design-system';
    ```
 
 ## TypeScript Errors
@@ -843,7 +843,7 @@ pnpm build:tokens
    {
      "compilerOptions": {
        "paths": {
-         "@mimic/*": ["packages/*/src"]
+         "@n00plicate/*": ["packages/*/src"]
        }
      }
    }
@@ -1000,9 +1000,9 @@ tail -f /var/log/system.log
 
 ### Community Support
 
-- **GitHub Issues**: [Report bugs](https://github.com/IAmJonoBo/mimic/issues)
-- **Discussions**: [Ask questions](https://github.com/IAmJonoBo/mimic/discussions)
-- **Documentation**: [Read the docs](https://github.com/IAmJonoBo/mimic/blob/main/README.md)
+- **GitHub Issues**: [Report bugs](https://github.com/IAmJonoBo/n00plicate/issues)
+- **Discussions**: [Ask questions](https://github.com/IAmJonoBo/n00plicate/discussions)
+- **Documentation**: [Read the docs](https://github.com/IAmJonoBo/n00plicate/blob/main/README.md)
 
 ### Emergency Reset
 

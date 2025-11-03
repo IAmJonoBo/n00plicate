@@ -1,13 +1,13 @@
 /**
- * @mimic/design-tokens
+ * @n00plicate/design-tokens
  *
  * Design tokens generated from W3C DTCG compliant JSON using Style Dictionary.
  * Provides the single source of truth for all visual properties across the
- * Mimic design system.
+ * n00plicate design system.
  *
  * @example
  * ```typescript
- * import { getToken, CommonTokens } from '@mimic/design-tokens';
+ * import { getToken, CommonTokens } from '@n00plicate/design-tokens';
  *
  * // Utility function access
  * const spacing = getToken('spacing.md');

@@ -1,9 +1,9 @@
 {
-  "name": "@mimic/ui-adapters",
+  "name": "@n00plicate/ui-adapters",
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Framework adapters wrapping the Mimic UI kernel (placeholder)",
+  "description": "Framework adapters wrapping the n00plicate UI kernel (placeholder)",
   "exports": {
     ".": "./src/index.ts"
   },

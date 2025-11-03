@@ -90,7 +90,7 @@ const layouts = {
 ```typescript
 // Qwik/React component
 import { component$ } from '@builder.io/qwik';
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 export const Grid = component$<{ columns?: number }>((props) => {
   return (
@@ -129,7 +129,7 @@ All spacing uses multiples of 8px for consistency and alignment.
 - Aligns perfectly with common icon sizes
 
 ```typescript
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 const spacing = {
   xs: getToken('spacing.xs'), // 0.5rem (8px)
@@ -725,7 +725,7 @@ Header, footer, main content with sidebars.
 ```typescript
 // Qwik layout components
 import { component$, Slot } from '@builder.io/qwik';
-import { getToken } from '@mimic/design-tokens';
+import { getToken } from '@n00plicate/design-tokens';
 
 // Stack: vertical spacing
 export const Stack = component$<{ gap?: string }>((props) => {
@@ -834,7 +834,7 @@ export const Box = component$<{
 - [Flexbox Froggy](https://flexboxfroggy.com/) - Learn flexbox
 - [Grid Garden](https://cssgridgarden.com/) - Learn grid
 
-### Mimic Tools
+### n00plicate Tools
 
 - [Grid Inspector](/tools/grid-inspector) - Visualize grid system
 - [Spacing Calculator](/tools/spacing) - Calculate spacing values
@@ -849,4 +849,4 @@ export const Box = component$<{
 
 ---
 
-**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/mimic/issues/new).
+**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/n00plicate/issues/new).

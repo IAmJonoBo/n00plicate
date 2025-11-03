@@ -261,8 +261,8 @@ module.exports = {
           destination: 'Theme.kt',
           format: 'compose/object',
           options: {
-            packageName: 'com.mimic.tokens',
-            objectName: 'MimicTheme',
+            packageName: 'com.n00plicate.tokens',
+            objectName: 'n00plicateTheme',
           },
         },
       ],

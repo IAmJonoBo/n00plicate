@@ -345,9 +345,9 @@ import { setupServiceWorker } from '@builder.io/qwik-city/service-worker';
 setupServiceWorker();
 
 // Custom caching strategies
-const CACHE_NAME = 'mimic-v1';
-const STATIC_CACHE = 'mimic-static-v1';
-const RUNTIME_CACHE = 'mimic-runtime-v1';
+const CACHE_NAME = 'n00plicate-v1';
+const STATIC_CACHE = 'n00plicate-static-v1';
+const RUNTIME_CACHE = 'n00plicate-runtime-v1';
 
 // Assets to cache immediately
 const PRECACHE_ASSETS = [
@@ -518,7 +518,7 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: 'Offline - Mimic Design System',
+  title: 'Offline - n00plicate Design System',
   meta: [
     {
       name: 'description',
@@ -610,8 +610,8 @@ export default defineConfig(({ mode }): UserConfig => {
             'vendor-utils': ['lodash', 'date-fns'],
 
             // Design system components
-            'design-system': ['@mimic/design-system'],
-            'design-tokens': ['@mimic/design-tokens'],
+            'design-system': ['@n00plicate/design-system'],
+            'design-tokens': ['@n00plicate/design-tokens'],
           },
 
           // Optimal chunk sizes
@@ -645,7 +645,7 @@ export default defineConfig(({ mode }): UserConfig => {
 
     // Dependency optimization
     optimizeDeps: {
-      include: ['@mimic/design-tokens', '@mimic/design-system'],
+      include: ['@n00plicate/design-tokens', '@n00plicate/design-system'],
       exclude: ['@builder.io/qwik', '@builder.io/qwik-city'],
     },
 

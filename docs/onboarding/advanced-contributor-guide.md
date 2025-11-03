@@ -1,6 +1,6 @@
 # Advanced Contributor Onboarding Guide
 
-Comprehensive onboarding guide for contributors to the Mimic design system, covering advanced workflows,\
+Comprehensive onboarding guide for contributors to the n00plicate design system, covering advanced workflows,\
 tooling integration, and best practices for maintaining design-development consistency.
 
 ## Table of Contents
@@ -75,7 +75,7 @@ echo "🎉 Prerequisites check complete!"
 
 set -e
 
-echo "🚀 Mimic Design System - Contributor Setup"
+echo "🚀 n00plicate Design System - Contributor Setup"
 echo "This will set up your development environment in ~30 minutes"
 echo ""
 
@@ -205,7 +205,7 @@ echo "Happy contributing! 🎨"
 {
   "folders": [
     {
-      "name": "🎨 Mimic Design System",
+      "name": "🎨 n00plicate Design System",
       "path": "."
     }
   ],
@@ -1476,5 +1476,5 @@ if (require.main === module) {
 ```
 
 This comprehensive contributor onboarding guide provides everything needed for new contributors to quickly\
-become productive with the advanced Mimic design system workflows. It includes automated setup scripts,\
+become productive with the advanced n00plicate design system workflows. It includes automated setup scripts,\
 AI-assisted development tools, quality gates, and complete workflow integration guidance.

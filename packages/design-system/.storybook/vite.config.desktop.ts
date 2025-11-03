@@ -6,10 +6,10 @@ export default defineConfig({
   resolve: {
     alias: {
       // Desktop-specific collision-safe token paths
-      '@mimic/design-tokens/desktop': resolve(__dirname, '../../design-tokens/libs/tokens/css/tokens.css'),
-      '@mimic/design-tokens/scss': resolve(__dirname, '../../design-tokens/libs/tokens/scss/tokens.scss'),
-      '@mimic/design-tokens/js': resolve(__dirname, '../../design-tokens/libs/tokens/js/tokens.js'),
-      '@mimic/design-tokens': resolve(__dirname, '../../design-tokens/libs/tokens/ts/tokens.ts'),
+      '@n00plicate/design-tokens/desktop': resolve(__dirname, '../../design-tokens/libs/tokens/css/tokens.css'),
+      '@n00plicate/design-tokens/scss': resolve(__dirname, '../../design-tokens/libs/tokens/scss/tokens.scss'),
+      '@n00plicate/design-tokens/js': resolve(__dirname, '../../design-tokens/libs/tokens/js/tokens.js'),
+      '@n00plicate/design-tokens': resolve(__dirname, '../../design-tokens/libs/tokens/ts/tokens.ts'),
     },
   },
   css: {
@@ -21,13 +21,13 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['@mimic/design-tokens'],
+    include: ['@n00plicate/design-tokens'],
   },
   build: {
     rollupOptions: {
       output: {
         manualChunks: {
-          'design-tokens-desktop': ['@mimic/design-tokens/desktop'],
+          'design-tokens-desktop': ['@n00plicate/design-tokens/desktop'],
         },
       },
     },

@@ -37,13 +37,13 @@ phase-by-phase delivery status.
 | Nx CLI      | Latest                         | `pnpm dlx @nx/cli@latest`                                     |
 
 > Optional: Configure OpenAI (via environment variables) or GitHub Copilot CLI if you want cloud-backed
-> AI assistance in addition to the local Ollama-powered `mimic assist` experience.
+> AI assistance in addition to the local Ollama-powered `n00plicate assist` experience.
 
 ### Bootstrap Existing Workspace
 
 ```bash
 # The workspace is already created with Nx
-cd /Volumes/MagicBag/GitHub/Mimic
+cd /Volumes/MagicBag/GitHub/n00plicate
 
 # Install dependencies
 pnpm install
@@ -159,7 +159,7 @@ echo '{
 
 ```bash
 # Install token dependency
-pnpm add -w @mimic/design-tokens
+pnpm add -w @n00plicate/design-tokens
 
 # Install styling tools
 pnpm add -w vanilla-extract @vanilla-extract/vite-plugin
@@ -169,7 +169,7 @@ Create theme integration:
 
 ```typescript
 // apps/web/src/theme.css.ts
-import { tokens } from '@mimic/design-tokens';
+import { tokens } from '@n00plicate/design-tokens';
 import { style } from '@vanilla-extract/css';
 
 export const theme = {
@@ -205,7 +205,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@mimic/design-tokens/css";`,
+        additionalData: `@import "@n00plicate/design-tokens/css";`,
       },
     },
   },
@@ -229,8 +229,8 @@ pnpm add -D @storybook/addon-designs @storybook/addon-controls
 
 ```typescript
 // apps/web/.storybook/preview.ts
-import { tokens } from '@mimic/design-tokens';
-import '@mimic/design-tokens/css';
+import { tokens } from '@n00plicate/design-tokens';
+import '@n00plicate/design-tokens/css';
 
 export const parameters = {
   backgrounds: {
@@ -275,10 +275,10 @@ echo '{
 
 ```bash
 # Create React Native app
-npx react-native@latest init MimicMobile --template react-native-template-typescript
+npx react-native@latest init n00plicateMobile --template react-native-template-typescript
 
 # Move to workspace
-mv MimicMobile apps/mobile-rn
+mv n00plicateMobile apps/mobile-rn
 
 # Add workspace integration
 cd apps/mobile-rn
@@ -298,14 +298,14 @@ echo '{
 }' > project.json
 
 # Install design tokens
-pnpm add @mimic/design-tokens
+pnpm add @n00plicate/design-tokens
 ```
 
 Create React Native theme:
 
 ```typescript
 // apps/mobile-rn/src/theme.ts
-import { tokens } from '@mimic/design-tokens';
+import { tokens } from '@n00plicate/design-tokens';
 import { StyleSheet } from 'react-native';
 
 const remToPx = (rem: string) => parseInt(rem) * 16;
@@ -337,15 +337,15 @@ mkdir -p apps/mobile-compose
 cd apps/mobile-compose
 
 # Create project structure
-mkdir -p src/commonMain/kotlin/com/mimic/theme
-mkdir -p src/androidMain/kotlin/com/mimic
-mkdir -p src/iosMain/kotlin/com/mimic
+mkdir -p src/commonMain/kotlin/com/n00plicate/theme
+mkdir -p src/androidMain/kotlin/com/n00plicate
+mkdir -p src/iosMain/kotlin/com/n00plicate
 ```
 
 Generate Compose theme from tokens:
 
 ```kotlin
-// apps/mobile-compose/src/commonMain/kotlin/com/mimic/theme/DesignTokens.kt
+// apps/mobile-compose/src/commonMain/kotlin/com/n00plicate/theme/DesignTokens.kt
 // Generated from Style Dictionary
 object DesignTokens {
     val ColorPrimary = Color(0xFF007BFF)
@@ -357,7 +357,7 @@ object DesignTokens {
 }
 
 @Composable
-fun MimicTheme(
+fun n00plicateTheme(
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
