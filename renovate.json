@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended", ":dependencyDashboard", ":semanticCommits", ":semanticCommitTypeAll(chore)"],
+  "extends": ["github>IAmJonoBo/n00-cortex//renovate-presets/workspace.json", ":semanticCommitTypeAll(chore)"],
   "rangeStrategy": "replace",
   "timezone": "UTC",
   "schedule": ["after 02:00 on monday"],
