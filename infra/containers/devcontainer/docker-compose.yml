@@ -41,7 +41,7 @@ services:
       - n00plicate-dev
 
   penpot-backend:
-    image: penpotapp/backend:2.10.0
+    image: penpotapp/backend:2.10.1
     restart: always
     volumes:
       - penpot_assets:/opt/data/assets
@@ -72,7 +72,7 @@ services:
       - n00plicate-dev
 
   penpot-frontend:
-    image: penpotapp/frontend:2.10.0
+    image: penpotapp/frontend:2.10.1
     restart: always
     ports:
       - 9001:80
@@ -98,7 +98,7 @@ services:
 
   # Penpot token export automation
   penpot-export:
-    image: penpotapp/exporter:2.10.0
+    image: penpotapp/exporter:2.10.1
     container_name: n00plicate-penpot-export
     volumes:
       - ../../../packages/design-tokens/tokens:/out
