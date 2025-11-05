@@ -182,6 +182,6 @@
   "dependencies": {
     "@vanilla-extract/css": "1.17.4",
     "@vanilla-extract/vite-plugin": "5.1.1",
-    "storybook": "10.0.2"
+    "storybook": "10.0.3"
   }
 }
