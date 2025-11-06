@@ -1,13 +1,16 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>IAmJonoBo/n00-cortex//renovate-presets/workspace.json", ":semanticCommitTypeAll(chore)"],
-  "rangeStrategy": "replace",
-  "timezone": "UTC",
-  "schedule": ["after 02:00 on monday"],
-  "prHourlyLimit": 2,
-  "prConcurrentLimit": 8,
-  "labels": ["dependencies", "renovate"],
-  "enabledManagers": ["npm", "github-actions", "dockerfile", "docker-compose", "devcontainer", "cargo"],
+  "extends": [
+    "github>IAmJonoBo/n00tropic-cerebrum//renovate/presets/workspace.json"
+  ],
+  "enabledManagers": [
+    "npm",
+    "github-actions",
+    "dockerfile",
+    "docker-compose",
+    "devcontainer",
+    "cargo"
+  ],
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": ["before 03:00 on monday"],
@@ -29,7 +32,11 @@
     },
     {
       "matchManagers": ["npm"],
-      "matchDepTypes": ["dependencies", "optionalDependencies", "peerDependencies"],
+      "matchDepTypes": [
+        "dependencies",
+        "optionalDependencies",
+        "peerDependencies"
+      ],
       "matchUpdateTypes": ["minor", "patch", "pin"],
       "groupName": "Runtime dependencies (minor+patch)",
       "automerge": true,
