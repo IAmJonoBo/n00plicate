@@ -1,0 +1,3 @@
+[submodule "n00plicate-token-cli"]
+	path = n00plicate-token-cli
+	url = https://github.com/IAmJonoBo/n00plicate-token-cli.git
