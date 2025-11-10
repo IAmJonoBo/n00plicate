@@ -15,7 +15,7 @@
     "apps/*",
     "tools/*"
   ],
-  "packageManager": "pnpm@10.18.2",
+  "packageManager": "pnpm@10.21.0",
   "engines": {
     "node": ">=22.20.0",
     "pnpm": ">=10.18.2"
