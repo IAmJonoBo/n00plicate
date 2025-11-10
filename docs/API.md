@@ -911,7 +911,7 @@ export default component$(() => {
         </Text>
 
         <Text color="muted">
-          Built on {formatDate(new Date(), 'MMM DD, YYYY')}
+          Built on {formatDate(new Date(), 'DD MMM YYYY')}
         </Text>
 
         <Input

@@ -576,7 +576,7 @@ For future ADRs, use this template:
 
 **Status:** [Proposed | Accepted | Deprecated | Superseded]
 
-**Date:** YYYY-MM-DD
+**Date:** DD-MM-YYYY
 
 ### Context
 
