@@ -41,7 +41,7 @@ import {
 
 // Use utilities in your components
 const className = cn('base-class', condition && 'conditional-class');
-const formattedDate = formatDate(new Date(), 'YYYY-MM-DD');
+const formattedDate = formatDate(new Date(), 'DD-MM-YYYY');
 ```
 
 ## 🛠️ Utility Categories
@@ -107,9 +107,8 @@ import { formatDate } from '@n00plicate/shared-utils';
 
 const date = new Date('2023-12-25');
 
-formatDate(date, 'YYYY-MM-DD'); // '2023-12-25'
-formatDate(date, 'DD/MM/YYYY'); // '25/12/2023'
-formatDate(date, 'MMM DD, YYYY'); // 'Dec 25, 2023'
+formatDate(date, 'DD-MM-YYYY'); // '25-12-2023'
+formatDate(date, 'DD MMM YYYY'); // '25 Dec 2023'
 formatDate(date, 'DD MMM YYYY HH:mm'); // '25 Dec 2023 00:00'
 ```
 
@@ -449,7 +448,7 @@ describe('Utility Functions', () => {
   describe('formatDate', () => {
     it('should format dates correctly', () => {
       const date = new Date('2023-12-25');
-      expect(formatDate(date, 'YYYY-MM-DD')).toBe('2023-12-25');
+      expect(formatDate(date, 'DD-MM-YYYY')).toBe('25-12-2023');
     });
   });
 });
