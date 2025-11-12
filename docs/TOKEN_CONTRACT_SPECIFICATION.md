@@ -27,7 +27,7 @@ Run either:
 **Option A: CLI Export**
 
 ```bash
-npx penpot-export --file <FILE_UUID> --out tokens.json --assets ./assets
+pnpm dlx penpot-export --file <FILE_UUID> --out tokens.json --assets ./assets
 ```
 
 **Option B: UI Export**
@@ -119,7 +119,7 @@ instead of hard-baked values.
 
 ## 5. Nx & CI Guard-Rails
 
-1. **Module-boundaries ESLint** (`@nx/enforce-module-boundaries`) blocks a web lib from importing mobile tokens and
+1. **Module-boundaries ESLint** (`@nx/enforce-module-boundaries`) - Nx rule (legacy). Implement module boundaries using ESLint alternatives such as `eslint-plugin-boundaries` or custom `depgraph` scripts to prevent cross-project imports.
    vice-versa.
 2. **Token-drift test**—run `style-dictionary build --dry-run` and fail if `git diff` is non-empty.
 3. **Storybook integrity**—execute `sb typecheck && sb test` for each builder to catch prop-type or interaction

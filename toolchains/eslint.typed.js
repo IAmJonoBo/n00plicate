@@ -1,6 +1,6 @@
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import tseslint from 'typescript-eslint';
+import tseslint from '@typescript-eslint/eslint-plugin';
 import baseConfig from './eslint.base.js';
 
 const workspaceRoot = dirname(fileURLToPath(new URL('..', import.meta.url)));
@@ -17,14 +17,13 @@ const typeCheckedFiles = [
 ];
 
 const restrictToTypeScript = (configs) =>
-  configs.map((config) => ({
+  (Array.isArray(configs) ? configs : [configs]).map((config) => ({
     ...config,
     files: config.files ?? typeCheckedFiles,
   }));
 
 const typedOnlyRules = [
-  ...restrictToTypeScript(tseslint.configs.recommendedTypeChecked),
-  ...restrictToTypeScript(tseslint.configs.stylisticTypeChecked),
+  ...restrictToTypeScript(tseslint.configs['recommended-requiring-type-checking'] || tseslint.configs.recommended || []),
   {
     files: typeCheckedFiles,
     languageOptions: {

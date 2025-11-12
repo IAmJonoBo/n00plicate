@@ -1,6 +1,6 @@
 /* eslint-env node */
 module.exports = {
-  extends: ['@commitlint/config-conventional', '@commitlint/config-nx-scopes'],
+  extends: ['@commitlint/config-conventional'],
   rules: {
     // Nx-specific rules
     'scope-enum': [
@@ -46,8 +46,7 @@ module.exports = {
         'ci',
         'chore',
         'revert',
-        // Nx-specific types
-        'nx',
+  // Nx-specific types removed (legacy)
         // Additional conventional types
         'deps',
         'release',

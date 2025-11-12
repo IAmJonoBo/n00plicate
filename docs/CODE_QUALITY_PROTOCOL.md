@@ -14,7 +14,7 @@ through Trunk, optimized for developer experience and CI/CD performance in 2025.
 - **Coverage**: Every file type has appropriate tooling
 - **Consistency**: Unified configuration and orchestration
 - **Developer Experience**: Zero-friction automation
-- **CI Optimization**: Nx affected graphs + caching
+- **CI Optimization**: pnpm workspace filters + pnpm store caching
 
 ---
 
@@ -198,7 +198,7 @@ showFound: true
 - ✅ **Enhanced MD013 rule**: Flexible line length handling for modern content (120 chars)
 - ✅ **Comprehensive exclusions**: Eliminate ALL third-party, generated, and temporary content
 - ✅ **Configuration-driven**: Keep all targeting logic in config file, not package.json scripts
-- ✅ **Nx integration**: Full workspace target support with caching and affected builds
+- ✅ **Workspace caching**: Full workspace target support using pnpm workspace filters and pnpm store caching
 
 **Automation Support:**
 
@@ -209,9 +209,9 @@ pnpm lint:md
 # Automated line length fixes
 pnpm lint:md:fix-line-length
 
-# Nx integration with caching
-nx run workspace-format:lint:md
-nx affected -t lint:md
+# Workspace caching with pnpm
+pnpm -w -r lint:md
+pnpm -w -r lint:md
 ```
 
 ### **4. dprint** (`dprint.json`)
@@ -359,7 +359,9 @@ actions:
 
 ## ⚡ **Performance Optimizations**
 
-### **Nx Integration** (`nx.json`)
+### **Workspace Affected Builds & Caching**
+
+This workspace uses pnpm workspace filters and the pnpm store to provide fast, cache-friendly builds in CI and locally. Replace Nx affected/graph concepts with pnpm-specific filters and lightweight tools for determining affected packages.
 
 ```json
 {
@@ -393,8 +395,8 @@ actions:
     "format:check": "trunk fmt --no-fix --print-failures",
     "format:biome": "biome format --write .",
     "format:dprint": "dprint fmt",
-    "lint": "nx run-many -t lint",
-    "lint:affected": "nx affected -t lint",
+  "lint": "pnpm -w -r lint",
+  "lint:affected": "# Use a pnpm workspace filter or a custom script to only run linters where necessary (git-based affected detection)",
     "lint:css": "stylelint 'packages/**/*.{css,scss,sass}' --fix",
     "lint:md": "markdownlint-cli2 --fix"
   }
@@ -404,7 +406,7 @@ actions:
 **Key Script Improvements:**
 
 - ✅ **Fixed `lint:md`**: Removed conflicting glob patterns, now respects config file exclusions
-- ✅ **Nx integration**: Available as both package script and Nx target
+- ✅ **Workspace caching**: Available as package script and orchestrated via pnpm workspace filtering
 - ✅ **Configuration-driven**: All targeting handled in `.markdownlint-cli2.yaml`
 
 ### **Nx Workspace Targets** (`project.json`)
@@ -463,8 +465,8 @@ pnpm format:check
 pnpm lint
 
 # 🚀 Affected-only in large repos
-pnpm nx affected -t format
-pnpm nx affected -t lint
+pnpm -w -r format
+pnpm -w -r lint
 ```
 
 ### **2. Pre-commit Hooks**
@@ -527,7 +529,7 @@ pnpm format
 pnpm format:check
 
 # Lint affected projects only
-pnpm nx affected -t lint
+pnpm -w -r lint
 
 # Format specific file types
 pnpm format:biome    # JS/TS/JSON only
@@ -538,13 +540,13 @@ pnpm format:dprint   # Config files only
 
 ```bash
 # Format specific project
-pnpm nx run design-system:format
+pnpm --filter @n00plicate/design-system run fmt
 
 # Lint specific project
-pnpm nx run design-system:lint
+pnpm --filter @n00plicate/design-system run lint
 
 # Check types
-pnpm nx run design-system:typecheck
+pnpm --filter @n00plicate/design-system run typecheck
 ```
 
 ### **Maintenance**
@@ -579,8 +581,9 @@ dprint --version
 #### **Performance Issues**
 
 ```bash
-# Clear Nx cache
-pnpm nx reset
+# Clear legacy Nx cache (if present) and local pnpm store
+# Legacy: remove Nx cache if it exists; we now rely on pnpm store instead
+pnpm store prune
 
 # Clear Trunk cache
 rm -rf .trunk/cache
@@ -664,8 +667,16 @@ Track these KPIs in your CI/CD:
 
 ### **Performance Optimization**
 
-1. **Affected-Only**: Use `nx affected` in CI/CD
-2. **Caching**: Enable Nx caching for all targets
+1. **Affected-Only**: Use a pnpm workspace filter or a git-based script in CI/CD.
+
+  Examples:
+
+  ```bash
+  pnpm --filter <pkg> run build
+  node scripts/affected.js --target build
+  ```
+
+2. **Caching**: Enable pnpm store caching for all targets (use pnpm store and CI cache actions)
 3. **Parallel**: Run independent tasks in parallel
 4. **Incremental**: Use tools' incremental features
 
@@ -687,7 +698,7 @@ Track these KPIs in your CI/CD:
 - [dprint](https://dprint.dev/): Multi-language Rust formatting
 - [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2): Modern Markdown linting
 - [ESLint 9](https://eslint.org/docs/latest/): Modern JavaScript linting
-- [Nx](https://nx.dev/): Monorepo tooling and caching
+- [pnpm Store](https://pnpm.io/): Workspace package manager and store caching
 
 ### **Community Resources**
 
@@ -718,8 +729,16 @@ consistency, and developer experience in 2025!\***
 
 ### **Performance Guidelines**
 
-1. **Affected-Only**: Use `nx affected` in CI/CD
-2. **Caching**: Enable Nx caching for all targets
+1. **Affected-Only**: Use a pnpm workspace filter or a git-based script for affected testing.
+
+  Examples:
+
+  ```bash
+  pnpm --filter <pkg> run test
+  pnpm -w -r test
+  ```
+
+2. **Caching**: Enable pnpm store caching for all targets (use pnpm store and CI cache actions)
 3. **Parallel**: Run independent tasks in parallel
 4. **Incremental**: Use tools' incremental features
 
@@ -747,8 +766,8 @@ Based on our implementation experience, follow these guidelines for optimal mark
 # Available automation commands
 pnpm lint:md                     # Standard linting with auto-fix
 pnpm lint:md:fix-line-length    # Automated line length fixes
-nx run workspace-format:lint:md  # Nx integration with caching
-nx affected -t lint:md          # Process only affected files
+pnpm -w -r lint:md  # Use pnpm recursive invocation as an equivalent for workspace-format linting
+pnpm -w -r lint:md          # Process only affected files (use 'pnpm -w -r lint:md' or add a CI-only filter)
 ```
 
 #### **Common Pitfalls to Avoid:**

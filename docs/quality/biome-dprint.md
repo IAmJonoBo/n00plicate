@@ -16,7 +16,7 @@ and dprint for additional file formatting across the n00plicate workspace.
 pnpm add -D @biomejs/biome
 
 # Initialize configuration
-npx @biomejs/biome init
+pnpm dlx @biomejs/biome init
 ```
 
 ### Core Configuration
@@ -197,7 +197,7 @@ npx @biomejs/biome init
 pnpm add -D dprint
 
 # Initialize configuration
-npx dprint init
+pnpm dlx dprint init
 ```
 
 ### Core Configuration
@@ -457,9 +457,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 24
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -472,7 +472,7 @@ jobs:
         run: pnpm run ci:lint
 
       - name: Check affected projects
-        run: pnpm nx affected --target=lint --base=origin/main
+  run: pnpm -w -r lint --filter --changed --base=origin/main
         if: github.event_name == 'pull_request'
 ```
 
@@ -495,9 +495,9 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 24
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -517,7 +517,7 @@ jobs:
           pnpm run type-check
 
           # Test affected
-          pnpm nx affected --target=test --base=origin/main
+          pnpm -w -r test --filter --changed --base=origin/main
 
           echo "✅ Quality gate passed"
 
@@ -714,7 +714,9 @@ biome lint --max-diagnostics=50 .
 
    ```bash
    pnpm add -D @biomejs/biome
-   npx @biomejs/biome init
+
+  pnpm dlx @biomejs/biome init
+
    ```
 
 3. **Update scripts**

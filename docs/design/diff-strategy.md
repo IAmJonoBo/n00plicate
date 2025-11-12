@@ -31,13 +31,13 @@ Token changes are automatically categorized using semantic versioning:
 
 ```bash
 # Patch: Non-breaking changes (descriptions, comments)
-npm run tokens:diff -- --level patch
+pnpm run tokens:diff -- --level patch
 
 # Minor: Additive changes (new tokens, new platforms)
-npm run tokens:diff -- --level minor
+pnpm run tokens:diff -- --level minor
 
 # Major: Breaking changes (removed tokens, value changes)
-npm run tokens:diff -- --level major
+pnpm run tokens:diff -- --level major
 ```
 
 ### 2. Git-Based Diff Analysis
@@ -46,13 +46,13 @@ Compare token files between Git references:
 
 ```bash
 # Compare current branch with main
-npm run tokens:diff -- --base main
+pnpm run tokens:diff -- --base main
 
 # Compare specific commits
-npm run tokens:diff -- --base commit1 --head commit2
+pnpm run tokens:diff -- --base commit1 --head commit2
 
 # Compare with last release tag
-npm run tokens:diff -- --base $(git describe --tags --abbrev=0)
+pnpm run tokens:diff -- --base $(git describe --tags --abbrev=0)
 ```
 
 ### 3. Schema-Aware Diffing
@@ -103,7 +103,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Generate Token Diff
-        run: npm run tokens:diff -- --format github --output diff-report.md
+        run: pnpm run tokens:diff -- --format github --output diff-report.md
 
       - name: Comment PR with Diff
         uses: actions/github-script@v6
@@ -125,10 +125,10 @@ Create visual comparisons of token changes:
 
 ```bash
 # Generate visual diffs for color tokens
-npm run tokens:visual-diff -- --type color --output visual-diff/
+pnpm run tokens:visual-diff -- --type color --output visual-diff/
 
 # Compare typography scales
-npm run tokens:visual-diff -- --type typography --format html
+pnpm run tokens:visual-diff -- --type typography --format html
 ```
 
 ### 3. Interactive Review Tools
@@ -167,10 +167,10 @@ Watch for changes in real-time:
 
 ```bash
 # Start token watch mode with diff detection
-npm run tokens:watch -- --diff
+pnpm run tokens:watch -- --diff
 
 # Monitor Penpot exports for changes
-npm run penpot:watch -- --diff-on-change
+pnpm run penpot:watch -- --diff-on-change
 ```
 
 ### 2. Slack/Teams Integration
@@ -207,10 +207,10 @@ Scan codebase for token usage:
 
 ```bash
 # Find all usages of changed tokens
-npm run tokens:find-usage -- --changed-only
+pnpm run tokens:find-usage -- --changed-only
 
 # Generate impact report
-npm run tokens:impact-analysis -- --format json --output impact.json
+pnpm run tokens:impact-analysis -- --format json --output impact.json
 ```
 
 ## Impact Analysis
@@ -329,13 +329,13 @@ Prepare for rollbacks:
 
 ```bash
 # Create rollback point before changes
-npm run tokens:snapshot -- --tag pre-release-v2.0.0
+pnpm run tokens:snapshot -- --tag pre-release-v2.0.0
 
 # Rollback to previous version
-npm run tokens:rollback -- --tag pre-release-v2.0.0
+pnpm run tokens:rollback -- --tag pre-release-v2.0.0
 
 # Validate rollback
-npm run tokens:validate && npm run test
+pnpm run tokens:validate && pnpm test
 ```
 
 ### 4. Documentation Updates
@@ -372,16 +372,16 @@ Test token changes comprehensively:
 
 ```bash
 # Visual regression testing
-npm run test:visual -- --changed-tokens-only
+pnpm run test:visual -- --changed-tokens-only
 
 # Cross-platform validation
-npm run test:platforms -- --tokens
+pnpm run test:platforms -- --tokens
 
 # Component integration tests
-npm run test:components -- --token-changes
+pnpm run test:components -- --token-changes
 
 # Performance impact testing
-npm run test:performance -- --baseline
+pnpm run test:performance -- --baseline
 ```
 
 ## Integration with CI/CD
@@ -399,13 +399,13 @@ if git diff --cached --name-only | grep -q "packages/design-tokens/"; then
   echo "🔍 Detecting token changes..."
 
   # Run token validation
-  npm run tokens:validate || exit 1
+  pnpm run tokens:validate || exit 1
 
   # Generate diff report
-  npm run tokens:diff -- --staged
+  pnpm run tokens:diff -- --staged
 
   # Check for breaking changes
-  if npm run tokens:breaking-changes --silent; then
+  if pnpm run tokens:breaking-changes --silent; then
     echo "⚠️  Breaking token changes detected. Please review carefully."
     echo "📖 See DESIGN_TOKENS_MIGRATION.md for migration guidance."
   fi
@@ -421,16 +421,16 @@ Automate version bumps based on token changes:
 - name: Determine Version Bump
   id: version
   run: |
-    if npm run tokens:breaking-changes --silent; then
+  if pnpm run tokens:breaking-changes --silent; then
       echo "bump=major" >> $GITHUB_OUTPUT
-    elif npm run tokens:has-new-tokens --silent; then
+  elif pnpm run tokens:has-new-tokens --silent; then
       echo "bump=minor" >> $GITHUB_OUTPUT
     else
       echo "bump=patch" >> $GITHUB_OUTPUT
     fi
 
 - name: Release
-  run: npm version ${{ steps.version.outputs.bump }}
+  run: pnpm version ${{ steps.version.outputs.bump }}
 ```
 
 ## Tools and Scripts
@@ -438,25 +438,25 @@ Automate version bumps based on token changes:
 ### Available Commands
 
 ```bash
-# Diff analysis
-npm run tokens:diff                    # Compare with main branch
-npm run tokens:diff -- --format json  # JSON output
-npm run tokens:diff -- --visual       # Generate visual diffs
+pnpm run tokens:diff                    # Compare with main branch
+pnpm run tokens:diff -- --format json  # JSON output
+pnpm run tokens:diff -- --visual       # Generate visual diffs
+pnpm run tokens:diff -- --visual       # Generate visual diffs
 
 # Change detection
-npm run tokens:breaking-changes        # Check for breaking changes
-npm run tokens:has-new-tokens         # Check for new tokens
-npm run tokens:validate-changes       # Validate all changes
+pnpm run tokens:breaking-changes        # Check for breaking changes
+pnpm run tokens:has-new-tokens         # Check for new tokens
+pnpm run tokens:validate-changes       # Validate all changes
 
 # Impact analysis
-npm run tokens:find-usage             # Find token usage in codebase
-npm run tokens:impact-analysis        # Analyze change impact
-npm run tokens:dependency-graph       # Generate dependency graph
+pnpm run tokens:find-usage             # Find token usage in codebase
+pnpm run tokens:impact-analysis        # Analyze change impact
+pnpm run tokens:dependency-graph       # Generate dependency graph
 
 # Utilities
-npm run tokens:snapshot               # Create snapshot for rollback
-npm run tokens:rollback               # Rollback to snapshot
-npm run tokens:migrate                # Apply migration scripts
+pnpm run tokens:snapshot               # Create snapshot for rollback
+pnpm run tokens:rollback               # Rollback to snapshot
+pnpm run tokens:migrate                # Apply migration scripts
 ```
 
 ### Configuration

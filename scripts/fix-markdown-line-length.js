@@ -117,11 +117,11 @@ async function main() {
   const files = await glob(
     ['README.md', 'CONTRIBUTING.md', 'DEVELOPMENT.md', 'docs/**/*.md', 'packages/**/*.md', '.github/**/*.md'],
     {
-      ignore: [
+  ignore: [
         '**/node_modules/**',
         '**/dist/**',
         '**/build/**',
-        '**/.nx/**',
+  // legacy Nx cache entries removed
         '**/CHANGELOG*.md',
         '**/*_COMPLETE.md',
         '**/*_SUMMARY.md',

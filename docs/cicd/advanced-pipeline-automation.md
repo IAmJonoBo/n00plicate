@@ -60,9 +60,9 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js with caching
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
           cache-dependency-path: 'pnpm-lock.yaml'
 
@@ -108,9 +108,9 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -119,25 +119,25 @@ jobs:
       - name: Validate token schemas
         run: |
           echo "🔍 Validating design token schemas..."
-          pnpm nx run design-tokens:validate-schema
+          pnpm --filter @n00plicate/design-tokens run validate-schema
 
       - name: Check token naming conventions
         run: |
           echo "📝 Checking token naming conventions..."
-          pnpm nx run design-tokens:validate-naming
+          pnpm --filter @n00plicate/design-tokens run validate-naming
 
       - name: Detect breaking changes
         if: github.event_name == 'pull_request'
         run: |
           echo "🔍 Detecting breaking token changes..."
-          pnpm nx run design-tokens:check-breaking-changes \
+          pnpm --filter @n00plicate/design-tokens run check-breaking-changes \
             --base=origin/${{ github.base_ref }} \
             --head=HEAD
 
       - name: Generate token documentation
         run: |
           echo "📚 Generating token documentation..."
-          pnpm nx run design-tokens:generate-docs
+          pnpm --filter @n00plicate/design-tokens run generate-docs
 
       - name: Upload token artifacts
         uses: actions/upload-artifact@v4
@@ -173,7 +173,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
@@ -201,19 +201,19 @@ jobs:
       - name: Build design tokens for ${{ matrix.target }}
         run: |
           echo "🔨 Building design tokens for ${{ matrix.target }}..."
-          pnpm nx build design-tokens --configuration=${{ matrix.target }}
+          pnpm run build:design-tokens -- --configuration=${{ matrix.target }}
 
       - name: Build design system
         run: |
           echo "🔨 Building design system..."
-          pnpm nx build design-system
+          pnpm --filter @n00plicate/design-system run build
 
       - name: Platform-specific validation
         run: |
           case "${{ matrix.target }}" in
             "web")
               echo "🌐 Validating web bundle..."
-              pnpm nx run design-system:analyze-bundle
+              pnpm --filter @n00plicate/design-system run analyze-bundle
               ;;
             "ios")
               echo "📱 Validating iOS token format..."
@@ -225,7 +225,7 @@ jobs:
               ;;
             "desktop")
               echo "🖥️ Validating desktop integration..."
-              pnpm nx run design-system:validate-desktop-tokens
+              pnpm --filter @n00plicate/design-system run validate-desktop-tokens
               ;;
           esac
 
@@ -252,9 +252,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -262,29 +262,29 @@ jobs:
 
       - name: Install Playwright
         if: matrix.test-suite != 'performance'
-        run: npx playwright install --with-deps
+  run: pnpm dlx playwright install --with-deps
 
       - name: Build Storybook
-        run: pnpm nx build-storybook design-system
+  run: pnpm --filter @n00plicate/design-system run build-storybook
 
       - name: Run test suite - ${{ matrix.test-suite }}
         run: |
           case "${{ matrix.test-suite }}" in
             "visual-regression")
               echo "📸 Running visual regression tests..."
-              pnpm nx run design-system:test:visual
+              pnpm --filter @n00plicate/design-system run visual-test
               ;;
             "interaction-tests")
               echo "🎯 Running interaction tests..."
-              pnpm nx run design-system:test:interaction
+              pnpm --filter @n00plicate/design-system run test-storybook
               ;;
             "accessibility")
               echo "♿ Running accessibility tests..."
-              pnpm nx run design-system:test:a11y
+              pnpm --filter @n00plicate/design-system run test:a11y
               ;;
             "performance")
               echo "⚡ Running performance tests..."
-              pnpm nx run design-system:test:performance
+              pnpm --filter @n00plicate/design-system run test:performance
               ;;
           esac
 
@@ -308,9 +308,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -320,12 +320,12 @@ jobs:
         run: |
           echo "🔒 Running security audit..."
           pnpm audit --audit-level moderate
-          npx audit-ci --moderate
+          pnpm dlx audit-ci --moderate
 
       - name: License compliance check
         run: |
           echo "📜 Checking license compliance..."
-          npx license-checker --summary --excludePrivatePackages
+          pnpm dlx license-checker --summary --excludePrivatePackages
 
       - name: Dependency vulnerability scan
         uses: snyk/actions/node@master
@@ -359,9 +359,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -370,17 +370,17 @@ jobs:
       - name: Run bundle size analysis
         run: |
           echo "📊 Analyzing bundle sizes..."
-          pnpm nx run design-system:analyze-bundle --json > bundle-analysis.json
+          pnpm --filter @n00plicate/design-system run analyze-bundle --json > bundle-analysis.json
 
       - name: Runtime performance benchmarks
         run: |
           echo "⚡ Running performance benchmarks..."
-          pnpm nx run design-system:benchmark
+          pnpm --filter @n00plicate/design-system run benchmark
 
       - name: Memory usage analysis
         run: |
           echo "🧠 Analyzing memory usage..."
-          pnpm nx run design-system:memory-profile
+          pnpm --filter @n00plicate/design-system run memory-profile
 
       - name: Generate performance report
         run: |
@@ -437,9 +437,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
 
@@ -449,18 +449,18 @@ jobs:
       - name: Build all packages
         run: |
           echo "🔨 Building all packages for release..."
-          pnpm nx run-many --target=build --all
+          pnpm -w -r build
 
       - name: Generate changelog
         run: |
           echo "📝 Generating changelog..."
-          pnpm nx run workspace:changelog
+          pnpm run workspace:changelog
 
       - name: Version and publish
         run: |
           echo "🚀 Versioning and publishing..."
-          pnpm nx run workspace:version
-          pnpm nx run workspace:publish
+          pnpm run workspace:version
+          pnpm run workspace:publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -478,7 +478,7 @@ jobs:
       - name: Deploy Storybook
         run: |
           echo "📚 Deploying Storybook to GitHub Pages..."
-          pnpm nx run design-system:deploy-storybook
+          pnpm --filter @n00plicate/design-system run deploy-storybook
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -777,7 +777,7 @@ export class BreakingChangeDetector {
       execSync(`git checkout ${branch}`);
 
       // Build tokens to get processed output
-      execSync(`npm run build:tokens --silent`);
+  execSync(`pnpm run build:tokens --silent`);
 
       // Read processed tokens
       const tokens = JSON.parse(
@@ -1023,7 +1023,7 @@ export class PlatformBuilder {
       });
 
       // Execute Style Dictionary build
-      execSync(`npx style-dictionary build --platform ${target.platform}`, {
+  execSync(`pnpm dlx style-dictionary build --platform ${target.platform}`, {
         cwd: 'packages/design-tokens',
         stdio: 'inherit',
       });
@@ -1113,7 +1113,7 @@ export class PlatformBuilder {
 
       case 'web':
         // Validate CSS syntax
-        execSync('npx stylelint "dist/web/*.css"', {
+  execSync('pnpm dlx stylelint "dist/web/*.css"', {
           cwd: 'packages/design-tokens',
         });
         break;
@@ -1155,7 +1155,7 @@ export class PerformanceMonitor {
     const startTime = Date.now();
 
     // Build tokens
-    execSync('npm run build:tokens', { stdio: 'inherit' });
+  execSync('pnpm run build:tokens', { stdio: 'inherit' });
 
     const buildTime = Date.now() - startTime;
 

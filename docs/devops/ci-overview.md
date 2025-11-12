@@ -289,9 +289,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -429,9 +429,9 @@ jobs:
 
       - name: Serve and audit
         run: |
-          npx http-server dist -p 8080 &
+          pnpm dlx http-server dist -p 8080 &
           sleep 5
-          npx lighthouse http://localhost:8080 \
+          pnpm dlx lighthouse http://localhost:8080 \
             --output=json \
             --output-path=lighthouse-results.json \
             --chrome-flags="--headless"
@@ -489,7 +489,7 @@ jobs:
       - name: Build React Native bundle
         run: |
           cd apps/mobile
-          npx react-native bundle \
+          pnpm dlx react-native bundle \
             --platform android \
             --dev false \
             --entry-file index.js \
@@ -586,9 +586,9 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Download design tokens

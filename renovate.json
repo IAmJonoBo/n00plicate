@@ -1,16 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "github>IAmJonoBo/n00tropic-cerebrum//renovate/presets/workspace.json"
-  ],
-  "enabledManagers": [
-    "npm",
-    "github-actions",
-    "dockerfile",
-    "docker-compose",
-    "devcontainer",
-    "cargo"
-  ],
+  "extends": ["github>IAmJonoBo/n00tropic-cerebrum//renovate/presets/workspace.json"],
+  "enabledManagers": ["npm", "github-actions", "dockerfile", "docker-compose", "devcontainer", "cargo"],
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": ["before 03:00 on monday"],
@@ -32,11 +23,7 @@
     },
     {
       "matchManagers": ["npm"],
-      "matchDepTypes": [
-        "dependencies",
-        "optionalDependencies",
-        "peerDependencies"
-      ],
+      "matchDepTypes": ["dependencies", "optionalDependencies", "peerDependencies"],
       "matchUpdateTypes": ["minor", "patch", "pin"],
       "groupName": "Runtime dependencies (minor+patch)",
       "automerge": true,
@@ -44,17 +31,8 @@
     },
     {
       "matchManagers": ["npm"],
-      "groupName": "Nx toolchain",
-      "separateMajorMinor": true,
-      "matchPackageNames": ["/^@nx//", "/^nx$/", "/^@nrwl//"]
-    },
-    {
-      "matchManagers": ["npm"],
-      "matchUpdateTypes": ["minor", "patch", "pin"],
-      "groupName": "Nx toolchain",
-      "automerge": true,
-      "automergeType": "pr",
-      "matchPackageNames": ["/^@nx//", "/^nx$/", "/^@nrwl//"]
+      "groupName": "Workspace tooling (legacy Nx rules removed)",
+      "description": "Nx package rule removed; use pnpm workspace filters and maintainers will update plugins separately"
     },
     {
       "matchManagers": ["github-actions"],

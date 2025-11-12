@@ -45,25 +45,25 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright
-        run: npx playwright install --with-deps ${{ matrix.browser }}
+        run: pnpm dlx playwright install --with-deps ${{ matrix.browser }}
 
       - name: Build Storybook
         run: pnpm run build-storybook
 
       - name: Serve Storybook and run tests
         run: |
-          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
-            "npx http-server storybook-static --port 6006 --silent" \
-            "npx wait-on http://127.0.0.1:6006 && pnpm run test-storybook:ci --browser=${{ matrix.browser }}"
+          pnpm dlx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "pnpm dlx http-server storybook-static --port 6006 --silent" \
+            "pnpm dlx wait-on http://127.0.0.1:6006 && pnpm run test-storybook:ci --browser=${{ matrix.browser }}"
         env:
           PLAYWRIGHT_BROWSER: ${{ matrix.browser }}
 
@@ -303,9 +303,9 @@ jobs:
           lfs: true
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -321,9 +321,9 @@ jobs:
 
       - name: Run Loki visual tests
         run: |
-          npx concurrently -k -s first -n "SB,LOKI" -c "magenta,blue" \
-            "npx http-server storybook-static --port 6006 --silent" \
-            "npx wait-on http://127.0.0.1:6006 && pnpm run loki:test"
+          pnpm dlx concurrently -k -s first -n "SB,LOKI" -c "magenta,blue" \
+            "pnpm dlx http-server storybook-static --port 6006 --silent" \
+            "pnpm dlx wait-on http://127.0.0.1:6006 && pnpm run loki:test"
 
       - name: Upload visual diffs
         if: failure()
@@ -351,8 +351,8 @@ jobs:
     "loki:test": "loki test --requireReference --reactUri file:./storybook-static",
     "loki:update": "loki update --requireReference --reactUri file:./storybook-static",
     "loki:approve": "loki approve",
-    "visual:test": "concurrently -k -s first -n \"SB,LOKI\" -c \"magenta,blue\" \"http-server storybook-static --port 6006 --silent\" \"wait-on http://127.0.0.1:6006 && npm run loki:test\"",
-    "visual:update": "concurrently -k -s first -n \"SB,LOKI\" -c \"magenta,blue\" \"http-server storybook-static --port 6006 --silent\" \"wait-on http://127.0.0.1:6006 && npm run loki:update\""
+  "visual:test": "concurrently -k -s first -n \"SB,LOKI\" -c \"magenta,blue\" \"http-server storybook-static --port 6006 --silent\" \"wait-on http://127.0.0.1:6006 && pnpm run loki:test\"",
+  "visual:update": "concurrently -k -s first -n \"SB,LOKI\" -c \"magenta,blue\" \"http-server storybook-static --port 6006 --silent\" \"wait-on http://127.0.0.1:6006 && pnpm run loki:update\""
   }
 }
 ```
@@ -530,9 +530,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -543,7 +543,7 @@ jobs:
 
       - name: Analyze bundle size
         run: |
-          npx bundlesize --config .bundlesize.json
+          pnpm dlx bundlesize --config .bundlesize.json
         env:
           BUNDLESIZE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -597,16 +597,16 @@ jobs:
           lfs: true
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright
-        run: npx playwright install --with-deps
+  run: pnpm dlx playwright install --with-deps
 
       - name: Lint Storybook files
         run: pnpm run lint:storybook
@@ -616,18 +616,18 @@ jobs:
 
       - name: Test stories (interaction)
         run: |
-          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
-            "npx http-server storybook-static --port 6006 --silent" \
-            "npx wait-on http://127.0.0.1:6006 && pnpm run test-storybook:ci"
+          pnpm dlx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "pnpm dlx http-server storybook-static --port 6006 --silent" \
+            "pnpm dlx wait-on http://127.0.0.1:6006 && pnpm run test-storybook:ci"
 
       - name: Test stories (visual)
         run: |
-          npx concurrently -k -s first -n "SB,LOKI" -c "magenta,blue" \
-            "npx http-server storybook-static --port 6006 --silent" \
-            "npx wait-on http://127.0.0.1:6006 && pnpm run loki:test"
+          pnpm dlx concurrently -k -s first -n "SB,LOKI" -c "magenta,blue" \
+            "pnpm dlx http-server storybook-static --port 6006 --silent" \
+            "pnpm dlx wait-on http://127.0.0.1:6006 && pnpm run loki:test"
 
       - name: Check bundle size
-        run: npx bundlesize
+  run: pnpm dlx bundlesize
 
       - name: Deploy to preview
         id: deploy

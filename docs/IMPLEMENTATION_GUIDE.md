@@ -34,7 +34,7 @@ phase-by-phase delivery status.
 | Java        | 17+                            | For Compose Multiplatform development                         |
 | Xcode       | Latest                         | iOS React Native development (macOS only)                     |
 | Android SDK | Latest                         | Android development                                           |
-| Nx CLI      | Latest                         | `pnpm dlx @nx/cli@latest`                                     |
+| Nx CLI      | Latest                         | `# Nx removed: use pnpm workspace tools (e.g. pnpm -w -r) or npx` |
 
 > Optional: Configure OpenAI (via environment variables) or GitHub Copilot CLI if you want cloud-backed
 > AI assistance in addition to the local Ollama-powered `n00plicate assist` experience.
@@ -49,7 +49,7 @@ cd /Volumes/MagicBag/GitHub/n00plicate
 pnpm install
 
 # Build design tokens to ensure pipeline works
-pnpm nx run design-tokens:build
+pnpm run build:design-tokens
 ```
 
 ## 2. Penpot → Design Token Pipeline
@@ -79,13 +79,13 @@ The dev-container is already configured with `penpot-export` service:
 
 ```bash
 # Export tokens from Penpot
-pnpm nx run design-tokens:tokens:export
+pnpm --filter @n00plicate/design-tokens run tokens:export
 
 # Export and build pipeline
-pnpm nx run design-tokens:tokens:sync
+pnpm --filter @n00plicate/design-tokens run tokens:sync
 
 # Watch for changes and auto-rebuild
-pnpm nx run design-tokens:watch
+pnpm --filter @n00plicate/design-tokens run watch
 ```
 
 ## 3. Style Dictionary Multi-Platform Transform
@@ -122,13 +122,13 @@ module.exports = {
 
 ```bash
 # Build all platform outputs
-pnpm nx run design-tokens:build
+pnpm run build:design-tokens
 
 # Build only tokens (skip TypeScript compilation)
-pnpm nx run design-tokens:build:tokens
+pnpm --filter design-tokens run build:tokens
 
 # Watch mode for development
-pnpm nx run design-tokens:watch
+pnpm --filter design-tokens watch
 ```
 
 ## 4. Web Component Library (Qwik City)
@@ -145,11 +145,11 @@ echo '{
   "name": "web",
   "targets": {
     "serve": {
-      "executor": "@nx/vite:dev-server",
+  "executor": "vite:dev-server (nx legacy: @nx/vite:dev-server)",
       "options": { "port": 5173 }
     },
     "build": {
-      "executor": "@nx/vite:build"
+  "executor": "vite:build (nx legacy: @nx/vite:build)"
     }
   }
 }' > project.json
@@ -275,7 +275,7 @@ echo '{
 
 ```bash
 # Create React Native app
-npx react-native@latest init n00plicateMobile --template react-native-template-typescript
+pnpm dlx react-native@latest init n00plicateMobile --template react-native-template-typescript
 
 # Move to workspace
 mv n00plicateMobile apps/mobile-rn
@@ -284,18 +284,12 @@ mv n00plicateMobile apps/mobile-rn
 cd apps/mobile-rn
 echo '{
   "name": "mobile-rn",
-  "targets": {
-    "start": {
-      "executor": "@nx/react-native:start"
-    },
-    "run-ios": {
-      "executor": "@nx/react-native:run-ios"
-    },
-    "run-android": {
-      "executor": "@nx/react-native:run-android"
-    }
+  "scripts": {
+    "start": "react-native start",
+    "run-ios": "react-native run-ios",
+    "run-android": "react-native run-android"
   }
-}' > project.json
+}' > package.json
 
 # Install design tokens
 pnpm add @n00plicate/design-tokens
@@ -378,20 +372,20 @@ mkdir -p apps/desktop
 cd apps/desktop
 
 # Initialize Tauri
-pnpm dlx create-tauri-app@latest . --before-dev-command "pnpm nx run web:serve" --dev-path "http://localhost:5173"
+pnpm dlx create-tauri-app@latest . --before-dev-command "pnpm --filter web serve" --dev-path "http://localhost:5173"
 
 # Add workspace integration
 echo '{
   "name": "desktop",
   "targets": {
     "tauri": {
-      "executor": "@nx/run-commands",
+  "executor": "# Legacy: @nx/run-commands - use pnpm scripts or a workspace-runner (e.g., pnpm -w -r run <script>)",
       "options": {
         "command": "tauri dev"
       }
     },
     "build": {
-      "executor": "@nx/run-commands",
+  "executor": "# Legacy: @nx/run-commands - use pnpm scripts or a workspace-runner (e.g., pnpm -w -r run <script>)",
       "options": {
         "command": "tauri build"
       }
@@ -406,8 +400,8 @@ Configure Tauri to use Qwik app:
 // apps/desktop/src-tauri/tauri.conf.json
 {
   "build": {
-    "beforeDevCommand": "pnpm nx run web:serve",
-    "beforeBuildCommand": "pnpm nx run web:build",
+  "beforeDevCommand": "pnpm --filter web serve",
+  "beforeBuildCommand": "pnpm --filter web build",
     "devPath": "http://localhost:5173",
     "distDir": "../web/dist"
   }
@@ -422,16 +416,16 @@ Create workspace-level automation:
 
 ```bash
 # Add global targets for token management
-pnpm nx g @nx/workspace:run-commands tokens:build-all \
+pnpm run tokens:build-all \
   --command="pnpm tokens:build && pnpm build" \
   --project=workspace-format
 
-pnpm nx g @nx/workspace:run-commands tokens:sync-all \
+pnpm run tokens:sync-all \
   --command="pnpm tokens:sync && pnpm build" \
   --project=workspace-format
 
-pnpm nx g @nx/workspace:run-commands dev:full-stack \
-  --command="concurrently 'pnpm nx run design-tokens:watch' 'pnpm nx run web:serve' 'pnpm nx run web:storybook'" \
+pnpm run dev:full-stack \
+  --command="concurrently 'pnpm --filter design-tokens watch' 'pnpm --filter web serve' 'pnpm --filter web run storybook'" \
   --project=workspace-format
 ```
 
@@ -456,21 +450,21 @@ Add token dependencies to nx.json:
 
 ```bash
 # Initial setup
-pnpm install && pnpm nx run tokens:build-all
+pnpm install && pnpm run tokens:build-all
 
 # Full development environment
-pnpm nx run dev:full-stack
+pnpm run dev:full-stack
 
 # Individual platforms
-pnpm nx run web:serve                    # Qwik City dev
-pnpm nx run web:storybook               # Storybook workshop
-pnpm nx run mobile-rn:start             # React Native Metro
-pnpm nx run desktop:tauri               # Tauri desktop dev
+pnpm --filter web serve                    # Qwik City dev
+pnpm --filter web run storybook               # Storybook workshop
+pnpm --filter mobile-rn run start             # React Native Metro
+pnpm --filter ./apps/desktop run tauri               # Tauri desktop dev
 
 # Testing
-pnpm nx run-many -t test lint           # Unit & lint tests
-pnpm nx run web:test-storybook          # Storybook interaction tests
-pnpm nx run web:visual-test             # Visual regression tests
+pnpm -w -r test && pnpm -w -r lint           # Unit & lint tests
+pnpm --filter ./apps/web run test-storybook          # Storybook interaction tests
+pnpm --filter ./apps/web run visual-test             # Visual regression tests
 ```
 
 ### 8.2 CI/CD Pipeline
@@ -487,25 +481,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
+  - uses: pnpm/action-setup@v4
 
       # Setup environment
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 24
           cache: 'pnpm'
 
       # Install and build
       - run: pnpm install
-      - run: pnpm nx run tokens:build-all
+  - run: pnpm run build:core
 
       # Test affected projects
-      - run: pnpm nx affected -t lint test build
+  - run: pnpm -w -r lint && pnpm -w -r test && pnpm -w -r build
 
       # Visual regression tests
-      - run: pnpm nx run web:build-storybook
-      - run: pnpm nx run web:visual-test
+  - run: pnpm --filter ./apps/web run build-storybook
+  - run: pnpm --filter ./apps/web run visual-test
         env:
           LOKI_REFERENCE_URL: ${{ secrets.LOKI_REFERENCE_URL }}
 ```
@@ -530,7 +524,7 @@ jobs:
 
 ```bash
 # Enable nx release for package publishing
-pnpm nx g @nx/js:release-configuration
+pnpm dlx @changesets/cli init
 ```
 
 ### 9.4 Advanced Visual Testing
@@ -550,7 +544,7 @@ After implementing this guide, verify:
 - [ ] Storybook displays components with token documentation
 - [ ] React Native app applies tokens through StyleSheet
 - [ ] Tauri desktop app bundles and runs the web app
-- [ ] All tests pass (`pnpm nx run-many -t test lint`)
+- [ ] All tests pass (`pnpm -w -r test` and `pnpm -w -r lint`)
 - [ ] Visual regression tests capture changes
 - [ ] Watch mode enables real-time design-to-code updates
 

@@ -45,19 +45,20 @@ Legacy folders from 1.x remain until their replacements land; prefer the 2.0 tar
 | Sync tokens from Penpot        | `make tokens-sync` (requires `.env` with Penpot credentials)                        |
 | Build tokens                   | `pnpm tokens:build` (legacy pipeline)                                               |
 | Full workspace build           | `pnpm build` (skips Nx Cloud, tolerates missing Tauri CLI)                          |
-| Start Storybook                | `pnpm nx run design-system:storybook`                                               |
+| Start Storybook                | `pnpm --filter design-system storybook`                                               |
 | Start full dev stack           | `pnpm dev:full-stack` (watches tokens + Storybook)                                  |
-| Run unit tests                 | `pnpm nx run-many -t test`                                                          |
-| Run visual + interaction tests | `pnpm nx run design-system:visual-test && pnpm nx run design-system:test-storybook` |
+| Run unit tests                 | `pnpm -r --workspace-root=false --workspace-concurrency=1 --if-present test`                                                          |
+| Run visual + interaction tests | `pnpm --filter design-system run visual-test && pnpm --filter design-system run test-storybook` |
 | Lint + typecheck               | `pnpm lint:workspace && pnpm typecheck`                                             |
 | Build affected projects        | `pnpm run build:affected`                                                           |
-| Generate dependency graph      | `pnpm nx graph --watch`                                                             |
+| Generate dependency graph      | `pnpm run dep-graph`                                                             |
 
 > Fast path: `pnpm lint:base` runs only the Biome formatter/linter (warnings currently tracked in Next_Steps). Use
 > `pnpm lint:typed` when you need the slower type-aware ESLint rules without the formatter.
-> **Offline builds**: `pnpm build` sets `NX_NO_CLOUD=true` and auto-skips Tauri packaging when the CLI is missing so the
-> workspace
-> can still produce artifacts in headless environments.
+> Offline builds (legacy): Historically `NX_NO_CLOUD=true` was used to force Nx Cloud into offline mode. Nx is no longer
+> used in our toolchain. For reproducible offline builds, use `pnpm install --prefer-offline --frozen-lockfile`, or run
+> the workspace filter build commands (for example `pnpm --filter <package> build`) to skip packaging steps that rely on
+> external tooling.
 
 ### Platform launchers
 
@@ -79,7 +80,7 @@ pnpm --filter @n00plicate/desktop tauri dev
 - **Rewriting**: Phase 2 introduces `packages/token-orchestrator`, `tokens-core`, and `tokens-outputs`.
   When adding token features, coordinate with the token squad to ensure the new pipeline requirements
   are captured.
-- **Validation**: `pnpm nx run design-tokens:validate` enforces current naming/namespace rules. Update
+- **Validation**: `pnpm --filter @n00plicate/design-tokens run validate` enforces current naming/namespace rules. Update
   the rule set if you introduce new token categories.
 
 ## 5. Component & Storybook Development
@@ -87,7 +88,7 @@ pnpm --filter @n00plicate/desktop tauri dev
 1. Create or update tokens first.
 2. Consume tokens through the adapter (avoid hard-coded CSS values).
 3. Add/extend Storybook stories in `packages/design-system/src/**/*.stories.tsx`.
-4. Run `pnpm nx run design-system:visual-test` and review diffs.
+4. Run `pnpm --filter design-system run visual-test` and review diffs.
 5. Document component behaviour in MDX or package README.
 
 Storybook 10 migration is tracked in Phase 3—file issues under the `storybook-10` label for blockers.
@@ -98,9 +99,9 @@ Before pushing:
 
 - `pnpm lint:workspace`
 - `pnpm typecheck`
-- `pnpm nx run-many -t test`
-- `pnpm nx run design-system:visual-test`
-- `pnpm nx run design-system:test-storybook`
+- `pnpm -r --workspace-root=false --workspace-concurrency=1 --if-present test`
+- `pnpm --filter design-system run visual-test`
+- `pnpm --filter design-system run test-storybook`
 
 CI repeats these checks plus Playwright journeys, package builds, and deployment dry runs.
 
@@ -109,8 +110,8 @@ CI repeats these checks plus Playwright journeys, package builds, and deployment
 | Symptom                        | Try this                                                                                 |
 | ------------------------------ | ---------------------------------------------------------------------------------------- |
 | Node version mismatch          | `nvm use` then re-run `./setup.sh`                                                       |
-| Token drift or collisions      | `pnpm nx run design-tokens:build` and inspect `libs/tokens/*`                            |
-| Storybook cache oddities       | `rm -rf packages/design-system/storybook-static* && pnpm nx run design-system:storybook` |
+| Token drift or collisions      | `pnpm run build:design-tokens` and inspect `libs/tokens/*`                            |
+| Storybook cache oddities       | `rm -rf packages/design-system/storybook-static* && pnpm --filter @n00plicate/design-system run storybook` |
 | React Native Metro duplication | Clear Metro cache: `pnpm --filter @n00plicate/mobile-rn start -- --reset-cache`               |
 | Dev container not starting     | `docker compose -f infra/containers/devcontainer/docker-compose.yml logs`                |
 

@@ -8,7 +8,7 @@
  *
  * Usage:
  *   node scripts/validate-token-contract.js
- *   npm run validate:token-contract
+ *   pnpm run validate:token-contract
  */
 
 const { resolve } = require('node:path');
@@ -29,7 +29,7 @@ function main() {
     console.log('❌ tokens.json not found in workspace root');
     console.log('Expected path:', tokensPath);
     console.log('\nTo fix this:');
-    console.log('1. Export tokens from Penpot using CLI: npx penpot-export --file <FILE_UUID> --out tokens.json');
+    console.log('1. Export tokens from Penpot using CLI: pnpm dlx penpot-export --file <FILE_UUID> --out tokens.json');
     console.log('2. Or use Penpot UI: Tokens ▶ Export button');
     process.exit(1);
   }

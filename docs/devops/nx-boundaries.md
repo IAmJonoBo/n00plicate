@@ -1,6 +1,7 @@
-# Nx Module Boundaries & DevOps
+# Monorepo Module Boundaries & DevOps (pnpm workspace)
 
-Advanced Nx workspace management, module boundaries, and release workflows.
+Guidance for module boundaries, workspace configuration, and release workflows
+for the n00plicate design system using a pnpm workspace. Nx has been removed. Legacy commands are commented out below.
 
 ## Overview
 
@@ -12,147 +13,157 @@ remote caching, and automated release workflows.
 ### ESLint Module Boundaries
 
 ```json
-// .eslintrc.json
+// .eslintrc.json (use eslint-plugin-boundaries to enforce module boundaries)
 {
-  "extends": ["@nx/eslint-plugin"],
+  "extends": ["eslint:recommended", "plugin:boundaries/recommended"],
+  "plugins": ["boundaries"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "@nx/enforce-module-boundaries": [
+        "boundaries/element-types": [
           "error",
           {
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "type:design-tokens",
-                "onlyDependOnLibsWithTags": ["type:utility"]
-              },
-              {
-                "sourceTag": "type:ui-components",
-                "onlyDependOnLibsWithTags": [
-                  "type:design-tokens",
-                  "type:utility"
-                ]
-              },
-              {
-                "sourceTag": "type:app",
-                "onlyDependOnLibsWithTags": [
-                  "type:ui-components",
-                  "type:design-tokens",
-                  "type:utility",
-                  "type:feature"
-                ]
-              },
-              {
-                "sourceTag": "platform:web",
-                "onlyDependOnLibsWithTags": ["platform:web", "platform:shared"]
-              },
-              {
-                "sourceTag": "platform:mobile",
-                "onlyDependOnLibsWithTags": [
-                  "platform:mobile",
-                  "platform:shared"
-                ]
-              },
-              {
-                "sourceTag": "scope:storybook",
-                "onlyDependOnLibsWithTags": [
-                  "type:ui-components",
-                  "type:design-tokens"
-                ]
-              }
+            "default": "disallow",
+            "rules": [
+              { "from": "packages/design-tokens/*", "allow": ["packages/utility/*"] },
+              { "from": "packages/ui-components/*", "allow": ["packages/design-tokens/*", "packages/utility/*"] },
+              { "from": "apps/*", "allow": ["packages/ui-components/*", "packages/design-tokens/*"] },
+              { "sourceTag": "platform:web", "onlyDependOnLibsWithTags": ["platform:web", "platform:shared"] },
+              { "sourceTag": "scope:storybook", "onlyDependOnLibsWithTags": ["type:ui-components", "type:design-tokens"] }
             ]
           }
         ]
-      }
     }
   ]
 }
 ```
 
+```bash
+# Workspace & cache examples (pnpm workspace)
+pnpm -w list --depth 0
+pnpm store prune
+pnpm -w -r build
+# Generate a dependency graph with a dep-graph tool (madge/dependency-cruiser)
+npx madge --image graph.svg packages/*/src
+```
+
 ### Project Tags Configuration
 
-```json
+#### Clean cache
+
+              pnpm store prune
 // nx.json
-{
-  "projects": {
+
+##### Remove unused dependencies
+
+###### Use standalone scripts or tools (e.g. depcheck, pnpm -w dedupe) to find and remove unused deps
+
     "design-tokens": {
-      "tags": ["type:design-tokens", "platform:shared"]
-    },
+
+###### Fix workspace formatting
+
+              pnpm -w -r run format --if-present
     "ui-components": {
-      "tags": ["type:ui-components", "platform:web"]
-    },
+
+###### Check workspace integrity
+
+              pnpm -w -r run lint --if-present
     "mobile-components": {
-      "tags": ["type:ui-components", "platform:mobile"]
-    },
+
+###### Validate project configuration
+
+###### Use workspace tools, dev-runner or dependency graph tools (madge/depcruise) to inspect projects
+
     "storybook": {
-      "tags": ["scope:storybook", "type:app"]
-    },
+
+###### Check for circular dependencies
+
+###### Use dep graph tools to create a visualization
+
+###### Example: npx madge --image graph.svg packages/*/src
+
     "docs-site": {
-      "tags": ["type:app", "platform:web", "scope:documentation"]
-    }
+
+###### Check migration status
+
+###### Legacy Nx migration command; use pnpm upgrade and check changelogs
+
   },
-  "targetDefaults": {
-    "build": {
-      "dependsOn": ["^build"],
-      "cache": true
+
+###### Run migrations
+
+###### pnpm exec nx migrate @nx/workspace@latest  <-- legacy (use pnpm upgrade and verify changes)
+
     },
-    "test": {
-      "cache": true
+
+###### Check workspace lint details
+
+                pnpm -w -r run lint --if-present --verbose
     },
-    "lint": {
+                pnpm -w -r run lint --if-present --fix
       "cache": true
-    }
+                pnpm store prune
   }
-}
+
+###### Nx daemon is removed; not applicable
+
 ```
 
-### Workspace Visualization
+# Workspace Visualization
+
+We no longer use Nx; use pnpm workspace tooling and small scripts to inspect and operate on the workspace.
+
+Examples:
 
 ```bash
-# Generate dependency graph
-npx nx graph
+## Show all packages in the workspace (top-level):
+pnpm -w list --depth 0
 
-# Show project dependencies
-npx nx show projects --with-target=build
+## Run lint across the workspace (recursive):
+pnpm -w -r run lint --if-present --silent --fix
 
-# Analyze bundle impact
-npx nx affected:graph --base=main
+## Build all packages in the workspace (ordered by root orchestrator script):
+pnpm run build:ordered
 
-# Check module boundary violations
-npx nx lint --fix
+## Use a dep-graph tool (eg. madge, depcruise) to visualize module graph:
+npx madge --image graph.svg packages/*/src
 ```
 
-## Remote Caching Setup
+# Remote Caching Setup
 
-### Nx Cloud Configuration
+# Remote Caching & CI configuration
+
+We don't use Nx Cloud. Use the pnpm store and standard CI cache actions for Node modules and pnpm store. Keep your workflows lean by using the root orchestrator scripts and pnpm workspace filters.
+
+Examples:
 
 ```bash
-# Connect to Nx Cloud
-npx nx connect-to-nx-cloud
+## Enable pnpm store caching in GitHub Actions:
+action: pnpm/action-setup@v2
 
-# Configure remote caching
-npx nx g @nx/workspace:ci-workflow --ci=github
+## Generate a workspace-aware CI workflow from templates or use existing CI templates in the repo.
 ```
 
-### Cache Configuration
+# Cache Configuration
 
 ```json
 // nx.json
-{
+  run: # previously used Nx affected; use a pnpm workspace filter or a git-based script to identify affected packages
+  run: pnpm -w -r --filter './*' run test --if-present
   "tasksRunnerOptions": {
     "default": {
-      "@nrwl/nx-cloud": {
+  run: pnpm -w -r run build --if-present
         "cacheableOperations": ["build", "test", "lint", "e2e", "tokens:build"],
         "accessToken": "YOUR_ACCESS_TOKEN"
-      }
+  run: pnpm --filter @n00plicate/design-tokens run build:tokens
     }
   },
-  "targetDefaults": {
+  run: # previously used Nx release; use changesets or a custom release script
+  run: pnpm -w -r run changeset --if-present
     "tokens:build": {
       "cache": true,
-      "inputs": [
+  run: pnpm -w -r --filter './*' run publish --if-present
         "{projectRoot}/tokens/**/*",
         "{workspaceRoot}/style-dictionary.config.js"
       ],
@@ -162,7 +173,7 @@ npx nx g @nx/workspace:ci-workflow --ci=github
 }
 ```
 
-### Local Cache Optimization
+# Local Cache Optimization
 
 ```json
 // nx.json cache configuration
@@ -181,11 +192,14 @@ npx nx g @nx/workspace:ci-workflow --ci=github
 }
 ```
 
-## Release Workflow
+# Release Workflow
 
-### Semantic Release Configuration
+pnpm -w list --depth 0
 
-```json
+# Semantic Release Configuration
+
+
+pnpm store prune && pnpm -w -r build
 // release.config.js
 module.exports = {
   branches: ['main', 'next'],
@@ -197,40 +211,19 @@ module.exports = {
     [
       '@semantic-release/git',
       {
-        assets: ['CHANGELOG.md', 'package.json', 'package-lock.json'],
+  assets: ['CHANGELOG.md', 'package.json', 'pnpm-lock.yaml'],
         message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
       }
     ],
     '@semantic-release/github'
   ]
 };
+
 ```
 
-### Nx Release Configuration
+### Release configuration
 
-```json
-// nx.json
-{
-  "release": {
-    "projects": ["design-tokens", "ui-components"],
-    "version": {
-      "conventionalCommits": true,
-      "generatorOptions": {
-        "packageRoot": "dist/{projectName}",
-        "currentVersionResolver": "git-tag"
-      }
-    },
-    "changelog": {
-      "workspaceChangelog": {
-        "createRelease": "github"
-      },
-      "projectChangelogs": {
-        "createRelease": "github"
-      }
-    }
-  }
-}
-```
+We use Changesets for workspace release automation (instead of Nx releases). See the `changeset` docs and the GitHub Actions workflows in `.github/workflows/release.yml`.
 
 ### GitHub Actions Release Workflow
 
@@ -246,46 +239,43 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    # Legacy: pnpm exec nx migrate --check
+    # Use `npx npm-check-updates --target minor` to review available updates without automatically applying them
+
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    steps:
-      - uses: actions/checkout@v4
-        with:
+    # Legacy: pnpm exec nx migrate @nx/workspace@latest  <-- use `pnpm upgrade` and review changelogs
+    # Legacy: pnpm exec nx migrate --run-migrations  <-- run migration scripts provided by the package or follow upgrade notes
           fetch-depth: 0
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
+        uses: actions/setup-node@v6
+        run: corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run affected tests
-        run: npx nx affected --target=test --base=last-release
-
-      - name: Build affected projects
-        run: npx nx affected --target=build --base=last-release
+    - name: Run affected tests
+  run: # Previously used Nx affected; use a workspace diff script or run all builds when unsure
+  run: pnpm -w -r run build --if-present
 
       - name: Build design tokens
-        run: npx nx run design-tokens:tokens:build
+  run: pnpm --filter @n00plicate/design-tokens run build:tokens
 
-      - name: Version and release
-        run: npx nx release --verbose
+    - name: Version and release
+  run: # Previously used Nx release; use changesets or a custom release script
+  run: pnpm -w -r run changeset --if-present
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish to npm
-        run: npx nx affected --target=publish --base=last-release
+    - name: Publish to npm
+  run: # Use pnpm workspace filter or a changeset-based release action
+  run: pnpm -w -r run publish --if-present
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
 
 ## Workspace Generators
 
+          <!-- Nx daemon functionality removed; pnpm does not use a daemon. Legacy command removed. -->
 ### Custom Token Generator
 
 ```typescript
@@ -379,14 +369,16 @@ export default async function (tree: Tree, schema: ComponentSchema) {
 
 ```bash
 # Generate performance report
-npx nx report
+<!-- Legacy: 'pnpm exec nx report' -->
+# Use `pnpm -w list` or dependency-introspection tools for a workspace report
 
 # Analyze cache effectiveness
-npx nx reset && npx nx run-many --target=build --all
-npx nx run-many --target=build --all  # Second run should be cached
+pnpm store prune && pnpm -w -r build
+pnpm -w -r build  # Second run should be cached when outputs exist
 
 # Check daemon status
-npx nx daemon --help
+<!-- Legacy: 'pnpm exec nx daemon --help' -- Nx daemon no longer used -->
+# Nx daemon is removed; no daemon control is required when using pnpm workspaces
 ```
 
 ## Workspace Maintenance
@@ -395,38 +387,44 @@ npx nx daemon --help
 
 ```bash
 # Update Nx workspace
-npx nx migrate latest
-npm install
-npx nx migrate --run-migrations
+<!-- Legacy: 'pnpm exec nx migrate latest' -->
+# Use `pnpm upgrade` and `npx npm-check-updates` for upgrading package versions
+corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile
+<!-- Legacy: 'pnpm exec nx migrate --run-migrations' -->
+# If a package ships migrations, run them using their migration scripts or follow upgrade notes
 
 # Update dependencies
-npx nx g @nx/workspace:update-packages-in-package-json
+<!-- Legacy generator: '@nx/workspace:update-packages-in-package-json' -->
+# Use `npx npm-check-updates` or a custom script to update package.json versions
 ```
 
 ### Workspace Cleanup
 
 ```bash
 # Clean cache
-npx nx reset
+<!-- Legacy: 'pnpm exec nx reset' -->
+# Reset action is legacy; to reset caches use `pnpm store prune` and remove any temporary caches
 
 # Remove unused dependencies
-npx nx g @nx/workspace:remove-unused-dependencies
+<!-- Legacy: 'pnpm exec nx g @nx/workspace:remove-unused-dependencies' -->
+# Use `depcheck` or a similar tool to find unused dependencies and then remove them manually
 
 # Fix workspace formatting
-npx nx format:write
+pnpm -w -r run format --if-present
 ```
 
 ### Health Checks
 
 ```bash
 # Check workspace integrity
-npx nx workspace-lint
+pnpm -w -r run workspace-lint --if-present
 
 # Validate project configuration
-npx nx show projects --affected
+<!-- Legacy: 'pnpm exec nx show projects --affected' -->
+# Use a git-based script to detect touched files and map them to workspace packages for affected builds
 
 # Check for circular dependencies
-npx nx graph --file=graph.html
+npx madge --image graph.svg packages/*/src
 ```
 
 ## Migration Strategies
@@ -435,12 +433,13 @@ npx nx graph --file=graph.html
 
 ```bash
 # Check migration status
-npx nx migrate --check
+<!-- Legacy: 'pnpm exec nx migrate --check' -->
+# Use `npx npm-check-updates --target minor` to review available updates without automatically applying them
 
 # Run migrations
-npx nx migrate @nx/workspace@latest
-npm install
-npx nx migrate --run-migrations
+# Legacy: pnpm exec nx migrate @nx/workspace@latest  <-- use `pnpm upgrade` and review changelogs
+pnpm install
+# Legacy: pnpm exec nx migrate --run-migrations  <-- run migration scripts from the package or follow upgrade notes
 ```
 
 ### Token Schema Migrations
@@ -476,17 +475,20 @@ function migrateTokenSchema(tokens: any): any {
 
    ```bash
    # Check specific violations
-   npx nx lint --verbose
 
-   # Fix auto-fixable issues
-   npx nx lint --fix
+  pnpm -w -r run lint --if-present --verbose
+
+# Fix auto-fixable issues
+
+  pnpm -w -r run lint --if-present --fix
+
    ```
 
 2. **Cache Issues**
 
    ```bash
    # Clear Nx cache
-   npx nx reset
+  # pnpm exec nx reset (legacy) - instead use `pnpm store prune` and clear temporary caches
 
    # Clear npm cache
    npm cache clean --force
@@ -496,10 +498,13 @@ function migrateTokenSchema(tokens: any): any {
 
    ```bash
    # Analyze build performance
-   npx nx run-many --target=build --all --verbose
 
-   # Check daemon status
-   npx nx daemon
+  pnpm -w -r build --loglevel=info
+
+# Check daemon status
+
+# pnpm exec nx daemon  # Legacy - Nx daemon removed; pnpm workspaces do not use a daemon
+
    ```
 
 ## Next Steps

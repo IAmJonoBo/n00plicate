@@ -4,10 +4,12 @@
   "private": true,
   "type": "module",
   "description": "Canonical token schema and history snapshots (placeholder)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "import": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     }
   },
   "dependencies": {
@@ -15,6 +17,7 @@
     "@n00plicate/shared-utils": "workspace:*"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit --project tsconfig.json"
+    "typecheck": "tsc --noEmit --project tsconfig.json",
+  "build": "tsup src/index.ts --format esm,cjs --dts --outDir dist"
   }
 }

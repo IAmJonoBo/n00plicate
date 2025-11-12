@@ -42,24 +42,22 @@ jobs:
           trunk fmt || true
 
           # 2. Fix all CSS/SCSS issues
-          pnpm nx run workspace-format:lint:css || true
+          pnpm run lint:css || true
 
           # 3. Fix all markdown issues
-          pnpm nx run workspace-format:lint:md || true
+          pnpm run lint:md || true
 
           # 4. Fix markdown line lengths
-          pnpm nx run workspace-format:lint:md:fix-line-length || true
+          pnpm run lint:md:fix || true
 
           # 5. Clean all temporary files
-          pnpm nx run workspace-format:clean:apple || true
-          pnpm nx run workspace-format:clean:temp || true
-          pnpm nx run workspace-format:clean:ds-store || true
+          pnpm run clean:all || true
 
           # 6. Biome safe fixes (formatting + safe lint fixes)
-          pnpm nx run workspace-format:format:biome || true
+          pnpm run format || true
 
           # 7. dprint formatting
-          pnpm nx run workspace-format:format:dprint || true
+          pnpm -r --workspace-root=false --workspace-concurrency=1 --if-present format:dprint || true
 
           # 8. Trunk upgrade and format
           trunk upgrade --no-progress || true

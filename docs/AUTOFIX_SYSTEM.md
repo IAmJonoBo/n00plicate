@@ -92,16 +92,16 @@ pnpm autofix
 ```bash
 # Format code
 pnpm format                    # Trunk (all formatters)
-pnpm nx run workspace-format:format:biome    # Biome only
-pnpm nx run workspace-format:format:prettier # Prettier only
+pnpm -w -r format:biome    # Biome only
+pnpm -w -r format:prettier # Prettier only
 
 # Fix linting issues
-pnpm nx run workspace-format:lint:css        # Stylelint
-pnpm nx run workspace-format:lint:md         # markdownlint
+pnpm -w -r lint:css        # Stylelint
+pnpm -w -r lint:md         # markdownlint
 
 # Clean temporary files
-pnpm nx run workspace-format:clean:apple     # Apple files
-pnpm nx run workspace-format:clean:temp      # Temp files
+pnpm -w -r clean:apple     # Apple files
+pnpm -w -r clean:temp      # Temp files
 ```
 
 ## 📊 Monitoring & Observability

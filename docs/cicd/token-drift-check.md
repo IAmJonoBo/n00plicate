@@ -245,12 +245,12 @@ if git diff --name-only HEAD~1 HEAD | grep -q "packages/design-tokens/"; then
   echo "📝 Token changes detected, verifying sync with Penpot..."
 
   # Run drift detection
-  npm run tokens:check-drift
+  pnpm run tokens:check-drift
   drift_status=$?
 
   if [ $drift_status -eq 1 ]; then
     echo "🚨 DRIFT DETECTED: Tokens are out of sync with Penpot!"
-    echo "Run 'npm run tokens:sync' to resolve before pushing."
+  echo "Run 'pnpm run tokens:sync' to resolve before pushing."
     exit 1
   elif [ $drift_status -eq 2 ]; then
     echo "⚠️ WARNING: Could not verify sync with Penpot (network/auth issue)"
@@ -298,7 +298,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '18'
           cache: 'pnpm'
@@ -309,7 +309,7 @@ jobs:
       - name: Check for drift
         id: drift-check
         run: |
-          npm run tokens:check-drift --silent
+          pnpm run tokens:check-drift --silent
           echo "drift-detected=$?" >> $GITHUB_OUTPUT
         env:
           PENPOT_ACCESS_TOKEN: ${{ secrets.PENPOT_ACCESS_TOKEN }}
@@ -319,9 +319,9 @@ jobs:
         if: steps.drift-check.outputs.drift-detected == '1' || github.event.inputs.force_sync == 'true'
         run: |
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
-            npm run tokens:sync -- --dry-run
+            pnpm run tokens:sync -- --dry-run
           else
-            npm run tokens:sync
+            pnpm run tokens:sync
           fi
         env:
           PENPOT_ACCESS_TOKEN: ${{ secrets.PENPOT_ACCESS_TOKEN }}
@@ -329,9 +329,9 @@ jobs:
       - name: Validate synced tokens
         if: steps.drift-check.outputs.drift-detected == '1'
         run: |
-          npm run tokens:validate
-          npm run tokens:build
-          npm run test:tokens
+          pnpm run tokens:validate
+          pnpm run tokens:build
+          pnpm run test:tokens
 
       - name: Create pull request
         if: steps.drift-check.outputs.drift-detected == '1' && github.event.inputs.dry_run != 'true'

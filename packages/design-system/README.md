@@ -608,7 +608,7 @@ pnpm visual-test --update
 
 ```bash
 # Rebuild design tokens
-pnpm nx run design-tokens:build
+pnpm run build:design-tokens
 pnpm build
 ```
 

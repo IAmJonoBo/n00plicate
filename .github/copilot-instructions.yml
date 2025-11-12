@@ -27,11 +27,12 @@ onboarding:
     - name: Baseline quality verification
       run: |
         set -euo pipefail
-        export NX_NO_CLOUD=true
-        export NX_DAEMON=false
-        export NX_NATIVE_ENABLE=false
-        export NX_NATIVE_COMMAND_RUNNER=false
-        export NX_ADD_PLUGINS=false
+        # Legacy Nx environment variables - Nx removed from our toolchain. Leave these commented for troubleshooting only.
+        # export NX_NO_CLOUD=true
+        # export NX_DAEMON=false
+        # export NX_NATIVE_ENABLE=false
+        # export NX_NATIVE_COMMAND_RUNNER=false
+        # export NX_ADD_PLUGINS=false
         run_cmd() {
           log="/tmp/$(printf '%s' "$*" | tr ' /:' '__').log"
           echo "→ Running $*"
@@ -49,7 +50,7 @@ onboarding:
         }
         run_cmd pnpm format:check
         run_cmd pnpm lint:workspace
-        run_cmd pnpm nx run-many -t typecheck --nx-bail
-        run_cmd pnpm nx run-many -t test --nx-bail
+        run_cmd pnpm -w -r typecheck
+        run_cmd pnpm -w -r test
         run_cmd pnpm build
         pnpm audit --audit-level=high

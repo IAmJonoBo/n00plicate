@@ -19,17 +19,15 @@ September 30, 2025
 | Node.js         | 22.19.0 | 22.20.0 | Latest LTS        |
 | pnpm            | 10.17.0 | 10.18.2 | Package manager   |
 | TypeScript      | 5.9.2   | 5.9.3   | Latest stable     |
-| Nx              | 21.6.2  | 21.6.2  | Already at latest |
+| Nx (legacy)     | 21.6.2  | removed | Nx removed from the workspace; tools migrated to pnpm workspace filters and alternative plugins |
 | Storybook       | 9.1.9   | 9.1.9   | Already at latest |
 | React/React DOM | 19.1.1  | 19.1.1  | Already at latest |
 
 ### New Tools Added
 
-#### Nx Build Plugins
+#### Build Plugins / Tooling
 
-- `@nx/cypress@21.6.2` - E2E testing framework integration
-- `@nx/esbuild@21.6.2` - Fast JavaScript bundler
-- `@nx/webpack@21.6.2` - Module bundler integration
+- `@nx/*` plugin stack has been removed and is now legacy; where appropriate, tooling was replaced by: pnpm workspace scripts, storybook plugins, and non-Nx integrations.
 
 #### Storybook Addons
 

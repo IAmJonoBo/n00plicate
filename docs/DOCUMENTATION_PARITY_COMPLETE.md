@@ -201,7 +201,7 @@ graph TD
 
 ### Consistency Checks
 
-- Run `npx markdownlint-cli2` before commits
+- Run `pnpm dlx markdownlint-cli2` before commits
 - Verify cross-references during major updates
 - Check version consistency across documents
 - Validate architecture details alignment

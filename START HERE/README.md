@@ -42,5 +42,5 @@ pnpm dev:full-stack
 ## Contribution guardrails
 
 - Keep generated token outputs in `packages/tokens-outputs/` (gitignored) — commit only the orchestrator source.
-- Run `pnpm nx run-many -t lint,test,visual-test` before merging to satisfy quality gates.
+- Run `pnpm -w -r lint && pnpm -w -r test && pnpm -w -r visual-test` before merging to satisfy quality gates.
 - Coordinate dependency or toolchain bumps with `n00-cortex` to avoid manifest drift.

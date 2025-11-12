@@ -34,7 +34,7 @@ echo "✅ Node.js $(node -v)"
 # Check pnpm
 if ! command -v pnpm &> /dev/null; then
   echo "❌ pnpm is required"
-  echo "📥 Install: npm install -g pnpm"
+  echo "📥 Install: corepack enable && corepack prepare pnpm@latest --activate"
   exit 1
 fi
 echo "✅ pnpm $(pnpm -v)"
@@ -153,23 +153,23 @@ echo "🏗️ Step 5/7: Building core packages..."
 
 # Build design tokens first (required by everything else)
 echo "Building design tokens..."
-pnpm nx build design-tokens
+pnpm run build:design-tokens
 echo "✅ Design tokens built"
 
 # Build shared utilities
 echo "Building shared utilities..."
-pnpm nx build shared-utils
+pnpm run build:shared-utils
 echo "✅ Shared utilities built"
 
 echo ""
 echo "🧪 Step 6/7: Running initial tests..."
-pnpm nx test design-tokens --skip-nx-cache
-pnpm nx test design-system --skip-nx-cache
+pnpm --filter design-tokens test
+pnpm --filter design-system test
 echo "✅ Initial tests passed"
 
 echo ""
 echo "📚 Step 7/7: Setting up Storybook..."
-pnpm nx build-storybook design-system
+pnpm --filter design-system build-storybook
 echo "✅ Storybook built"
 
 echo ""
@@ -177,11 +177,11 @@ echo "🎉 Setup complete! Here's what you can do now:"
 echo ""
 echo "🚀 Start development:"
 echo "  pnpm dev                    # Start all development servers"
-echo "  pnpm nx storybook design-system  # Open Storybook"
+echo "  pnpm --filter design-system storybook  # Open Storybook"
 echo ""
 echo "🧪 Run tests:"
 echo "  pnpm test                   # Run all tests"
-echo "  pnpm nx test design-system  # Test specific project"
+echo "  pnpm --filter design-system test  # Test specific project"
 echo ""
 echo "🔧 Build and lint:"
 echo "  pnpm build                  # Build all packages"
@@ -232,7 +232,6 @@ echo "Happy contributing! 🎨"
     "search.exclude": {
       "**/node_modules": true,
       "**/dist": true,
-      "**/.nx": true,
       "**/coverage": true,
       "**/.storybook-static": true
     },
@@ -242,9 +241,7 @@ echo "Happy contributing! 🎨"
     "typescript.preferences.includePackageJsonAutoImports": "on",
     "typescript.suggest.autoImports": true,
 
-    // Nx Console settings
-    "nxConsole.showNodeVersionOnStartup": false,
-    "nxConsole.projectViewingStyle": "tree",
+  // Workspace Console settings (Nx removed)
 
     // Design token specific
     "css.validate": true,
@@ -265,7 +262,6 @@ echo "Happy contributing! 🎨"
     // File watching
     "files.watcherExclude": {
       "**/node_modules/**": true,
-      "**/.nx/**": true,
       "**/dist/**": true
     }
   },
@@ -274,8 +270,7 @@ echo "Happy contributing! 🎨"
     "recommendations": [
       "ms-vscode.vscode-typescript-next",
       "bradlc.vscode-tailwindcss",
-      "esbenp.prettier-vscode",
-      "nx-console.nx-console",
+  "esbenp.prettier-vscode",
       "unifiedjs.vscode-mdx",
       "ms-playwright.playwright",
       "github.copilot",
@@ -306,7 +301,7 @@ echo "Happy contributing! 🎨"
       {
         "label": "📚 Open Storybook",
         "type": "shell",
-        "command": "pnpm nx storybook design-system",
+  "command": "pnpm --filter @n00plicate/design-system run storybook",
         "group": "build",
         "presentation": {
           "echo": true,
@@ -1021,7 +1016,7 @@ export class TokenContributionWorkflow {
     writeFileSync(tokensPath, JSON.stringify(tokens, null, 2));
 
     // Rebuild tokens
-    execSync('pnpm nx build design-tokens', { stdio: 'inherit' });
+  execSync('pnpm run build:design-tokens', { stdio: 'inherit' });
 
     // Run validation suite
     await this.runValidationSuite(contribution);
@@ -1100,13 +1095,13 @@ export class TokenContributionWorkflow {
     console.log('🧪 Running validation suite...');
 
     // Run token schema validation
-    execSync('pnpm nx run design-tokens:validate-schema', { stdio: 'inherit' });
+  execSync('pnpm --filter design-tokens run validate', { stdio: 'inherit' });
 
     // Run component tests to ensure no breakage
-    execSync('pnpm nx test design-system', { stdio: 'inherit' });
+  execSync('pnpm --filter design-system test', { stdio: 'inherit' });
 
     // Build Storybook to validate visual changes
-    execSync('pnpm nx build-storybook design-system', { stdio: 'inherit' });
+  execSync('pnpm --filter design-system build-storybook', { stdio: 'inherit' });
 
     console.log('✅ Validation suite passed');
   }
@@ -1183,7 +1178,7 @@ export class QualityGateRunner {
       required: true,
       check: async () => {
         try {
-          execSync('pnpm nx run design-tokens:validate-schema', {
+          execSync('pnpm --filter design-tokens run validate', {
             stdio: 'pipe',
           });
           return true;
@@ -1201,7 +1196,7 @@ export class QualityGateRunner {
       required: true,
       check: async () => {
         try {
-          execSync('pnpm nx test design-system --passWithNoTests', {
+          execSync('pnpm --filter design-system test --passWithNoTests', {
             stdio: 'pipe',
           });
           return true;
@@ -1219,7 +1214,7 @@ export class QualityGateRunner {
       required: true,
       check: async () => {
         try {
-          execSync('pnpm nx run design-system:test:a11y', { stdio: 'pipe' });
+          execSync('pnpm --filter design-system run test:a11y', { stdio: 'pipe' });
           return true;
         } catch {
           return false;
@@ -1235,7 +1230,7 @@ export class QualityGateRunner {
       required: false,
       check: async () => {
         try {
-          execSync('pnpm nx run design-system:test:visual', { stdio: 'pipe' });
+          execSync('pnpm --filter design-system run test:visual', { stdio: 'pipe' });
           return true;
         } catch {
           return false;
@@ -1252,7 +1247,7 @@ export class QualityGateRunner {
       check: async () => {
         try {
           const report = execSync(
-            'pnpm nx run design-system:analyze-bundle --json',
+            'pnpm --filter @n00plicate/design-system run analyze-bundle --json',
             { encoding: 'utf-8' }
           );
           const bundleData = JSON.parse(report);
@@ -1271,7 +1266,7 @@ export class QualityGateRunner {
       required: false,
       check: async () => {
         try {
-          execSync('pnpm nx run design-system:benchmark', { stdio: 'pipe' });
+          execSync('pnpm --filter design-system run benchmark', { stdio: 'pipe' });
           return true;
         } catch {
           return false;
@@ -1303,7 +1298,7 @@ export class QualityGateRunner {
       check: async () => {
         try {
           execSync(
-            'npx license-checker --onlyAllow "MIT;Apache-2.0;BSD-2-Clause;BSD-3-Clause;ISC"',
+            'pnpm dlx license-checker --onlyAllow "MIT;Apache-2.0;BSD-2-Clause;BSD-3-Clause;ISC"',
             { stdio: 'pipe' }
           );
           return true;

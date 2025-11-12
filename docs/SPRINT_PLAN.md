@@ -12,7 +12,7 @@ for stories as well as sprint reviews:
 
 - `pnpm format:check`, `pnpm lint:workspace`, and `pnpm typecheck` green with no warnings gated by
   waivers.
-- Functional/contract suites (`pnpm nx run-many -t test`, Storybook interaction runner, Playwright
+- Functional/contract suites (`pnpm -w -r test`, Storybook interaction runner, Playwright
   journeys) stable with flake budgets logged.
 - Visual regression baselines (Loki, Compose/SwiftUI snapshots) updated and reviewed.
 - `pnpm build` + package-specific builds successful in CI.
@@ -85,8 +85,8 @@ delivery.
 
 ### Architecture & Tooling Upgrades
 
-- Stabilize Nx plugin stack (`@nx/js`, `@nx/react`, `@nx/storybook`, `@nx/vite`) with
-  `NX_NATIVE_ENABLE=false` mitigation and document escalation paths.
+- Stabilize plugin stack (legacy Nx plugin references removed). Replace Nx orchestration with pnpm workspace
+  filters and explicit run scripts. `NX_NATIVE_ENABLE=false` is a legacy mitigation and no longer required.
 - Publish `justfile` catalogue with automation/AI helper aliases and ensure CI runners install it.
 - Align CONTRIBUTING/DEVELOPMENT guides with the new workflows and AI expectations.
 

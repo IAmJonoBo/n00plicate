@@ -1,5 +1,119 @@
 # n00plicate Design Token Pipeline: Master Control Document
 
+### n00plicate Design Token Pipeline: Master Control Document
+
+**Version**: 2.2.0\
+**Last Updated**: June 2025\
+**Status**: Production Ready with Collision-Prevention Architecture
+
+## Executive Summary
+
+n00plicate is a comprehensive, open-source design token management platform that provides real-time
+
+## Architecture Overview
+
+### Core Pipeline Components
+
+### System Architecture Principles
+
+1. **Collision-Free**: Comprehensive namespace strategy prevents all token, file, and runtime conflicts
+
+## Pipeline Control Flow
+
+### 1. Design Token Lifecycle
+
+### 2. Critical Workflows
+
+#### Design Token Update Workflow
+
+## Technical Implementation Guide
+
+### Core Technologies Stack
+
+### Platform-Specific Configurations
+
+#### Web Platform (Qwik City)
+
+#### Mobile Platform (React Native)
+
+```json
+#### Desktop Platform (Tauri)
+
+```json
+#### Compose Multiplatform
+
+```json
+## Collision Prevention Architecture
+
+The n00plicate design token pipeline implements a comprehensive collision-prevention strategy that eliminates
+### Core Collision Prevention Principles
+
+1. **Universal Namespace Strategy**: All tokens use the `ds-` prefix across all platforms
+### Token Namespace Strategy
+
+**Principle**: All design tokens use the `ds-` prefix to guarantee no CSS variables, JavaScript constants,\
+### Platform-Rooted Build Paths
+
+Each platform outputs to its own isolated directory structure to eliminate file-name collisions:
+**Migration Note**: Projects using the old `dist/` paths must update imports:
+### Module Boundary Enforcement
+
+Nx ESLint rules prevent illegal cross-platform token imports:
+### Runtime Collision Prevention
+
+| Runtime Environment | Collision Risk                       | Prevention Strategy               | Implementation                                             | Documentation Reference |
+### Collision Detection and Monitoring
+
+#### Build-Time Validation
+#### Platform-Specific Collision Details
+
+#### 1. Tailwind CSS Integration (Specify Warning Compliance)
+#### 2. Metro Bundle Deduplication (Locofy FAQ Compliance)
+
+Locofy FAQ documents that React Native Metro bundler will create duplicate packages if package.json\
+#### 3. Storybook Port Management (Supernova Issue Prevention)
+
+Supernova documentation notes that Storybook's React Native builder defaults to port 7007 while Vite\
+### Additional Platform-Specific Implementation Details
+
+#### Runtime Monitoring
+### Storybook Composition Architecture
+
+To prevent Storybook builder conflicts and port collisions across platforms:
+## Quality Assurance Framework
+
+### Testing Strategy
+#### 1. Unit Testing
+
+...
+## Project Governance
+
+### Contribution Guidelines
+#### Code Contributions
+
+1. **Fork & Branch**: Create feature branches from main
+### Maintenance Schedule
+
+#### Regular Maintenance
+## Success Metrics
+
+### Technical Metrics
+### User Experience Metrics
+
+#### Developer Experience
+## Future Roadmap
+
+### Short-Term Goals (3 months)
+## Conclusion
+
+This control document establishes the foundation for a world-class design token management platform.
+## Document Control
+
+...
+### n00plicate Design Token Pipeline: Master Control Document
+
+### n00plicate Design Token Pipeline: Master Control Document
+
 **Version**: 2.2.0\
 **Last Updated**: June 2025\
 **Status**: Production Ready with Collision-Prevention Architecture
@@ -452,7 +566,7 @@ const validateCollisions = (tokens: DesignToken[]) => {
 #### CI/CD Collision Gates
 
 ```yaml
-# .github/workflows/collision-check.yml
+### .github/workflows/collision-check.yml
 - name: Validate Token Namespace
   run: |
     # Ensure all CSS tokens use --ds-* prefix (prevents Specify/Tailwind conflicts)
@@ -465,7 +579,7 @@ const validateCollisions = (tokens: DesignToken[]) => {
     grep -r "dist/" apps/ libs/ && exit 1 || true
 
 - name: Module Boundary Check
-  run: nx run-many -t lint --parallel --maxParallel=4
+  run: pnpm -w -r lint --parallel --if-present
 
 - name: Metro Package Name Validation (Locofy FAQ Compliance)
   run: |
@@ -805,7 +919,7 @@ platform-specific metadata.
 **Implementation Architecture:**
 
 ```bash
-# Universal post-build cleanup script
+### Universal post-build cleanup script
 scripts/postbuild-chain.sh [target-directory] [options]
 ```
 
@@ -828,13 +942,13 @@ scripts/postbuild-chain.sh [target-directory] [options]
 **Usage Examples:**
 
 ```bash
-# Standard cleanup (used in build scripts)
+### Standard cleanup (used in build scripts)
 ./scripts/postbuild-chain.sh ./packages/design-tokens/libs
 
-# With validation (used in CI/CD)
+### With validation (used in CI/CD)
 ./scripts/postbuild-chain.sh ./apps/web/dist --validate
 
-# Deep cleanup including dependencies
+### Deep cleanup including dependencies
 ./scripts/postbuild-chain.sh ./packages/design-tokens --with-deps --validate
 ```
 
@@ -860,10 +974,10 @@ The cleanup chain is automatically invoked by:
 #### Typical Development Cycle
 
 1. **Design** → Edit Penpot tokens, export via CLI or menu (auto-cleaned)
-2. **Build** → `pnpm nx run design-tokens:build` (Style Dictionary watch handles live dev, auto-cleaned)
+2. **Build** → `pnpm run build:design-tokens` (Style Dictionary watch handles live dev, auto-cleaned)
 3. **Develop** → Hot-reload via Qwik Vite server; RN Metro or Compose hot restart as needed
 4. **Document** → Write/adjust Storybook stories for new components
-5. **Test** → `nx affected` runs ESLint, unit, interaction & visual tests
+5. **Test** → `pnpm -w -r --filter '*' run test` runs ESLint, unit, interaction & visual tests
 6. **Commit** → Pre-commit hooks automatically format, lint, clean Apple junk, and validate token drift
 7. **CI** → Style Dictionary drift check, Storybook test-runner, Loki visual diff, size budgets
 8. **Release** → `nx release`, `pnpm deploy` (Cloudflare Pages, auto-cleaned), Tauri updater manifest, mobile store
@@ -872,30 +986,30 @@ The cleanup chain is automatically invoked by:
 #### Live Development Setup
 
 ```bash
-# Terminal 1: Token watching
+### Terminal 1: Token watching
 cd packages/design-tokens
 pnpm style-dictionary build --watch
 
-# Terminal 2: Web development
-nx run web:serve
+### Terminal 2: Web development
+pnpm --filter ./apps/web run serve
 
-# Terminal 3: Storybook
-nx run web:storybook
+### Terminal 3: Storybook
+pnpm --filter @n00plicate/design-system run storybook
 
-# Terminal 4: Mobile (optional)
-nx run mobile-rn:start
+### Terminal 4: Mobile (optional)
+pnpm --filter ./apps/mobile run start
 ```
 
 #### Essential Development Commands
 
 | Task                | Command                                     | Purpose                                     |
 | ------------------- | ------------------------------------------- | ------------------------------------------- |
-| **Build tokens**    | `nx run design-tokens:build`                | Transform Penpot JSON to platform artifacts |
-| **Serve web**       | `nx run web:serve`                          | Development server with hot reload          |
-| **Storybook**       | `nx run web:storybook`                      | Component documentation and testing         |
-| **Mobile**          | `nx run mobile-rn:ios` / `:android`         | Native mobile builds                        |
-| **Desktop**         | `nx run desktop:tauri dev`                  | Desktop development mode                    |
-| **Full test suite** | `nx affected -t=lint,test,storytest,visual` | Run all affected tests                      |
+| **Build tokens**    | `pnpm --filter @n00plicate/design-tokens run build`                | Transform Penpot JSON to platform artifacts |
+| **Serve web**       | `pnpm --filter ./apps/web run serve`                          | Development server with hot reload          |
+| **Storybook**       | `pnpm --filter @n00plicate/design-system run storybook`                      | Component documentation and testing         |
+| **Mobile**          | `pnpm --filter ./apps/mobile run ios` / `pnpm --filter ./apps/mobile run android`         | Native mobile builds                        |
+| **Desktop**         | `pnpm --filter ./apps/desktop run tauri dev`                  | Desktop development mode                    |
+| **Full test suite** | `pnpm -w -r --filter '*' run test` | Run all tests across the workspace                      |
 
 ### Deployment Process
 
@@ -923,16 +1037,16 @@ nx run mobile-rn:start
 ##### Cloudflare Pages (Web Platform)
 
 ```bash
-# Build optimized production bundle
+### Build optimized production bundle
 pnpm build
 
-# Deploy to Cloudflare Pages
+### Deploy to Cloudflare Pages
 pnpm deploy
 
-# Local preview with Cloudflare Workers runtime
+### Local preview with Cloudflare Workers runtime
 pnpm serve
 
-# Check deployment status
+### Check deployment status
 wrangler pages deployment list
 ```
 
@@ -956,7 +1070,7 @@ wrangler pages deployment list
 **Alternative Deployment Adapters:**
 
 ```bash
-# Other hosting platforms
+### Other hosting platforms
 pnpm qwik add vercel-edge    # Vercel Edge Functions
 pnpm qwik add netlify-edge   # Netlify Edge Functions
 pnpm qwik add node-express   # Traditional Node.js hosting
@@ -1011,7 +1125,7 @@ pnpm qwik add static         # Static site generation
 | **RN build size grew**            | `newArchEnabled=false`                            | Re-enable New Architecture & clean Gradle                |
 | **Tauri build fails CSP**         | Manual meta tag overriding                        | Remove custom CSP policy                                 |
 | **Storybook stories broken**      | Outdated addon versions                           | Update to Storybook 9.1+                                 |
-| **Nx cache issues**               | Corrupted cache state                             | `nx reset` to clear all caches                           |
+| **Nx cache issues**               | Corrupted cache state                             | `pnpm store prune` (previously `nx reset` - legacy)       |
 | **pnpm install fails**            | Node version mismatch                             | Use Node 22 LTS via nvm/volta                            |
 | **Visual tests failing**          | Loki reference outdated                           | Update references: `pnpm loki update`                    |
 | **Cloudflare deploy fails**       | Missing wrangler authentication                   | `wrangler login` or set CLOUDFLARE_API_TOKEN             |
@@ -1025,66 +1139,66 @@ pnpm qwik add static         # Static site generation
 #### Style Dictionary Issues
 
 ```bash
-# Verbose build output for debugging
+### Verbose build output for debugging
 style-dictionary build --verbose
 
-# Validate token structure without writing files
+### Validate token structure without writing files
 style-dictionary build --dry-run
 
-# Check for transform errors
+### Check for transform errors
 style-dictionary build --debug
 ```
 
 #### Token Collision Analysis
 
 ```bash
-# View collision details with verbose output
+### View collision details with verbose output
 cd packages/design-tokens
 pnpm style-dictionary build --verbose
 
-# Validate namespace compliance
+### Validate namespace compliance
 grep -r "ds-" libs/tokens/css/ | head -5
 ```
 
 #### Nx Task Debugging
 
 ```bash
-# Show affected projects and their dependencies
-nx show projects --affected
+### Show affected projects and their dependencies
+pnpm -w -r --filter '*' list --depth 0
 
-# Run with verbose output to see detailed execution
-nx run web:build --verbose
+### Run with verbose output to see detailed execution
+pnpm --filter ./apps/web run build -- --verbose
 
-# Analyze task graph for bottlenecks
+### Analyze task graph for bottlenecks
 nx graph
 ```
 
 #### Cloudflare Pages Deployment
 
 ```bash
-# Check deployment status and history
+### Check deployment status and history
 wrangler pages deployment list
 
-# Debug build output with detailed logging
+### Debug build output with detailed logging
 pnpm build --verbose
 
-# Test local preview with Cloudflare Workers runtime
+### Test local preview with Cloudflare Workers runtime
 pnpm serve
 
-# Validate edge function configuration
+### Validate edge function configuration
 wrangler pages functions build
 ```
 
 #### Build Artifact Validation
 
 ```bash
-# Verify Apple cleanup completion
+### Verify Apple cleanup completion
 ./scripts/postbuild-chain.sh dist --validate
 
-# Check for platform-specific metadata
+### Check for platform-specific metadata
 find dist -name "._*" -o -name ".DS_Store"
 
-# Validate bundle sizes against budgets
+### Validate bundle sizes against budgets
 ls -la dist/build/*.js | awk '{print $5, $9}'
 ```
 
@@ -1093,23 +1207,23 @@ ls -la dist/build/*.js | awk '{print $5, $9}'
 #### Bundle Analysis
 
 ```bash
-# Analyze bundle composition
+### Analyze bundle composition
 pnpm build --analyze
 
-# Check Core Web Vitals compliance
+### Check Core Web Vitals compliance
 lighthouse --only-categories=performance apps/web/dist/index.html
 
-# Monitor memory usage during build
+### Monitor memory usage during build
 time pnpm build
 ```
 
 #### Token Performance
 
 ```bash
-# Measure token generation time
-time pnpm nx run design-tokens:build
+### Measure token generation time
+time pnpm run build:design-tokens
 
-# Validate token file sizes
+### Validate token file sizes
 du -h packages/design-tokens/libs/tokens/*/*.css
 ```
 

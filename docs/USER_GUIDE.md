@@ -93,7 +93,7 @@ efficient task execution.
 **CLI Export** (Recommended for automation):
 
 ```bash
-npx penpot-export --file <penpot-file-uuid> --out tokens.json
+pnpm dlx penpot-export --file <penpot-file-uuid> --out tokens.json
 ```
 
 The CLI outputs W3C-JSON plus optional SVG/PNG assets for icons and illustrations.
@@ -646,8 +646,8 @@ and ~20% size reduction. Hermes engine improves startup time and memory usage.
 // tauri.conf.json
 {
   "build": {
-    "beforeDevCommand": "nx run web:serve",
-    "beforeBuildCommand": "nx run web:build",
+  "beforeDevCommand": "pnpm --filter ./apps/web run serve",
+  "beforeBuildCommand": "pnpm --filter ./apps/web run build",
     "distDir": "../apps/web/dist"
   }
 }
@@ -694,29 +694,29 @@ without complexity.
 
 | Task                | Command                                     | Purpose                                     |
 | ------------------- | ------------------------------------------- | ------------------------------------------- |
-| **Build tokens**    | `nx run design-tokens:build`                | Transform Penpot JSON to platform artifacts |
-| **Serve web**       | `nx run web:serve`                          | Development server with hot reload          |
-| **Storybook**       | `nx run web:storybook`                      | Component documentation and testing         |
-| **Mobile**          | `nx run mobile:run-ios` / `:run-android`    | Native mobile builds                        |
-| **Desktop**         | `nx run desktop:tauri dev`                  | Desktop development mode                    |
-| **Full test suite** | `nx affected -t=lint,test,storytest,visual` | Run all affected tests                      |
+| **Build tokens**    | `pnpm run build:design-tokens`                | Transform Penpot JSON to platform artifacts |
+| **Serve web**       | `pnpm --filter ./apps/web run serve`                          | Development server with hot reload          |
+| **Storybook**       | `pnpm --filter ./apps/web run storybook`                      | Component documentation and testing         |
+| **Mobile**          | `pnpm --filter mobile run run-ios` / `pnpm --filter mobile run run-android`    | Native mobile builds                        |
+| **Desktop**         | `pnpm --filter desktop run dev`                  | Desktop development mode                    |
+| **Full test suite** | `pnpm -w -r test` or a git-based affected filter | Run tests across the workspace or affected packages |
 
 ### 8.2 Module Boundaries
 
-Enable the `enforce-module-boundaries` ESLint rule to prevent illegal imports:
+Enable a module-boundaries rule in ESLint to prevent illegal imports.
+We recommend `eslint-plugin-boundaries` as a cross-workspace alternative.
 
 ```json
-// .eslintrc.json
+// .eslintrc.json, using eslint-plugin-boundaries (example)
 {
+  "plugins": ["boundaries"],
   "rules": {
-    "@nx/enforce-module-boundaries": [
+    "boundaries/element-types": [
       "error",
       {
-        "depConstraints": [
-          {
-            "sourceTag": "scope:design-tokens",
-            "onlyDependOnLibsWithTags": []
-          }
+        "default": "disallow",
+        "rules": [
+          { "from": "packages/*", "allow": ["apps/*"] }
         ]
       }
     ]
@@ -732,8 +732,8 @@ Enable the `enforce-module-boundaries` ESLint rule to prevent illegal imports:
 # .github/workflows/ci.yml
 - uses: actions/cache@v3
   with:
-    path: .nx/cache
-    key: nx-${{ hashFiles('pnpm-lock.yaml') }}
+    path: ~/.pnpm-store
+    key: pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
 ```
 
 **Size Budget Enforcement**:
@@ -757,7 +757,7 @@ The pipeline includes automatic Apple junk cleanup to prevent macOS metadata con
 ```bash
 # Automatically runs after every build
 pnpm build                    # Includes post-build Apple cleanup
-pnpm nx run design-tokens:build  # Includes token output cleanup
+pnpm run build:design-tokens  # Includes token output cleanup
 ```
 
 **Manual Cleanup Commands**:
@@ -875,10 +875,10 @@ tools (Biome, dprint) provide faster execution than Node.js alternatives.
 ### 10.1 Typical Development Cycle
 
 1. **Design** → Edit Penpot tokens, export via CLI or menu (auto-cleaned)
-2. **Build** → `pnpm nx run design-tokens:build` (Style Dictionary watch handles live dev, auto-cleaned)
+2. **Build** → `pnpm run build:design-tokens` (Style Dictionary watch handles live dev, auto-cleaned)
 3. **Develop** → Hot-reload via Qwik Vite server; RN Metro or Compose hot restart as needed
 4. **Document** → Write/adjust Storybook stories for new components
-5. **Test** → `nx affected` runs ESLint, unit, interaction & visual tests
+5. **Test** → `pnpm -w -r --filter '*' test` runs unit and visual tests across the workspace (use filters to scope execution)
 6. **Commit** → Pre-commit hooks automatically format, lint, clean Apple junk, and validate token drift
 7. **CI** → Style Dictionary drift check, Storybook test-runner, Loki visual diff, size budgets
 8. **Release** → `nx release`, `pnpm deploy` (Cloudflare Pages, auto-cleaned), Tauri updater manifest, mobile store
@@ -892,13 +892,13 @@ cd packages/design-tokens
 pnpm style-dictionary build --watch
 
 # Terminal 2: Web development
-nx run web:serve
+pnpm --filter web run serve
 
 # Terminal 3: Storybook
-nx run web:storybook
+pnpm --filter @n00plicate/design-system run storybook
 
 # Terminal 4: Mobile (optional)
-nx run mobile:start
+pnpm --filter mobile run start
 ```
 
 **Why this matters**: The watch-based workflow provides immediate feedback. Automated
@@ -1058,9 +1058,9 @@ builder defaults to port 6006, causing dev-machine port conflicts. n00plicate us
 
 ```bash
 # Collision-safe Storybook commands per Supernova best practices
-pnpm nx run design-system:storybook          # Port 6006 (Web/Vite - default)
-pnpm nx run design-system:storybook:mobile   # Port 7007 (React Native - default)
-pnpm nx run design-system:storybook:desktop  # Port 6008 (Desktop/Vite - custom)
+pnpm --filter @n00plicate/design-system run storybook          # Port 6006 (Web/Vite - default)
+pnpm --filter @n00plicate/design-system run storybook:mobile   # Port 7007 (React Native - default)
+pnpm --filter @n00plicate/design-system run storybook:desktop  # Port 6008 (Desktop/Vite - custom)
 ```
 
 **Configuration Files:**
@@ -1115,7 +1115,7 @@ of truth.
 | **RN build size grew**            | `newArchEnabled=false`                            | Re-enable New Architecture & clean Gradle                |
 | **Tauri build fails CSP**         | Manual meta tag overriding                        | Remove custom CSP policy                                 |
 | **Storybook stories broken**      | Outdated addon versions                           | Update to Storybook 9.1+                                 |
-| **Nx cache issues**               | Corrupted cache state                             | `nx reset` to clear all caches                           |
+| **Nx cache issues**               | Corrupted cache state                             | `pnpm store prune`  (previously `nx reset` - legacy)     |
 | **pnpm install fails**            | Node version mismatch                             | Use Node 22 LTS via nvm/volta                            |
 | **Visual tests failing**          | Loki reference outdated                           | Update references: `pnpm loki update`                    |
 | **Cloudflare deploy fails**       | Missing wrangler authentication                   | `wrangler login` or set CLOUDFLARE_API_TOKEN             |
@@ -1148,10 +1148,10 @@ pnpm style-dictionary build --verbose
 
 ```bash
 # Show task graph
-nx show projects --affected
+pnpm -w -r --filter '*' list --depth 0
 
 # Run with verbose output
-nx run web:build --verbose
+pnpm --filter ./apps/web run build -- --verbose
 ```
 
 **Cloudflare Pages Deployment**:

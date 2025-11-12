@@ -89,10 +89,10 @@ pnpm install
 pnpm install
 
 # 2. Build initial tokens
-pnpm nx run design-tokens:build
+pnpm run build:design-tokens
 
 # 3. Start development workflow
-pnpm nx run design-tokens:watch
+pnpm --filter @n00plicate/design-tokens run watch
 ```
 
 ## 🚀 Multi-Platform Usage
@@ -124,7 +124,7 @@ const allColors = getTokensByPattern('color.**');
 
 ### Mobile Applications
 
-#### React Native
+### React Native
 
 ```typescript
 // apps/mobile-rn/src/theme.ts
@@ -143,7 +143,7 @@ export const theme = StyleSheet.create({
 });
 ```
 
-#### Compose Multiplatform
+### Compose Multiplatform
 
 ```kotlin
 // mobile-compose/src/main/kotlin/Theme.kt
@@ -241,7 +241,7 @@ const buttonPadding = getToken('component.button.padding.md');
 const cardShadow = getToken('component.card.shadow');
 
 ````javascript
-### CSS Variables (Web)
+# CSS Variables (Web)
 
 ```css
 /* Import generated CSS variables */
@@ -255,7 +255,7 @@ const cardShadow = getToken('component.card.shadow');
 }
 ````
 
-### Qwik + Vanilla Extract Integration
+# Qwik + Vanilla Extract Integration
 
 ```typescript
 // apps/web/src/theme.css.ts
@@ -271,7 +271,7 @@ export const button = style({
 });
 ```
 
-### React Native Integration
+# React Native Integration
 
 ```typescript
 // apps/mobile/src/theme.ts
@@ -288,11 +288,11 @@ export const styles = StyleSheet.create({
 });
 ```
 
-### Token Categories
+# Token Categories
 
 Our token system provides comprehensive coverage for all design decisions:
 
-#### Colors
+# Colors
 
 ```typescript
 // Primary brand colors (50-900 scale)
@@ -312,7 +312,7 @@ getToken('color.neutral.500'); // #6b7280
 getToken('color.neutral.900'); // #111827
 ```
 
-#### Typography
+# Typography
 
 ```typescript
 // Font families
@@ -338,7 +338,7 @@ getToken('line.height.normal'); // 1.5
 getToken('line.height.relaxed'); // 1.75
 ```
 
-#### Spacing & Layout
+# Spacing & Layout
 
 ```typescript
 // T-shirt sizing scale
@@ -351,7 +351,7 @@ getToken('spacing.2xl'); // 2.5rem (40px)
 getToken('spacing.3xl'); // 3rem (48px)
 ```
 
-#### Borders & Effects
+# Borders & Effects
 
 ```typescript
 // Border radius scale
@@ -368,25 +368,25 @@ getToken('shadow.lg'); // 0 10px 15px -3px rgb(0 0 0 / 0.1)
 getToken('shadow.xl'); // 0 20px 25px -5px rgb(0 0 0 / 0.1)
 ```
 
-## 🛠️ Development
+# 🛠️ Development
 
-### Building Tokens
+# Building Tokens
 
 ```bash
-# Build all token outputs
+## Build all token outputs
 pnpm build
 
-# Build only tokens (skip TypeScript compilation)
+## Build only tokens (skip TypeScript compilation)
 pnpm build:tokens
 
-# Build only TypeScript types
+## Build only TypeScript types
 pnpm build:types
 
-# Watch for changes and rebuild
+## Watch for changes and rebuild
 pnpm watch
 ```
 
-### Token File Structure
+# Token File Structure
 
 ```text
 tokens/
@@ -399,7 +399,7 @@ tokens/
     └── desktop.json         # Desktop-specific overrides (future)
 ```
 
-### Style Dictionary Configuration
+# Style Dictionary Configuration
 
 The `style-dictionary.config.js` file defines how tokens are transformed:
 
@@ -431,7 +431,7 @@ module.exports = {
 };
 ```
 
-## 📁 Output Structure
+# 📁 Output Structure
 
 Style Dictionary generates platform-specific outputs for the entire n00plicate ecosystem:
 
@@ -454,7 +454,7 @@ dist/
     └── Theme.kt
 ```
 
-### Platform Integration
+# Platform Integration
 
 | Platform            | Import Path                 | Usage Example                   |
 | ------------------- | --------------------------- | ------------------------------- |
@@ -465,9 +465,9 @@ dist/
 | **Mobile (Future)** | `@n00plicate/design-tokens/dart` | Flutter theming                 |
 | **Desktop**         | Inherits from web           | Tauri web view styling          |
 
-## 🎨 Token Design Philosophy
+# 🎨 Token Design Philosophy
 
-### Naming Convention
+# Naming Convention
 
 Tokens follow a hierarchical naming pattern:
 
@@ -481,13 +481,13 @@ Examples:
 - `spacing.component.button.padding` - Button padding value
 - `fontSize.heading.h1` - H1 heading font size
 
-### Token Types
+# Token Types
 
 1. **Primitive Tokens**: Raw values (colors, numbers, strings)
 2. **Semantic Tokens**: Meaningful aliases (primary, secondary, success)
 3. **Component Tokens**: Component-specific values (button-padding, card-shadow)
 
-### Design Token Hierarchy
+# Design Token Hierarchy
 
 ```text
 Primitive Tokens (base.json)
@@ -499,11 +499,11 @@ Component Tokens (components.json)
 Platform Overrides (platforms/*.json)
 ```
 
-## 🔄 Penpot Integration Workflow
+# 🔄 Penpot Integration Workflow
 
 This package is central to our design-to-code workflow using Penpot v2.8:
 
-### 1. Design Token Creation
+# 1. Design Token Creation
 
 **In Penpot:**
 
@@ -512,15 +512,15 @@ This package is central to our design-to-code workflow using Penpot v2.8:
 - Create **Alias Tokens** for semantic references (primary, secondary, success)
 - All tokens automatically follow W3C DTCG format
 
-### 2. Automated Export
+# 2. Automated Export
 
 **Via Dev Container:**
 
 ```bash
-# Manual export for development
+## Manual export for development
 pnpm run tokens:export
 
-# Automated via the penpot-export service (infra/containers/devcontainer/docker-compose.yml, workspace mount `tools/penpot-export/`)
+## Automated via the penpot-export service (infra/containers/devcontainer/docker-compose.yml, workspace mount `tools/penpot-export/`)
 pnpm run tokens:sync
 ```
 
@@ -531,22 +531,22 @@ pnpm run tokens:sync
 3. Writes `tokens/tokens.json` in W3C DTCG format
 4. Triggers Style Dictionary rebuild
 
-### 3. Transform & Distribution
+# 3. Transform & Distribution
 
 **Style Dictionary Processing:**
 
 ```bash
-# Manual rebuild
+## Manual rebuild
 pnpm run build:tokens
 
-# Watch mode for development
+## Watch mode for development
 pnpm run watch
 
-# Automated in CI/CD
+## Automated in CI/CD
 nx affected -t build:tokens
 ```
 
-### 4. Platform Consumption
+# 4. Platform Consumption
 
 **Web Applications (Qwik City):**
 
@@ -587,7 +587,7 @@ export const colors = {
 }
 ```
 
-### 5. Storybook Integration
+# 5. Storybook Integration
 
 **Design Workshop:**
 
@@ -605,10 +605,10 @@ export const parameters = {
 };
 ```
 
-### Continuous Sync
+# Continuous Sync
 
 ```bash
-# Planned automation features
+## Planned automation features
 pnpm run tokens:sync     # Pull latest from Penpot
 pnpm run tokens:validate # Verify W3C DTCG compliance
 pnpm run tokens:diff     # Compare with previous version
@@ -617,27 +617,27 @@ pnpm run tokens:diff     # Compare with previous version
 This workflow ensures that design changes in Penpot automatically flow to all applications while
 maintaining type safety and platform consistency.
 
-## 📊 Token Metrics
+# 📊 Token Metrics
 
 - **Token Count**: ~50 base tokens
 - **Generated Files**: 8 platform-specific formats
 - **Build Time**: <1 second (incremental)
 - **Bundle Size**: <2KB (minified CSS)
 
-## 🧪 Testing
+# 🧪 Testing
 
 ```bash
-# Run token validation tests
+## Run token validation tests
 pnpm test
 
-# Validate token structure
+## Validate token structure
 pnpm test:tokens
 
-# Check generated output
+## Check generated output
 pnpm test:output
 ```
 
-## 🤝 Contributing
+# 🤝 Contributing
 
 When adding new tokens:
 
@@ -646,7 +646,7 @@ When adding new tokens:
 3. **Test Outputs**: Verify all platform formats generate correctly
 4. **Update Types**: Ensure TypeScript definitions are complete
 
-### Adding New Tokens
+# Adding New Tokens
 
 ```json
 // tokens/base.json
@@ -663,7 +663,7 @@ When adding new tokens:
 }
 ```
 
-## 📚 Advanced Documentation
+# 📚 Advanced Documentation
 
 For comprehensive guides on advanced workflows and enterprise features:
 
@@ -673,43 +673,43 @@ For comprehensive guides on advanced workflows and enterprise features:
 - **[CI/CD Token Drift Detection](../../docs/cicd/token-drift-check.md)** - Automated sync monitoring and alerting
 - **[Security Compliance](../../docs/security/security-compliance-framework.md)** - Token security and enterprise compliance
 
-## 📚 Resources
+# 📚 Resources
 
 - [Style Dictionary Documentation](https://amzn.github.io/style-dictionary/)
 - [Design Token Community Group](https://www.w3.org/community/design-tokens/)
 - [W3C Design Token Format](https://tr.designtokens.org/format/)
 - [Penpot Design Token Guide](https://penpot.app/design-tokens)
 
-## 🐛 Troubleshooting
+# 🐛 Troubleshooting
 
-### Common Issues
+# Common Issues
 
-#### Token Build Fails
+# Token Build Fails
 
 ```bash
-# Clear dist directory and rebuild
+## Clear dist directory and rebuild
 pnpm clean && pnpm build
 ```
 
-#### TypeScript Errors
+# TypeScript Errors
 
 ```bash
-# Regenerate TypeScript definitions
+## Regenerate TypeScript definitions
 pnpm build:types
 ```
 
-#### Watch Mode Not Working
+# Watch Mode Not Working
 
 ```bash
-# Restart with verbose logging
+## Restart with verbose logging
 pnpm watch --verbose
 ```
 
-#### CSS Variables Not Loading
+# CSS Variables Not Loading
 
 - Ensure `dist/css/variables.css` is imported in your application
 - Check that CSS custom properties are supported in your target browsers
 
-## 📄 License
+# 📄 License
 
 MIT License - see the [LICENSE](../../LICENSE) file for details.

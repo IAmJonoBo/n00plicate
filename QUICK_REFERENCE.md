@@ -25,11 +25,11 @@ pnpm test:e2e
 
 ## 🛠️ New Tools Available
 
-### Nx Build Plugins
+### Build plugins & integrations
 
-- **@nx/cypress** - E2E testing integration
-- **@nx/esbuild** - Fast JavaScript bundling
-- **@nx/webpack** - Webpack integration
+- **Cypress plugin** - E2E testing integration (via packages/tooling)
+- **esbuild** - Fast JavaScript bundling
+- **webpack** - Webpack integration
 
 ### Storybook Addons (in design-system)
 
@@ -57,7 +57,7 @@ pnpm test:e2e
 | Node.js    | 22.20.0 |
 | pnpm       | 10.18.2 |
 | TypeScript | 5.9.3   |
-| Nx         | 21.6.2  |
+| Nx         | removed |
 | Storybook  | 9.1.9   |
 
 ## 🎯 Quick Setup

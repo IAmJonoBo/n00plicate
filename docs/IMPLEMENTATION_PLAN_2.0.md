@@ -104,6 +104,7 @@ n00plicate/
 | ------------ | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Phases 0–6   | Node 22.20.0 + pnpm 10.18.2                                                                            | Primary execution environment for Nx targets, Storybook builds, and script automation.               | MIT-licensed toolchain. Works offline once tarballs are cached; DevContainer pins versions via `setup.sh`.                                      | `.github/workflows/ci.yml`, `visual-tests.yml`, and `pr-verification.yml` install pinned Node/pnpm via `actions/setup-node` + `pnpm/action-setup`.                |
 | Phases 1–6   | Nx 21.6 plugin stack (`@nx/{js,react,storybook,vite,plugin}`)                                          | Provides project graph, lint/test orchestration, Storybook build integration, and custom generators. | OSS licenses (MIT). Requires Node environment; offline usage supported via pnpm store.                                                          | Installed through workspace `pnpm install`. Ensure cache seeds via existing CI install steps.                                                                     |
+| Phases 1–6   | Nx 21.6 plugin stack (`@nx/{js,react,storybook,vite,plugin}`) *(legacy)*                         | Previously used for project graph and orchestration; this repository now relies on pnpm workspace filters and CI cache techniques. | OSS licenses (MIT). Use pnpm store caching and project-specific scripts for orchestration.                                                          | Documented migration path: replace Nx generators/executors with pnpm workspace scripts and custom generators.                                                   |
 | Phases 2–6   | Rust toolchain (stable 1.80+, `wasm32-unknown-unknown`, `cargo-generate`)                              | Builds the token orchestrator CLI, wasm bindings, and future Tauri shell automation.                 | Apache-2.0 / MIT dual license. Offline builds require pre-fetching `rustup` components.                                                         | **Follow-up:** add rustup provisioning to token orchestrator GitHub Actions (`token-sync.yml`/`token-export.yml`). Track in `Next_Steps.md`.                      |
 | Phases 2–6   | Storybook 9.1 + Loki + Playwright runners                                                              | Document kernel/adapters and power visual/a11y regression gates.                                     | OSS license. Requires Node; offline builds rely on cached npm packages and Chromatic alternatives.                                              | `visual-tests.yml` builds Storybook and runs Loki; ensure Chromatic optional path documented in Sprint 6.                                                         |
 | Phases 0–6   | AI CLIs: Ollama >=0.5 (`ollama run`), OpenAI CLI (`openai`), GitHub Copilot CLI (`github-copilot-cli`) | Powers `n00plicate assist` and AI-augmented `just` flows for scaffolding, Q&A, and review triage.         | Ollama: AGPLv3, runs fully offline with local models. OpenAI/Copilot: proprietary APIs—requires network + billing; provide opt-in legal review. | Devcontainers install Ollama by default; remote runners skip AI setup. **Follow-up:** evaluate self-hosted runners for AI optionality (track in `Next_Steps.md`). |
@@ -141,21 +142,12 @@ n00plicate/
 
 ## Component & UX Strategy
 
-- UI kernel hierarchy: tokens → primitives → accessible patterns → composite widgets.
-- Accessibility enforced via Axe + Storybook test runner; failures block merges.
-- Deliver theme packs (light/dark/high contrast) and embed Penpot previews in Storybook docs.
-- Capture interaction recipes (motion, microcopy) in MDX stories + Playwright traces.
 
 ## Code Quality & Testing Strategy
 
-- Static analysis: Biome 2 baseline, ESLint 9 typed overlay, strict TypeScript 5.9, `knip` for dead-code audits.
-- Tests: Vitest 3 (unit), Playwright 1.49 (E2E), Loki 0.35 (visual), Jest 30 (React Native), Compose/SwiftUI
   snapshots via KMP in CI.
-- Contract tests for token outputs via JSON Schema + snapshot parity with automatic changelog gating.
-- Flake tracking and error budgets enforced via Nx target analytics (auto-quarantine flaky specs, raise issues).
-- Security scanning: Scorecard, Trivy, Cargo Audit, and dependency review gates baked into CI.
-- Dependency graph budgets (`pnpm nx graph --file=reports/dependency-graph.json`) and bundle guardrails
-  using `bundle-buddy`.
+  Example: `npx madge --json packages/*/src > reports/dependency-graph.json`.
+  And bundle guardrails using `bundle-buddy`.
 
 ## Extensibility & Ecosystem Goals
 

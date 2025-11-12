@@ -15,8 +15,9 @@
 
 - Added typed CLI tasks (`deps:plan`, `deps:verify`, `build`, `affected`) to `tools/dev-runner.js` with alias support,
   simplifying automation for humans and agents.
-- Updated `package.json` scripts to inject `NX_NO_CLOUD=true` and exclude the recursive `workspace-format` project, ensuring
-  commands succeed without Nx Cloud and Husky hook recursion.
+- Updated `package.json` scripts used to inject `NX_NO_CLOUD=true` and exclude the recursive `workspace-format` project.
+- `NX_NO_CLOUD=true` is a legacy Nx variable; the repository now uses pnpm store caching and workspace filters
+  to achieve reproducible offline builds and avoid recursion.
 - `pnpm build` now skips the Tauri packaging step when the CLI is unavailable, avoiding false negatives during continuous
   verification.
 
@@ -30,5 +31,5 @@ upgrade:verify` to build, lint, and test the workspace under the new toolchain.
 4. **Stabilise**: Successful verifications keep the lockfile and workspace in a releasable state, enabling automated
    merges for minor and patch updates.
 
-> 📌 **Note**: Nx Cloud is disabled via `neverConnectToCloud` in `nx.json` and script-level `NX_NO_CLOUD=true` so
-> automation works reliably in air-gapped or proxied environments.
+> 📌 **Note**: Nx Cloud and related script-level `NX_NO_CLOUD` usage are legacy. Automation now uses pnpm store cache and
+> workspace filters to maintain offline reproducibility in air-gapped or proxied environments.

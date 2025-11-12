@@ -5,8 +5,8 @@
       "name": "🚀 Debug Design System",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/node_modules/.bin/nx",
-      "args": ["serve", "design-system"],
+      "program": "${workspaceFolder}/node_modules/.bin/pnpm",
+      "args": ["--filter", "@n00plicate/design-system", "run", "serve"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     },
@@ -14,8 +14,8 @@
       "name": "🧪 Debug Tests",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/node_modules/.bin/nx",
-      "args": ["test", "${input:project}"],
+      "program": "${workspaceFolder}/node_modules/.bin/pnpm",
+      "args": ["--filter", "${input:project}", "run", "test"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     },
@@ -23,8 +23,8 @@
       "name": "📚 Debug Storybook",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/node_modules/.bin/nx",
-      "args": ["storybook", "design-system"],
+      "program": "${workspaceFolder}/node_modules/.bin/pnpm",
+      "args": ["--filter", "@n00plicate/design-system", "run", "storybook"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     }

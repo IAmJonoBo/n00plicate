@@ -12,10 +12,7 @@ out/
 .serverless/
 .parcel-cache/
 
-# Nx workspace cache
-.nx/cache
-.nx/workspace-data
-.nx/installation
+# Legacy Nx workspace cache entries removed; If you have local cache artifacts, add them as needed
 
 # Testing outputs
 coverage/
@@ -61,8 +58,7 @@ vitest.config.*.timestamp*
 *.timestamp-*
 
 # Generated files and documentation
-.cursor/rules/nx-rules.mdc
-.github/instructions/nx.instructions.md
+# Nx Console instructions / rules removed
 auto-generated/
 generated/
 gen/

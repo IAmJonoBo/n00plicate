@@ -7,8 +7,8 @@ This project uses PR gates to reduce regressions. Follow this checklist when ope
 - Run locally:
   - `pnpm lint:workspace`
   - `pnpm typecheck`
-  - `pnpm nx run-many -t test`
-  - If UI changed: `pnpm nx run design-system:visual-test`
+  - `pnpm -w -r test`
+  - If UI changed: `pnpm --filter @n00plicate/design-system run visual-test`
 - Ensure tokens comply with prefixes and import rules.
 - Update docs when public APIs or tokens change.
 

@@ -782,7 +782,7 @@ echo "📊 Analyzing bundle size and performance..."
 VITE_ANALYZE_BUNDLE=true pnpm build
 
 # Generate bundle report
-npx vite-bundle-analyzer dist/
+pnpm dlx vite-bundle-analyzer dist/
 
 # Check bundle size limits
 node scripts/check-bundle-size.js

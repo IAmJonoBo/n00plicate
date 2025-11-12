@@ -373,7 +373,7 @@ jobs:
 
       - name: Build Style Dictionary outputs
         run: |
-          pnpm nx run design-tokens:build
+          pnpm run build:design-tokens
 
       - name: Check for changes
         id: changes
@@ -436,7 +436,7 @@ if git diff --cached --name-only | grep -q "tokens/.*\.json"; then
   fi
 
   # Rebuild outputs to ensure consistency
-  pnpm nx run design-tokens:build
+  pnpm run build:design-tokens
 
   # Stage regenerated files
   git add dist/

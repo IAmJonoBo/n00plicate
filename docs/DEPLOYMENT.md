@@ -32,11 +32,11 @@ The n00plicate design system supports multiple deployment targets:
 #### Prerequisites
 
 ```bash
-# Ensure you're logged into NPM
-npm whoami
+# Ensure you're logged into NPM (via pnpm)
+pnpm whoami
 
 # If not logged in
-npm login
+pnpm login
 ```
 
 #### Publishing Workflow
@@ -67,18 +67,22 @@ npm login
 3. **Publish Packages**:
 
    ```bash
-   # Publish all packages
-   pnpm changeset publish
 
-   # Or publish individually
-   cd packages/design-tokens
-   npm publish
+# Publish all packages (via pnpm)
 
-   cd packages/design-system
-   npm publish
+  pnpm changeset publish
 
-   cd packages/shared-utils
-   npm publish
+# Or publish individually
+
+  cd packages/design-tokens
+  pnpm publish
+
+  cd packages/design-system
+  pnpm publish
+
+  cd packages/shared-utils
+  pnpm publish
+
    ```
 
 #### Package Configuration
@@ -109,7 +113,7 @@ echo "@n00plicate:registry=https://npm.pkg.github.com" >> .npmrc
 echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
 
 # Publish to GitHub Packages
-npm publish
+pnpm publish
 ```
 
 ## Storybook Deployment
@@ -138,18 +142,20 @@ npm publish
        runs-on: ubuntu-latest
        steps:
          - uses: actions/checkout@v4
-         - uses: actions/setup-node@v4
+         - uses: actions/setup-node@v6
            with:
              node-version: '18'
              cache: 'pnpm'
 
          - run: pnpm install --frozen-lockfile
-         - run: pnpm nx run design-system:build-storybook
+
+- run: pnpm --filter @n00plicate/design-system run build-storybook
 
          - uses: peaceiris/actions-gh-pages@v3
            with:
              github_token: ${{ secrets.GITHUB_TOKEN }}
              publish_dir: packages/design-system/storybook-static
+
    ```
 
 ### Netlify Deployment
@@ -159,7 +165,8 @@ npm publish
    ```toml
    [build]
    base = "packages/design-system"
-   command = "pnpm build-storybook"
+
+  command = "pnpm --filter @n00plicate/design-system run build-storybook"
    publish = "storybook-static"
 
    [build.environment]
@@ -169,12 +176,14 @@ npm publish
    from = "/*"
    to = "/index.html"
    status = 200
+
    ```
 
 2. **Configure Netlify**:
    - Connect GitHub repository
-   - Set build command: `pnpm install && pnpm nx run design-system:build-storybook`
-   - Set publish directory: `packages/design-system/storybook-static`
+
+- Set build command: `pnpm install && pnpm --filter design-system build-storybook`
+- Set publish directory: `packages/design-system/storybook-static`
 
 ### Vercel Deployment
 
@@ -182,20 +191,26 @@ npm publish
 
    ```json
    {
-     "buildCommand": "pnpm nx run design-system:build-storybook",
+
+  "buildCommand": "pnpm --filter @n00plicate/design-system run build-storybook",
      "outputDirectory": "packages/design-system/storybook-static",
      "installCommand": "pnpm install --frozen-lockfile"
    }
+
    ```
 
 2. **Deploy**:
 
    ```bash
-   # Install Vercel CLI
-   npm i -g vercel
 
-   # Deploy
+# Install Vercel CLI
+
+  pnpm dlx vercel
+
+# Deploy
+
    vercel --prod
+
    ```
 
 ### Chromatic Visual Testing
@@ -261,7 +276,7 @@ npm publish
        runs-on: ubuntu-latest
        steps:
          - uses: actions/checkout@v4
-         - uses: actions/setup-node@v4
+         - uses: actions/setup-node@v6
            with:
              node-version: '18'
 
@@ -293,7 +308,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '18'
           cache: 'pnpm'
@@ -304,10 +319,10 @@ jobs:
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
-      - run: pnpm nx affected -t build
+  - run: pnpm -w -r build
 
       # Visual regression tests
-      - run: pnpm nx run design-system:visual-test
+  - run: pnpm --filter @n00plicate/design-system run visual-test
         if: github.event_name == 'pull_request'
 
   release:
@@ -320,7 +335,7 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '18'
           cache: 'pnpm'
@@ -346,13 +361,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '18'
           cache: 'pnpm'
 
       - run: pnpm install --frozen-lockfile
-      - run: pnpm nx run design-system:build-storybook
+  - run: pnpm --filter design-system build-storybook
 
       - uses: peaceiris/actions-gh-pages@v3
         with:
@@ -417,7 +432,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 COPY packages/*/package.json ./packages/*/
 
-RUN npm install -g pnpm
+  RUN corepack enable && corepack prepare pnpm@latest --activate
 RUN pnpm install --frozen-lockfile
 
 COPY . .
@@ -549,7 +564,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '18'
 
@@ -627,8 +642,11 @@ checkBundleSize();
 
    # Or manually deploy previous version
    git checkout previous-working-commit
-   pnpm nx run design-system:build-storybook
-   # Deploy to hosting platform
+
+  pnpm --filter design-system build-storybook
+
+# Deploy to hosting platform
+
    ```
 
 3. **Emergency Procedures**:

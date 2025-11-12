@@ -2,7 +2,7 @@ import js from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import globals from 'globals';
-import tseslint from 'typescript-eslint';
+import tseslint from '@typescript-eslint/eslint-plugin';
 
 export default [
   {
@@ -17,9 +17,7 @@ export default [
       '**/*.buildinfo',
       '**/*.js.map',
       '**/*.d.ts.map',
-      '**/.nx/cache/**',
-      '**/.nx/workspace-data/**',
-      '**/.nx/installation/**',
+  // Nx caches (no longer used) removed; keep pnpm store and other cache exclusions
       '**/.pnpm-store/**',
       '**/storybook-static/**',
       '**/chromatic-build/**',
@@ -104,7 +102,7 @@ export default [
     ],
   },
   js.configs.recommended,
-  ...tseslint.configs.recommended,
+  tseslint.configs.recommended,
   {
     languageOptions: {
       ecmaVersion: 2024,

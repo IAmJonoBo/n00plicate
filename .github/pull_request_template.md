@@ -36,7 +36,7 @@ assignees: ''
 
 ### Pre-submission Requirements
 
-- [ ] All tests pass locally (`pnpm nx run-many -t test`)
+- [ ] All tests pass locally (`pnpm -w -r test`)
 - [ ] Linting passes (`pnpm lint:workspace`)
 - [ ] TypeScript checks pass (`pnpm typecheck`)
 - [ ] Visual tests pass (`pnpm --filter design-system visual-test`)

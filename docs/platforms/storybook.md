@@ -444,7 +444,7 @@ Install and configure the official Storybook test runner:
 ```bash
 # Install test runner
 pnpm add -D @storybook/test-runner playwright
-npx playwright install
+pnpm dlx playwright install
 ```
 
 Configure test runner:
@@ -575,25 +575,25 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright
-        run: npx playwright install --with-deps
+  run: pnpm dlx playwright install --with-deps
 
       - name: Build Storybook
         run: pnpm run build-storybook
 
       - name: Serve Storybook and run tests
         run: |
-          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
-            "npx http-server storybook-static --port 6006 --silent" \
-            "npx wait-on http://127.0.0.1:6006 && pnpm run test-storybook:ci"
+          pnpm dlx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "pnpm dlx http-server storybook-static --port 6006 --silent" \
+            "pnpm dlx wait-on http://127.0.0.1:6006 && pnpm run test-storybook:ci"
 
       - name: Upload test results
         if: always()
@@ -1015,38 +1015,38 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+  run: pnpm dlx playwright install --with-deps chromium
 
       - name: Build design tokens
-        run: pnpm nx build design-tokens
+  run: pnpm run build:design-tokens
 
       - name: Build Storybook 9.1
         run: |
           echo "🏗️ Building Storybook with optimizations..."
-          pnpm nx build-storybook design-system \
+          pnpm --filter @n00plicate/design-system run build-storybook \
             --webpack-stats-json \
             --output-dir storybook-static
 
       - name: Analyze Storybook bundle
         run: |
           echo "📊 Analyzing Storybook bundle size..."
-          npx webpack-bundle-analyzer storybook-static/project.json \
+          pnpm dlx webpack-bundle-analyzer storybook-static/project.json \
             --mode static --report bundle-analysis.html --no-open
 
       - name: Start Storybook server
         run: |
           echo "🚀 Starting Storybook server..."
-          npx http-server storybook-static --port 6006 --silent &
-          npx wait-on http://127.0.0.1:6006
+          pnpm dlx http-server storybook-static --port 6006 --silent &
+          pnpm dlx wait-on http://127.0.0.1:6006
 
       - name: Run test suite - ${{ matrix.test-suite }}
         run: |
@@ -1069,7 +1069,7 @@ jobs:
               ;;
             "performance")
               echo "⚡ Running performance tests..."
-              npx lighthouse-ci autorun --config=.lighthouserc.json
+              pnpm dlx lighthouse-ci autorun --config=.lighthouserc.json
               ;;
           esac
 
@@ -1131,21 +1131,21 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build design tokens
-        run: pnpm nx build design-tokens
+  run: pnpm run build:design-tokens
 
       - name: Build Storybook for production
         run: |
           echo "🏗️ Building production Storybook..."
-          pnpm nx build-storybook design-system \
+          pnpm --filter @n00plicate/design-system run build-storybook \
             --output-dir storybook-static \
             --quiet
 

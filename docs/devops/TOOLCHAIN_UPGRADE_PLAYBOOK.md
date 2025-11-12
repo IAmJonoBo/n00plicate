@@ -48,7 +48,7 @@ Dictionary, and Penpot automation on their latest supported versions.
 2. Run pending Nx migrations:
 
    ```bash
-   pnpm nx migrate --run-migrations
+   # Legacy Nx migration removed. Use `npx npm-check-updates -u` followed by `pnpm install` and run package-specific migration scripts if they exist.
    ```
 
 3. Refresh the Penpot dev stack after dependency bumps:
@@ -71,7 +71,7 @@ Dictionary, and Penpot automation on their latest supported versions.
    ```bash
    pnpm upgrade:verify
    make tokens-build
-   pnpm nx run-many -t lint typecheck test build-storybook
+   pnpm -w -r lint && pnpm -w -r typecheck && pnpm -w -r test && pnpm --filter @n00plicate/design-system run build-storybook
    ```
 
 3. Rebuild visual baselines as required (Loki/Storybook test-runner).

@@ -36,7 +36,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run ESLint module boundary checks
-        run: pnpm nx run-many -t lint --parallel --maxParallel=4
+        run: pnpm run lint:packages
 
       - name: Validate token namespace compliance
         run: |
@@ -170,7 +170,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build design tokens
-        run: pnpm nx run design-tokens:tokens:build
+        run: pnpm --filter design-tokens run build:tokens
 
       - name: Validate token schema compliance
         run: |
@@ -243,7 +243,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build design tokens
-        run: pnpm nx run design-tokens:tokens:build
+        run: pnpm --filter design-tokens run build:tokens
 
       - name: Test Storybook web build
         run: |
@@ -374,7 +374,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build design tokens
-        run: pnpm nx run design-tokens:tokens:build
+        run: pnpm --filter design-tokens run build:tokens
 
       - name: Check token bundle sizes
         run: |

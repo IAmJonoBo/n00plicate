@@ -43,9 +43,9 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -59,18 +59,18 @@ jobs:
           pnpm audit --audit-level moderate --prod
 
           # Check for known vulnerabilities
-          npx audit-ci --moderate --report-type json --output-file security-audit.json
+          pnpm dlx audit-ci --moderate --report-type json --output-file security-audit.json
 
       - name: License compliance check
         run: |
           echo "📜 Checking license compliance..."
 
           # Generate license report
-          npx license-checker --summary --onlyAllow 'MIT;Apache-2.0;BSD-2-Clause;BSD-3-Clause;ISC' \
+          pnpm dlx license-checker --summary --onlyAllow 'MIT;Apache-2.0;BSD-2-Clause;BSD-3-Clause;ISC' \
             --excludePrivatePackages --json --out license-report.json
 
           # Check for GPL and copyleft licenses
-          npx license-checker --failOn 'GPL;AGPL;LGPL;SSPL;OSL;EPL;MPL;CPAL;CPL;IPL;RPL;SPL'
+          pnpm dlx license-checker --failOn 'GPL;AGPL;LGPL;SSPL;OSL;EPL;MPL;CPAL;CPL;IPL;RPL;SPL'
 
       - name: Dependency vulnerability scan
         uses: snyk/actions/node@master
@@ -148,10 +148,10 @@ jobs:
           echo "♿ Validating WCAG 2.1 AA compliance..."
 
           # Build Storybook for a11y testing
-          pnpm nx build-storybook design-system
+          pnpm --filter @n00plicate/design-system run build-storybook
 
           # Run comprehensive accessibility tests
-          npx @axe-core/cli http://localhost:6006 \
+          pnpm dlx @axe-core/cli http://localhost:6006 \
             --include ".story-wrapper" \
             --exit-on-violation \
             --reporter json \
@@ -588,7 +588,7 @@ export class SupplyChainMonitor {
 
   private async checkLicenses(): Promise<any[]> {
     try {
-      const licenseOutput = execSync('npx license-checker --json', {
+  const licenseOutput = execSync('pnpm dlx license-checker --json', {
         encoding: 'utf-8',
       });
       const licenses = JSON.parse(licenseOutput);
@@ -852,7 +852,7 @@ export class VulnerabilityManager {
         id: `${name}-${severity}`,
         action: 'fix',
         reason: 'Automated fix available',
-        commands: [`npm audit fix ${name}`],
+  commands: [`pnpm audit fix ${name}`],
         timeline: this.getTimeline(severity),
         assignee: this.assignResponsible(severity),
       };
@@ -865,7 +865,7 @@ export class VulnerabilityManager {
         id: `${name}-${severity}`,
         action: 'replace',
         reason: `Secure alternatives available: ${alternatives.join(', ')}`,
-        commands: [`npm uninstall ${name}`, `npm install ${alternatives[0]}`],
+  commands: [`pnpm remove ${name}`, `pnpm add ${alternatives[0]}`],
         timeline: this.getTimeline(severity),
         assignee: this.assignResponsible(severity),
       };
@@ -876,7 +876,7 @@ export class VulnerabilityManager {
       id: `${name}-${severity}`,
       action: 'ignore',
       reason: 'Requires manual security review - no automated fix available',
-      commands: [`npm audit fix --force`],
+  commands: [`pnpm audit fix --force`],
       timeline: this.getTimeline(severity),
       assignee: 'security-team',
     };
@@ -885,7 +885,7 @@ export class VulnerabilityManager {
   private async findAlternatives(packageName: string): Promise<string[]> {
     try {
       // Use npm search to find similar packages
-      const searchOutput = execSync(`npm search ${packageName} --json`, {
+  const searchOutput = execSync(`pnpm search ${packageName} --json`, {
         encoding: 'utf-8',
       });
       const packages = JSON.parse(searchOutput);

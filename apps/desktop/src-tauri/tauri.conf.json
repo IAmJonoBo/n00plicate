@@ -4,8 +4,8 @@
   "version": "0.1.0",
   "identifier": "com.n00plicate.design-tokens",
   "build": {
-    "beforeBuildCommand": "npm run build:frontend",
-    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "pnpm run build:frontend",
+    "beforeDevCommand": "pnpm run dev",
     "devUrl": "http://localhost:1420",
     "frontendDist": "../dist"
   },

@@ -6,7 +6,7 @@ module.exports = {
     '**/dist/**',
     '**/build/**',
     '**/coverage/**',
-    '**/.nx/**',
+  // Nx is removed; old Nx cache patterns were removed
     '**/tmp/**',
     '**/storybook-static/**',
     '**/*.min.css',

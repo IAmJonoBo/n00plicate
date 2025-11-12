@@ -38,12 +38,12 @@ Run these before opening a pull request:
 ```bash
 pnpm lint:workspace          # Biome (format + lint) followed by typed ESLint
 pnpm typecheck              # Sequential workspace type-check via tsc
-pnpm nx run-many -t test     # Vitest unit suites
-pnpm nx run design-system:visual-test
-pnpm nx run design-system:test-storybook
+pnpm -r --workspace-root=false --workspace-concurrency=1 --if-present test     # Vitest unit suites
+pnpm --filter design-system run visual-test
+pnpm --filter design-system run test-storybook
 ```
 
-> Use `pnpm nx run-many -t lint,test --affected` if your change is scoped and you understand the impact. `pnpm
+> Use `pnpm -r --workspace-root=false --workspace-concurrency=1 --if-present lint test` if your change is scoped and you understand the impact. `pnpm
 typecheck:nx` is available for troubleshooting but defaults to the less stable Nx project graph.
 
 ## Pull Request Process

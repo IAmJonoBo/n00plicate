@@ -4,11 +4,7 @@ ARG NODE_VERSION=22.20.0
 ENV NVM_DIR=/usr/local/share/nvm
 ENV PNPM_STORE_PATH=/opt/pnpm-store
 ENV PATH="${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:${PATH}"
-ENV NX_NO_CLOUD=true
-ENV NX_DAEMON=false
-ENV NX_NATIVE_ENABLE=false
-ENV NX_NATIVE_COMMAND_RUNNER=false
-ENV NX_ADD_PLUGINS=false
+# Legacy Nx environment variables removed — Nx is no longer part of the workspace toolchain
 
 # Install OS-level dependencies for mobile development prior to dropping root
 RUN apt-get update && apt-get install -y \
@@ -66,7 +62,7 @@ ENV ANDROID_SDK_ROOT=/usr/lib/android-sdk
 ENV PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools
 
 # Install Node.js development helpers with pnpm
-RUN pnpm add -g @nx/cli@latest
+# Nx removed from the workspace; global `@nx/cli` is not installed anymore
 
 # Create workspace directory and set as working directory
 WORKDIR /workspace

@@ -129,13 +129,13 @@ import tseslint from 'typescript-eslint';
 pnpm install
 
 # Verify ESLint works with new config
-pnpm nx run mobile:lint
+pnpm --filter ./apps/mobile run lint
 
 # Verify tests work without jest-native
-pnpm nx run mobile:test
+pnpm --filter ./apps/mobile run test
 
 # Verify builds work
-pnpm nx run mobile:build
+pnpm --filter ./apps/mobile run build
 ```
 
 ## Expected Warnings (Temporary)

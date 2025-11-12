@@ -24,7 +24,8 @@ nvm use 22.20.0
 corepack enable
 corepack prepare pnpm@10.18.2 --activate
 pnpm install --frozen-lockfile
-NX_DAEMON=false pnpm format:check
+# (legacy) NX_DAEMON=false pnpm format:check  # NX env vars shown here were used for previous troubleshooting
+pnpm format:check
 ```
 
 ## Observed output
@@ -48,7 +49,7 @@ Aborted
 - Devcontainer defaults and Copilot instructions were updated to export the same variables so that
   humans and agents consistently avoid the unstable native binary while the upstream issue is
   investigated.
-- Subsequent runs show `pnpm lint:workspace` succeeding, while `pnpm nx run-many -t typecheck --nx-bail`
+- Subsequent runs show `pnpm lint:workspace` succeeding, while `pnpm -w -r typecheck` (legacy Nx `run-many`)
   currently stalls after the first wave of projects; further investigation is required to determine if
   the hang is related to the fallback mode, outstanding formatting drift, or additional Nx inference
   plugins.

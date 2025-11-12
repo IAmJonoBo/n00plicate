@@ -33,8 +33,8 @@ ensures consistency across the design-to-code pipeline.
 For CI/CD integration, use the Penpot export CLI with file UUID targeting:
 
 ```bash
-# Install Penpot CLI (when available)
-npm install -g @penpot/cli
+# Run Penpot CLI without installing globally
+pnpm dlx @penpot/cli
 
 # Export tokens using file UUID
 penpot-export --file <FILE_UUID> --format dtcg --output ./tokens/penpot-tokens.json
@@ -148,12 +148,12 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Install Penpot CLI
-        run: npm install -g @penpot/cli
+        run: pnpm dlx @penpot/cli --version || pnpm dlx @penpot/cli
 
       - name: Export tokens
         env:

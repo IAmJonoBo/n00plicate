@@ -44,12 +44,8 @@ packages/design-tokens/libs/tokens/
 *.crt
 secrets.json
 
-# Nx workspace
-.nx/cache
-.nx/workspace-data
-.nx/installation
-
-# Nx Cloud cache
+# Nx workspace (removed) — legacy patterns deleted
+# Nx Cloud cache (local temporary cache; keep ignored)
 tmp/nx-cache/
 
 # Storybook
@@ -95,8 +91,7 @@ Thumbs.db
 .AppleDouble
 .LSOverride
 
-# Ignore Nx Console auto-generated instructions
-.github/instructions/nx.instructions.md
+# Nx Console auto-generated instructions removed from the workspace
 
 # macOS specific
 .DocumentRevisions-V100

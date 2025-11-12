@@ -544,13 +544,13 @@ Regular security validation:
 cargo audit
 
 # Check for security vulnerabilities
-npm audit
+pnpm audit
 
 # Run security linting
 cargo clippy -- -D warnings
 
 # Test CSP compliance
-npm run test:security
+pnpm run test:security
 ```
 
 ## Advanced Configuration
@@ -708,8 +708,8 @@ Configure development tools:
 ```json
 {
   "scripts": {
-    "tauri:dev": "nx run web:serve & tauri dev",
-    "tauri:build": "nx run web:build && tauri build",
+  "tauri:dev": "pnpm --filter ./apps/web run serve & tauri dev",
+  "tauri:build": "pnpm --filter ./apps/web run build && tauri build",
     "tauri:bundle": "tauri build --bundles all"
   }
 }
@@ -777,8 +777,8 @@ Essential configuration files for frontend integration:
 // tauri.conf.json
 {
   "build": {
-    "beforeDevCommand": "npm run dev",
-    "beforeBuildCommand": "npm run build",
+  "beforeDevCommand": "pnpm run dev",
+  "beforeBuildCommand": "pnpm run build",
     "devPath": "http://localhost:5173",
     "distDir": "../dist",
     "withGlobalTauri": false

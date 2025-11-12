@@ -27,19 +27,19 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: '24'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build Storybook
-        run: npx nx build-storybook design-system
+        run: pnpm --filter @n00plicate/design-system run build-storybook
 
       - name: Run Loki visual tests
-        run: npx loki test --verboseRenderer
+        run: pnpm dlx loki test --verboseRenderer
         env:
           LOKI_UPDATE_BASELINE: false
 
@@ -87,7 +87,7 @@ jobs:
 ```yaml
 # Alternative using Percy for visual testing
 - name: Percy visual tests
-  run: npx percy storybook ./storybook-static
+  run: pnpm dlx percy storybook ./storybook-static
   env:
     PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
 ```
@@ -509,22 +509,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: '20'
-          cache: 'npm'
-      - run: npm ci
-      - run: npx nx run-many --target=test --parallel=3
-      - run: npx nx run-many --target=test:coverage --parallel=3
+          node-version: '24'
+          cache: 'pnpm'
+      - run: corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile
+  - run: pnpm -w -r --parallel test
+  - run: pnpm -w -r --parallel test:coverage
 
   visual-tests:
     needs: unit-tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci
-      - run: npx nx build-storybook design-system
-      - run: npx loki test
+  - run: corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile
+  - run: pnpm --filter @n00plicate/design-system run build-storybook
+  - run: pnpm dlx loki test
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
@@ -536,9 +536,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci
-      - run: npx playwright install
-      - run: npx nx e2e design-system-e2e
+  - run: corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile
+  - run: pnpm dlx playwright install
+  - run: pnpm --filter @n00plicate/design-system run e2e
 ```
 
 This comprehensive testing strategy ensures robust quality assurance across all aspects of the design system, from\

@@ -47,10 +47,10 @@ jobs:
         run: pnpm run test
 
       - name: 🔍 Lint code
-        run: pnpm nx run-many -t lint
+        run: pnpm run lint:workspace
 
       - name: 📸 Visual regression tests
-        run: pnpm nx run-many -t visual-test
+        run: pnpm run visual-test
         continue-on-error: true
 
       - name: 📊 Upload coverage

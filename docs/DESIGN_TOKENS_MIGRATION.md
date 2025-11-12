@@ -58,11 +58,9 @@ disruption.
 
 ```bash
 # Add to your project
-npm install @n00plicate/design-tokens
-# or
 pnpm add @n00plicate/design-tokens
 # or
-yarn add @n00plicate/design-tokens
+# yarn add @n00plicate/design-tokens
 ```
 
 #### Configure Build System

@@ -48,7 +48,7 @@ jobs:
         run: |
           echo "🎨 Exporting tokens from Penpot..."
           # Use the penpot-export tool
-          pnpm nx run design-tokens:tokens:export
+          pnpm --filter design-tokens run tokens:export
 
       - name: Export assets
         env:
@@ -62,12 +62,12 @@ jobs:
       - name: Validate exported tokens
         run: |
           echo "🔍 Validating exported tokens..."
-          pnpm nx run design-tokens:tokens:validate
+          pnpm --filter design-tokens run validate
 
       - name: Build Style Dictionary outputs
         run: |
           echo "🏗️ Building Style Dictionary outputs..."
-          pnpm nx run design-tokens:build
+          pnpm run build:design-tokens
 
       - name: Create Pull Request
         if: github.event_name == 'schedule'

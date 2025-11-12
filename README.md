@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/IAmJonoBo/n00plicate/workflows/CI/badge.svg)](https://github.com/IAmJonoBo/n00plicate/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Nx](https://img.shields.io/badge/built%20with-Nx-21.6-blue)](https://nx.dev)
+[![pnpm](https://img.shields.io/badge/package-manager-pnpm-blue)](https://pnpm.io)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue)](https://www.typescriptlang.org/)
 [![Node](https://img.shields.io/badge/Node-22.20.0-green)](https://nodejs.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-10.18.2-orange)](https://pnpm.io/)
@@ -24,7 +24,7 @@
   Compose, SwiftUI, Flutter, and Tauri.
 - **Frontier quality gates** — Storybook 10-ready docs, Loki visual diffs, Playwright interaction tests,
   and accessibility checks block regressions before they ship.
-- **All open-source** — Built entirely on permissive tooling (Nx, pnpm, Qwik, React Native, Tauri,
+- **All open-source** — Built with permissive tooling (pnpm, Qwik, React Native, Tauri,
   Starlight, Loki, Biome) so teams can operate fully on-premises.
 
 ## 2.0 Architecture Snapshot
@@ -78,7 +78,7 @@ pnpm dev:full-stack
 make tokens-sync
 
 # Run the full quality suite
-pnpm nx run-many -t lint,test,visual-test
+pnpm -w -r lint && pnpm -w -r test && pnpm -w -r visual-test
 ```
 
 ### Frequently Used Commands
@@ -87,11 +87,11 @@ pnpm nx run-many -t lint,test,visual-test
 | ----------------------- | ------------------------------------------------------------------ |
 | Sync tokens from Penpot | `make tokens-sync`                                                 |
 | Build everything        | `pnpm build`                                                       |
-| Launch Storybook        | `pnpm nx run design-system:storybook`                              |
+| Launch Storybook        | `pnpm --filter @n00plicate/design-system run storybook`                              |
 | Mobile dev server       | `pnpm --filter @n00plicate/mobile-rn start`                             |
 | Desktop dev server      | `pnpm --filter @n00plicate/desktop tauri dev`                           |
 | Format & lint           | `pnpm lint:workspace` (Biome + typed ESLint) / `pnpm format:check` |
-| Visual regression       | `pnpm nx run design-system:visual-test`                            |
+| Visual regression       | `pnpm --filter @n00plicate/design-system run visual-test`                            |
 
 ## Repository Layout
 
@@ -168,7 +168,7 @@ We welcome feedback and contributions while 2.0 takes shape:
 4. Mention which phase (from the implementation plan) your work targets.
 
 Automated checks enforce formatting (Biome), linting (ESLint), type safety, Vitest suites, Storybook
-interaction tests, and Loki visual baselines. Run `pnpm nx run-many -t lint,test,visual-test` before
+interaction tests, and Loki visual baselines. Run `pnpm -w -r lint && pnpm -w -r test && pnpm -w -r visual-test` before
 requesting review.
 
 ## Community & Support

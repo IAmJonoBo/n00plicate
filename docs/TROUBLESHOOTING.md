@@ -86,7 +86,7 @@ Common issues and solutions for the n00plicate design system monorepo.
 
    # Should contain:
    # packages:
-   #   - 'packages/*'
+   # - 'packages/*'
    ```
 
 3. **Verify package.json dependencies:**
@@ -124,9 +124,9 @@ Common issues and solutions for the n00plicate design system monorepo.
 3. **Rebuild dependencies in order:**
 
    ```bash
-   pnpm nx run design-tokens:build
-   pnpm nx run shared-utils:build
-   pnpm nx run design-system:build
+   pnpm run build:design-tokens
+   pnpm --filter @n00plicate/shared-utils run build
+   pnpm --filter @n00plicate/design-system run build
    ```
 
 ### Nx Build Cache Issues
@@ -141,7 +141,9 @@ Common issues and solutions for the n00plicate design system monorepo.
 1. **Clear Nx cache:**
 
    ```bash
-   pnpm nx reset
+   # To reset the pnpm state and node_modules, use tests such as:
+   pnpm store prune
+   rm -rf node_modules
    ```
 
 2. **Check cache configuration:**
@@ -186,13 +188,16 @@ pnpm build:tokens
 1. **Check Style Dictionary config:**
 
    ```bash
-   # Verify configuration
+
+### Verify configuration
+
    cat packages/design-tokens/style-dictionary.config.js
+
    ```
 
-## Development Server Issues
+# Development Server Issues
 
-### Port Already in Use
+# Port Already in Use
 
 **Symptoms:**
 
@@ -204,31 +209,35 @@ pnpm build:tokens
 1. **Find and kill process:**
 
    ```bash
-   # Find process using port 3000
+### Find process using port 3000
    lsof -ti:3000
 
-   # Kill the process
+### Kill the process
    kill -9 $(lsof -ti:3000)
    ```
 
 2. **Use different port:**
 
    ```bash
-   # For Storybook
+
+### For Storybook
+
    pnpm storybook -- --port 6007
 
-   # For dev server
+### For dev server
+
    PORT=3001 pnpm dev
+
    ```
 
 3. **Check for background processes:**
 
    ```bash
-   # List Node.js processes
+### List Node.js processes
    ps aux | grep node
    ```
 
-### Hot Reload Not Working
+# Hot Reload Not Working
 
 **Symptoms:**
 
@@ -240,15 +249,18 @@ pnpm build:tokens
 1. **Check file watchers limit (Linux/macOS):**
 
    ```bash
-   # Increase file watchers
+
+### Increase file watchers
+
    echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
    sudo sysctl -p
+
    ```
 
 2. **Restart development server:**
 
    ```bash
-   # Kill and restart
+### Kill and restart
    pnpm dev
    ```
 
@@ -256,9 +268,9 @@ pnpm build:tokens
    - Disable firewall temporarily
    - Add Node.js to antivirus exceptions
 
-## Design Token Problems
+# Design Token Problems
 
-### Tokens Not Updating
+# Tokens Not Updating
 
 **Symptoms:**
 
@@ -286,21 +298,26 @@ pnpm build:tokens
 3. **Clear build cache:**
 
    ```bash
-   # Clear all caches
-   pnpm nx reset
+
+### Clear all caches (legacy Nx reset removed)
+
+### pnpm nx reset  # Legacy: Nx reset example; Nx removed from toolchain
+
+   pnpm store prune
    rm -rf packages/design-tokens/dist
    pnpm run build:tokens
+
    ```
 
 4. **Verify token file changes:**
 
    ```bash
-   # Check if token files have been modified
+### Check if token files have been modified
    git status tokens/
    pnpm test  # Run validation tests
    ```
 
-### Token Not Found Errors
+# Token Not Found Errors
 
 **Symptoms:**
 
@@ -331,11 +348,15 @@ pnpm build:tokens
 2. **Verify token structure:**
 
    ```bash
-   # Check token files exist
+
+### Check token files exist
+
    ls -la packages/design-tokens/tokens/
 
-   # Validate token structure
+### Validate token structure
+
    pnpm test
+
    ```
 
 3. **Use correct path format:**
@@ -349,7 +370,7 @@ pnpm build:tokens
    getToken('color-primary-500');
    ```
 
-### CSS Variables Not Loading
+# CSS Variables Not Loading
 
 **Symptoms:**
 
@@ -373,9 +394,12 @@ pnpm build:tokens
 2. **Verify CSS generation:**
 
    ```bash
-   # Check if CSS file exists and has content
+
+### Check if CSS file exists and has content
+
    ls -la packages/design-tokens/dist/css/
    head -20 packages/design-tokens/dist/css/tokens.css
+
    ```
 
 3. **Browser compatibility:**
@@ -391,12 +415,15 @@ pnpm build:tokens
 4. **Check build process:**
 
    ```bash
-   # Ensure Style Dictionary build succeeds
+
+### Ensure Style Dictionary build succeeds
+
    cd packages/design-tokens
    pnpm run build:tokens --verbose
+
    ```
 
-### Token Validation Failures
+# Token Validation Failures
 
 **Symptoms:**
 
@@ -447,12 +474,15 @@ pnpm build:tokens
 3. **Check token file syntax:**
 
    ```bash
-   # Validate JSON syntax
+
+### Validate JSON syntax
+
    pnpm exec jsonlint tokens/base.json
    pnpm exec jsonlint tokens/semantic.json
+
    ```
 
-### Pattern Matching Issues
+# Pattern Matching Issues
 
 **Symptoms:**
 
@@ -497,7 +527,7 @@ pnpm build:tokens
    );
    ```
 
-### Build Performance Issues
+# Build Performance Issues
 
 **Symptoms:**
 
@@ -510,31 +540,38 @@ pnpm build:tokens
 1. **Optimize token structure:**
 
    ```bash
-   # Check for deeply nested or large token files
+
+### Check for deeply nested or large token files
+
    find tokens/ -name "*.json" -exec wc -l {} \;
+
    ```
 
 2. **Use incremental builds:**
 
    ```bash
-   # Use watch mode for development
+### Use watch mode for development
    pnpm run watch
 
-   # Build only what changed
-   pnpm nx affected:build
+### Build only what changed
+   pnpm -w -r build
    ```
 
 3. **Profile build performance:**
 
    ```bash
-   # Run with timing information
+
+### Run with timing information
+
    time pnpm run build:tokens
 
-   # Use verbose logging
+### Use verbose logging
+
    pnpm run build:tokens --verbose
+
    ```
 
-### Integration Issues
+# Integration Issues
 
 **Symptoms:**
 
@@ -560,8 +597,11 @@ pnpm build:tokens
 2. **Verify build outputs:**
 
    ```bash
-   # Check all expected files exist
+
+### Check all expected files exist
+
    ls -la packages/design-tokens/dist/
+
    ```
 
 3. **Test import paths:**
@@ -573,9 +613,9 @@ pnpm build:tokens
    import tokens from '@n00plicate/design-tokens/json';
    ```
 
-## Storybook Issues
+# Storybook Issues
 
-### Storybook Won't Start
+# Storybook Won't Start
 
 **Symptoms:**
 
@@ -594,8 +634,11 @@ pnpm build:tokens
 2. **Check Storybook configuration:**
 
    ```bash
-   # Verify .storybook/main.ts
+
+### Verify .storybook/main.ts
+
    cat packages/design-system/.storybook/main.ts
+
    ```
 
 3. **Update Storybook:**
@@ -604,7 +647,7 @@ pnpm build:tokens
    pnpm storybook upgrade
    ```
 
-### Stories Not Loading
+# Stories Not Loading
 
 **Symptoms:**
 
@@ -623,8 +666,11 @@ pnpm build:tokens
 2. **Verify story file naming:**
 
    ```bash
-   # Stories should follow pattern
+
+### Stories should follow pattern
+
    find packages/design-system/src -name "*.stories.*"
+
    ```
 
 3. **Check story exports:**
@@ -637,9 +683,9 @@ pnpm build:tokens
    };
    ```
 
-## Testing Problems
+# Testing Problems
 
-### Tests Fail to Run
+# Tests Fail to Run
 
 **Symptoms:**
 
@@ -651,14 +697,17 @@ pnpm build:tokens
 1. **Check test configuration:**
 
    ```bash
-   # Verify vitest.config.ts
+
+### Verify vitest.config.ts
+
    cat packages/*/vitest.config.ts
+
    ```
 
 2. **Clear test cache:**
 
    ```bash
-   pnpm nx run-many -t test --clearCache
+   pnpm -w -r test --clearCache
    ```
 
 3. **Run tests with verbose output:**
@@ -667,7 +716,7 @@ pnpm build:tokens
    pnpm test --reporter=verbose
    ```
 
-### Visual Tests Failing
+# Visual Tests Failing
 
 **Symptoms:**
 
@@ -685,8 +734,11 @@ pnpm build:tokens
 2. **Check rendering consistency:**
 
    ```bash
-   # Run tests in Docker for consistency
+
+### Run tests in Docker for consistency
+
    docker run --rm -v $(pwd):/app -w /app node:18 pnpm visual-test
+
    ```
 
 3. **Compare specific stories:**
@@ -695,9 +747,9 @@ pnpm build:tokens
    pnpm loki test --stories "Button.*"
    ```
 
-## Git and Version Control
+# Git and Version Control
 
-### Pre-commit Hooks Failing
+# Pre-commit Hooks Failing
 
 **Symptoms:**
 
@@ -709,8 +761,11 @@ pnpm build:tokens
 1. **Run hooks manually:**
 
    ```bash
-   # Check what's failing
+
+### Check what's failing
+
    .husky/pre-commit
+
    ```
 
 2. **Fix linting issues:**
@@ -726,7 +781,7 @@ pnpm build:tokens
    git commit --no-verify -m "temporary commit"
    ```
 
-### Git Hooks Not Running
+# Git Hooks Not Running
 
 **Symptoms:**
 
@@ -745,20 +800,23 @@ pnpm build:tokens
 2. **Check hook files:**
 
    ```bash
-   # Verify hook files exist and are executable
+
+### Verify hook files exist and are executable
+
    ls -la .husky/
+
    ```
 
 3. **Check Git configuration:**
 
    ```bash
-   # Verify hooks path
+### Verify hooks path
    git config core.hooksPath
    ```
 
-## Performance Issues
+# Performance Issues
 
-### Slow Build Times
+# Slow Build Times
 
 **Symptoms:**
 
@@ -770,25 +828,31 @@ pnpm build:tokens
 1. **Use Nx affected builds:**
 
    ```bash
-   # Only build what changed
-   pnpm nx affected -t build
+
+### Only build what changed
+
+   pnpm -w -r build
+
    ```
 
 2. **Enable remote caching:**
 
    ```bash
-   # Check Nx Cloud configuration
+### Check Nx Cloud configuration
    cat nx.json | grep "nxCloudId"
    ```
 
 3. **Parallel builds:**
 
    ```bash
-   # Increase parallel processes
+
+### Increase parallel processes
+
    pnpm build -- --parallel=4
+
    ```
 
-### Large Bundle Sizes
+# Large Bundle Sizes
 
 **Symptoms:**
 
@@ -800,7 +864,7 @@ pnpm build:tokens
 1. **Analyze bundle size:**
 
    ```bash
-   pnpm nx run design-system:analyze
+   pnpm --filter @n00plicate/design-system run analyze
    ```
 
 2. **Check for duplicate dependencies:**
@@ -819,9 +883,9 @@ pnpm build:tokens
    import { Button } from '@n00plicate/design-system';
    ```
 
-## TypeScript Errors
+# TypeScript Errors
 
-### Type Definition Errors
+# Type Definition Errors
 
 **Symptoms:**
 
@@ -833,7 +897,7 @@ pnpm build:tokens
 1. **Rebuild type definitions:**
 
    ```bash
-   pnpm nx run-many -t build:types
+   pnpm -w -r build:types
    ```
 
 2. **Check TypeScript paths:**
@@ -859,7 +923,7 @@ pnpm build:tokens
    }
    ```
 
-### Circular Dependency Errors
+# Circular Dependency Errors
 
 **Symptoms:**
 
@@ -871,14 +935,17 @@ pnpm build:tokens
 1. **Analyze dependency graph:**
 
    ```bash
-   pnpm nx graph
+   pnpm -w -r list
    ```
 
 2. **Check import patterns:**
 
    ```bash
-   # Look for circular imports
+
+### Look for circular imports
+
    madge --circular packages/*/src
+
    ```
 
 3. **Refactor problematic imports:**
@@ -886,9 +953,9 @@ pnpm build:tokens
    - Use dependency injection
    - Create interface files
 
-## macOS Specific Issues
+# macOS Specific Issues
 
-### Apple File System Artifacts
+# Apple File System Artifacts
 
 **Symptoms:**
 
@@ -900,24 +967,27 @@ pnpm build:tokens
 1. **Run Apple cleaner:**
 
    ```bash
-   # Use built-in cleaner
+### Use built-in cleaner
    pnpm run clean:apple
 
-   # Fast path for staged files only
+### Fast path for staged files only
    pnpm run clean:apple:staged
 
-   # Verify nothing slipped into git
+### Verify nothing slipped into git
    pnpm run check:apple
 
-   # Or run manually
+### Or run manually
    node tools/apple-cleaner.js --mode=full
    ```
 
 2. **Check gitignore:**
 
    ```bash
-   # Verify Apple patterns are ignored
+
+### Verify Apple patterns are ignored
+
    grep -A 10 "Apple" .gitignore
+
    ```
 
 3. **Configure Git globally:**
@@ -927,7 +997,7 @@ pnpm build:tokens
    git config --global core.excludesfile ~/.gitignore_global
    ```
 
-### Permission Issues
+# Permission Issues
 
 **Symptoms:**
 
@@ -955,61 +1025,63 @@ pnpm build:tokens
    export PATH=~/.npm-global/bin:$PATH
    ```
 
-## Getting Help
+# Getting Help
 
-### Enable Debug Mode
+# Enable Debug Mode
 
 ```bash
-# Enable verbose logging
+## ## Enable verbose logging
 DEBUG=* pnpm dev
 
-# Nx debug mode
-NX_VERBOSE_LOGGING=true pnpm nx affected -t build
+## ### Nx debug mode (legacy)
+## ### If you have a debug workflow, set DEBUG env for the underlying process, or run workspace builds with verbose logging.
+## ### Example: DEBUG=* pnpm -w -r run build
+## ### NOTE: Nx was used historically. Use pnpm workspace filters or bespoke scripts to run affected builds.
 
-# Style Dictionary debug
-DEBUG=style-dictionary pnpm nx run design-tokens:build
+## ### Style Dictionary debug
+DEBUG=style-dictionary pnpm run build:design-tokens
 ```
 
-### Collect System Information
+# Collect System Information
 
 ```bash
-# System info script
+## ### System info script
 echo "Node.js: $(node --version)"
 echo "pnpm: $(pnpm --version)"
 echo "OS: $(uname -a)"
-echo "Nx: $(pnpm nx --version)"
+echo "Nx (legacy, if installed): $(command -v nx >/dev/null && nx --version || echo 'Nx not installed')"
 echo "Git: $(git --version)"
 
-# Package info
+## ### Package info
 pnpm ls --depth=0
 ```
 
-### Common Log Locations
+# Common Log Locations
 
 ```bash
-# Nx logs
-cat /tmp/nx-*.log
+## ### Legacy Nx logs (if present):
+## ### cat /tmp/nx-*.log
 
-# npm logs
+## ### npm logs
 npm config get cache
 ls ~/.npm/_logs/
 
-# System logs (macOS)
+## ### System logs (macOS)
 tail -f /var/log/system.log
 ```
 
-### Community Support
+# Community Support
 
 - **GitHub Issues**: [Report bugs](https://github.com/IAmJonoBo/n00plicate/issues)
 - **Discussions**: [Ask questions](https://github.com/IAmJonoBo/n00plicate/discussions)
 - **Documentation**: [Read the docs](https://github.com/IAmJonoBo/n00plicate/blob/main/README.md)
 
-### Emergency Reset
+# Emergency Reset
 
 If all else fails, here's the nuclear option:
 
 ```bash
-# Complete workspace reset
+## ### Complete workspace reset
 git clean -fdx
 rm -rf node_modules
 rm -rf packages/*/node_modules
@@ -1017,7 +1089,7 @@ rm -rf packages/*/dist
 rm -rf .nx
 rm pnpm-lock.yaml
 
-# Reinstall everything
+## ### Reinstall everything
 pnpm install
 pnpm build
 ```

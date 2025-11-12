@@ -40,15 +40,15 @@ check_requirements() {
   echo "✅ System requirements met"
 }
 
-# Install dependencies with optimization
+  # Install dependencies with optimization
 install_dependencies() {
   echo "📦 Installing dependencies..."
 
   # Clean install with frozen lockfile
-  npm ci --prefer-offline --no-audit
+  pnpm install --frozen-lockfile
 
   # Install git hooks
-  npx husky install
+  pnpm dlx husky install
 
   echo "✅ Dependencies installed"
 }
@@ -63,7 +63,7 @@ setup_dev_tools() {
     code --install-extension bradlc.vscode-tailwindcss
     code --install-extension esbenp.prettier-vscode
     code --install-extension ms-vscode.vscode-typescript-next
-    code --install-extension nx-console.nx-console
+  # Nx Console removed; prefer workspace tooling and other VS Code extensions
     code --install-extension unifiedjs.vscode-mdx
   fi
 
@@ -81,13 +81,13 @@ init_workspace() {
   echo "🏗️ Initializing workspace..."
 
   # Build design tokens first
-  npx nx build design-tokens
+  pnpm run build:design-tokens
 
   # Build shared utilities
-  npx nx build shared-utils
+  pnpm run build:shared-utils
 
   # Generate initial Storybook build
-  npx nx build-storybook design-system
+  pnpm --filter @n00plicate/design-system run build-storybook
 
   echo "✅ Workspace initialized"
 }
@@ -103,10 +103,10 @@ main() {
   echo "🎉 Development environment setup complete!"
   echo ""
   echo "Next steps:"
-  echo "  npm run dev          # Start development servers"
-  echo "  npm run storybook    # Open Storybook"
-  echo "  npm run test         # Run tests"
-  echo "  npm run lint         # Lint codebase"
+  echo "  pnpm run dev          # Start development servers"
+  echo "  pnpm run storybook    # Open Storybook"
+  echo "  pnpm run test         # Run tests"
+  echo "  pnpm run lint         # Lint codebase"
   echo ""
   echo "Happy coding! 🚀"
 }
@@ -239,14 +239,14 @@ export const n00plicateHotReloadConfig: HotReloadConfig = {
   ],
   commands: {
     'design-tokens/tokens/.*\\.json$': [
-      'npx nx build design-tokens',
-      'npx nx build design-system',
+  'pnpm run build:design-tokens',
+  'pnpm --filter @n00plicate/design-system run build',
     ],
     'design-system/src/.*\\.(ts|tsx)$': [
-      'npx nx build design-system',
-      'npx nx build-storybook design-system --quiet',
+  'pnpm --filter @n00plicate/design-system run build',
+  'pnpm --filter @n00plicate/design-system run build-storybook --quiet',
     ],
-    'shared-utils/src/.*\\.ts$': ['npx nx build shared-utils'],
+  'shared-utils/src/.*\\.ts$': ['pnpm --filter @n00plicate/shared-utils run build'],
   },
 };
 ```
@@ -628,14 +628,14 @@ export class ContributorOnboarding {
     console.log(chalk.blue('\\n📦 Setting up development environment...'));
 
     const steps = [
-      { name: 'Installing dependencies', command: 'npm ci' },
-      { name: 'Building design tokens', command: 'npx nx build design-tokens' },
+  { name: 'Installing dependencies', command: 'pnpm install --frozen-lockfile' },
+  { name: 'Building design tokens', command: 'pnpm run build:design-tokens' },
       {
         name: 'Building shared utilities',
-        command: 'npx nx build shared-utils',
+  command: 'pnpm run build:shared-utils',
       },
-      { name: 'Running initial tests', command: 'npx nx test shared-utils' },
-      { name: 'Setting up Git hooks', command: 'npx husky install' },
+  { name: 'Running initial tests', command: 'pnpm --filter @n00plicate/shared-utils run test' },
+  { name: 'Setting up Git hooks', command: 'pnpm dlx husky install' },
     ];
 
     for (const step of steps) {
@@ -671,7 +671,7 @@ export class ContributorOnboarding {
         ]);
 
         if (runDemo.run) {
-          await execAsync('npx nx build design-tokens');
+          await execAsync('pnpm run build:design-tokens');
           console.log(
             chalk.green('  ✅ Check packages/design-tokens/dist/ for output')
           );
@@ -697,7 +697,7 @@ export class ContributorOnboarding {
           console.log(
             chalk.blue('Opening Storybook... (this may take a moment)')
           );
-          exec('npx nx storybook design-system');
+          exec('pnpm --filter @n00plicate/design-system run storybook');
         }
       },
     };
@@ -751,7 +751,7 @@ if (require.main === module) {
 {
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/nx-cloud",
+  "runner": "# Legacy: @nrwl/nx-cloud removed - use pnpm store and CI cache actions or a custom cache runner",
       "options": {
         "cacheableOperations": [
           "build",
@@ -760,7 +760,7 @@ if (require.main === module) {
           "e2e",
           "build-storybook"
         ],
-        "accessToken": "your-nx-cloud-token",
+  # Nx Cloud removed; access tokens not required for pnpm store caching
         "canTrackAnalytics": false,
         "showUsageWarnings": true,
         "useDaemonProcess": true
@@ -805,16 +805,16 @@ if (require.main === module) {
 ```json
 {
   "scripts": {
-    "dev": "concurrently \"npm run dev:tokens\" \"npm run dev:storybook\"",
-    "dev:tokens": "npx nx build design-tokens --watch",
-    "dev:storybook": "npx nx storybook design-system",
-    "dev:full": "concurrently \"npm run dev\" \"npm run dev:docs\"",
-    "dev:docs": "npx nx serve docs",
+  "dev": "concurrently \"pnpm run dev:tokens\" \"pnpm run dev:storybook\"",
+  "dev:tokens": "pnpm run build:design-tokens -- --watch",
+  "dev:storybook": "pnpm --filter @n00plicate/design-system run storybook",
+  "dev:full": "concurrently \"pnpm run dev\" \"pnpm run dev:docs\"",
+  "dev:docs": "pnpm --filter @n00plicate/docs run serve",
     "onboard": "ts-node scripts/onboard-contributor.ts",
     "profile": "node --prof scripts/profile-build.js",
-    "debug:build": "node --inspect-brk=9229 node_modules/.bin/nx build design-system",
-    "clean": "npx nx reset && rimraf node_modules/.cache",
-    "fresh": "npm run clean && npm ci && npm run build",
+  "debug:build": "node --inspect-brk=9229 $(pnpm bin)/pnpm --filter @n00plicate/design-system run build",
+  "clean": "pnpm store prune && rimraf node_modules/.cache",
+  "fresh": "pnpm run clean && pnpm install --frozen-lockfile && pnpm run build",
     "health": "node scripts/health-check.js"
   }
 }

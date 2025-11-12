@@ -9,8 +9,7 @@ jobs:
   verify:
     name: Lint • Typecheck • Test • Build (affected)
     runs-on: ubuntu-latest
-    env:
-      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+    env: {}
 
     steps:
       - name: Checkout repository
@@ -18,13 +17,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Restore Nx cache
+      - name: Restore pnpm store cache
         uses: actions/cache@v4
         with:
-          path: tmp/nx-cache
-          key: ${{ runner.os }}-nx-${{ hashFiles('pnpm-lock.yaml', 'nx.json') }}
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-nx-
+            ${{ runner.os }}-pnpm-
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -40,38 +39,32 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Configure Nx Cloud environment
-        run: scripts/configure-nx-cloud.sh
+      - name: Configure environment
+        run: echo "Nx removed - skipping Nx Cloud configuration"
 
-      - name: Start Nx self-healing run
-        if: env.NX_CLOUD_ACCESS_TOKEN != ''
-        run: |
-          pnpm exec nx start-ci-run --no-distribution --fix-tasks="*lint*,*format*" \
-            || echo "Nx self-healing bootstrap skipped (token missing or feature disabled)"
+      - name: Skip Nx self-healing run
+        run: echo "Nx removed - skipping self-healing bootstrapping"
 
-      - name: Lint (affected)
-        run: pnpm nx affected -t lint --parallel=4
+      - name: Lint (workspace)
+        run: pnpm run lint:workspace
 
-      - name: Typecheck (affected)
+      - name: Typecheck (workspace)
         id: typecheck_affected
-        run: pnpm nx affected -t typecheck --parallel=3
+        run: pnpm run typecheck:workspace
         continue-on-error: true
 
       - name: Typecheck fallback (sequential)
         if: steps.typecheck_affected.outcome == 'failure'
         run: pnpm typecheck
 
-      - name: Unit tests (affected)
-        run: pnpm nx affected -t test --parallel=3
+      - name: Unit tests (workspace)
+        run: pnpm -r --workspace-root=false --workspace-concurrency=3 --if-present test
 
-      - name: Build (affected)
-        run: pnpm nx affected -t build --parallel=3
+      - name: Build (workspace)
+        run: pnpm run build:ordered
 
       - name: Markdown lint
         run: pnpm lint:md
 
-      - name: Apply Nx self-healing fixes
-        if: always() && env.NX_CLOUD_ACCESS_TOKEN != ''
-        run: |
-          pnpm exec nx fix-ci \
-            || echo "Nx self-healing fixes not applied (token missing or no fixes available)"
+      - name: Skip Nx self-healing fixes
+        run: echo "Nx removed - skipping self-healing fixes"

@@ -37,8 +37,8 @@ This workflow enables designers and developers to:
 ### 1. Setup & Configuration
 
 ```bash
-# Install the CLI globally
-npm install -g n00plicate-token-cli
+# Run the CLI without installing globally
+pnpm dlx n00plicate-token-cli
 # or
 pnpm add -g n00plicate-token-cli
 
@@ -419,9 +419,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Install dependencies
         run: pnpm install

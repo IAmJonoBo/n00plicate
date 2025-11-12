@@ -431,7 +431,7 @@ Nx executor configuration for Qwik optimization:
 ```json
 {
   "name": "build",
-  "executor": "@nx/vite:build",
+  "executor": "vite:build (legacy Nx executor: @nx/vite:build) - use pnpm workspace scripts such as `pnpm --filter web build`",
   "outputs": ["{options.outputPath}"],
   "options": {
     "outputPath": "dist/apps/web",

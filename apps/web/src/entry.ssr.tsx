@@ -5,12 +5,12 @@
  * entry point will be the common one.
  *
  * - Server (express, cloudflare...)
- * - npm run start
- * - npm run preview
- * - npm run build
+ * - pnpm run start
+ * - pnpm run preview
+ * - pnpm run build
  *
  */
-import { renderToStream,type RenderToStreamOptions } from '@builder.io/qwik/server';
+import { type RenderToStreamOptions, renderToStream } from '@builder.io/qwik/server';
 
 import Root from './root';
 

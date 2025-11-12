@@ -19,27 +19,23 @@
     "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
     "fmt": "prettier --write .",
     "fmt.check": "prettier --check .",
-    "lint": "eslint \"src/**/*.ts*\"",
+  "lint": "pnpm exec biome check --reporter compact src/**/*.ts*",
     "preview": "qwik build preview && vite preview --open",
     "serve": "wrangler pages dev ./dist --compatibility-flags=nodejs_als",
     "start": "vite --open --mode ssr",
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@builder.io/qwik": "^1.17.1",
-    "@builder.io/qwik-city": "^1.17.1",
-    "@eslint/js": "^9.39.0",
+    "@builder.io/qwik": "^1.17.2",
+    "@builder.io/qwik-city": "^1.17.2",
+
     "@n00plicate/design-tokens": "workspace:*",
-    "@types/node": "24.10.0",
-    "eslint": "9.39.1",
-    "eslint-plugin-qwik": "^1.17.1",
+
     "globals": "16.5.0",
     "prettier": "3.6.2",
-    "typescript": "5.9.3",
-    "typescript-eslint": "8.46.4",
     "undici": "^7.16.0",
-    "vite": "^7.1.12",
+
     "vite-tsconfig-paths": "^5.1.4",
-    "wrangler": "^4.45.3"
+    "wrangler": "^4.47.0"
   }
 }

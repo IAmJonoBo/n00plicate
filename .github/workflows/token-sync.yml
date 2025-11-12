@@ -68,12 +68,12 @@ jobs:
         run: |
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             echo "🔄 Dry run: Would sync tokens from Penpot"
-            pnpm nx run design-tokens:tokens:validate
+            pnpm --filter design-tokens run validate
           else
             echo "🔄 Syncing tokens from Penpot..."
             # In a real implementation, this would call:
-            # pnpm nx run design-tokens:tokens:sync
-            pnpm nx run design-tokens:build
+            # pnpm --filter design-tokens run tokens:sync
+            pnpm run build:design-tokens
           fi
         env:
           PENPOT_ACCESS_TOKEN: ${{ secrets.PENPOT_ACCESS_TOKEN }}
@@ -81,8 +81,8 @@ jobs:
       - name: Validate synced tokens
         if: steps.drift-check.outputs.drift-detected == '1'
         run: |
-          pnpm nx run design-tokens:test
-          pnpm nx run design-tokens:build
+          pnpm --filter design-tokens test
+          pnpm run build:design-tokens
 
       - name: Create pull request
         if: steps.drift-check.outputs.drift-detected == '1' && github.event.inputs.dry_run != 'true'

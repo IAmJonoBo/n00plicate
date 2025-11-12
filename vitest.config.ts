@@ -11,9 +11,7 @@ export default defineConfig({
       {
         test: {
           environment: 'node',
-          include: [
-            'packages/**/__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
-          ],
+          include: ['packages/**/__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
           name: 'packages-node',
         },
       },
@@ -21,9 +19,7 @@ export default defineConfig({
       {
         test: {
           environment: 'jsdom',
-          include: [
-            'packages/design-system/**/__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
-          ],
+          include: ['packages/design-system/**/__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
           name: 'packages-browser',
         },
       },
@@ -31,9 +27,7 @@ export default defineConfig({
       {
         test: {
           environment: 'jsdom',
-          include: [
-            'apps/desktop/**/__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
-          ],
+          include: ['apps/desktop/**/__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
           name: 'desktop',
         },
       },
@@ -41,9 +35,7 @@ export default defineConfig({
       {
         test: {
           environment: 'node',
-          include: [
-            'n00plicate-token-cli/**/__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
-          ],
+          include: ['n00plicate-token-cli/**/__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
           name: 'cli',
         },
       },

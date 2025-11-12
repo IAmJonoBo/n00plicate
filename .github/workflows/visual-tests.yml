@@ -13,8 +13,7 @@ on:
 jobs:
   loki-visual-tests:
     runs-on: ubuntu-latest
-    env:
-      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+    env: {}
 
     steps:
       - name: Checkout
@@ -23,13 +22,13 @@ jobs:
           fetch-depth: 0
           lfs: true
 
-      - name: Restore Nx cache
+      - name: Restore pnpm store cache
         uses: actions/cache@v4
         with:
-          path: tmp/nx-cache
-          key: ${{ runner.os }}-nx-${{ hashFiles('pnpm-lock.yaml', 'nx.json') }}
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-nx-
+            ${{ runner.os }}-pnpm-
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -45,20 +44,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Configure Nx Cloud environment
-        run: scripts/configure-nx-cloud.sh
-
-      - name: Start Nx self-healing run
-        if: env.NX_CLOUD_ACCESS_TOKEN != ''
-        run: |
-          pnpm exec nx start-ci-run --no-distribution --fix-tasks="*lint*,*format*" \
-            || echo "Nx self-healing bootstrap skipped (token missing or feature disabled)"
+      - name: Configure environment
+        run: echo "Nx removed - skipping Nx Cloud configuration"
 
       - name: Build design tokens
-        run: pnpm nx run design-tokens:build
+        run: pnpm run build:design-tokens
 
       - name: Build Storybook
-        run: pnpm nx run design-system:build-storybook
+        run: pnpm --filter design-system build-storybook
 
       - name: Download reference images
         run: |
@@ -67,9 +60,9 @@ jobs:
 
       - name: Run Loki visual tests
         run: |
-          npx concurrently -k -s first -n "SB,LOKI" -c "magenta,blue" \
-            "npx http-server packages/design-system/storybook-static --port 6006 --silent" \
-            "npx wait-on http://127.0.0.1:6006 && pnpm nx run design-system:loki:test"
+          pnpm dlx concurrently -k -s first -n "SB,LOKI" -c "magenta,blue" \
+            "pnpm dlx http-server packages/design-system/storybook-static --port 6006 --silent" \
+            "pnpm dlx wait-on http://127.0.0.1:6006 && pnpm --filter design-system run visual-test"
 
       - name: Upload visual diffs
         if: failure()
@@ -81,15 +74,12 @@ jobs:
       - name: Update references on main
         if: github.ref == 'refs/heads/main' && success()
         run: |
-          pnpm nx run design-system:loki:update
+          pnpm --filter design-system run loki:update
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add packages/design-system/.loki/reference/
           git commit -m "Update Loki reference images" || exit 0
           git push
 
-      - name: Apply Nx self-healing fixes
-        if: always() && env.NX_CLOUD_ACCESS_TOKEN != ''
-        run: |
-          pnpm exec nx fix-ci \
-            || echo "Nx self-healing fixes not applied (token missing or no fixes available)"
+      - name: Skip Nx self-healing fixes
+        run: echo "Nx removed - skipping self-healing fixes"

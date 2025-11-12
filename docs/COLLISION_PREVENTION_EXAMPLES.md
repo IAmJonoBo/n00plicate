@@ -310,20 +310,20 @@ export default {
 
 ```bash
 # Supernova-compliant Storybook commands (no port conflicts)
-pnpm nx run design-system:storybook          # Port 6006 (Web/Vite default)
-pnpm nx run design-system:storybook:mobile   # Port 7007 (React Native default)
-pnpm nx run design-system:storybook:desktop  # Port 6008 (Custom, no conflicts)
+pnpm --filter @n00plicate/design-system run storybook          # Port 6006 (Web/Vite default)
+pnpm --filter @n00plicate/design-system run storybook:mobile   # Port 7007 (React Native default)
+pnpm --filter @n00plicate/design-system run storybook:desktop  # Port 6008 (Custom, no conflicts)
 
 # All three can run simultaneously without conflicts
-pnpm nx run design-system:storybook &
-pnpm nx run design-system:storybook:mobile &
-pnpm nx run design-system:storybook:desktop &
+pnpm --filter @n00plicate/design-system run storybook &
+pnpm --filter @n00plicate/design-system run storybook:mobile &
+pnpm --filter @n00plicate/design-system run storybook:desktop &
 wait
 
 # Production builds (no port dependencies)
-pnpm nx run design-system:build-storybook
-pnpm nx run design-system:build-storybook:mobile
-pnpm nx run design-system:build-storybook:desktop
+pnpm --filter @n00plicate/design-system run build-storybook
+pnpm --filter @n00plicate/design-system run build-storybook:mobile
+pnpm --filter @n00plicate/design-system run build-storybook:desktop
 ```
 
 ### Package.json Scripts
@@ -331,14 +331,14 @@ pnpm nx run design-system:build-storybook:desktop
 ```json
 {
   "scripts": {
-    "storybook:web": "nx run design-system:storybook",
-    "storybook:mobile": "nx run design-system:storybook:mobile",
-    "storybook:desktop": "nx run design-system:storybook:desktop",
-    "storybook:all": "concurrently \"npm run storybook:web\" \"npm run storybook:mobile\" \"npm run storybook:desktop\"",
-    "storybook:build": "nx run design-system:build-storybook",
-    "storybook:build:mobile": "nx run design-system:build-storybook:mobile",
-    "storybook:build:desktop": "nx run design-system:build-storybook:desktop",
-    "storybook:build:all": "nx run-many -t build-storybook --parallel=3"
+  "storybook:web": "pnpm --filter @n00plicate/design-system run storybook",
+  "storybook:mobile": "pnpm --filter @n00plicate/design-system run storybook:mobile",
+  "storybook:desktop": "pnpm --filter @n00plicate/design-system run storybook:desktop",
+  "storybook:all": "concurrently \"pnpm run storybook:web\" \"pnpm run storybook:mobile\" \"pnpm run storybook:desktop\"",
+  "storybook:build": "pnpm --filter @n00plicate/design-system run build-storybook",
+  "storybook:build:mobile": "pnpm --filter @n00plicate/design-system run build-storybook:mobile",
+  "storybook:build:desktop": "pnpm --filter @n00plicate/design-system run build-storybook:desktop",
+  "storybook:build:all": "pnpm -w -r run build-storybook"
   }
 }
 ```
@@ -401,9 +401,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -463,9 +463,9 @@ jobs:
       - name: Test Storybook Builds
         run: |
           echo "Testing all Storybook builds for conflicts..."
-          pnpm nx run design-system:build-storybook
-          pnpm nx run design-system:build-storybook:mobile
-          pnpm nx run design-system:build-storybook:desktop
+          pnpm --filter @n00plicate/design-system run build-storybook
+          pnpm --filter @n00plicate/design-system run build-storybook:mobile
+          pnpm --filter @n00plicate/design-system run build-storybook:desktop
           echo "✅ All Storybook builds successful"
 
   validate-runtime-integration:
@@ -477,10 +477,10 @@ jobs:
         run: |
           echo "Testing Tailwind CSS integration with ds- tokens..."
           # Build CSS and check for conflicts
-          pnpm nx run design-tokens:build-all
+          pnpm -w -r build
 
           # Ensure Tailwind config is valid
-          npx tailwindcss build --config tailwind.config.js --output test-output.css
+          pnpm dlx tailwindcss build --config tailwind.config.js --output test-output.css
 
           # Check generated CSS for proper token usage
           if grep -q "var(--ds-" test-output.css; then

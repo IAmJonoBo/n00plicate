@@ -25,9 +25,9 @@
 ## Steps
 
 - [ ] Validate baseline automation commands (DevOps Guild — Week 0) to confirm `pnpm lint:workspace`,
-      `pnpm typecheck`, `pnpm nx run-many -t test`, `pnpm nx run design-system:visual-test`,
-      `pnpm nx run-many -t typecheck`, `pnpm nx run-many -t test`, `pnpm nx run design-system:visual-test`,
-      `pnpm nx run design-system:test-storybook`, `pnpm build`, and `pnpm audit` all run cleanly in the
+  `pnpm typecheck`, `pnpm -w -r test`, `pnpm --filter @n00plicate/design-system run visual-test`,
+  `pnpm -w -r typecheck`, `pnpm -w -r test`, `pnpm --filter @n00plicate/design-system run visual-test`,
+  `pnpm --filter @n00plicate/design-system run test-storybook`, `pnpm build`, and `pnpm audit` all run cleanly in the
       container and CI. Document exit codes, coverage deltas, and remediation owners.
   - 2025-10-11: Initial audit attempt on Node 22.19.0 saw `pnpm format:check` and `pnpm lint:workspace`
     crash the terminal while Nx constructed the project graph after emitting engine mismatch warnings;
@@ -35,19 +35,22 @@
   - 2025-10-12: Provisioned a pnpm wheelhouse via the devcontainer build (`/opt/pnpm-store`) with
     `pnpm fetch --prod --dev` and added Copilot onboarding instructions so automation can hydrate
     dependencies offline before rerunning the gates once the Node 22.20.0 image lands.
-  - 2025-10-11: Re-tested `pnpm format:check`, `pnpm lint:workspace`, and `pnpm nx run-many -t typecheck`
-    under `nvm use 22.20.0` (`NX_DAEMON=false`)—all abort as the Nx native binary initialises the project
+  - 2025-10-11: Re-tested `pnpm format:check`, `pnpm lint:workspace`, and `pnpm -w -r typecheck`
+  under `nvm use 22.20.0` (previously `NX_DAEMON=false` — legacy Nx env var; no longer required).  
+  The run aborted while the (now-removed) Nx project graph initialised.
     graph (exit code 134 / SIGABRT). Captured logs in `infra/troubleshooting/2025-10-11-nx-runtime-crash.md`
     for DevOps triage and flagged the need to validate Nx without the native binary.
-  - 2025-10-12: Forced Nx to use the JavaScript implementation by exporting `NX_NATIVE_ENABLE=false` in the
+  - 2025-10-12: Historically, teams forced Nx to use the JavaScript implementation by exporting
+    `NX_NATIVE_ENABLE=false` (legacy) in the
     devcontainer and Copilot bootstrap. `pnpm format:check` now exits cleanly and reports 21 Biome
     formatting/import-order violations across apps/web/mobile/desktop instead of crashing; next rerun
     needs those fixes so lint/type/test gates can proceed.
-  - 2025-10-12: Confirmed `pnpm lint:workspace` succeeds with the fallback path, but `pnpm nx run-many -t
+  - 2025-10-12: Confirmed `pnpm lint:workspace` succeeds with the fallback path, but `pnpm -w -r
 typecheck --nx-bail` stalled after kicking off five projects (manual SIGTERM at ~12m). Capture logs,
     triage the hang, and rerun once formatting diffs are resolved.
   - 2025-10-13: Installing Node.js 22.20.0 via `.nvmrc` and exporting `NX_NATIVE_COMMAND_RUNNER=false`
-    plus `NX_ADD_PLUGINS=false` lets `pnpm format:check` reach the Biome runner without crashing; the
+  plus `NX_ADD_PLUGINS=false` (both legacy Nx env vars) let `pnpm format:check` reach the Biome
+  runner without crashing; the
     command now lists outstanding formatting updates across docs/apps while `pnpm lint:workspace`
     completes successfully under the same environment overrides. Investigate whether typecheck/test
     targets also require the plugin disablement and capture timings once formatting drift is cleared.
@@ -63,7 +66,9 @@ typecheck --nx-bail` stalled after kicking off five projects (manual SIGTERM at 
     adapter packages. Command now completes sequentially via `pnpm -r --workspace-root=false --if-present`
     so the type gate can run without triggering the Nx project graph crash. Keep `pnpm typecheck:nx`
     available as a diagnostic path while upstream fixes incubate.
-- 2025-10-16: `pnpm nx run-many -t test` and `pnpm build` still crash the shell even with
+ - 2025-10-16: `pnpm -w -r test` and `pnpm -w -r build` still crash the shell.
+   The run was attempted with `NX_NATIVE_COMMAND_RUNNER=false`, `NX_ADD_PLUGINS=false`, and `NX_NATIVE_ENABLE=false`.
+  The run was attempted with `NX_NATIVE_COMMAND_RUNNER=false`, `NX_ADD_PLUGINS=false`, and `NX_NATIVE_ENABLE=false`.
     `NX_NATIVE_COMMAND_RUNNER=false`, `NX_ADD_PLUGINS=false`, and `NX_NATIVE_ENABLE=false`; capture the
     reproduction for DevOps and retry once the Node 22.20.0 image lands or Nx native binary is patched.
 - 2025-10-15: `pnpm typecheck` currently fails under Node 22.19.0 because `packages/shared-utils/tsconfig.json`
@@ -76,7 +81,7 @@ typecheck --nx-bail` stalled after kicking off five projects (manual SIGTERM at 
   typecheck step, ensuring the Nx exit status fails the workflow even when the sequential fallback runs.
 - 2025-10-20: Baseline rerun in Node 22.19.0 container: `pnpm format:check` still reports existing formatting
   drift (51 errors, 4 warnings) from prior work; `pnpm lint:workspace`, `pnpm typecheck`, and `pnpm audit`
-  succeed with engine warnings; `pnpm nx run-many -t test` and `pnpm build` crash the shell as Nx initialises
+  succeed with engine warnings; `pnpm -w -r test` and `pnpm -w -r build` crash the shell as a legacy Nx graph initialised
   the project graph despite `NX_NATIVE_ENABLE=false` safeguards—captured fresh terminal crashes for DevOps.
 - 2025-10-20: Added a `dorny/paths-filter` gate to `pr-verification.yml` so Markdown lint only runs when
   documentation paths (`docs/**`, package READMEs) change, replacing the previous incorrect
@@ -113,40 +118,43 @@ typecheck --nx-bail` stalled after kicking off five projects (manual SIGTERM at 
   verify padding tokens now emit axis-specific objects.
 - 2025-10-12: Revalidated baseline ahead of platform token precedence update — `pnpm format:check`
   still fails with 50 formatter errors and 4 warnings from existing drift; `pnpm lint:workspace` and
-  `pnpm typecheck` complete with engine mismatch warnings; `pnpm nx run-many -t test` and `pnpm build`
+  `pnpm typecheck` complete with engine mismatch warnings; `pnpm -w -r test` and `pnpm -w -r build`
   continue to crash the terminal while constructing the project graph; targeted `pnpm --filter
   @n00plicate/design-tokens test -- --run` added to cover new platform lookup behaviour.
 - 2025-10-28: Re-ran baseline commands before sprint planning refresh — `pnpm format:check` fails with
   47 errors/4 warnings (Biome broken symlink notices persist); `pnpm lint:workspace` and
-  `pnpm typecheck` pass despite Node engine warnings; `pnpm nx run-many -t test` and `pnpm build`
+  `pnpm typecheck` pass despite Node engine warnings; `pnpm -w -r test` and `pnpm -w -r build`
   still crash the shell while Nx constructs the project graph; `pnpm audit` reports no known
   vulnerabilities. Captured new terminal crashes for DevOps to correlate with ongoing Nx runtime issue.
 - 2025-10-28: Expanded `docs/SPRINT_PLAN.md` with mission/workstream/quality-gate sections for each
   sprint plus baseline gate summary so squads can operationalise the roadmap; ensure squads cross-link
   the new structure from sprint kickoff notes.
-- 2025-10-29: Baseline rerun (Node 22.19.0) – `pnpm nx run-many -t test --output-style=static`,
-  `pnpm lint:workspace`, `pnpm typecheck`, `pnpm audit --prod`, and `pnpm nx run-many -t build
-  --exclude=workspace-format --output-style=static` complete with existing Node engine warnings and
+ - 2025-10-29: Baseline rerun (Node 22.19.0) – `pnpm -w -r test`,
+  `pnpm lint:workspace`, `pnpm typecheck`, and `pnpm audit --prod`.  
+  Run `pnpm -w -r build` to build all workspaces; skip helper projects such as `workspace-format` if needed.
+  complete with existing Node engine warnings and
   Nx Cloud client download notices. `pnpm format:check` still reports pre-existing Biome formatting
-  drift (45 errors, 4 warnings). `npx gitleaks@latest detect` failed because npm could not determine a
+  drift (45 errors, 4 warnings). `pnpm dlx gitleaks@latest detect` failed because npm could not determine a
   runnable binary inside the package; capture the log for security tooling follow-up.
-- 2025-10-29: Updated CI (`ci.yml`, `pr-verification.yml`, `visual-tests.yml`) to inject the Nx Cloud
-  token via the `NX_CLOUD_ACCESS_TOKEN` repository secret instead of shelling out to `gh variable get`.
+ - 2025-10-29: Updated CI (`ci.yml`, `pr-verification.yml`, `visual-tests.yml`) to inject the Nx Cloud
+   token via the `NX_CLOUD_ACCESS_TOKEN` repository secret instead of shelling out to `gh variable get`.
+   Note: This approach uses Nx Cloud and `NX_CLOUD_ACCESS_TOKEN` (legacy) and will be migrated to pnpm
+   store cache / Actions-based caching.
   Documented the new secret requirement in `docs/devops/nx-remote-cache.md`; coordinate with DevOps to
   store the secret in GitHub and validate Nx Cloud self-healing once populated.
-- 2025-10-30: Added `scripts/configure-nx-cloud.sh` so workflows disable Nx Cloud gracefully when the
+ - 2025-10-30: Added `scripts/configure-nx-cloud.sh` so workflows disable Nx Cloud gracefully when the
   secret is absent, vendored the `nx-cloud` package, and configured the `nx-cloud` tasks runner in
-  `nx.json`. Reran the baseline: `pnpm nx run-many -t test --parallel=1 --output-style=static`,
-  `pnpm lint:workspace`, `pnpm typecheck`, `pnpm nx run-many -t build --exclude=workspace-format
-  --output-style=static`, and `pnpm audit --prod` succeed with existing Node engine warnings;
-  `pnpm format:check` still reports legacy Biome drift and `npx gitleaks@latest detect` fails because
+  `nx.json`. Reran the baseline: `pnpm -w -r test` (legacy Nx `run-many`),
+  `pnpm lint:workspace`, `pnpm typecheck`, `pnpm -w -r build` (legacy Nx invocation; skip `workspace-format` as needed),
+  and `pnpm audit --prod` succeed with existing Node engine warnings;
+  `pnpm format:check` still reports legacy Biome drift and `pnpm dlx gitleaks@latest detect` fails because
   npm cannot determine the correct executable. Nx now logs "Nx Cloud Will Not Be Used" when
   `NX_NO_CLOUD=true` is injected, suppressing repeated agent download attempts in forked PRs.
 - 2025-10-30: Removed stale `.trunk` symlinks, ignored the directory going forward, and ran Biome's
   autofixer to clear the long-standing formatter drift so `pnpm format:check` exits cleanly.
 - 2025-10-30: Added `scripts/run-gitleaks.sh` and the `pnpm security:gitleaks` helper to download and
   cache the upstream CLI, restoring the repository's secret scanning gate without relying on the
-  broken `npx gitleaks@latest` package entry point.
+  broken `pnpm dlx gitleaks@latest` package entry point.
 - 2025-10-13: Scaffolded the Rust token orchestrator pipeline (Penpot ingest, governance checks,
   multi-platform emitters, OpenTelemetry spans) with integration tests and wired pnpm scripts to
   run the new CLI before legacy Style Dictionary tasks.
@@ -168,9 +176,9 @@ typecheck --nx-bail` stalled after kicking off five projects (manual SIGTERM at 
 - Linting: `pnpm lint:workspace` (Biome format+lint, typed ESLint overlay) must pass.
 - Type Safety: `pnpm typecheck` remains green across affected projects (Nx variant `pnpm typecheck:nx`
   retained for diagnostics).
-- Testing: `pnpm nx run-many -t test` and targeted suites (e.g., Storybook/Vitest) succeed.
-- Visual Regression: `pnpm nx run design-system:visual-test` (Loki/Storybook) completes without diffs.
-- Storybook Interaction: `pnpm nx run design-system:test-storybook` verifies stories and accessibility
+- Testing: `pnpm -w -r test` and targeted suites (e.g., Storybook/Vitest) succeed.
+- Visual Regression: `pnpm --filter design-system run visual-test` (Loki/Storybook) completes without diffs.
+- Storybook Interaction: `pnpm --filter design-system run test-storybook` verifies stories and accessibility
   automation.
 - Security: `pnpm audit` and scheduled security workflows report no blocking vulnerabilities.
 - Build: `pnpm build` (and any sprint-specific Nx targets) completes successfully.
@@ -192,7 +200,7 @@ typecheck --nx-bail` stalled after kicking off five projects (manual SIGTERM at 
   before gating can be fully enforced—track remediation as part of relevant sprints.
 - Local container image currently pins Node 22.19.0, triggering engine mismatch warnings versus the
   required Node 22.20.0 baseline; coordinate with DevOps to bump the runtime and re-verify Nx targets.
-- `pnpm nx run-many -t test` and legacy Nx-driven typecheck commands triggered shell crashes during
+- `pnpm -w -r test` and legacy Nx-driven typecheck commands triggered shell crashes during
   baseline verification while Nx built the project graph on Node 22.19.0; capture logs under
   `infra/` troubleshooting and stabilise the command path once the runtime upgrade lands so gates can
   be relied on for enforcement. `pnpm typecheck` now runs via `tsc` without touching the Nx graph, but

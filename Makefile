@@ -28,23 +28,24 @@ dev: ## Start full development environment
 
 clean: ## Clean all build artifacts
 	@echo "🧹 Cleaning build artifacts..."
-	pnpm nx run-many -t clean
+	pnpm -w -r clean || true
 	rm -rf node_modules/.cache
 	rm -rf tmp/nx-cache
 
 test: ## Run all tests
 	@echo "🧪 Running tests..."
-	pnpm nx run-many -t test lint
+	pnpm -w -r test && pnpm -w -r lint
 
 test-affected: ## Run tests for affected projects only
 	@echo "🧪 Running affected tests..."
-	pnpm nx affected -t test lint
+	# Run tests and lint across all packages; consider adding a selective filter per CI tool if required
+	pnpm -w -r test && pnpm -w -r lint
 
 # Design Token Workflows
 tokens-export: ## Export tokens from Penpot (requires .env configuration)
 	@echo "📥 Exporting tokens from Penpot..."
 	@if [ ! -f .env ]; then echo "❌ .env file not found. Copy .env.example and configure."; exit 1; fi
-	pnpm nx run design-tokens:tokens:export
+	pnpm --filter @n00plicate/design-tokens run tokens:export
 	@echo "🧹 Cleaning Apple junk from export..."
 	pnpm run clean:apple
 
@@ -68,19 +69,19 @@ tokens-watch: ## Watch token files and rebuild on changes
 # Application Development
 web-dev: ## Start Qwik City web app development
 	@echo "🌐 Starting web app..."
-	pnpm nx run design-system:serve
+	pnpm --filter ./apps/web run serve
 
 storybook: ## Start Storybook component workshop
 	@echo "📚 Starting Storybook..."
-	pnpm nx run design-system:storybook
+	pnpm --filter @n00plicate/design-system run storybook
 
 storybook-build: ## Build static Storybook
 	@echo "📦 Building Storybook..."
-	pnpm nx run design-system:build-storybook
+	pnpm --filter @n00plicate/design-system run build-storybook
 
 visual-test: ## Run visual regression tests
 	@echo "👀 Running visual tests..."
-	pnpm nx run design-system:visual-test
+	pnpm --filter @n00plicate/design-system run visual-test
 
 # Environment Setup
 setup-env: ## Copy .env.example to .env for configuration
@@ -122,7 +123,8 @@ ci: ## Run full CI pipeline locally
 
 release: ## Create release (requires proper git setup)
 	@echo "🚀 Creating release..."
-	pnpm nx release
+	# Use changesets or your release tooling at the root; example:
+	pnpm changeset publish --access public
 
 # Docker Development
 docker-dev: ## Start development environment in Docker
@@ -140,14 +142,15 @@ docker-stop: ## Stop all Docker services
 # Utility Commands
 graph: ## Show project dependency graph
 	@echo "📊 Generating dependency graph..."
-	pnpm nx graph
+	pnpm -w -r list
 
 affected: ## Show affected projects
 	@echo "📊 Showing affected projects..."
-	pnpm nx show projects --affected
+	# Use a CI-aware filter mechanism or package discovery tool instead of Nx graph
+	pnpm -w -r list --depth 0
 
 reset: ## Reset Nx cache and node_modules
 	@echo "🔄 Resetting workspace..."
-	pnpm nx reset
+	pnpm store prune || true
 	rm -rf node_modules
 	make install

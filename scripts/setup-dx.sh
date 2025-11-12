@@ -9,11 +9,12 @@ echo "🎨 Setting up Mimic workspace with modern DX enhancements..."
 
 # Install modern testing tools
 echo "📋 Adding Cypress for E2E and component testing..."
-pnpm add -D @nx/cypress cypress
+pnpm add -D cypress
 
 # Add performance and build tools
 echo "⚡ Adding modern build tools..."
-pnpm add -D @nx/esbuild @nx/webpack
+# Nx-specific wrappers removed; install native tooling or Vite-compatible plugins when needed
+pnpm add -D esbuild webpack
 
 # Add code quality tools
 echo "🔍 Adding advanced code quality tools..."
