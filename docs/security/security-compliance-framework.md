@@ -557,8 +557,8 @@ export class SupplyChainMonitor {
 
   private async scanVulnerabilities(): Promise<DependencyVulnerability[]> {
     try {
-      // Run npm audit in JSON format
-      const auditOutput = execSync('npm audit --json', { encoding: 'utf-8' });
+      // Run pnpm audit in JSON format
+      const auditOutput = execSync('pnpm audit --json', { encoding: 'utf-8' });
       const auditData = JSON.parse(auditOutput);
 
       const vulnerabilities: DependencyVulnerability[] = [];
@@ -636,7 +636,7 @@ export class SupplyChainMonitor {
 
   private async checkOutdatedPackages(): Promise<any[]> {
     try {
-      const outdatedOutput = execSync('npm outdated --json', {
+      const outdatedOutput = execSync('pnpm outdated --json', {
         encoding: 'utf-8',
       });
       const outdated = JSON.parse(outdatedOutput);
@@ -650,7 +650,7 @@ export class SupplyChainMonitor {
         majorUpdate: this.isMajorUpdate(info.current, info.latest),
       }));
     } catch (error) {
-      // npm outdated returns non-zero exit code when outdated packages exist
+      // pnpm outdated returns non-zero exit code when outdated packages exist
       try {
         const output = error.stdout?.toString();
         if (output) {
@@ -884,7 +884,7 @@ export class VulnerabilityManager {
 
   private async findAlternatives(packageName: string): Promise<string[]> {
     try {
-      // Use npm search to find similar packages
+      // Use pnpm search to find similar packages
   const searchOutput = execSync(`pnpm search ${packageName} --json`, {
         encoding: 'utf-8',
       });

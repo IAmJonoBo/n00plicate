@@ -2,7 +2,7 @@
 
 Common issues and solutions for the n00plicate design system monorepo.
 
-> Applies to the n00plicate 2.0 toolchain (Node 22.20 / pnpm 10.18.2). If you are working from older
+> Applies to the n00plicate 2.0 toolchain (Node 24.11.0 / pnpm 10.21.0). If you are working from older
 > instructions, cross-check the latest references in [`docs/README.md`](./README.md).
 
 ## 📋 Table of Contents
@@ -41,7 +41,7 @@ Common issues and solutions for the n00plicate design system monorepo.
 
    ```bash
    node --version  # Should be 18.0.0 or later
-   pnpm --version  # Should be 10.18.2 or later
+   pnpm --version  # Should be 10.21.0 or later
    ```
 
 3. **Reset workspace:**
@@ -1012,17 +1012,18 @@ pnpm build:tokens
    sudo chown -R $(whoami) /path/to/project
    ```
 
-2. **Reset npm permissions:**
+2. **Reset pnpm store permissions:**
 
    ```bash
-   sudo chown -R $(whoami) ~/.npm
+   sudo chown -R $(whoami) ~/.pnpm-store
    ```
 
-3. **Use local npm prefix:**
+3. **Use a local pnpm home:**
 
    ```bash
-   npm config set prefix ~/.npm-global
-   export PATH=~/.npm-global/bin:$PATH
+   export PNPM_HOME=~/.pnpm-home
+   corepack enable && corepack prepare pnpm@latest --activate
+   export PATH="$PNPM_HOME:$PATH"
    ```
 
 # Getting Help
@@ -1062,9 +1063,9 @@ pnpm ls --depth=0
 ## ### Legacy Nx logs (if present):
 ## ### cat /tmp/nx-*.log
 
-## ### npm logs
-npm config get cache
-ls ~/.npm/_logs/
+## ### pnpm logs
+pnpm store path
+ls ~/.pnpm-store/_logs/ 2>/dev/null || echo "No pnpm logs directory"
 
 ## ### System logs (macOS)
 tail -f /var/log/system.log

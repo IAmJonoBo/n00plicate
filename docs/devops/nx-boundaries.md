@@ -45,7 +45,7 @@ pnpm -w list --depth 0
 pnpm store prune
 pnpm -w -r build
 # Generate a dependency graph with a dep-graph tool (madge/dependency-cruiser)
-npx madge --image graph.svg packages/*/src
+pnpm dlx madge --image graph.svg packages/*/src
 ```
 
 ### Project Tags Configuration
@@ -81,7 +81,7 @@ npx madge --image graph.svg packages/*/src
 
 ###### Use dep graph tools to create a visualization
 
-###### Example: npx madge --image graph.svg packages/*/src
+###### Example: pnpm dlx madge --image graph.svg packages/*/src
 
     "docs-site": {
 
@@ -127,7 +127,7 @@ pnpm -w -r run lint --if-present --silent --fix
 pnpm run build:ordered
 
 ## Use a dep-graph tool (eg. madge, depcruise) to visualize module graph:
-npx madge --image graph.svg packages/*/src
+pnpm dlx madge --image graph.svg packages/*/src
 ```
 
 # Remote Caching Setup
@@ -240,7 +240,7 @@ on:
 jobs:
   release:
     # Legacy: pnpm exec nx migrate --check
-    # Use `npx npm-check-updates --target minor` to review available updates without automatically applying them
+    # Use `pnpm dlx npm-check-updates --target minor` to review available updates without automatically applying them
 
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     # Legacy: pnpm exec nx migrate @nx/workspace@latest  <-- use `pnpm upgrade` and review changelogs
@@ -388,14 +388,14 @@ pnpm -w -r build  # Second run should be cached when outputs exist
 ```bash
 # Update Nx workspace
 <!-- Legacy: 'pnpm exec nx migrate latest' -->
-# Use `pnpm upgrade` and `npx npm-check-updates` for upgrading package versions
+# Use `pnpm upgrade` and `pnpm dlx npm-check-updates` for upgrading package versions
 corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile
 <!-- Legacy: 'pnpm exec nx migrate --run-migrations' -->
 # If a package ships migrations, run them using their migration scripts or follow upgrade notes
 
 # Update dependencies
 <!-- Legacy generator: '@nx/workspace:update-packages-in-package-json' -->
-# Use `npx npm-check-updates` or a custom script to update package.json versions
+# Use `pnpm dlx npm-check-updates` or a custom script to update package.json versions
 ```
 
 ### Workspace Cleanup
@@ -424,7 +424,7 @@ pnpm -w -r run workspace-lint --if-present
 # Use a git-based script to detect touched files and map them to workspace packages for affected builds
 
 # Check for circular dependencies
-npx madge --image graph.svg packages/*/src
+pnpm dlx madge --image graph.svg packages/*/src
 ```
 
 ## Migration Strategies
@@ -434,7 +434,7 @@ npx madge --image graph.svg packages/*/src
 ```bash
 # Check migration status
 <!-- Legacy: 'pnpm exec nx migrate --check' -->
-# Use `npx npm-check-updates --target minor` to review available updates without automatically applying them
+# Use `pnpm dlx npm-check-updates --target minor` to review available updates without automatically applying them
 
 # Run migrations
 # Legacy: pnpm exec nx migrate @nx/workspace@latest  <-- use `pnpm upgrade` and review changelogs
@@ -490,8 +490,8 @@ function migrateTokenSchema(tokens: any): any {
    # Clear Nx cache
   # pnpm exec nx reset (legacy) - instead use `pnpm store prune` and clear temporary caches
 
-   # Clear npm cache
-   npm cache clean --force
+   # Clear pnpm store cache
+   pnpm store prune
    ```
 
 3. **Performance Issues**
