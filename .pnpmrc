@@ -20,4 +20,4 @@ fetch-retry-mintimeout: 10000
 fetch-retry-maxtimeout: 60000
 
 # Node modules configuration
-node-linker: isolated
+node-linker: hoisted
