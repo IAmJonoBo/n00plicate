@@ -19,7 +19,7 @@ Dictionary, and Penpot automation on their latest supported versions.
 
    ```bash
    corepack enable
-   corepack prepare pnpm@10.18.2 --activate
+   corepack prepare pnpm@10.21.0 --activate
    ```
 
 ## 2. Plan the Upgrade
@@ -48,7 +48,7 @@ Dictionary, and Penpot automation on their latest supported versions.
 2. Run pending Nx migrations:
 
    ```bash
-   # Legacy Nx migration removed. Use `npx npm-check-updates -u` followed by `pnpm install` and run package-specific migration scripts if they exist.
+   # Legacy Nx migration removed. Use `pnpm dlx npm-check-updates -u` followed by `pnpm install` and run package-specific migration scripts if they exist.
    ```
 
 3. Refresh the Penpot dev stack after dependency bumps:

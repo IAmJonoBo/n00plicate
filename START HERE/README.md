@@ -13,7 +13,7 @@ n00plicate is the multi-runtime design system and token orchestrator. Use it to 
 ```bash
 cd n00plicate
 corepack enable
-corepack prepare pnpm@10.18.2 --activate
+corepack prepare pnpm@10.21.0 --activate
 pnpm install
 
 # bootstrap dev environment

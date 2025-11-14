@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/devcontainers/base:bookworm
 
-ARG NODE_VERSION=22.20.0
+ARG NODE_VERSION=24.11.0
 ENV NVM_DIR=/usr/local/share/nvm
 ENV PNPM_STORE_PATH=/opt/pnpm-store
 ENV PATH="${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:${PATH}"
@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     android-sdk=25.2.5+6 \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Node.js 22.20.0 via nvm and activate pnpm 10.18.2
+# Install Node.js 24.11.0 via nvm and activate pnpm 10.21.0
 RUN mkdir -p ${NVM_DIR} \
     && curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
     && bash -lc ". ${NVM_DIR}/nvm.sh \
@@ -23,11 +23,11 @@ RUN mkdir -p ${NVM_DIR} \
         && nvm alias default ${NODE_VERSION} \
         && nvm use ${NODE_VERSION} \
         && corepack enable \
-        && corepack prepare pnpm@10.18.2 --activate"
+        && corepack prepare pnpm@10.21.0 --activate"
 
 # Configure a shared pnpm store to act as the workspace wheelhouse and prefetch all dependencies
 RUN mkdir -p ${PNPM_STORE_PATH} \
-    && corepack prepare pnpm@10.18.2 --activate \
+    && corepack prepare pnpm@10.21.0 --activate \
     && pnpm config set store-dir ${PNPM_STORE_PATH} --global
 
 # Copy dependency manifests and hydrate the pnpm store for offline installs
@@ -48,7 +48,7 @@ USER appuser
 ENV PNPM_HOME="/home/appuser/.local/share/pnpm"
 ENV PATH="$PNPM_HOME:${PATH}"
 RUN mkdir -p "${PNPM_HOME}" \
-    && corepack prepare pnpm@10.18.2 --activate
+    && corepack prepare pnpm@10.21.0 --activate
 
 # Install Rust and Cargo (for Tauri) as the non-root user
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]

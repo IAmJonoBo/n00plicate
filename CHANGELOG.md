@@ -35,14 +35,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated Node.js requirement from `>=22.19.0` to `>=22.20.0`
-- Updated pnpm requirement from `>=10.17.0` to `>=10.18.2`
+-- Updated Node.js requirement from `>=22.19.0` to `>=24.11.0`
+- Updated pnpm requirement from `>=10.17.0` to `>=10.21.0`
 - Updated TypeScript from `5.9.2` to `5.9.3`
 - Updated README badges to reflect current versions:
   - Nx: 21.5 → 21.6
   - TypeScript: 5.9 → 5.9.3
-  - Added Node.js badge (22.20.0)
-  - Added pnpm badge (10.18.2)
+  - Added Node.js badge (24.11.0)
+  - Added pnpm badge (10.21.0)
   - Added Storybook badge (9.1.9)
 - Enhanced Storybook configuration with new addons in design-system package
 

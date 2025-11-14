@@ -12,7 +12,7 @@ Use this guide when working on n00plicate 2.0. For big-picture context check
 code --folder-uri vscode-remote://dev-container+$(pwd)/infra/containers/devcontainer
 ```
 
-The container provisions Node 22.20, pnpm 10.18.2, Rust, Android/iOS toolchains, Playwright, and a local
+The container provisions Node 24.11.0, pnpm 10.21.0, Rust, Android/iOS toolchains, Playwright, and a local
 Penpot stack.
 
 ### Local environment
@@ -23,7 +23,7 @@ pnpm install              # safe to re-run after dependency changes
 pnpm lint:workspace       # runs Biome (format + lint) and typed ESLint to verify the toolchain
 ```
 
-Ensure `nvm use` loads Node 22.20.0 before running scripts.
+Ensure `nvm use` loads Node 24.11.0 before running scripts.
 
 ## 2. Project Layout (2.0)
 

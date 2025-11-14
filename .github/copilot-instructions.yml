@@ -2,9 +2,9 @@ version: 1
 name: Mimic workspace bootstrap
 onboarding:
   summary: >-
-    Ensure GitHub Copilot agents and other automation runners hydrate the pnpm wheelhouse
-    before executing quality gates so that lint, test, and build targets do not fail due to
-    missing dependencies or the Node 22.20.0 toolchain.
+  Ensure GitHub Copilot agents and other automation runners hydrate the pnpm wheelhouse
+  before executing quality gates so that lint, test, and build targets do not fail due to
+  missing dependencies or the Node 24.11.0 toolchain.
   steps:
     - name: Align Node & pnpm toolchain
       run: |

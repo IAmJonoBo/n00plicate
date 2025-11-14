@@ -42,7 +42,7 @@ graph LR
 
 | Tool                             | Version       | Purpose                                     |
 | -------------------------------- | ------------- | ------------------------------------------- |
-| **Node 22 LTS + pnpm 10**        | Latest LTS    | JS runtimes, monorepo PM                    |
+| **Node 24 LTS + pnpm 10**        | Latest LTS    | JS runtimes, monorepo PM                    |
 | **Rust & Cargo**                 | Latest stable | Tauri CLI builds                            |
 | **JDK 17 / Android SDK / Xcode** | Latest        | Compose MP & RN native targets              |
 | **Docker (optional)**            | Latest        | Dev-container with Penpot, Postgres, Ollama |
@@ -1116,7 +1116,7 @@ of truth.
 | **Tauri build fails CSP**         | Manual meta tag overriding                        | Remove custom CSP policy                                 |
 | **Storybook stories broken**      | Outdated addon versions                           | Update to Storybook 9.1+                                 |
 | **Nx cache issues**               | Corrupted cache state                             | `pnpm store prune`  (previously `nx reset` - legacy)     |
-| **pnpm install fails**            | Node version mismatch                             | Use Node 22 LTS via nvm/volta                            |
+| **pnpm install fails**            | Node version mismatch                             | Use Node 24 LTS via nvm/volta                            |
 | **Visual tests failing**          | Loki reference outdated                           | Update references: `pnpm loki update`                    |
 | **Cloudflare deploy fails**       | Missing wrangler authentication                   | `wrangler login` or set CLOUDFLARE_API_TOKEN             |
 | **CF Pages build timeout**        | Large build output or slow CI                     | Optimize build size; use `pnpm build --minify`           |

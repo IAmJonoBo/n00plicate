@@ -5,9 +5,9 @@ pre-loads a pnpm "wheelhouse" so automation runs can install dependencies offlin
 
 ## Key Components
 
-- **Node.js 22.20.0 via nvm** — matches the `engines` field declared in `package.json` and the CI
+- **Node.js 24.11.0 via nvm** — matches the `engines` field declared in `package.json` and the CI
   runners.
-- **pnpm 10.18.2** — activated through Corepack for deterministic installs.
+- **pnpm 10.21.0** — activated through Corepack for deterministic installs.
 - **Shared pnpm store (`/opt/pnpm-store`)** — populated at build time with `pnpm fetch --prod --dev`
   so that containers, GitHub Codespaces, and Copilot agents can run `pnpm install --prefer-offline` without
   reaching the public registry.
@@ -32,7 +32,7 @@ pre-loads a pnpm "wheelhouse" so automation runs can install dependencies offlin
 Automation agents should follow [`.github/copilot-instructions.yml`](../../../.github/copilot-instructions.yml)
 to synchronise with the wheelhouse before executing quality gates. These instructions:
 
-- Pin Node.js to 22.20.0 and pnpm to 10.18.2.
+- Pin Node.js to 24.11.0 and pnpm to 10.21.0.
 - Reuse the shared pnpm store to hydrate installs offline.
 - Execute the baseline lint, type-check, test, build, and security audit commands.
 

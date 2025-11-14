@@ -4,8 +4,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![pnpm](https://img.shields.io/badge/package-manager-pnpm-blue)](https://pnpm.io)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue)](https://www.typescriptlang.org/)
-[![Node](https://img.shields.io/badge/Node-22.20.0-green)](https://nodejs.org/)
-[![pnpm](https://img.shields.io/badge/pnpm-10.18.2-orange)](https://pnpm.io/)
+[![Node](https://img.shields.io/badge/Node-24.11.0-green)](https://nodejs.org/)
+[![pnpm](https://img.shields.io/badge/pnpm-10.21.0-orange)](https://pnpm.io/)
 [![Storybook](https://img.shields.io/badge/Storybook-9.1.9-ff4785)](https://storybook.js.org/)
 
 > Penpot-first, multi-runtime design systems powered by open tooling. n00plicate 2.0 is an in-progress
@@ -56,8 +56,8 @@ Refer to [`docs/IMPLEMENTATION_PLAN_2.0.md`](docs/IMPLEMENTATION_PLAN_2.0.md) fo
 
 ### Prerequisites
 
-- Node.js 22.20.0 (run `nvm use` after `./setup.sh`)
-- pnpm 10.18.2 (`corepack enable && corepack prepare pnpm@10.18.2 --activate`)
+- Node.js 24.11.0 (run `nvm use` after `./setup.sh`)
+- pnpm 10.21.0 (`corepack enable && corepack prepare pnpm@10.21.0 --activate`)
 - Rust (toolchains for the token orchestrator and Tauri)
 - Docker (Penpot + automation stack)
 - Platform SDKs as needed: Android Studio, Xcode, or Tauri dependencies

@@ -1126,7 +1126,7 @@ pnpm qwik add static         # Static site generation
 | **Tauri build fails CSP**         | Manual meta tag overriding                        | Remove custom CSP policy                                 |
 | **Storybook stories broken**      | Outdated addon versions                           | Update to Storybook 9.1+                                 |
 | **Nx cache issues**               | Corrupted cache state                             | `pnpm store prune` (previously `nx reset` - legacy)       |
-| **pnpm install fails**            | Node version mismatch                             | Use Node 22 LTS via nvm/volta                            |
+| **pnpm install fails**            | Node version mismatch                             | Use Node 24 LTS via nvm/volta                            |
 | **Visual tests failing**          | Loki reference outdated                           | Update references: `pnpm loki update`                    |
 | **Cloudflare deploy fails**       | Missing wrangler authentication                   | `wrangler login` or set CLOUDFLARE_API_TOKEN             |
 | **CF Pages build timeout**        | Large build output or slow CI                     | Optimize build size; use `pnpm build --minify`           |

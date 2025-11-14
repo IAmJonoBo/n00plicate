@@ -52,7 +52,7 @@ Development mode uses [Vite's development server](https://vitejs.dev/). The `dev
 server-side render (SSR) the output during development.
 
 ```shell
-pnpm start # or `npm start`
+ `pnpm start`
 ```
 
 > Note: during dev mode, Vite may request a significant number of `.js` files. This does not

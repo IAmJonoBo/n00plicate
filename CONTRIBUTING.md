@@ -21,7 +21,7 @@ We follow the [Contributor Covenant](CODE_OF_CONDUCT.md). Be kind, inclusive, an
  git remote add upstream https://github.com/IAmJonoBo/n00plicate.git
 ```
 
-4. **Bootstrap once** — `./setup.sh` installs Node 22.20, pnpm 10.18.2, Husky hooks, and workspace deps.
+4. **Bootstrap once** — `./setup.sh` installs Node 24.11.0, pnpm 10.21.0, Husky hooks, and workspace deps.
 
 ## Local Development
 

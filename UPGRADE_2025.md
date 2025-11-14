@@ -16,8 +16,8 @@ September 30, 2025
 
 | Package         | Before  | After   | Notes             |
 | --------------- | ------- | ------- | ----------------- |
-| Node.js         | 22.19.0 | 22.20.0 | Latest LTS        |
-| pnpm            | 10.17.0 | 10.18.2 | Package manager   |
+| Node.js         | 22.19.0 | 24.11.0 | Latest LTS        |
+| pnpm            | 10.17.0 | 10.21.0 | Package manager   |
 | TypeScript      | 5.9.2   | 5.9.3   | Latest stable     |
 | Nx (legacy)     | 21.6.2  | removed | Nx removed from the workspace; tools migrated to pnpm workspace filters and alternative plugins |
 | Storybook       | 9.1.9   | 9.1.9   | Already at latest |
@@ -54,10 +54,7 @@ September 30, 2025
 
 ### Configuration Files
 
-- `/package.json` - Root package with all new dependencies
-- `/pnpm-lock.yaml` - Updated lockfile with new dependency tree
-- `/.nvmrc` - Already at 22.20.0
-- `/setup.sh` - Updated pnpm version to 10.18.2
+`/.nvmrc` - Updated to 24.11.0
 
 ### Application Packages
 
@@ -145,9 +142,9 @@ These can be safely ignored as Storybook v9 maintains backward compatibility wit
 
 ### Node Version Warning
 
-The project requires Node.js 22.20.0, but the current environment has 20.19.5. This is expected in CI
-environments without Node version management. Developers should use nvm or similar tools to install
-the correct version locally.
+The project recommends Node.js 24.11.0; if your environment is at an older Node version please use
+nvm/Volta to install the correct runtime. If CI images are not updated, install the pinned version via
+`.nvmrc` or the action setup.
 
 ## Next Steps
 
@@ -177,12 +174,12 @@ the correct version locally.
 
 ```bash
 # Install correct Node version
-nvm install 22.20.0
-nvm use 22.20.0
+nvm install 24.11.0
+nvm use 24.11.0
 
 # Enable pnpm
 corepack enable
-corepack prepare pnpm@10.18.2 --activate
+corepack prepare pnpm@10.21.0 --activate
 
 # Install dependencies
 pnpm install

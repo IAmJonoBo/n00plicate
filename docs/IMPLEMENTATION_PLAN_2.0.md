@@ -87,7 +87,7 @@ n00plicate/
 - pnpm 10 + corepack with a `just` command catalogue (build, sync, snapshot, release, doctor).
 - Nx 22 incremental graph with Nx Cloud OSS runner, TypeScript project references, `tsup` for UI
   adapters, and `rsbuild` for Rust CLI bundling.
-- DevContainer provisioning Node 22 LTS, Rust, Android/iOS SDKs, Playwright, Penpot 2.8, and both
+- DevContainer provisioning Node 24 LTS, Rust, Android/iOS SDKs, Playwright, Penpot 2.8, and both
   OpenAI + GitHub Copilot CLI tooling for AI accessibility.
 - Local + remote AI assistant stack: `n00plicate assist` (Ollama) with fallbacks to OpenAI/Copilot for
   orchestration, scaffolding, and documentation queries.
@@ -102,7 +102,7 @@ n00plicate/
 
 | Phase window | Dependency                                                                                             | Purpose                                                                                              | Runtime / licensing notes                                                                                                                       | CI coverage / follow-up                                                                                                                                           |
 | ------------ | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Phases 0–6   | Node 22.20.0 + pnpm 10.18.2                                                                            | Primary execution environment for Nx targets, Storybook builds, and script automation.               | MIT-licensed toolchain. Works offline once tarballs are cached; DevContainer pins versions via `setup.sh`.                                      | `.github/workflows/ci.yml`, `visual-tests.yml`, and `pr-verification.yml` install pinned Node/pnpm via `actions/setup-node` + `pnpm/action-setup`.                |
+| Phases 0–6   | Node 24.11.0 + pnpm 10.21.0                                                                            | Primary execution environment for Nx targets, Storybook builds, and script automation.               | MIT-licensed toolchain. Works offline once tarballs are cached; DevContainer pins versions via `setup.sh`.                                      | `.github/workflows/ci.yml`, `visual-tests.yml`, and `pr-verification.yml` install pinned Node/pnpm via `actions/setup-node` + `pnpm/action-setup`.                |
 | Phases 1–6   | Nx 21.6 plugin stack (`@nx/{js,react,storybook,vite,plugin}`)                                          | Provides project graph, lint/test orchestration, Storybook build integration, and custom generators. | OSS licenses (MIT). Requires Node environment; offline usage supported via pnpm store.                                                          | Installed through workspace `pnpm install`. Ensure cache seeds via existing CI install steps.                                                                     |
 | Phases 1–6   | Nx 21.6 plugin stack (`@nx/{js,react,storybook,vite,plugin}`) *(legacy)*                         | Previously used for project graph and orchestration; this repository now relies on pnpm workspace filters and CI cache techniques. | OSS licenses (MIT). Use pnpm store caching and project-specific scripts for orchestration.                                                          | Documented migration path: replace Nx generators/executors with pnpm workspace scripts and custom generators.                                                   |
 | Phases 2–6   | Rust toolchain (stable 1.80+, `wasm32-unknown-unknown`, `cargo-generate`)                              | Builds the token orchestrator CLI, wasm bindings, and future Tauri shell automation.                 | Apache-2.0 / MIT dual license. Offline builds require pre-fetching `rustup` components.                                                         | **Follow-up:** add rustup provisioning to token orchestrator GitHub Actions (`token-sync.yml`/`token-export.yml`). Track in `Next_Steps.md`.                      |
@@ -113,8 +113,8 @@ n00plicate/
 
 | CLI deliverable                                                        | Runtime dependency                                                                    | AI / network requirements                                                                                | Licensing & offline posture                                                                                      |
 | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `n00plicate assist`                                                         | Node 22 CLI wrapper invoking Ollama (default) with optional OpenAI/Copilot fallbacks. | Offline with local Ollama models; optional remote API keys enable GPT/Copilot flows.                     | Wrapper MIT-licensed. Ollama AGPLv3—ensure redistribution compliance. Document opt-in for proprietary APIs.      |
-| `n00plicate init feature`, `n00plicate token create` wizards                     | Node 22 + Nx generators + Rust orchestrator bindings (Phase 2+).                      | AI prompts piggyback on `n00plicate assist`; runs offline when Ollama available.                              | Scripts MIT; respects same Ollama/OpenAI licensing constraints.                                                  |
+| `n00plicate assist`                                                         | Node 24 CLI wrapper invoking Ollama (default) with optional OpenAI/Copilot fallbacks. | Offline with local Ollama models; optional remote API keys enable GPT/Copilot flows.                     | Wrapper MIT-licensed. Ollama AGPLv3—ensure redistribution compliance. Document opt-in for proprietary APIs.      |
+| `n00plicate init feature`, `n00plicate token create` wizards                     | Node 24 + Nx generators + Rust orchestrator bindings (Phase 2+).                      | AI prompts piggyback on `n00plicate assist`; runs offline when Ollama available.                              | Scripts MIT; respects same Ollama/OpenAI licensing constraints.                                                  |
 | `just` catalogue (`just lint-all`, `just ai-review`, `just penpot-up`) | Requires system `just` binary, pnpm workspace, Docker (for Penpot)                    | AI-enhanced recipes call `n00plicate assist`; offline usage supported when Ollama + Docker images pre-pulled. | `just` is MIT; Docker images for Penpot are AGPL-compatible. Provide legal review for enterprise redistribution. |
 
 ## Engineering Metrics & Observability Pillars
@@ -146,7 +146,7 @@ n00plicate/
 ## Code Quality & Testing Strategy
 
   snapshots via KMP in CI.
-  Example: `npx madge --json packages/*/src > reports/dependency-graph.json`.
+  Example: `pnpm dlx madge --json packages/*/src > reports/dependency-graph.json`.
   And bundle guardrails using `bundle-buddy`.
 
 ## Extensibility & Ecosystem Goals
@@ -210,7 +210,7 @@ n00plicate/
 | [ ]    | Finalise new workspace layout (`apps/`, `packages/`, `infra/`, `toolchains/`)          | Platform    | Phase 0      |
 | [ ]    | Establish SLO baseline (build <=5 min, drift MTTR, visual escape rate, doc freshness)  | Platform/QA | Phase 0      |
 | [ ]    | Stand up shared config presets (TS, ESLint, Biome, Stylelint, Vitest) in `toolchains/` | Platform    |              |
-| [ ]    | Configure Nx 22 + pnpm 10.18.2 + Node 22.20 baselines across CI/devcontainers          | DevOps      |              |
+| [ ]    | Configure Nx 22 + pnpm 10.21.0 + Node 24.11.0 baselines across CI/devcontainers          | DevOps      |              |
 | [ ]    | Introduce CODEOWNERS + `just` command catalogue + PR templates referencing metrics     | DevRel      |              |
 | [ ]    | Publish contributor playbook updates (setup, scripts, justfile)                        | DevRel      |              |
 

@@ -39,7 +39,7 @@ confidently from Sprint 1 onwards.
 
 ### Architecture & Tooling Upgrades
 
-- Promote the Node 22.20.0 + pnpm 10.18.2 toolchain and document fallbacks (nvm, devcontainer,
+  - Promote the Node 24.11.0 + pnpm 10.21.0 toolchain and document fallbacks (nvm, devcontainer,
   wheelhouse sync).
 - Decide on AI platform mix (Ollama/OpenAI/Copilot) for `n00plicate assist` and Storybook guidance.
 - Capture ADRs for Rust CLI footprint, Lit kernel, repo layout, Storybook 10 track, and AI
@@ -79,7 +79,7 @@ delivery.
 - Finalize directory layout (`apps/`, `packages/`, `infra/`, `toolchains/`) and publish CODEOWNERS,
   PR templates, and governance docs.
 - Ship toolchain presets (tsconfig, ESLint flat config, Biome, Stylelint, Vitest, Playwright).
-- Refresh devcontainer with Node 22.20, pnpm 10.18.2, Rust, mobile toolchains, Penpot stack, and AI
+  - Refresh devcontainer with Node 24.11.0, pnpm 10.21.0, Rust, mobile toolchains, Penpot stack, and AI
   CLIs.
 - Seed SLO dashboards and telemetry hooks for orchestrator, kernel, and automation services.
 
@@ -209,7 +209,7 @@ Implement the Lit-based UI kernel, first-party adapters, and Storybook-powered v
 
 ### Architecture & Tooling Upgrades
 
-- Stabilize Playwright, Storybook interaction runner, and Loki pipelines on Node 22.20.
+- Stabilize Playwright, Storybook interaction runner, and Loki pipelines on Node 24.11.
 - Add contract testing harness (Vitest DOM, Storybook test runner, Playwright journeys).
 - Document adapter interface contracts and versioning policy.
 

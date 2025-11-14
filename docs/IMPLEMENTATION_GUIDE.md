@@ -28,13 +28,13 @@ phase-by-phase delivery status.
 
 | Tool        | Version                        | Installation Notes                                            |
 | ----------- | ------------------------------ | ------------------------------------------------------------- |
-| Node.js     | ≥ 22 LTS (22.20.0 recommended) | `corepack enable && corepack prepare pnpm@10.18.2 --activate` |
-| pnpm        | ≥ 10.18.2                      | Included with Node corepack                                   |
+| Node.js     | ≥ 24 LTS (24.11.0 recommended) | `corepack enable && corepack prepare pnpm@10.21.0 --activate` |
+| pnpm        | ≥ 10.21.0                      | Included with Node corepack                                   |
 | Rust        | Latest stable                  | Required for Tauri desktop apps                               |
 | Java        | 17+                            | For Compose Multiplatform development                         |
 | Xcode       | Latest                         | iOS React Native development (macOS only)                     |
 | Android SDK | Latest                         | Android development                                           |
-| Nx CLI      | Latest                         | `# Nx removed: use pnpm workspace tools (e.g. pnpm -w -r) or npx` |
+| Nx CLI      | Latest                         | `# Nx removed: use pnpm workspace tools (e.g. pnpm -w -r) or pnpm dlx` |
 
 > Optional: Configure OpenAI (via environment variables) or GitHub Copilot CLI if you want cloud-backed
 > AI assistance in addition to the local Ollama-powered `n00plicate assist` experience.

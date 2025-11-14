@@ -54,8 +54,8 @@ pnpm test:e2e
 
 | Tool       | Version |
 | ---------- | ------- |
-| Node.js    | 22.20.0 |
-| pnpm       | 10.18.2 |
+| Node.js    | 24.11.0 |
+| pnpm       | 10.21.0 |
 | TypeScript | 5.9.3   |
 | Nx         | removed |
 | Storybook  | 9.1.9   |
