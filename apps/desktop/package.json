@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.9.4",
-    "@vitest/ui": "^4.0.8"
+    "@vitest/ui": "^4.0.9"
   },
   "engines": {
     "node": ">=22.0.0"
