@@ -328,8 +328,8 @@ Our comprehensive design system includes:
 
 Help us make this the best design guide in OSS:
 
-1. **Report issues**: Found a mistake? [Open an issue](https://github.com/IAmJonoBo/n00plicate/issues/new)
-2. **Suggest improvements**: Have ideas? [Start a discussion](https://github.com/IAmJonoBo/n00plicate/discussions)
+1. **Report issues**: Found a mistake? [Open an issue](https://github.com/n00tropic/n00plicate/issues/new)
+2. **Suggest improvements**: Have ideas? [Start a discussion](https://github.com/n00tropic/n00plicate/discussions)
 3. **Add examples**: Submit PRs with more examples
 4. **Share patterns**: Document patterns you've discovered
 
@@ -380,8 +380,8 @@ Help us make this the best design guide in OSS:
 
 ## 📞 Get Help
 
-- **Issues**: [GitHub Issues](https://github.com/IAmJonoBo/n00plicate/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/IAmJonoBo/n00plicate/discussions)
+- **Issues**: [GitHub Issues](https://github.com/n00tropic/n00plicate/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/n00tropic/n00plicate/discussions)
 - **Documentation**: [docs/TROUBLESHOOTING.md](../TROUBLESHOOTING.md)
 
 ---

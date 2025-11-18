@@ -728,4 +728,4 @@ $ n00plicate ai layout --content="6 feature cards" --output=src/pages/features.t
 
 ---
 
-**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/n00plicate/issues/new).
+**Need help?** Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [open an issue](https://github.com/n00tropic/n00plicate/issues/new).

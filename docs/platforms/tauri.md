@@ -98,7 +98,7 @@ Configure CSP in Tauri configuration:
           "scope": [
             "https://api.n00plicate.design/**",
             "https://cdn.n00plicate.design/**",
-            "https://github.com/IAmJonoBo/n00plicate/**"
+            "https://github.com/n00tropic/n00plicate/**"
           ]
         },
         "notification": {
@@ -237,7 +237,7 @@ Configure updater endpoints in tauri.conf.json:
     "updater": {
       "active": true,
       "endpoints": [
-        "https://github.com/IAmJonoBo/n00plicate/releases/latest/download/n00plicate-updater.json",
+        "https://github.com/n00tropic/n00plicate/releases/latest/download/n00plicate-updater.json",
         "https://cdn.n00plicate.design/releases/latest/n00plicate-updater.json"
       ],
       "dialog": true,
@@ -257,19 +257,19 @@ Create update manifest for GitHub Releases:
   "platforms": {
     "darwin-x86_64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkK...",
-      "url": "https://github.com/IAmJonoBo/n00plicate/releases/download/v1.0.1/n00plicate_1.0.1_x64.dmg"
+      "url": "https://github.com/n00tropic/n00plicate/releases/download/v1.0.1/n00plicate_1.0.1_x64.dmg"
     },
     "darwin-aarch64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkK...",
-      "url": "https://github.com/IAmJonoBo/n00plicate/releases/download/v1.0.1/n00plicate_1.0.1_aarch64.dmg"
+      "url": "https://github.com/n00tropic/n00plicate/releases/download/v1.0.1/n00plicate_1.0.1_aarch64.dmg"
     },
     "linux-x86_64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkK...",
-      "url": "https://github.com/IAmJonoBo/n00plicate/releases/download/v1.0.1/n00plicate_1.0.1_amd64.AppImage"
+      "url": "https://github.com/n00tropic/n00plicate/releases/download/v1.0.1/n00plicate_1.0.1_amd64.AppImage"
     },
     "windows-x86_64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkK...",
-      "url": "https://github.com/IAmJonoBo/n00plicate/releases/download/v1.0.1/n00plicate_1.0.1_x64-setup.exe"
+      "url": "https://github.com/n00tropic/n00plicate/releases/download/v1.0.1/n00plicate_1.0.1_x64-setup.exe"
     }
   }
 }

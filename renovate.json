@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>IAmJonoBo/n00tropic-cerebrum//renovate/presets/workspace.json"],
+  "extends": ["github>n00tropic/n00tropic-cerebrum//renovate/presets/workspace.json"],
   "enabledManagers": ["npm", "github-actions", "dockerfile", "docker-compose", "devcontainer", "cargo"],
   "lockFileMaintenance": {
     "enabled": true,

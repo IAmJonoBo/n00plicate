@@ -1073,9 +1073,9 @@ tail -f /var/log/system.log
 
 # Community Support
 
-- **GitHub Issues**: [Report bugs](https://github.com/IAmJonoBo/n00plicate/issues)
-- **Discussions**: [Ask questions](https://github.com/IAmJonoBo/n00plicate/discussions)
-- **Documentation**: [Read the docs](https://github.com/IAmJonoBo/n00plicate/blob/main/README.md)
+- **GitHub Issues**: [Report bugs](https://github.com/n00tropic/n00plicate/issues)
+- **Discussions**: [Ask questions](https://github.com/n00tropic/n00plicate/discussions)
+- **Documentation**: [Read the docs](https://github.com/n00tropic/n00plicate/blob/main/README.md)
 
 # Emergency Reset
 

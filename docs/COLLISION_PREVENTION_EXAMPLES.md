@@ -138,7 +138,7 @@ All packages use scoped naming to prevent Metro workspace library conflicts:
   "files": ["libs/tokens/"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/IAmJonoBo/n00plicate.git",
+    "url": "https://github.com/n00tropic/n00plicate.git",
     "directory": "packages/design-tokens"
   }
 }

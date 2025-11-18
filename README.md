@@ -1,6 +1,6 @@
 # n00plicate 2.0 (Preview)
 
-[![CI](https://github.com/IAmJonoBo/n00plicate/workflows/CI/badge.svg)](https://github.com/IAmJonoBo/n00plicate/actions)
+[![CI](https://github.com/n00tropic/n00plicate/workflows/CI/badge.svg)](https://github.com/n00tropic/n00plicate/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![pnpm](https://img.shields.io/badge/package-manager-pnpm-blue)](https://pnpm.io)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue)](https://www.typescriptlang.org/)
@@ -65,7 +65,7 @@ Refer to [`docs/IMPLEMENTATION_PLAN_2.0.md`](docs/IMPLEMENTATION_PLAN_2.0.md) fo
 ### Bootstrap the Workspace
 
 ```bash
-git clone https://github.com/IAmJonoBo/n00plicate.git
+git clone https://github.com/n00tropic/n00plicate.git
 cd n00plicate
 
 # One-time setup
@@ -173,8 +173,8 @@ requesting review.
 
 ## Community & Support
 
-- **Issues** — [github.com/IAmJonoBo/n00plicate/issues](https://github.com/IAmJonoBo/n00plicate/issues)
-- **Discussions** — [github.com/IAmJonoBo/n00plicate/discussions](https://github.com/IAmJonoBo/n00plicate/discussions)
+- **Issues** — [github.com/n00tropic/n00plicate/issues](https://github.com/n00tropic/n00plicate/issues)
+- **Discussions** — [github.com/n00tropic/n00plicate/discussions](https://github.com/n00tropic/n00plicate/discussions)
 - **Storybook (public)** — <https://iamjonobo.github.io/n00plicate/storybook/>
 - **Dependency automation plan** — [`docs/DEPENDENCY_AUTOMATION_PLAN.md`](docs/DEPENDENCY_AUTOMATION_PLAN.md)
 

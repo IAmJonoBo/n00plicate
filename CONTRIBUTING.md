@@ -18,7 +18,7 @@ We follow the [Contributor Covenant](CODE_OF_CONDUCT.md). Be kind, inclusive, an
 ```bash
  git clone https://github.com/YOUR_USERNAME/n00plicate.git
  cd n00plicate
- git remote add upstream https://github.com/IAmJonoBo/n00plicate.git
+ git remote add upstream https://github.com/n00tropic/n00plicate.git
 ```
 
 4. **Bootstrap once** — `./setup.sh` installs Node 24.11.0, pnpm 10.21.0, Husky hooks, and workspace deps.
@@ -97,7 +97,7 @@ UI kernel, adapters, CLI), run `pnpm changeset` and describe the impact succinct
 
 ## Need Help?
 
-- Create a discussion in [GitHub Discussions](https://github.com/IAmJonoBo/n00plicate/discussions).
+- Create a discussion in [GitHub Discussions](https://github.com/n00tropic/n00plicate/discussions).
 - Tag maintainers in the issue if you’re blocked.
 - For docs gaps, file an issue with the `documentation` label—keeping references fresh is part of the
   2.0 push.

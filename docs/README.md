@@ -134,8 +134,8 @@ Please open an issue for any missing or outdated documentation so we can prune t
 
 ### Getting Help
 
-- **[GitHub Issues](https://github.com/IAmJonoBo/n00plicate/issues)** - Bug reports and feature requests
-- **[GitHub Discussions](https://github.com/IAmJonoBo/n00plicate/discussions)** - Community discussions
+- **[GitHub Issues](https://github.com/n00tropic/n00plicate/issues)** - Bug reports and feature requests
+- **[GitHub Discussions](https://github.com/n00tropic/n00plicate/discussions)** - Community discussions
 - **[Troubleshooting](./TROUBLESHOOTING.md)** - Common problems and solutions
 
 ### Contributing
@@ -193,4 +193,4 @@ Please open an issue for any missing or outdated documentation so we can prune t
 
 **Last Updated**: June 2025
 
-**Need help?** Check the [troubleshooting guide](./TROUBLESHOOTING.md) or [open an issue](https://github.com/IAmJonoBo/n00plicate/issues/new).
+**Need help?** Check the [troubleshooting guide](./TROUBLESHOOTING.md) or [open an issue](https://github.com/n00tropic/n00plicate/issues/new).
